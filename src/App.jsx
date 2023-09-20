@@ -9,7 +9,7 @@ function App() {
           <img src={pureLogo} className="logo react" alt="React logo" />
         </a>
       </div>
-      <h1>asfil Be Here Soon ! </h1>
+      <h1>Will Be Here Soon ! </h1>
       <p className="read-the-docs">© PURE 2023 | All Rights Reserved</p>
     </>
   );
