@@ -6,6 +6,7 @@
 
   * {
     color: $white;
+    text-transform: uppercase;
   }
   img {
     width: 10.1875rem;
@@ -34,9 +35,17 @@
     li {
       &:first-child {
         margin-right: 3.125rem;
+        text-transform: uppercase;
+        word-wrap: break-word;
       }
       &:last-child {
         margin-right: 8.3125rem;
+        background-color: $dark-gray;
+        border: 1px solid $white;
+        border-radius: 0.625rem;
+        padding: 0.8125rem 1.75rem;
+        text-transform: uppercase;
+        word-wrap: break-word;
       }
     }
   }
