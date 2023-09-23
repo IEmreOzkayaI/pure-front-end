@@ -1,0 +1,43 @@
+@import "../global.scss";
+
+.navbar {
+  background-color: $very-dark-gray;
+  margin-top: 7.375rem;
+
+  * {
+    color: $white;
+  }
+  img {
+    width: 10.1875rem;
+    margin-left: 8.3125rem;
+  }
+  ul {
+    display: flex;
+    justify-content: space-between;
+
+    a {
+      text-decoration: none;
+    }
+  }
+
+  .firstChild {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex: 1;
+    margin-right: 31.125rem;
+  }
+  .lastChild {
+    display: flex;
+    align-items: center;
+
+    li {
+      &:first-child {
+        margin-right: 3.125rem;
+      }
+      &:last-child {
+        margin-right: 8.3125rem;
+      }
+    }
+  }
+}
