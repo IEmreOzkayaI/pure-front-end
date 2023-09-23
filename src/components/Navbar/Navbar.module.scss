@@ -1,7 +1,7 @@
 @import "../../global.scss";
 
 .navbar {
-  padding-top: 7.375rem;
+  margin-left: 7.0625rem;
 
   * {
     color: $white;
@@ -9,7 +9,6 @@
   }
   img {
     width: 10.1875rem;
-    margin-left: 8.3125rem;
   }
   ul {
     display: flex;
