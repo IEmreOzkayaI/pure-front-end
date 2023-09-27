@@ -1,0 +1,58 @@
+@import "../../global.scss";
+
+.ctaContainer {
+  display: flex;
+  margin-top: 1.25rem;
+
+  .companyService {
+    margin-right: 1.5rem;
+  }
+  .companyService,
+  .userService {
+    background-color: $very-dark-gray;
+    border-radius: 0.625rem;
+    color: $text-color;
+    padding: 4.6875rem 4rem;
+    text-align: center;
+    position: relative;
+
+    div:first-child {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin-bottom: 3rem;
+    }
+
+    .buttonContainer {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+
+      svg {
+        margin: 1.5rem 0;
+      }
+
+      button {
+        color: $white;
+        background-color: $dark-gray;
+        border: 1px solid $white;
+        border-radius: 0.625rem;
+        text-transform: uppercase;
+        padding: 1.25rem 3.75rem 1.25rem 3.75rem;
+        word-wrap: break-word;
+        font-size: 0.75rem;
+        cursor: pointer;
+      }
+    }
+
+    .rightArrow {
+      border: solid $white;
+      border-width: 0.5rem;
+      border-radius: 0.875rem 0 0 0;
+      width: fit-content;
+      position: absolute;
+      background-color: $white;
+      bottom: -2rem;
+      right: -0.6rem;
+    }
+  }
+}

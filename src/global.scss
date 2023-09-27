@@ -6,10 +6,15 @@ $blue-gray: #6c7b9f;
 $very-dark-gray: #16161b;
 $text-color: #a1aeb7;
 
-* {
+*,
+*::before,
+*::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+html {
+  background-color: $white;
 }
 
 :root {
@@ -18,4 +23,8 @@ $text-color: #a1aeb7;
 
 ul {
   list-style: none;
+}
+
+.globalContainer {
+  margin: 1.3125rem;
 }

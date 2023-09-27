@@ -5,7 +5,7 @@ import InfoText from "../InfoText/InfoText";
 
 const Welcome = () => {
   return (
-    <div className={styles.welcome}>
+    <section className={styles.welcome}>
       <Navbar />
       <InfoText />
       <div className={styles.backgroundImage}>
@@ -29,7 +29,7 @@ const Welcome = () => {
         <div className={styles.blackBox}></div>
         <TrustedBy />
       </div>
-    </div>
+    </section>
   );
 };
 
