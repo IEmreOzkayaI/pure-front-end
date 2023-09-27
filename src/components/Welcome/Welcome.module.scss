@@ -2,8 +2,24 @@
 
 .welcome {
   margin: 1.3125rem;
-  padding-top: 7.375rem;
+  padding-top: 3.6875rem;
   border-radius: 0.875rem;
-  height: 100vh;
   background-color: $very-dark-gray;
+  position: relative;
+  .backgroundImage {
+    position: absolute;
+    top: 20.125rem;
+    left: 39.625rem;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 18.18025rem 1fr;
+    background-color: $white;
+
+    .blackBox {
+      background-color: $very-dark-gray;
+      border-radius: 0 0 0.875rem 0.875rem;
+    }
+  }
 }

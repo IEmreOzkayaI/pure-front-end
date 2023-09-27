@@ -8,15 +8,17 @@ import kocsistem from "/kocsistem.svg";
 
 const TrustedBy = () => {
   return (
-    <div className={styles.trustedBy}>
-      <div className={styles.text}>Trusted by</div>
-      <div className={styles.logos}>
-        <img src={token} alt="token" />
-        <img src={beko} alt="beko" />
-        <img src={arcelik} alt="arcelik" />
-        <img src={yapikredi} alt="yapikredi" />
-        <img src={grundig} alt="grundig" />
-        <img src={kocsistem} alt="kocsistem" />
+    <div className={styles.outerBorder}>
+      <div className={styles.trustedBy}>
+        <div className={styles.text}>Trusted by</div>
+        <div className={styles.logos}>
+          <img src={token} alt="token" />
+          <img src={beko} alt="beko" />
+          <img src={arcelik} alt="arcelik" />
+          <img src={yapikredi} alt="yapikredi" />
+          <img src={grundig} alt="grundig" />
+          <img src={kocsistem} alt="kocsistem" />
+        </div>
       </div>
     </div>
   );

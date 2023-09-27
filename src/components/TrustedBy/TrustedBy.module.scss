@@ -2,7 +2,7 @@
 
 .trustedBy {
   background-color: $light-gray;
-  width: 68.0625rem;
+  // width: 68.0625rem;
   height: 12.3125rem;
   border-radius: 0.875rem;
   display: flex;
@@ -20,4 +20,15 @@
     align-items: center;
     padding: 2.635625rem 8.3125rem 0 8.3125rem;
   }
+}
+
+.outerBorder {
+  // position: absolute;
+  // bottom: 0;
+  // right: 0;
+  border: solid white;
+  border-width: 1rem 0 0 1rem;
+  border-radius: 0.875rem 0 0 0;
+  background-color: $white;
+  position: relative;
 }
