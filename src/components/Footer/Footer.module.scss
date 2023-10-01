@@ -59,7 +59,10 @@ footer {
       }
     }
     .companyMotto{
+      width: 100%;
+      text-align: justify;
       font-size: 1.6rem;
+      color: $white;
     }
     .socials {
       display: flex;
