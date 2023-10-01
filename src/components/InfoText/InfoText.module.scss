@@ -3,19 +3,22 @@
 .infoTextContainer {
 	display: flex;
 	flex-direction: column;
-	width: 57.1rem;
 	margin-left: 11.3rem;
 	margin-top: 15.4rem;
 	margin-bottom: 13.8rem;
+	width: 57.1rem;
 
 	header {
 		color: $white;
-		font-size: 6.6rem;
-		padding-left: 4.8rem;
+		font-size: 6rem;
+		margin-bottom: 5.6rem;
+		text-align: right;
+		font-size: 6rem;
+		font-style: normal;
 	}
 	p {
 		color: $text-color;
-		text-align: left;
+		text-align: justify;
 		font-size: 2.4rem;
 	}
 	img {
@@ -24,11 +27,6 @@
 
 	.infoText {
 		margin-bottom: 8.7rem;
-
-		header {
-			text-align: center;
-			margin-bottom: 5.6rem;
-		}
 	}
 
 	.tryDemoButton {

@@ -4,7 +4,7 @@ const CallToAction = () => {
   return (
     <section className={styles.ctaContainer}>
       <div className={styles.companyService}>
-        <div>Company Service</div>
+        <div>COMPANY SERVICE</div>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, quidem
           voluptates. Quisquam, voluptatum. Quisquam, voluptatum.
@@ -50,7 +50,7 @@ const CallToAction = () => {
         </div>
       </div>
       <div className={styles.userService}>
-        <div>User Service</div>
+        <div>USER SERVICE</div>
         <p>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Quod, quidem
           voluptates. Quisquam, voluptatum. Quisquam, voluptatum.
