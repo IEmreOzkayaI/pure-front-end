@@ -1,18 +1,19 @@
 @import "../../global.scss";
 
 .navbar {
-  margin-left: 7.0625rem;
-
+  padding-top: 5.9rem;
+  padding-left: 11.3rem;
   * {
     color: $white;
     text-transform: uppercase;
   }
   img {
-    width: 10.1875rem;
+    width: 16.3rem;
   }
   ul {
     display: flex;
     justify-content: space-between;
+    font-size: 1.6rem;
 
     a {
       text-decoration: none;
@@ -24,7 +25,7 @@
     justify-content: space-between;
     align-items: center;
     flex: 1;
-    margin-right: 31.125rem;
+    margin-right: 49.8rem;
   }
   .lastChild {
     display: flex;
@@ -32,16 +33,16 @@
 
     li {
       &:first-child {
-        margin-right: 3.125rem;
+        margin-right: 5rem;
         text-transform: uppercase;
         word-wrap: break-word;
       }
       &:last-child {
-        margin-right: 8.3125rem;
+        margin-right: 13.3rem;
         background-color: $dark-gray;
         border: 1px solid $white;
-        border-radius: 0.625rem;
-        padding: 0.8125rem 1.75rem;
+        border-radius: 1rem;
+        padding: 1.3rem 2.8rem;
         text-transform: uppercase;
         word-wrap: break-word;
       }

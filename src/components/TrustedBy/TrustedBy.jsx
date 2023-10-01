@@ -8,7 +8,8 @@ import kocsistem from "/kocsistem.svg";
 
 const TrustedBy = () => {
   return (
-    <div className={styles.outerBorder}>
+  <div className={styles.outBorder_line}>
+      <div className={styles.outerBorder}>
       <div className={styles.trustedBy}>
         <div className={styles.text}>Trusted by</div>
         <div className={styles.logos}>
@@ -21,6 +22,7 @@ const TrustedBy = () => {
         </div>
       </div>
     </div>
+  </div>
   );
 };
 export default TrustedBy;
