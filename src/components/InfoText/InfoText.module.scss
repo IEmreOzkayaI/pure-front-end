@@ -33,7 +33,7 @@
 
 	.tryDemoButton {
 		color: $white;
-		background-color: $dark-gray;
+		background-color: rgba($color: $blue-gray, $alpha: 0.1);
 		border: 1px solid $white;
 		border-radius: 1rem;
 		text-transform: uppercase;
