@@ -65,6 +65,7 @@
   #card1 {
     margin: 19rem 15.7rem 8.5rem 13.7rem;
     z-index: 3;
+    transition: margin opacity 2s;
   }
   #card2 {
     margin: 21rem 15.7rem 8.5rem 13.7rem;
@@ -72,6 +73,7 @@
     background: rgba(108, 123, 159, 0.4);
     //buradaki widthler ve font sizelar, card yukari tasininca eski hallerine donecek
     width: 100.7rem;
+    transition: margin 2s;
     * {
       font-size: 0.6rem;
     }
@@ -82,6 +84,7 @@
     background: rgba(108, 123, 159, 0.2);
     //buradaki widthler ve font sizelar, card yukari tasininca eski hallerine donecek
     width: 91.9258rem;
+    transition: margin 2s;
     * {
       font-size: 0.6rem;
     }
