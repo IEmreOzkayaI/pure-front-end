@@ -29,7 +29,7 @@
     color: $very-dark-gray;
     position: absolute;
     display: flex;
-
+    transition: all 0.5s;
     .content {
       margin: 14.6rem 47.5rem 23.6rem 4.3rem;
 
@@ -103,15 +103,6 @@
     cursor: pointer;
     position: absolute;
     right: 13.4rem;
-    top: 44.2rem;
-    bottom: 30.4rem;
-    z-index: 999;
-  }
-  .prevBtn {
-    transform: scaleX(-1);
-    cursor: pointer;
-    position: absolute;
-    left: 11rem;
     top: 44.2rem;
     bottom: 30.4rem;
     z-index: 999;
