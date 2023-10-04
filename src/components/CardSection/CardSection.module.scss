@@ -88,7 +88,7 @@
   }
 
   .pageIndex {
-    cursor: pointer;
+    // cursor: pointer;
     position: absolute;
     bottom: 11rem;
     left: 0;
@@ -106,5 +106,18 @@
     top: 44.2rem;
     bottom: 30.4rem;
     z-index: 999;
+  }
+
+  #firstIndex {
+    fill: #16161b;
+    fill-opacity: 1;
+  }
+  #secondIndex {
+    fill: #6f7b9f;
+    fill-opacity: 0.2;
+  }
+  #thirdIndex {
+    fill: #6f7b9f;
+    fill-opacity: 0.2;
   }
 }

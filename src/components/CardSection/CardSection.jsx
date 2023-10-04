@@ -2,11 +2,16 @@ import styles from "./CardSection.module.scss";
 import { useState } from "react";
 
 const CardSection = () => {
-  const [ids, setIds] = useState({
+  const [cardIds, setCardIds] = useState({
     firstDivId: styles.card1,
     secondDivId: styles.card2,
     thirdDivId: styles.card3,
   }); // 1, 2, 3
+  const [pageIndexIds, setPageIndexIds] = useState({
+    firstIndex: styles.firstIndex,
+    secondIndex: styles.secondIndex,
+    thirdIndex: styles.thirdIndex,
+  });
 
   const handleCardSwitch = () => {
     //nexte basinca sirasiyla ilk divin idsi 3 olacak
@@ -15,11 +20,18 @@ const CardSection = () => {
     // first -> 3, second -> 1, third -> 2
     // first -> 2, second -> 3, third -> 1
     // first -> 1, second -> 2, third -> 3
-    setIds((prevIds) => {
+    setCardIds((prevIds) => {
       return {
         firstDivId: prevIds.thirdDivId,
         secondDivId: prevIds.firstDivId,
         thirdDivId: prevIds.secondDivId,
+      };
+    });
+    setPageIndexIds((prevIds) => {
+      return {
+        firstIndex: prevIds.thirdIndex,
+        secondIndex: prevIds.firstIndex,
+        thirdIndex: prevIds.secondIndex,
       };
     });
   };
@@ -28,7 +40,7 @@ const CardSection = () => {
       <div className={styles.grayBackground}>
         <div>toc.</div>
       </div>
-      <div id={ids.firstDivId} className={styles.cards}>
+      <div id={cardIds.firstDivId} className={styles.cards}>
         <div className={styles.content}>
           <div className={styles.title}>content #1</div>
           <p>
@@ -42,7 +54,7 @@ const CardSection = () => {
           <div>interactive detail #2 :</div>
         </div>
       </div>
-      <div id={ids.secondDivId} className={styles.cards}>
+      <div id={cardIds.secondDivId} className={styles.cards}>
         <div className={styles.content}>
           <div className={styles.title}>content #2</div>
           <p>
@@ -56,7 +68,7 @@ const CardSection = () => {
           <div>interactive detail #3 :</div>
         </div>
       </div>
-      <div id={ids.thirdDivId} className={styles.cards}>
+      <div id={cardIds.thirdDivId} className={styles.cards}>
         <div className={styles.content}>
           <div className={styles.title}>content #3</div>
           <p>
@@ -78,22 +90,20 @@ const CardSection = () => {
           viewBox="0 0 111 6"
           fill="none"
         >
-          <rect width="29" height="6" rx="3" fill="#16161B" />
+          <rect id={pageIndexIds.firstIndex} width="29" height="6" rx="3" />
           <rect
+            id={pageIndexIds.secondIndex}
             x="41"
             width="29"
             height="6"
             rx="3"
-            fill="#6F7B9F"
-            fillOpacity="0.2"
           />
           <rect
+            id={pageIndexIds.thirdIndex}
             x="82"
             width="29"
             height="6"
             rx="3"
-            fill="#6F7B9F"
-            fillOpacity="0.2"
           />
         </svg>
       </div>
