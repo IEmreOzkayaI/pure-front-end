@@ -64,8 +64,8 @@ const CardSection = () => {
           </p>
         </div>
         <div className={styles.details}>
-          <div>interactive detail #2 :</div>
           <div>interactive detail #3 :</div>
+          <div>interactive detail #4 :</div>
         </div>
       </div>
       <div id={cardIds.thirdDivId} className={styles.cards}>
@@ -78,8 +78,8 @@ const CardSection = () => {
           </p>
         </div>
         <div className={styles.details}>
-          <div>interactive detail #4 :</div>
           <div>interactive detail #5 :</div>
+          <div>interactive detail #6 :</div>
         </div>
       </div>
       <div className={styles.pageIndex}>
