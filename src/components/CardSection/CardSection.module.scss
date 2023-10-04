@@ -23,30 +23,30 @@
       font-size: 4.3rem;
     }
   }
-
   .cards {
-    position: absolute;
     background-color: $white;
     border-radius: 4.5rem;
+    color: $very-dark-gray;
+    position: absolute;
     display: flex;
-    margin: 19rem 15.7rem 8.5rem 13.7rem;
 
     .content {
       margin: 14.6rem 47.5rem 23.6rem 4.3rem;
+
+      .title {
+        color: $very-dark-gray;
+        font-size: 2.4rem;
+        font-weight: 500;
+        margin-bottom: 2.1rem;
+      }
+      p {
+        color: $text-color;
+        font-size: 1.4rem;
+        font-weight: 400;
+        text-align: justify;
+      }
     }
 
-    .title {
-      color: $very-dark-gray;
-      font-size: 2.4rem;
-      font-weight: 500;
-      margin-bottom: 2.1rem;
-    }
-    p {
-      color: $text-color;
-      font-size: 1.4rem;
-      font-weight: 400;
-      text-align: justify;
-    }
     .details {
       display: flex;
       flex-direction: column;
@@ -60,32 +60,60 @@
         margin-bottom: 1rem;
       }
     }
+  }
 
-    .pageIndex {
-      cursor: pointer;
-      position: absolute;
-      bottom: 2.5rem;
-      left: 0;
-      right: 0;
-      margin-left: auto;
-      margin-right: auto;
-      width: 11.1rem; /* Need a specific value to work */
+  #card1 {
+    margin: 19rem 15.7rem 8.5rem 13.7rem;
+    z-index: 3;
+  }
+  #card2 {
+    margin: 21rem 15.7rem 8.5rem 13.7rem;
+    z-index: 2;
+    background: rgba(108, 123, 159, 0.4);
+    //buradaki widthler ve font sizelar, card yukari tasininca eski hallerine donecek
+    width: 100.7rem;
+    * {
+      font-size: 0.6rem;
     }
+  }
+  #card3 {
+    margin: 22rem 15.7rem 8.5rem 13.7rem;
+    z-index: 1;
+    background: rgba(108, 123, 159, 0.2);
+    //buradaki widthler ve font sizelar, card yukari tasininca eski hallerine donecek
+    width: 91.9258rem;
+    * {
+      font-size: 0.6rem;
+    }
+  }
 
-    .nextBtn {
-      cursor: pointer;
-      position: absolute;
-      right: -2.78rem;
-      top: 25.1rem;
-      bottom: 21.8rem;
-    }
-    .prevBtn {
-      transform: scaleX(-1);
-      cursor: pointer;
-      position: absolute;
-      left: -2.78rem;
-      top: 25.1rem;
-      bottom: 21.8rem;
-    }
+  .pageIndex {
+    cursor: pointer;
+    position: absolute;
+    bottom: 11rem;
+    left: 0;
+    right: 0;
+    margin-left: auto;
+    margin-right: auto;
+    width: 11.1rem;
+    z-index: 999;
+  }
+
+  .nextBtn {
+    cursor: pointer;
+    position: absolute;
+    right: 13.4rem;
+    top: 44.2rem;
+    bottom: 30.4rem;
+    z-index: 999;
+  }
+  .prevBtn {
+    transform: scaleX(-1);
+    cursor: pointer;
+    position: absolute;
+    left: 11rem;
+    top: 44.2rem;
+    bottom: 30.4rem;
+    z-index: 999;
   }
 }
