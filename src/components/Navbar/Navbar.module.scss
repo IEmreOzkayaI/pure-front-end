@@ -36,10 +36,15 @@
     align-items: center;
 
     li {
+      position: relative;
       &:first-child {
         margin-right: 5rem;
         text-transform: uppercase;
         word-wrap: break-word;
+        cursor: pointer;
+      }
+      div:first-child {
+        padding: 1.3rem 2.8rem;
       }
       &:last-child {
         margin-right: 13.3rem;
@@ -53,10 +58,19 @@
       .dropdownContent {
         display: none;
         position: absolute;
-        background-color: $white;
         min-width: 16rem;
         z-index: 1;
+        left: 2.8rem;
 
+        @for $i from 1 through 2 {
+          .dropdownItem#{$i} {
+            animation: rotateX 400ms ($i * 60ms) ease-in-out forwards;
+            transform-origin: top center;
+          }
+        }
+        &:first-child {
+          margin-top: 20px;
+        }
         a {
           color: $very-dark-gray;
           padding: 1.2rem 1.6rem;
@@ -64,6 +78,8 @@
           display: block;
           font-size: 1.2rem;
           font-weight: 400;
+          opacity: 0;
+          background-color: $white;
         }
       }
 
@@ -71,10 +87,23 @@
         display: block;
 
         a:hover {
-          background-color: $very-dark-gray;
+          background-color: $dark-gray;
           color: $white;
         }
       }
     }
+  }
+}
+@keyframes rotateX {
+  0% {
+    opacity: 0;
+    transform: rotateX(-90deg);
+  }
+  50% {
+    transform: rotateX(-20deg);
+  }
+  100% {
+    opacity: 1;
+    transform: rotateX(0deg);
   }
 }

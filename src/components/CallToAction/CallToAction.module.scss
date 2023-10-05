@@ -23,7 +23,7 @@
 
     div:first-child {
       color: $white;
-      font-size:2rem;
+      font-size: 2rem;
       font-weight: 500;
       margin-bottom: 4.8rem;
     }
@@ -35,11 +35,13 @@
 
       svg {
         margin: 3rem 0;
+        cursor: pointer;
       }
 
-      button {
+      a {
         color: $white;
-        background-color: rgba($color: $blue-gray, $alpha: .1);
+        text-decoration: none;
+        background-color: rgba($color: $blue-gray, $alpha: 0.1);
         border: 1px solid $white;
         border-radius: 1rem;
         text-transform: uppercase;
@@ -51,14 +53,18 @@
     }
 
     .rightArrow {
-        position: absolute;
-        right: 0;
-        bottom: -3.152rem;
-        border-left: 1.188rem solid $white;
-        border-bottom: 0.941rem  solid $white;
-        border-top: 0.941rem  solid $white;
-        background-color: $white;
-        border-radius: 0.8648rem 0 0 0;
+      position: absolute;
+      right: 0;
+      bottom: -3.152rem;
+      border-left: 1.188rem solid $white;
+      border-bottom: 0.941rem solid $white;
+      border-top: 0.941rem solid $white;
+      background-color: $white;
+      border-radius: 0.8648rem 0 0 0;
+
+      svg {
+        cursor: pointer;
+      }
     }
   }
 }

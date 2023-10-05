@@ -1,6 +1,11 @@
 import styles from "./CallToAction.module.scss";
+// import { useNavigate } from "react-router-dom";
 
 const CallToAction = () => {
+  // TODO 2: Uncomment the code when routing added
+  // const navigate = useNavigate();
+  // const handleClick = (route) => navigate(route);
+
   return (
     <section className={styles.ctaContainer}>
       <div className={styles.companyService}>
@@ -16,6 +21,7 @@ const CallToAction = () => {
             height="20"
             viewBox="0 0 19 20"
             fill="none"
+            // onClick={handleClick}
           >
             <path
               fillRule="evenodd"
@@ -24,10 +30,13 @@ const CallToAction = () => {
               fill="#F5F3F3"
             />
           </svg>
-          <button> More</button>
+          {/* TODO 1: Add a Link component from react router dom to the pricing
+          page */}
+          <a href="/pricing"> More</a>
         </div>
         <div className={styles.rightArrow}>
           <svg
+            // onClick={()=>handleClick("/companyLogin")}
             xmlns="http://www.w3.org/2000/svg"
             width="104"
             height="82"
@@ -62,6 +71,7 @@ const CallToAction = () => {
             height="20"
             viewBox="0 0 19 20"
             fill="none"
+            // onClick={handleClick}
           >
             <path
               fillRule="evenodd"
@@ -70,10 +80,11 @@ const CallToAction = () => {
               fill="#F5F3F3"
             />
           </svg>
-          <button> More</button>
+          <a href="/pricing"> More</a>
         </div>
         <div className={styles.rightArrow}>
           <svg
+            // onClick={()=>handleClick("/personalLogin")}
             xmlns="http://www.w3.org/2000/svg"
             width="104"
             height="82"

@@ -21,10 +21,14 @@ const Navbar = () => {
         </span>
         <span className={styles.lastChild}>
           <li>
-            <a href="">Log In</a>
+            <div>Log In</div>
             <div className={styles.dropdownContent}>
-              <a href="#">Company Account</a>
-              <a href="#">Personal Account</a>
+              <a className={styles.dropdownItem1} href="/companyLogin">
+                Company Account
+              </a>
+              <a className={styles.dropdownItem2} href="/personalLogin">
+                Personal Account
+              </a>
             </div>
           </li>
           <li>
