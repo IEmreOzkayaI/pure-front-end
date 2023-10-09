@@ -1,8 +1,10 @@
-@import "../../global.scss";
+@import "../../../../global.scss";
 
 .navbar {
   padding-top: 5.9rem;
   padding-left: 11.3rem;
+  background-color: $very-dark-gray;
+  border-radius: 1.4rem;
   * {
     color: $white;
     text-transform: uppercase;

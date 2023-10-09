@@ -1,0 +1,111 @@
+@import "../../../global.scss";
+
+.pricing {
+  margin: 2.1rem 2rem;
+  background-color: $very-dark-gray;
+  border-radius: 1.4rem;
+
+  .grayBackground {
+    margin: 12.5rem 11.5rem 45.5rem 11.2rem;
+    padding: 3.7rem 9rem 0 9.1rem;
+    border-radius: 4.5rem;
+
+    color: $white;
+    background-color: $dark-gray;
+
+    .sliderContainer {
+      margin-top: 6rem;
+
+      ul {
+        display: flex;
+        margin-top: 1rem;
+        color: $text-color;
+        text-align: justify;
+        font-size: 1.2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5rem;
+      }
+      .slider {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 100%;
+        height: 0.8rem;
+        background: linear-gradient(
+          90deg,
+          #16161b 12.17%,
+          #6c7b9f 38.11%,
+          #f5f3f3 101.62%
+        );
+        outline: none;
+        flex-shrink: 0;
+        border-radius: 0.5rem;
+
+        &::-webkit-slider-thumb {
+          -webkit-appearance: none;
+          appearance: none;
+          width: 2rem;
+          height: 2rem;
+          background: linear-gradient(
+            90deg,
+            #16161b 12.17%,
+            #6c7b9f 38.11%,
+            #f5f3f3 101.62%
+          );
+          border-radius: 50%;
+          cursor: pointer;
+        }
+
+        &::-moz-range-thumb {
+          width: 2rem;
+          height: 2rem;
+          background: linear-gradient(
+            90deg,
+            #16161b 12.17%,
+            #6c7b9f 38.11%,
+            #f5f3f3 101.62%
+          );
+          border-radius: 50%;
+
+          cursor: pointer;
+        }
+      }
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4rem;
+      cursor: pointer;
+
+      .text {
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+      }
+      .text.active {
+        color: $white;
+        text-decoration: underline;
+      }
+
+      & + div {
+        color: $white;
+        text-align: left;
+        font-family: Ubuntu;
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
+        margin-top: 3rem;
+      }
+    }
+  }
+}
+.footer {
+  margin: 2.1rem 2rem;
+}

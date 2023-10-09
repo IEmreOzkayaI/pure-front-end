@@ -1,4 +1,4 @@
-@import "../../global.scss";
+@import "../../../../global.scss";
 
 footer {
   background-color: $very-dark-gray;
@@ -12,7 +12,7 @@ footer {
   .listContainer {
     display: flex;
     margin-top: 3.7rem;
-    div{
+    div {
       font-size: 1.4rem;
       height: 2rem; // tasarımda 3.4 rem ama ben böyle yaptım arayüzde biraz farklı duruyor.
     }
@@ -58,7 +58,7 @@ footer {
         font-weight: 400;
       }
     }
-    .companyMotto{
+    .companyMotto {
       width: 100%;
       text-align: justify;
       font-size: 1.6rem;
