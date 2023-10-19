@@ -1,5 +1,4 @@
-import * as React from "react";
-import { styled, alpha, Box } from "@mui/system";
+import { styled, Box } from "@mui/system";
 import { Slider as BaseSlider, sliderClasses } from "@mui/base/Slider";
 
 export default function RangeSlider({ marks }) {
@@ -27,12 +26,12 @@ function SliderValueLabel({ children }) {
   );
 }
 
-function valuetext(value: number) {
+function valuetext(value) {
   return `${value}`;
 }
 
 const Slider = styled(BaseSlider)(
-  ({ theme }) => `
+  () => `
   color: #A1AEB7;
   height: 0.6rem;
   width: 98.8rem;

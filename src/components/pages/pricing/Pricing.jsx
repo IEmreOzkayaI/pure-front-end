@@ -3,6 +3,7 @@ import Navbar from "../root/Navbar/Navbar";
 import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
 import RangeSlider from "../../shared/RangeSlider";
+import Card from "../../shared/Card";
 
 const marks = [
   {
@@ -57,6 +58,9 @@ export default function Pricing() {
           <div className={styles.sliderContainer}>
             <RangeSlider marks={marks} />
           </div>
+          <Card order={1} title="demo" />
+          <Card dark title="monthly" order={2} />
+          <Card title="yearly" order={3} />
         </div>
       </div>
       <div className={styles.footer}>
