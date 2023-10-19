@@ -1,7 +1,31 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../root/Navbar/Navbar";
 import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
+import RangeSlider from "../../shared/RangeSlider";
+
+const marks = [
+  {
+    value: 0,
+    label: "0",
+  },
+  {
+    value: 10,
+    label: "10",
+  },
+  {
+    value: 20,
+    label: "20",
+  },
+  {
+    value: 30,
+    label: "30",
+  },
+  {
+    value: 40,
+    label: "40",
+  },
+];
 
 export default function Pricing() {
   const [activeTab, setActiveTab] = useState("company");
@@ -31,20 +55,7 @@ export default function Pricing() {
           </div>
           <div>select plan that scale with you</div>
           <div className={styles.sliderContainer}>
-            <input
-              type="range"
-              min="0"
-              max="40"
-              defaultValue="9"
-              className={styles.slider}
-            />
-            <ul>
-              <li>0</li>
-              <li>10</li>
-              <li>20</li>
-              <li>30</li>
-              <li>40</li>
-            </ul>
+            <RangeSlider marks={marks} />
           </div>
         </div>
       </div>
