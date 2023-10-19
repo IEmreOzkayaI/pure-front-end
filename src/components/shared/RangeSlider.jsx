@@ -1,7 +1,8 @@
 import { styled, Box } from "@mui/system";
 import { Slider as BaseSlider, sliderClasses } from "@mui/base/Slider";
+import PropTypes from "prop-types";
 
-export default function RangeSlider({ marks }) {
+export default function RangeSlider({ marks, setSliderValue, sliderValue }) {
   return (
     <Box sx={{ width: 300 }}>
       <Slider
@@ -12,6 +13,10 @@ export default function RangeSlider({ marks }) {
         step={1}
         min={0}
         max={40}
+        value={sliderValue}
+        onChange={(e, value) => {
+          setSliderValue(value);
+        }}
         slots={{ valueLabel: SliderValueLabel }}
       />
     </Box>
@@ -25,6 +30,9 @@ function SliderValueLabel({ children }) {
     </span>
   );
 }
+SliderValueLabel.propTypes = {
+  children: PropTypes.node,
+};
 
 function valuetext(value) {
   return `${value}`;
@@ -144,3 +152,9 @@ const Slider = styled(BaseSlider)(
   }
 `
 );
+
+RangeSlider.propTypes = {
+  marks: PropTypes.array.isRequired,
+  setSliderValue: PropTypes.func.isRequired,
+  sliderValue: PropTypes.number.isRequired,
+};

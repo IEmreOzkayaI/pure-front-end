@@ -1,7 +1,33 @@
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 import styles from "./Card.module.scss";
 
 export default function Card(props) {
-  const { dark, title, order } = props;
+  const { dark, title, order, user, sliderValue } = props;
+  const [price, setPrice] = useState(0);
+
+  useEffect(() => {
+    const calculatePrice = () => {
+      if (user === "company") {
+        if (title === "monthly") {
+          setPrice(sliderValue * 25);
+        } else if (title === "yearly") {
+          setPrice(sliderValue * 250);
+        } else {
+          setPrice(0);
+        }
+      } else {
+        if (title === "monthly") {
+          setPrice(sliderValue * 10);
+        } else if (title === "yearly") {
+          setPrice(sliderValue * 100);
+        } else {
+          setPrice(0);
+        }
+      }
+    };
+    calculatePrice();
+  }, [sliderValue, user, title]);
 
   return (
     <div
@@ -13,7 +39,7 @@ export default function Card(props) {
         {title}
       </div>
       <div className={`${styles.price} ${dark ? styles.dark : styles.white}`}>
-        $0
+        ${price}
       </div>
       <div
         className={`${styles.explanation} ${dark ? styles.dark : styles.white}`}
@@ -59,3 +85,12 @@ export default function Card(props) {
     </div>
   );
 }
+
+//define proptypes
+Card.propTypes = {
+  dark: PropTypes.bool,
+  title: PropTypes.string,
+  order: PropTypes.number,
+  user: PropTypes.string,
+  sliderValue: PropTypes.number,
+};

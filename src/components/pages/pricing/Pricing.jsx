@@ -30,7 +30,7 @@ const marks = [
 
 export default function Pricing() {
   const [activeTab, setActiveTab] = useState("company");
-
+  const [sliderValue, setSliderValue] = useState(10);
   return (
     <>
       <div className={styles.pricing}>
@@ -56,11 +56,31 @@ export default function Pricing() {
           </div>
           <div>select plan that scale with you</div>
           <div className={styles.sliderContainer}>
-            <RangeSlider marks={marks} />
+            <RangeSlider
+              marks={marks}
+              setSliderValue={setSliderValue}
+              sliderValue={sliderValue}
+            />
           </div>
-          <Card order={1} title="demo" />
-          <Card dark title="monthly" order={2} />
-          <Card title="yearly" order={3} />
+          <Card
+            order={1}
+            title="demo"
+            user={activeTab}
+            sliderValue={sliderValue}
+          />
+          <Card
+            dark
+            title="monthly"
+            order={2}
+            user={activeTab}
+            sliderValue={sliderValue}
+          />
+          <Card
+            title="yearly"
+            order={3}
+            user={activeTab}
+            sliderValue={sliderValue}
+          />
         </div>
       </div>
       <div className={styles.footer}>
