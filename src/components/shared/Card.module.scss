@@ -134,5 +134,33 @@
         padding: 1.1rem 0 1rem 0;
       }
     }
+    .buttonContainer {
+      margin-top: 4.1rem;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+
+      .terms {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        label {
+          text-decoration: underline;
+          color: $text-color;
+        }
+        span {
+          color: $very-dark-gray;
+          font-size: 1.2rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+    }
   }
 }

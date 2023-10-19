@@ -67,6 +67,7 @@ export default function Pricing() {
             title="demo"
             user={activeTab}
             sliderValue={sliderValue}
+            explanation="Get our starter plan for getting your scale services."
           />
           <Card
             dark
@@ -74,12 +75,14 @@ export default function Pricing() {
             order={2}
             user={activeTab}
             sliderValue={sliderValue}
+            explanation="Get our starter plan for getting your scale services."
           />
           <Card
             title="yearly"
             order={3}
             user={activeTab}
             sliderValue={sliderValue}
+            explanation="Get our starter plan for getting your scale services."
           />
         </div>
       </div>

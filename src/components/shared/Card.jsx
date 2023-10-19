@@ -1,10 +1,20 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Card.module.scss";
+import Modal from "./Modal";
+import Button from "./Button";
 
 export default function Card(props) {
-  const { dark, title, order, user, sliderValue } = props;
+  const { dark, title, order, user, sliderValue, explanation } = props;
   const [price, setPrice] = useState(0);
+  const [isOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsOpen(false);
+  };
 
   useEffect(() => {
     const calculatePrice = () => {
@@ -44,7 +54,7 @@ export default function Card(props) {
       <div
         className={`${styles.explanation} ${dark ? styles.dark : styles.white}`}
       >
-        Get our starter plan for getting your scale services.
+        {explanation}
       </div>
 
       <div className={styles.perks}>
@@ -76,11 +86,108 @@ export default function Card(props) {
           className={`${styles.choosePlan} ${
             dark ? styles.dark : styles.white
           }`}
+          onClick={openModal}
         >
           <div className={`${dark ? styles.dark : styles.white}`}>
             Choose plan
           </div>
         </div>
+        <Modal
+          isOpen={isOpen}
+          closeModal={closeModal}
+          title={title}
+          price={price}
+          explanation={explanation}
+          dark={dark}
+        >
+          <div>
+            <div>
+              <div
+                className={`${styles.title} ${
+                  dark ? styles.dark : styles.white
+                }`}
+              >
+                {title}
+              </div>
+              <div
+                className={`${styles.price} ${
+                  dark ? styles.dark : styles.white
+                }`}
+              >
+                ${price}
+              </div>
+              <div
+                className={`${styles.explanation} ${
+                  dark ? styles.dark : styles.white
+                }`}
+                style={{ textAlign: "center" }}
+              >
+                {explanation}
+              </div>
+              {/* TODO text color siyah veya beyaz olsun */}
+              <div>
+                <ul
+                  style={{ listStyle: "disc", fontSize: "1.2rem" }}
+                  className={`${dark ? styles.dark : styles.white}`}
+                >
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                  <li>
+                    Lorem ipsum dolor sit amet, consectetur adipisicing elit,
+                    sed do eiusmod tempor incididunt ut labore et dolore magna
+                    aliquat enim ad minim veniam.
+                  </li>
+                </ul>
+              </div>
+              <div className={styles.buttonContainer}>
+                <div className={styles.terms}>
+                  <input type="checkbox" id="terms" />
+                  <label htmlFor="terms">
+                    I&apos;ve read and agree to the
+                    {/* TODO linke cevir span i */}
+                    {/* TODO BLACK ISE WHITE COLOR OLSUN */}
+                    <span> privacy policy and PDPA</span>
+                  </label>
+                </div>
+
+                <Button onClick={closeModal}>Choose Plan</Button>
+              </div>
+            </div>
+          </div>
+        </Modal>
       </div>
     </div>
   );
@@ -93,4 +200,5 @@ Card.propTypes = {
   order: PropTypes.number,
   user: PropTypes.string,
   sliderValue: PropTypes.number,
+  explanation: PropTypes.string,
 };

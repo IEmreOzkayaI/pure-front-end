@@ -1,5 +1,6 @@
 import pureLogo from "/pure-logo.svg";
 import styles from "./Navbar.module.scss";
+import { Link } from "react-router-dom";
 
 const Navbar = () => {
   return (
@@ -10,29 +11,29 @@ const Navbar = () => {
             <img src={pureLogo} alt="logo" />
           </li>
           <li>
-            <a href="">Home</a>
+            <Link to={"/"}>Home</Link>
           </li>
           <li>
-            <a href="">About Us</a>
+            <Link to={"/about-us"}>About Us</Link>
           </li>
           <li>
-            <a href="">Pricing</a>
+            <Link to={"/pricing"}>Pricing</Link>
           </li>
         </span>
         <span className={styles.lastChild}>
           <li>
             <div>Log In</div>
             <div className={styles.dropdownContent}>
-              <a className={styles.dropdownItem1} href="/companyLogin">
+              <Link className={styles.dropdownItem1} href="/companyLogin">
                 Company Account
-              </a>
-              <a className={styles.dropdownItem2} href="/personalLogin">
+              </Link>
+              <Link className={styles.dropdownItem2} href="/personalLogin">
                 Personal Account
-              </a>
+              </Link>
             </div>
           </li>
           <li>
-            <a href="">Sign Up</a>
+            <Link to={"/sign-up"}>Sign Up</Link>
           </li>
         </span>
       </ul>
