@@ -25,4 +25,11 @@
     background-color: $very-dark-gray;
     border: 0.1rem solid #fff;
   }
+  &.blue {
+    background-color: $blue-gray;
+    color: #fff;
+  }
+  &.md {
+    width: 18.3rem;
+  }
 }

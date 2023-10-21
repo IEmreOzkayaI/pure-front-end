@@ -1,0 +1,147 @@
+@import "../../../global.scss";
+
+.container {
+  margin: 2.2rem;
+  border-radius: 1.4rem;
+  height: 118rem;
+
+  background: $very-dark-gray;
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    padding-inline: 11.2rem;
+    padding-block: 10rem;
+
+    .explanation {
+      display: grid;
+      gap: 1rem;
+      background-color: rgba(108, 123, 159, 0.4);
+      border-radius: 5.9rem;
+      .texts {
+        padding-inline: 5rem;
+        color: $white;
+        font-family: Ubuntu;
+        line-height: normal;
+        :nth-child(1) {
+          font-size: 4rem;
+          font-style: normal;
+          font-weight: 500;
+          padding-top: 6.7rem;
+        }
+        :nth-child(2) {
+          font-size: 2.8rem;
+          font-style: normal;
+          font-weight: 400;
+          margin-top: 2rem;
+        }
+        :nth-child(3) {
+          text-align: justify;
+          font-size: 2.4rem;
+          font-style: normal;
+          font-weight: 400;
+          margin-top: 3rem;
+        }
+        :nth-child(4) {
+          color: $text-color;
+          text-align: justify;
+          font-size: 1.6rem;
+          font-style: normal;
+          margin-top: 6rem;
+          font-weight: 400;
+        }
+      }
+      .image {
+        svg {
+          width: 100%;
+        }
+      }
+    }
+    .getStarted {
+      padding-inline: 5.1rem;
+      padding-top: 5.8rem;
+      .header {
+        display: flex;
+
+        #getStarted {
+          color: #fff;
+          font-family: Ubuntu;
+          font-size: 3.6rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          margin-right: 7rem;
+        }
+        span {
+          color: rgba(255, 255, 255, 0.5);
+          font-family: Ubuntu;
+          font-size: 1rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+          margin-right: 0.5rem;
+          align-self: center;
+        }
+        button {
+          font-size: 1rem;
+        }
+        & + div {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 1.6rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          margin-top: 5.2rem;
+          margin-bottom: 4.5rem;
+        }
+      }
+      form {
+        width: 47.7rem;
+
+        label {
+          color: rgba(255, 255, 255, 0.5);
+          font-size: 1.6rem;
+          font-style: normal;
+          font-weight: 500;
+          line-height: normal;
+          text-transform: uppercase;
+        }
+        input {
+          border-radius: 0.6rem;
+          border: 0.13rem solid rgba(255, 255, 255, 0.2);
+          padding: 1.2rem;
+          background-color: $very-dark-gray;
+        }
+        .inputGroup {
+          display: flex;
+          flex-direction: column;
+          flex: 1;
+
+          &.privacy {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            flex-direction: row;
+            label {
+              font-size: 1.2rem !important;
+              color: rgba(255, 255, 255, 0.5);
+              font-weight: 400;
+              text-transform: none;
+              margin-left: 0.7rem;
+            }
+            span {
+              font-style: normal;
+              font-weight: 400;
+              line-height: normal;
+              color: $white;
+            }
+          }
+        }
+        .col {
+          display: flex;
+          gap: 3.6rem;
+          margin-block: 2rem;
+        }
+      }
+    }
+  }
+}

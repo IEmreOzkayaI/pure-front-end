@@ -2,11 +2,13 @@ import PropTypes from "prop-types";
 import styles from "./Button.module.scss";
 
 export default function Button(props) {
+  let className = props.className.map((className) => {
+    return styles[className];
+  });
+  className.push(styles.button);
+
   return (
-    <button
-      {...props}
-      className={`${styles.button} ${styles[`${props.className}`]}`}
-    >
+    <button {...props} className={className.join(" ")}>
       {props.children}
     </button>
   );
@@ -14,5 +16,5 @@ export default function Button(props) {
 
 Button.propTypes = {
   children: PropTypes.node,
-  className: PropTypes.string,
+  className: PropTypes.arrayOf(PropTypes.string),
 };
