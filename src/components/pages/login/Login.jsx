@@ -1,19 +1,18 @@
-import { Link } from "react-router-dom";
 import Button from "../../shared/Button";
 import Footer from "../root/Footer/Footer";
 import Navbar from "../root/Navbar/Navbar";
-import styles from "./Signup.module.scss";
+import styles from "./Login.module.scss";
 import PropTypes from "prop-types";
 
 // TODO user'i ya localstorage'dan ya da redux'tan al
-export default function Signup({ user }) {
+export default function Login({ user }) {
   return (
     <>
       <div className={styles.container}>
         <Navbar />
         <div
           className={styles.grid}
-          style={user === "user" ? { gridAutoRows: 65 + "rem" } : {}}
+          // style={user === "user" ? { gridAutoRows: 46 + "rem" } : {}}
         >
           <div className={styles.explanation}>
             <div className={styles.texts}>
@@ -55,51 +54,12 @@ export default function Signup({ user }) {
             <div className={styles.header}>
               <span id={styles.getStarted}>Get Started Now</span>
               <div className="flex">
-                <span>Already a member ?</span>
-                <Button className={["dark"]}>LOG IN</Button>
+                <span>Not a member ?</span>
+                <Button className={["dark"]}>Sign Up</Button>
               </div>
             </div>
-            <div>
-              Welcome in our service, create account to start your experience.
-            </div>
+            <div>Log in to your account to continue your experience.</div>
             <form>
-              <div className={styles.col}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="firstName">First Name</label>
-                  <input type="text" id="firstName" />
-                </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="lastName">Last Name</label>
-                  <input type="text" id="lastName" />
-                </div>
-              </div>
-              <div className={styles.col}>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="phoneNumber">Phone Number</label>
-                  <input type="text" id="phoneNumber" />
-                </div>
-              </div>
-              {user === "company" ? (
-                <>
-                  <div className={styles.col}>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="companyName">Company Name</label>
-                      <input type="text" id="companyName" />
-                    </div>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="industry">Industry</label>
-                      <input type="text" id="industry" />
-                    </div>
-                  </div>
-                  <div className={styles.col}>
-                    <div className={styles.inputGroup}>
-                      <label htmlFor="vat">vat number</label>
-                      <input type="text" id="vat" />
-                    </div>
-                  </div>
-                </>
-              ) : null}
-
               <div className={styles.col}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="email">E mail</label>
@@ -115,32 +75,15 @@ export default function Signup({ user }) {
                     autoComplete="new-password"
                   />
                 </div>
-                <div className={styles.inputGroup}>
-                  <label htmlFor="repeatPass">repeat password</label>
-                  <input
-                    type="password"
-                    id="repeatPass"
-                    autoComplete="new-password"
-                  />
-                </div>
-              </div>
-              <div className={styles.col}>
-                <div className={`${styles.inputGroup} ${styles.privacy}`}>
-                  {/* TODO checkbox tasarimdaki gibi style edilecek bir ara */}
-                  <input type="checkbox" id="terms" />
-                  <label htmlFor="terms">
-                    I’ve read and agree to the{" "}
-                    <Link to="privacy-policy">privacy policy</Link>
-                  </label>
-                </div>
               </div>
               <div className="flex justify-center mt-6">
-                <Button className={["blue", "md"]}>Sign Up</Button>
+                <Button className={["blue", "md"]}>Log In</Button>
               </div>
             </form>
           </div>
         </div>
       </div>
+      {/* FIXME div kalkacak footer componentinin paddingleri fln duzeltilmeli */}
       <div>
         <Footer />
       </div>
@@ -148,4 +91,4 @@ export default function Signup({ user }) {
   );
 }
 
-Signup.propTypes = { user: PropTypes.string.isRequired };
+Login.propTypes = { user: PropTypes.string.isRequired };

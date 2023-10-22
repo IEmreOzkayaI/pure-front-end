@@ -2,7 +2,7 @@ $white: #f5f3f3;
 $purple-gray: #918a9f;
 $dark-gray: #383e50;
 $light-gray: #657284;
-$blue-gray: #6C7B9F;
+$blue-gray: #6c7b9f;
 $very-dark-gray: #16161b;
 $text-color: #a1aeb7;
 
@@ -28,4 +28,53 @@ ul {
 
 .globalContainer {
   margin: 2.1rem 2rem;
+}
+
+.flex {
+  display: flex;
+}
+.justify-space-between {
+  justify-content: space-between;
+}
+.justify-center {
+  justify-content: center;
+}
+.align-items-center {
+  align-items: center;
+}
+
+@for $i from 0 through 10 {
+  .m-#{$i} {
+    margin: #{$i}rem;
+  }
+  .p-#{$i} {
+    padding: #{$i}rem;
+  }
+}
+
+@for $i from 0 through 10 {
+  .mt-#{$i} {
+    margin-top: #{$i}rem;
+  }
+  .mb-#{$i} {
+    margin-bottom: #{$i}rem;
+  }
+  .ml-#{$i} {
+    margin-left: #{$i}rem;
+  }
+  .mr-#{$i} {
+    margin-right: #{$i}rem;
+  }
+  .pt-#{$i} {
+    padding-top: #{$i}rem;
+  }
+  .pb-#{$i} {
+    padding-bottom: #{$i}rem;
+  }
+  .pl-#{$i} {
+    padding-left: #{$i}rem;
+  }
+  .pr-#{$i} {
+    padding-right: #{$i}rem;
+  }
 }
