@@ -1,12 +1,12 @@
 import { Link } from "react-router-dom";
 import styles from "./CallToAction.module.scss";
-// import { useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 const CallToAction = () => {
-  // TODO 2: Uncomment the code when routing added
-  // const navigate = useNavigate();
-  // const handleClick = (route) => navigate(route);
-
+  const navigate = useNavigate();
+  const handleClick = (route, params) => {
+    navigate(`${route}?user=${params}`);
+  };
   return (
     <section className={styles.ctaContainer}>
       <div className={styles.companyService}>
@@ -22,7 +22,7 @@ const CallToAction = () => {
             height="20"
             viewBox="0 0 19 20"
             fill="none"
-            // onClick={handleClick}
+            onClick={() => handleClick("/pricing", "company")}
           >
             <path
               fillRule="evenodd"
@@ -32,12 +32,11 @@ const CallToAction = () => {
             />
           </svg>
 
-          <Link to="/pricing">More</Link>
+          <Link to="/pricing?user=company">More</Link>
         </div>
         <div className={styles.rightArrow}>
           <svg
-            //TODO
-            // onClick={()=>handleClick("/companyLogin")}
+            onClick={() => handleClick("/signup", "company")}
             xmlns="http://www.w3.org/2000/svg"
             width="104"
             height="82"
@@ -72,9 +71,7 @@ const CallToAction = () => {
             height="20"
             viewBox="0 0 19 20"
             fill="none"
-
-            //TODO
-            // onClick={handleClick}
+            onClick={() => handleClick("/pricing", "user")}
           >
             <path
               fillRule="evenodd"
@@ -83,12 +80,11 @@ const CallToAction = () => {
               fill="#F5F3F3"
             />
           </svg>
-          <a href="/pricing"> More</a>
+          <Link to="/pricing?user=user">More</Link>
         </div>
         <div className={styles.rightArrow}>
           <svg
-            //TODO
-            // onClick={()=>handleClick("/personalLogin")}
+            onClick={() => handleClick("/signup", "user")}
             xmlns="http://www.w3.org/2000/svg"
             width="104"
             height="82"

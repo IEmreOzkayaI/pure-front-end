@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import styles from "./Card.module.scss";
 import Modal from "./Modal";
 import Button from "./Button";
+import { Link } from "react-router-dom";
 
 export default function Card(props) {
   const { dark, title, order, user, sliderValue, explanation } = props;
@@ -179,11 +180,13 @@ export default function Card(props) {
                     I&apos;ve read and agree to the
                     {/* TODO linke cevir span i */}
                     {/* TODO BLACK ISE WHITE COLOR OLSUN */}
-                    <span> privacy policy and PDPA</span>
+                    <Link to="privacy-policy"> privacy policy and PDPA</Link>
                   </label>
                 </div>
 
-                <Button onClick={closeModal}>Choose Plan</Button>
+                <Button className={["white"]} onClick={closeModal}>
+                  Choose Plan
+                </Button>
               </div>
             </div>
           </div>

@@ -2,13 +2,13 @@ import PropTypes from "prop-types";
 import styles from "./Button.module.scss";
 
 export default function Button(props) {
-  let className = props.className.map((className) => {
+  let className = props.className?.map((className) => {
     return styles[className];
   });
-  className.push(styles.button);
+  className?.push(styles.button);
 
   return (
-    <button {...props} className={className.join(" ")}>
+    <button {...props} className={className?.join(" ")}>
       {props.children}
     </button>
   );

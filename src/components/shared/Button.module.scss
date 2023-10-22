@@ -10,7 +10,6 @@
   align-items: center;
   flex-shrink: 0;
 
-  color: rgba(22, 22, 27, 0.5);
   text-align: center;
   font-family: Ubuntu;
   font-size: 1.6rem;
@@ -18,8 +17,11 @@
   font-weight: 500;
   line-height: normal;
   text-transform: uppercase;
-  background-color: #fff;
   cursor: pointer;
+  &.white {
+    background-color: #fff;
+    color: rgba(22, 22, 27, 0.5);
+  }
   &.dark {
     color: #fff;
     background-color: $very-dark-gray;

@@ -1,9 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "../root/Navbar/Navbar";
 import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
 import RangeSlider from "../../shared/RangeSlider";
 import Card from "../../shared/Card";
+import { useLocation } from "react-router-dom";
 
 const marks = [
   {
@@ -29,11 +30,19 @@ const marks = [
 ];
 
 export default function Pricing() {
-  const [activeTab, setActiveTab] = useState("company");
+  const location = useLocation();
+  const user = new URLSearchParams(location.search).get("user");
+  const [activeTab, setActiveTab] = useState(user || "company");
   const [sliderValue, setSliderValue] = useState(10);
+  useEffect(() => {
+    window.scrollTo({
+      top: document.getElementById("pricing").offsetTop,
+      behavior: "smooth",
+    });
+  }, []);
   return (
     <>
-      <div className={styles.pricing}>
+      <div className={styles.pricing} id="pricing">
         <Navbar />
         <div className={styles.grayBackground}>
           <div className={styles.tabs}>
