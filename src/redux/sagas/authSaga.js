@@ -51,10 +51,9 @@ function* authWrapper(payload) {
         //     secureFlag +
         //     ";";
         // }
-        // if (res.status === 201) {
-        //   window.location.href = "/confirm";
-        // }
-        console.log("res", res);
+        if (res.status === 201) {
+          window.location.href = "/confirm";
+        }
         const data = res.data;
         resolve(data);
       })

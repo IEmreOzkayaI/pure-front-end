@@ -16,6 +16,7 @@ export default function Confirm() {
     useRef(null),
     useRef(null),
   ];
+  console.log("COOKIE", document.cookie)
 
   const handleChange = (e, index) => {
     const value = e.target.value;
