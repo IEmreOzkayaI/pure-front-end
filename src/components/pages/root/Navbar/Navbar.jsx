@@ -24,16 +24,16 @@ const Navbar = () => {
           <li>
             <div>Log In</div>
             <div className={styles.dropdownContent}>
-              <Link className={styles.dropdownItem1} href="/companyLogin">
+              <Link className={styles.dropdownItem1} to={"/login"}>
                 Company Account
               </Link>
-              <Link className={styles.dropdownItem2} href="/personalLogin">
+              <Link className={styles.dropdownItem2} to={"/login"}>
                 Personal Account
               </Link>
             </div>
           </li>
           <li>
-            <Link to={"/sign-up"}>Sign Up</Link>
+            <Link to={"/signup"}>Sign Up</Link>
           </li>
         </span>
       </ul>

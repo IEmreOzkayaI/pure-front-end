@@ -4,9 +4,43 @@ import Footer from "../root/Footer/Footer";
 import Navbar from "../root/Navbar/Navbar";
 import styles from "./Signup.module.scss";
 import PropTypes from "prop-types";
-
+import { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { authFetch } from "../../../redux/toolkit/authSlice";
 // TODO user'i ya localstorage'dan ya da redux'tan al
 export default function Signup({ user }) {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [phoneNumber, setPhoneNumber] = useState("");
+  const [companyName, setCompanyName] = useState("");
+  const [industry, setIndustry] = useState("");
+  const [vat, setVat] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [repeatPass, setRepeatPass] = useState("");
+  const dispatch = useDispatch();
+  const authInfo = useSelector((state) => state.auth.authInfo);
+
+  const registerRequest = (e) => {
+    e.preventDefault();
+    const user = {
+      name: firstName,
+      surname: lastName,
+      email,
+      phone_number: phoneNumber,
+      password,
+      privacy_policy: true,
+      terms_of_use: true,
+      role: "Individual_User",
+    };
+    console.log(user);
+    dispatch(authFetch(user));
+  };
+
+  useEffect(() => {
+    console.log(authInfo);
+  }, [authInfo]);
+
   return (
     <>
       <div className={styles.container}>
@@ -62,21 +96,36 @@ export default function Signup({ user }) {
             <div>
               Welcome in our service, create account to start your experience.
             </div>
-            <form>
+            <form onSubmit={(e) => registerRequest(e)}>
               <div className={styles.col}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="firstName">First Name</label>
-                  <input type="text" id="firstName" />
+                  <input
+                    type="text"
+                    id="firstName"
+                    value={firstName}
+                    onChange={(e) => setFirstName(e.target.value)}
+                  />
                 </div>
                 <div className={styles.inputGroup}>
                   <label htmlFor="lastName">Last Name</label>
-                  <input type="text" id="lastName" />
+                  <input
+                    type="text"
+                    id="lastName"
+                    value={lastName}
+                    onChange={(e) => setLastName(e.target.value)}
+                  />
                 </div>
               </div>
               <div className={styles.col}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="phoneNumber">Phone Number</label>
-                  <input type="text" id="phoneNumber" />
+                  <input
+                    type="text"
+                    id="phoneNumber"
+                    value={phoneNumber}
+                    onChange={(e) => setPhoneNumber(e.target.value)}
+                  />
                 </div>
               </div>
               {user === "company" ? (
@@ -84,17 +133,32 @@ export default function Signup({ user }) {
                   <div className={styles.col}>
                     <div className={styles.inputGroup}>
                       <label htmlFor="companyName">Company Name</label>
-                      <input type="text" id="companyName" />
+                      <input
+                        type="text"
+                        id="companyName"
+                        value={companyName}
+                        onChange={(e) => setCompanyName(e.target.value)}
+                      />
                     </div>
                     <div className={styles.inputGroup}>
                       <label htmlFor="industry">Industry</label>
-                      <input type="text" id="industry" />
+                      <input
+                        type="text"
+                        id="industry"
+                        value={industry}
+                        onChange={(e) => setIndustry(e.target.value)}
+                      />
                     </div>
                   </div>
                   <div className={styles.col}>
                     <div className={styles.inputGroup}>
                       <label htmlFor="vat">vat number</label>
-                      <input type="text" id="vat" />
+                      <input
+                        type="text"
+                        id="vat"
+                        value={vat}
+                        onChange={(e) => setVat(e.target.value)}
+                      />
                     </div>
                   </div>
                 </>
@@ -103,7 +167,13 @@ export default function Signup({ user }) {
               <div className={styles.col}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="email">E mail</label>
-                  <input type="text" id="email" autoComplete="username" />
+                  <input
+                    type="text"
+                    id="email"
+                    autoComplete="username"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
+                  />
                 </div>
               </div>
               <div className={styles.col}>
@@ -113,6 +183,8 @@ export default function Signup({ user }) {
                     type="password"
                     id="password"
                     autoComplete="new-password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
                 <div className={styles.inputGroup}>
@@ -121,6 +193,8 @@ export default function Signup({ user }) {
                     type="password"
                     id="repeatPass"
                     autoComplete="new-password"
+                    value={repeatPass}
+                    onChange={(e) => setRepeatPass(e.target.value)}
                   />
                 </div>
               </div>
