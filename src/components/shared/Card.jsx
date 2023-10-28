@@ -178,7 +178,6 @@ export default function Card(props) {
                   <input type="checkbox" id="terms" />
                   <label htmlFor="terms">
                     I&apos;ve read and agree to the
-                    {/* TODO linke cevir span i */}
                     {/* TODO BLACK ISE WHITE COLOR OLSUN */}
                     <Link to="privacy-policy"> privacy policy and PDPA</Link>
                   </label>
