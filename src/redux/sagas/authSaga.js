@@ -24,7 +24,10 @@ function* authWrapper(payload) {
     axios
       .post(
         "https://pure-backend-node-production.up.railway.app/api/user/register",
-        payload
+        payload,
+        {
+          withCredentials: true,
+        }
       )
       .then((res) => {
         // if (document.cookie.indexOf("confirm_token") === -1) {
