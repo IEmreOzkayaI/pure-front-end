@@ -1,0 +1,166 @@
+@import "../../global.scss";
+
+.card {
+  position: absolute;
+  padding: 3.3rem 3.1rem 2.7rem 3.1rem;
+  background-color: $white;
+  border-radius: 2rem;
+  width: 24rem;
+  top: 28rem;
+
+  &.order-1 {
+    left: 11.9rem;
+  }
+
+  &.order-2 {
+    left: 44.6rem;
+    right: 44.2rem;
+    top: 25rem;
+  }
+
+  &.order-3 {
+    left: 80.5rem;
+  }
+
+  &.dark {
+    background-color: $very-dark-gray;
+    color: $white;
+  }
+  .title {
+    &.dark {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    &.white {
+      color: rgba(22, 22, 27, 0.5);
+    }
+    font-family: Ubuntu;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 2rem;
+  }
+  .price {
+    &.dark {
+      color: $white;
+    }
+    &.white {
+      color: $very-dark-gray;
+    }
+    font-family: Ubuntu;
+    font-size: 3.6rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+  }
+  .explanation {
+    &.dark {
+      color: rgba(255, 255, 255, 0.5);
+    }
+    &.white {
+      color: rgba(22, 22, 27, 0.5);
+    }
+    text-align: justify;
+    font-family: Ubuntu;
+    font-size: 1.2rem;
+    font-style: normal;
+    font-weight: 500;
+    margin-bottom: 2rem;
+    line-height: normal;
+  }
+
+  ul {
+    &.dark {
+      color: rgba(255, 255, 255, 0.5);
+      list-style: url("./list-style-white.svg");
+    }
+    &.white {
+      color: rgba(22, 22, 27, 0.5);
+      list-style: url("./list-style-dark.svg");
+    }
+    font-family: Ubuntu;
+    font-size: 2rem;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+    margin-bottom: 1rem;
+    padding-left: 2.5rem;
+
+    li:not(:last-child) {
+      margin-bottom: 1.9rem;
+    }
+  }
+  .svg {
+    margin-bottom: 1rem;
+    text-align: center;
+    padding-left: 8rem;
+    padding-right: 7.9rem;
+  }
+  .choosePlanContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .choosePlan {
+      flex-shrink: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-family: Ubuntu;
+      font-size: 1.6rem;
+      font-style: normal;
+      font-weight: 500;
+      line-height: normal;
+      text-transform: uppercase;
+      border-radius: 1rem;
+      &.dark {
+        border: 0.1rem solid rgba(255, 255, 255, 0.5);
+      }
+      &.white {
+        border: 0.1rem solid rgba(22, 22, 27, 0.5);
+      }
+      user-select: none;
+      width: 14rem;
+
+      div {
+        &.dark {
+          color: #fff;
+        }
+        &.white {
+          color: rgba(22, 22, 27, 0.5);
+        }
+        padding: 1.1rem 0 1rem 0;
+      }
+    }
+    .buttonContainer {
+      margin-top: 4.1rem;
+      margin-bottom: 3rem;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 2rem;
+
+      .terms {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        gap: 0.5rem;
+
+        label {
+          text-decoration: underline;
+          color: $text-color;
+        }
+        a {
+          color: $very-dark-gray;
+          font-size: 1.2rem;
+          font-style: normal;
+          font-weight: 400;
+          line-height: normal;
+        }
+      }
+    }
+  }
+}

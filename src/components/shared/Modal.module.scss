@@ -1,0 +1,25 @@
+@import "../../global.scss";
+
+.modal {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9999; // Set the z-index to ensure it's on top
+}
+
+// Style for the modal content
+.modalContent {
+  padding: 2rem;
+  border-radius: 4.5rem;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  &.dark {
+    background-color: $very-dark-gray;
+    color: $white;
+  }
+  &.white {
+    background-color: $white;
+    color: $very-dark-gray;
+  }
+}

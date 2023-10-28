@@ -1,10 +1,43 @@
-import React from 'react'
-import ReactDOM from 'react-dom/client'
-import App from './App.jsx'
-import './index.css'
+import ReactDOM from "react-dom/client";
+import App from "./App.jsx";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Pricing from "./components/pages/pricing/Pricing.jsx";
+import Signup from "./components/pages/signup/Signup.jsx";
+import Login from "./components/pages/login/Login.jsx";
+import store from "./redux/store.js";
+import { Provider } from "react-redux";
+import Confirm from "./components/pages/ConfirmPage/Confirm.jsx";
 
-ReactDOM.createRoot(document.getElementById('root')).render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-)
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <App />,
+    errorElement: (
+      <div style={{ fontSize: "4em", textAlign: "center" }}>
+        Oops, there is an error!
+      </div>
+    ),
+  },
+  {
+    path: "pricing",
+    element: <Pricing />,
+  },
+  {
+    path: "signup",
+    element: <Signup user="user" />,
+  },
+  {
+    path: "login",
+    element: <Login user="company" />,
+  },
+  {
+    path: "confirm",
+    element: <Confirm />,
+  },
+]);
+
+ReactDOM.createRoot(document.getElementById("root")).render(
+  <Provider store={store}>
+    <RouterProvider router={router} />
+  </Provider>
+);

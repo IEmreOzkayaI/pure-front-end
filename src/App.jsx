@@ -1,20 +1,18 @@
-import {useState} from "react";
-import pureLogo from "/pure-logo.svg";
-import "./App.css";
-import {Card} from "@mui/material";
+import CallToAction from "./components/pages/root/CallToAction/CallToAction";
+import Footer from "./components/pages/root/Footer/Footer";
+import Welcome from "./components/pages/root/Welcome/Welcome";
+import CardSection from "./components/pages/root/CardSection/CardSection";
+import "./global.scss";
 
 function App() {
-	return (
-		<>
-			<div>
-				<a href='#' target='_blank'>
-					<img src={pureLogo} className='logo react' alt='React logo' />
-				</a>
-			</div>
-			<h1>Will Be Here Soon ! </h1>
-			<p className='read-the-docs'>© PURE 2023 | All Rights Reserved</p>
-		</>
-	);
+  return (
+    <div className="globalContainer">
+      <Welcome />
+      <CallToAction />
+      <CardSection />
+      <Footer />
+    </div>
+  );
 }
 
 export default App;

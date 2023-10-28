@@ -1,0 +1,59 @@
+@import "../../../global.scss";
+
+.pricing {
+  margin: 2.1rem 2rem;
+  background-color: $very-dark-gray;
+  border-radius: 1.4rem;
+  height: 118.4rem;
+
+  .grayBackground {
+    margin: 12.5rem 11.5rem 45.5rem 11.2rem;
+    padding: 3.7rem 9rem 0 9.1rem;
+    border-radius: 4.5rem;
+    height: 45.3rem;
+
+    color: $white;
+    background-color: $dark-gray;
+    position: relative;
+
+    .sliderContainer {
+      margin-top: 6rem;
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4rem;
+      cursor: pointer;
+
+      .text {
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+      }
+      .text.active {
+        color: $white;
+        text-decoration: underline;
+      }
+
+      & + div {
+        color: $white;
+        text-align: left;
+        font-family: Ubuntu;
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
+        margin-top: 3rem;
+      }
+    }
+  }
+}
+.footer {
+  margin: 2.1rem 2rem;
+}
