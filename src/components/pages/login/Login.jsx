@@ -83,7 +83,6 @@ export default function Login({ user }) {
           </div>
         </div>
       </div>
-      {/* FIXME div kalkacak footer componentinin paddingleri fln duzeltilmeli */}
       <div>
         <Footer />
       </div>

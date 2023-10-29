@@ -13,13 +13,13 @@
   }
 
   &.order-2 {
-    left: 44.6rem;
+    left: 48.1rem;
     right: 44.2rem;
     top: 25rem;
   }
 
   &.order-3 {
-    left: 80.5rem;
+    left: 87.5rem;
   }
 
   &.dark {
@@ -74,11 +74,11 @@
 
   ul {
     &.dark {
-      color: rgba(255, 255, 255, 0.5);
+      color: $white;
       list-style: url("./list-style-white.svg");
     }
     &.white {
-      color: rgba(22, 22, 27, 0.5);
+      color: $very-dark-gray;
       list-style: url("./list-style-dark.svg");
     }
     font-family: Ubuntu;
@@ -154,7 +154,12 @@
           color: $text-color;
         }
         a {
-          color: $very-dark-gray;
+          &.darkText {
+            color: $very-dark-gray;
+          }
+          &.whiteText {
+            color: $white;
+          }
           font-size: 1.2rem;
           font-style: normal;
           font-weight: 400;
