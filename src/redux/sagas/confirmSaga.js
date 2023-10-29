@@ -22,20 +22,26 @@ function* confirm(action) {
 function* confirmWrapper(payload) {
 	const promise = yield new Promise((resolve, reject) => {
 		axios
-			.post("https://pure-backend-node-production.up.railway.app/api/user/confirm", payload.body, {
-				withCredentials: true,
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-					Authorization: `Bearer ${payload.confirm_token}`,
-				},
-			})
+			.post(
+				"http://localhost:3001/api/user/confirm",
+				{confirm_credential: payload.confirm_credential},
+				{
+					withCredentials: true,
+					headers: {
+						"Content-Type": "application/json",
+						Accept: "application/json",
+						Authorization: `Bearer ${payload.confirm_token}`,
+					},
+				}
+			)
 			.then((res) => {
+				if (res.status === 200) window.location.replace("/login");
+
 				const data = res.data;
 				resolve(data);
 			})
 			.catch((err) => {
-				reject(err.response.data);
+				reject(err);
 			});
 	});
 

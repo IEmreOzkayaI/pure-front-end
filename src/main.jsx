@@ -31,7 +31,7 @@ const router = createBrowserRouter([
     element: <Login user="company" />,
   },
   {
-    path: "confirm",
+    path: "confirm/:confirm_url_token",
     element: <Confirm />,
   },
 ]);

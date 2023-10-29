@@ -6,7 +6,7 @@ import styles from "./Signup.module.scss";
 import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authFetch } from "../../../redux/toolkit/authSlice";
+import { registerFetch } from "../../../redux/toolkit/registerSlice";
 // TODO user'i ya localstorage'dan ya da redux'tan al
 export default function Signup({ user }) {
   const [firstName, setFirstName] = useState("");
@@ -19,7 +19,7 @@ export default function Signup({ user }) {
   const [password, setPassword] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
   const dispatch = useDispatch();
-  const authInfo = useSelector((state) => state.auth.authInfo);
+  const registerInfo = useSelector((state) => state.register.registerInfo);
 
   const registerRequest = (e) => {
     e.preventDefault();
@@ -34,12 +34,13 @@ export default function Signup({ user }) {
       role: "Individual_User",
     };
     console.log(user);
-    dispatch(authFetch(user));
+    
+    dispatch(registerFetch(user));
   };
 
   useEffect(() => {
-    console.log(authInfo);
-  }, [authInfo]);
+    console.log(registerInfo);
+  }, [registerInfo]);
 
   return (
     <>
