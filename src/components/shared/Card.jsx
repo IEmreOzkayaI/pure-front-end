@@ -8,13 +8,17 @@ import { Link } from "react-router-dom";
 export default function Card(props) {
   const { dark, title, order, user, sliderValue, explanation } = props;
   const [price, setPrice] = useState(0);
-  const [isOpen, setIsOpen] = useState(false);
-  const openModal = () => {
-    setIsOpen(true);
+  const [modal, setModal] = useState({
+    demo: false,
+    monthly: false,
+    yearly: false,
+  });
+  const openModal = (modalName) => {
+    setModal({ ...modal, [modalName]: true });
   };
 
-  const closeModal = () => {
-    setIsOpen(false);
+  const closeModal = (modalName) => {
+    setModal({ ...modal, [modalName]: false });
   };
 
   useEffect(() => {
@@ -87,14 +91,14 @@ export default function Card(props) {
           className={`${styles.choosePlan} ${
             dark ? styles.dark : styles.white
           }`}
-          onClick={openModal}
+          onClick={() => openModal(title.toLowerCase())}
         >
           <div className={`${dark ? styles.dark : styles.white}`}>
             Choose plan
           </div>
         </div>
         <Modal
-          isOpen={isOpen}
+          isOpen={modal[title.toLowerCase()]}
           closeModal={closeModal}
           title={title}
           price={price}
@@ -125,7 +129,6 @@ export default function Card(props) {
               >
                 {explanation}
               </div>
-              {/* TODO text color siyah veya beyaz olsun */}
               <div>
                 <ul
                   style={{ listStyle: "disc", fontSize: "1.2rem" }}
@@ -178,12 +181,20 @@ export default function Card(props) {
                   <input type="checkbox" id="terms" />
                   <label htmlFor="terms">
                     I&apos;ve read and agree to the
-                    {/* TODO BLACK ISE WHITE COLOR OLSUN */}
-                    <Link to="privacy-policy"> privacy policy and PDPA</Link>
+                    <Link
+                      to="privacy-policy"
+                      className={`${dark ? styles.whiteText : styles.darkText}`}
+                    >
+                      {" "}
+                      privacy policy and PDPA
+                    </Link>
                   </label>
                 </div>
 
-                <Button className={["white"]} onClick={closeModal}>
+                <Button
+                  className={["white"]}
+                  onClick={() => closeModal(title.toLowerCase())}
+                >
                   Choose Plan
                 </Button>
               </div>
