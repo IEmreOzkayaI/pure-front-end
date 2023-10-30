@@ -1,14 +1,14 @@
 import { Link } from "react-router-dom";
-import Button from "../../shared/Button";
+import Button from "../../shared/Button/Button";
 import Footer from "../root/Footer/Footer";
 import Navbar from "../root/Navbar/Navbar";
 import styles from "./Signup.module.scss";
-import PropTypes from "prop-types";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { authFetch } from "../../../redux/toolkit/authSlice";
+import { useLocation } from "react-router-dom";
 // TODO user'i ya localstorage'dan ya da redux'tan al
-export default function Signup({ user }) {
+export default function Signup() {
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -20,6 +20,9 @@ export default function Signup({ user }) {
   const [repeatPass, setRepeatPass] = useState("");
   const dispatch = useDispatch();
   const authInfo = useSelector((state) => state.auth.authInfo);
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const user = params.get("user");
 
   const registerRequest = (e) => {
     e.preventDefault();
@@ -221,5 +224,3 @@ export default function Signup({ user }) {
     </>
   );
 }
-
-Signup.propTypes = { user: PropTypes.string.isRequired };

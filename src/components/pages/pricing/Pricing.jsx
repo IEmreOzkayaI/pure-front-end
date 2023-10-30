@@ -2,8 +2,8 @@ import { useEffect, useState } from "react";
 import Navbar from "../root/Navbar/Navbar";
 import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
-import RangeSlider from "../../shared/RangeSlider";
-import Card from "../../shared/Card";
+import RangeSlider from "../../shared/RangeSlider/RangeSlider";
+import Card from "../../shared/Card/Card";
 import { useLocation } from "react-router-dom";
 
 const marks = [
