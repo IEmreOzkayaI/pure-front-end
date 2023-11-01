@@ -23,7 +23,7 @@ function* confirmWrapper(payload) {
 	const promise = yield new Promise((resolve, reject) => {
 		axios
 			.post(
-				"http://localhost:3001/api/user/confirm",
+				"https://the-pure-backend.cyclic.app/api/user/confirm",
 				{confirm_credential: payload.confirm_credential},
 				{
 					withCredentials: true,

@@ -23,7 +23,7 @@ function* authWrapper(payload) {
 	const promise = yield new Promise((resolve, reject) => {
 		axios
 			.post(
-				"http://localhost:3001/api/user/login",
+				"https://the-pure-backend.cyclic.app/api/user/login",
 				{auth_credential: payload.auth_credential},
 				{
 					withCredentials: true,
