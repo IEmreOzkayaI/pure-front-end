@@ -27,8 +27,10 @@ function* confirmWrapper(payload) {
   const promise = yield new Promise((resolve, reject) => {
     axios
       .post(
-        "https://pure-backend-node-production.up.railway.app/api/user/confirm",
-        payload.body,
+        "https://pure-backend.azurewebsites.net/api/user/confirm",
+        payload.body,{
+          withCredentials: true,
+        },
         {
           headers: {
             "Content-Type": "application/json",
