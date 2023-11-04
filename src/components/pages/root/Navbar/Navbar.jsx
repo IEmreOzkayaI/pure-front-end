@@ -22,18 +22,29 @@ const Navbar = () => {
         </span>
         <span className={styles.lastChild}>
           <li>
-            <div>Log In</div>
-            <div className={styles.dropdownContent}>
-              <Link className={styles.dropdownItem1} to={"/login"}>
-                Company Account
+            <div id={styles.login}>Log In</div>
+            <div className={styles.dropdownContentLogin}>
+              <Link className={styles.dropdownItem1} to={"/login?user=company"}>
+                <img src="./building.png" alt="company" /> Companies
               </Link>
-              <Link className={styles.dropdownItem2} to={"/login"}>
-                Personal Account
+              <Link className={styles.dropdownItem2} to={"/login?user=user"}>
+                <img src="./person.png" alt="person" /> Users
               </Link>
             </div>
           </li>
           <li>
-            <Link to={"/signup"}>Sign Up</Link>
+            <div id={styles.signUp}>Sign Up</div>
+            <div className={styles.dropdownContentSignUp}>
+              <Link
+                className={styles.dropdownItem1}
+                to={"/signup?user=company"}
+              >
+                <img src="./building.png" alt="company" /> Companies
+              </Link>
+              <Link className={styles.dropdownItem2} to={"/signup?user=user"}>
+                <img src="./person.png" alt="person" /> Users
+              </Link>
+            </div>
           </li>
         </span>
       </ul>

@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
 import styles from "./Card.module.scss";
-import Modal from "./Modal";
-import Button from "./Button";
 import { Link } from "react-router-dom";
+import Modal from "../Modal/Modal";
+import Button from "../Button/Button";
 
 export default function Card(props) {
   const { dark, title, order, user, sliderValue, explanation } = props;

@@ -24,11 +24,11 @@ const router = createBrowserRouter([
   },
   {
     path: "signup",
-    element: <Signup user="user" />,
+    element: <Signup />,
   },
   {
     path: "login",
-    element: <Login user="company" />,
+    element: <Login />,
   },
   {
     path: "confirm/:confirm_url_token",

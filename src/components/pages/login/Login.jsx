@@ -1,11 +1,13 @@
-import Button from "../../shared/Button";
+import { useLocation } from "react-router-dom";
+import Button from "../../shared/Button/Button";
 import Footer from "../root/Footer/Footer";
 import Navbar from "../root/Navbar/Navbar";
 import styles from "./Login.module.scss";
-import PropTypes from "prop-types";
-
 // TODO user'i ya localstorage'dan ya da redux'tan al
-export default function Login({ user }) {
+export default function Login() {
+  const location = useLocation();
+  const params = new URLSearchParams(location.search);
+  const user = params.get("user");
   return (
     <>
       <div className={styles.container}>
@@ -89,5 +91,3 @@ export default function Login({ user }) {
     </>
   );
 }
-
-Login.propTypes = { user: PropTypes.string.isRequired };
