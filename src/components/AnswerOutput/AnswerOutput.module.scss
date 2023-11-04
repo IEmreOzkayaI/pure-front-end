@@ -1,0 +1,11 @@
+@import "../../global.scss";
+
+.right_side_content_down {
+    color: $white;
+    text-align: center;
+    font-size: 5rem;
+    flex-grow: 1;
+    border-radius: 1rem;
+    background-color: rgba($color: $very-dark-gray, $alpha: .7);
+    border: 0.5rem solid $white;
+}
