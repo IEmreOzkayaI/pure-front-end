@@ -1,5 +1,5 @@
 import {useEffect, useRef, useState} from "react";
-import {confirmFetch} from "../../../redux/toolkit/confirmSlice";
+import {confirmFetch} from "../../redux/toolkit/confirmSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {useParams} from "react-router-dom";
 
