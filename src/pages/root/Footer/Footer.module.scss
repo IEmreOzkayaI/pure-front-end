@@ -1,0 +1,74 @@
+@import "../../../global.scss";
+
+footer {
+  background-color: $very-dark-gray;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  padding: 11.7rem 11.4rem 15.6rem 11.4rem;
+  margin-top: 3.2rem;
+  border-radius: 1.4rem;
+
+  .listContainer {
+    display: flex;
+    margin-top: 3.7rem;
+    div {
+      font-size: 1.4rem;
+      height: 2rem; // tasarımda 3.4 rem ama ben böyle yaptım arayüzde biraz farklı duruyor.
+    }
+    a {
+      text-decoration: none;
+      color: $white;
+      opacity: 0.7;
+      font-size: 1.2rem;
+    }
+
+    ul:not(:last-child) {
+      margin-right: 5.2rem;
+    }
+
+    ul div {
+      margin-bottom: 1.6rem;
+    }
+
+    ul li:not(:last-child) {
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+
+    div:first-child {
+      width: 33.1rem;
+      margin-bottom: 3.2rem;
+    }
+
+    .logos {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 3.2rem;
+      img {
+        width: 11.9rem;
+      }
+      .companyName {
+        font-size: 3.6rem;
+        font-weight: 400;
+      }
+    }
+    .companyMotto {
+      width: 100%;
+      text-align: justify;
+      font-size: 1.6rem;
+      color: $white;
+    }
+    .socials {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+  }
+}

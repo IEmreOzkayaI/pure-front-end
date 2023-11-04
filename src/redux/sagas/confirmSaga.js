@@ -23,10 +23,12 @@ function* confirmWrapper(payload) {
 	const promise = yield new Promise((resolve, reject) => {
 		axios
 			.post(
-				"https://the-pure-backend.cyclic.app/api/user/confirm",
-				{confirm_credential: payload.confirm_credential},
+				"https://pure-backend.azurewebsites.net/api/user/confirm",
+				payload.body,
 				{
 					withCredentials: true,
+				},
+				{
 					headers: {
 						"Content-Type": "application/json",
 						Accept: "application/json",
@@ -35,15 +37,12 @@ function* confirmWrapper(payload) {
 				}
 			)
 			.then((res) => {
-				if (res.status === 200) window.location.replace("/login");
-
 				const data = res.data;
 				resolve(data);
 			})
 			.catch((err) => {
-				reject(err);
+				reject(err.response.data);
 			});
 	});
-
 	return promise;
 }
