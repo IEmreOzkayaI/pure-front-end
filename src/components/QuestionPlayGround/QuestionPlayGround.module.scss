@@ -1,0 +1,14 @@
+@import "../../global.scss";
+
+.left_side {
+    border: 0.5rem solid $white;
+    background-color: $black;
+    color: $white;
+    text-align: center;
+    font-size: 5rem;
+    min-width: 20rem;
+    border-radius: 1rem;
+    .left_side_content {
+        height: 100%;
+    }
+}
