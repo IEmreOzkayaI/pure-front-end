@@ -26,32 +26,6 @@ function* authWrapper(payload) {
 				withCredentials: true,
 			})
 			.then((res) => {
-				console.log("document", res);
-				// if (document.cookie.indexOf("confirm_token") === -1) {
-				//   // cookie yok setle
-				//   var cookieName = "confirm_token";
-				//   var cookieValue = res.data.confirm_token;
-				//   var expiryHours = 1;
-				//   var date = new Date();
-				//   date.setTime(date.getTime() + expiryHours * 60 * 60 * 1000);
-
-				//   var secureFlag = location.protocol === "https:" ? "; secure" : ""; // Güvenli bağlantıda mı kontrolü
-
-				//   // Çerez oluşturma
-				//   document.cookie =
-				//     cookieName +
-				//     "=" +
-				//     cookieValue +
-				//     "; expires=" +
-				//     date.toUTCString() +
-				//     "; path=/" +
-				//     secureFlag +
-				//     ";";
-				// }
-				// if (res.status === 201) {
-				//   window.location.href = "/confirm";
-				// }
-				console.log("res", res);
 				const data = res.data;
 				resolve(data);
 			})
