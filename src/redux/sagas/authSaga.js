@@ -3,7 +3,7 @@ import axios from "axios";
 import {authProgress, authSuccess, authFailure} from "../toolkit/authSlice";
 
 export default function* authSaga() {
-	yield all([authWatcher()]);
+	yield all([authWatcher(),]);
 }
 function* authWatcher() {
 	yield takeLatest("auth/authFetch", auth);
@@ -22,7 +22,7 @@ function* auth(action) {
 function* authWrapper(payload) {
 	const promise = yield new Promise((resolve, reject) => {
 		axios
-			.post("https://pure-backend.azurewebsites.net/api/user/register", payload, {
+			.post("http://localhost:3000/api/user/register", payload, {
 				withCredentials: true,
 			})
 			.then((res) => {

@@ -12,25 +12,24 @@ const reducers = {
 		state.authInfo = null;
 		state.authError = false;
 		state.authProgress = true;
-		// state.authFetch = false;
+		state.authFetch = null;
 	},
 	authSuccess: (state, action) => {
-		console.log(action);
 		state.authInfo = action.payload;
 		state.authError = false;
-		state.authFetch = false;
+		state.authFetch = null;
 		state.authProgress = false;
 	},
 	authFailure: (state, action) => {
 		state.authError = action.payload;
 		state.authInfo = null;
 		state.authProgress = false;
-		state.authFetch = false;
+		state.authFetch = null;
 	},
 	clearAuthInfo: (state) => {
 		state.authInfo = null;
 		state.authError = false;
-		state.authFetch = false;
+		state.authFetch = null;
 		state.authProgress = false;
 	},
 	authFetch: (state, action) => {

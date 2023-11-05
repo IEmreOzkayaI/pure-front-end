@@ -32,7 +32,7 @@ const router = createBrowserRouter([
 		errorElement: <div style={{fontSize: "4em", textAlign: "center"}}>Oops, there is an error!</div>,
 	},
 	{
-		path: "confirm",
+		path: "confirm/:confirm_url_token",
 		element: <Confirm />,
 		errorElement: <div style={{fontSize: "4em", textAlign: "center"}}>Oops, there is an error!</div>,
 	},

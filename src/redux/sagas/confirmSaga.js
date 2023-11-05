@@ -20,23 +20,21 @@ function* confirm(action) {
 }
 
 function* confirmWrapper(payload) {
+	console.log(payload);
 	const promise = yield new Promise((resolve, reject) => {
 		axios
-			.post(
-				"https://pure-backend.azurewebsites.net/api/user/confirm",
-				payload.body,
-				{
-					withCredentials: true,
+			.post("http://localhost:3000/api/user/confirm", payload.confirm_credential, {
+				withCredentials: true,
+				headers: {
+					"Content-Type": "text/plain",
+					"Accept": "application/json",
+					"Authorization": `Bearer ${payload.confirm_token}`,
 				},
-				{
-					headers: {
-						"Content-Type": "application/json",
-						Accept: "application/json",
-						Authorization: `Bearer ${payload.confirm_token}`,
-					},
-				}
-			)
+			})
 			.then((res) => {
+				if (res.status === 200) {
+					window.location.replace(`/login`);
+				}
 				const data = res.data;
 				resolve(data);
 			})
