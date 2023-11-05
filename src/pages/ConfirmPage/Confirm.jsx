@@ -5,7 +5,6 @@ import {useParams} from "react-router-dom";
 
 export default function Confirm() {
 	const dispatch = useDispatch();
-	const authInfo = useSelector((state) => state.auth.authInfo);
 	const confirmInfo = useSelector((state) => state.confirm.confirmInfo);
 	const {confirm_url_token} = useParams();
 	const [digits, setDigits] = useState(["", "", "", "", "", ""]);

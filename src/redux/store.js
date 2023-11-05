@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
-import auth from "./toolkit/authSlice";
-import authSaga from "./sagas/authSaga";
+import logIn from "./toolkit/logInSlice";
+import logInSaga from "./sagas/logInSaga";
 import confirmSaga from "./sagas/confirmSaga";
 import confirm from "./toolkit/confirmSlice";
 import register from "./toolkit/registerSlice";
@@ -9,10 +9,10 @@ import registerSaga from "./sagas/registerSaga";
 
 const saga = createSagaMiddleware();
 const store = configureStore({
-  reducer: { auth, confirm ,register},
+  reducer: { logIn, confirm ,register},
   middleware: [saga],
 });
-saga.run(authSaga);
+saga.run(logInSaga);
 saga.run(confirmSaga);
 saga.run(registerSaga);
 
