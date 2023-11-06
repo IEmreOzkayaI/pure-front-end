@@ -18,25 +18,113 @@ export default function SignUp() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
+  const [terms, setTerms] = useState(false);
   const dispatch = useDispatch();
   const registerInfo = useSelector((state) => state.register.registerInfo);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const user = params.get("user");
+  const [error, setError] = useState({
+    firstName: false,
+    lastName: false,
+    phoneNumber: false,
+    companyName: false,
+    industry: false,
+    vat: false,
+    email: false,
+    password: false,
+    repeatPass: false,
+    terms: false,
+  });
 
   const registerRequest = (e) => {
     e.preventDefault();
-    const user = {
-      name: firstName,
-      surname: lastName,
-      email,
-      phone_number: phoneNumber,
-      password,
-      privacy_policy: true,
-      terms_of_use: true,
-      role: "Individual_User",
-    };
-    dispatch(registerFetch(user));
+    if (user === "user") {
+      const Individual_User = {
+        name: firstName,
+        surname: lastName,
+        email,
+        phone_number: phoneNumber,
+        password,
+        privacy_policy: terms,
+        terms_of_use: terms,
+        role: "Individual_User",
+      };
+      dispatch(registerFetch(Individual_User));
+    }
+    if (user === "company") {
+      //TODO address'i formda ekleyince buraya da ekleyecegiz
+      //TODO vat da eklenecek,
+      const Company_User = {
+        name: firstName,
+        email,
+        phone_number: phoneNumber,
+        password,
+        privacy_policy: terms,
+        terms_of_use: terms,
+        company_name: companyName,
+        industry,
+        role: "Company_User",
+        address: "bizim formda adres kismi yok",
+      };
+      dispatch(registerFetch(Company_User));
+    }
+  };
+
+  const handleOnSubmit = (e) => {
+    e.preventDefault();
+    if (user === "user") {
+      if (
+        !firstName ||
+        !lastName ||
+        !phoneNumber ||
+        !email ||
+        !password ||
+        !repeatPass ||
+        !terms
+      ) {
+        setError({
+          firstName: !firstName,
+          lastName: !lastName,
+          phoneNumber: !phoneNumber,
+          email: !email,
+          password: !password,
+          repeatPass: !repeatPass,
+          terms: !terms,
+        });
+        return;
+      }
+    }
+    if (user === "company") {
+      if (
+        !firstName ||
+        !lastName ||
+        !phoneNumber ||
+        !companyName ||
+        !industry ||
+        !vat ||
+        !email ||
+        !password ||
+        !repeatPass ||
+        !terms
+      ) {
+        setError({
+          firstName: !firstName,
+          lastName: !lastName,
+          phoneNumber: !phoneNumber,
+          companyName: !companyName,
+          industry: !industry,
+          vat: !vat,
+          email: !email,
+          password: !password,
+          repeatPass: !repeatPass,
+          terms: !terms,
+        });
+        return;
+      }
+    }
+
+    registerRequest(e);
   };
 
   useEffect(() => {
@@ -54,11 +142,7 @@ export default function SignUp() {
           <div className={styles.explanation}>
             <div className={styles.texts}>
               <div>pure code</div>
-              {user === "company" ? (
-                <div>For Companies</div>
-              ) : (
-                <div>For Users</div>
-              )}
+              <div></div>
 
               <div>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -98,7 +182,7 @@ export default function SignUp() {
             <div>
               Welcome in our service, create account to start your experience.
             </div>
-            <form onSubmit={(e) => registerRequest(e)}>
+            <form onSubmit={handleOnSubmit}>
               <div className={styles.col}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="firstName">First Name</label>
@@ -106,8 +190,19 @@ export default function SignUp() {
                     type="text"
                     id="firstName"
                     value={firstName}
-                    onChange={(e) => setFirstName(e.target.value)}
+                    onChange={(e) => {
+                      setFirstName(e.target.value.trim());
+                      setError({ ...error, firstName: !e.target.value });
+                    }}
+                    onBlur={() => {
+                      setError({ ...error, firstName: !firstName });
+                    }}
                   />
+                  {error.firstName ? (
+                    <span className={styles.errorMessage}>
+                      Field is required
+                    </span>
+                  ) : null}
                 </div>
                 <div className={styles.inputGroup}>
                   <label htmlFor="lastName">Last Name</label>
@@ -115,8 +210,19 @@ export default function SignUp() {
                     type="text"
                     id="lastName"
                     value={lastName}
-                    onChange={(e) => setLastName(e.target.value)}
+                    onChange={(e) => {
+                      setLastName(e.target.value.trim());
+                      setError({ ...error, lastName: !e.target.value });
+                    }}
+                    onBlur={() => {
+                      setError({ ...error, lastName: !lastName });
+                    }}
                   />
+                  {error.lastName ? (
+                    <span className={styles.errorMessage}>
+                      Field is required
+                    </span>
+                  ) : null}
                 </div>
               </div>
               <div className={styles.col}>
@@ -126,8 +232,19 @@ export default function SignUp() {
                     type="text"
                     id="phoneNumber"
                     value={phoneNumber}
-                    onChange={(e) => setPhoneNumber(e.target.value)}
+                    onChange={(e) => {
+                      setPhoneNumber(e.target.value.trim());
+                      setError({ ...error, phoneNumber: !e.target.value });
+                    }}
+                    onBlur={() => {
+                      setError({ ...error, phoneNumber: !phoneNumber });
+                    }}
                   />
+                  {error.phoneNumber ? (
+                    <span className={styles.errorMessage}>
+                      Field is required
+                    </span>
+                  ) : null}
                 </div>
               </div>
               {user === "company" ? (
@@ -139,8 +256,19 @@ export default function SignUp() {
                         type="text"
                         id="companyName"
                         value={companyName}
-                        onChange={(e) => setCompanyName(e.target.value)}
+                        onChange={(e) => {
+                          setCompanyName(e.target.value.trim());
+                          setError({ ...error, companyName: !e.target.value });
+                        }}
+                        onBlur={() => {
+                          setError({ ...error, companyName: !companyName });
+                        }}
                       />
+                      {error.companyName ? (
+                        <span className={styles.errorMessage}>
+                          Field is required
+                        </span>
+                      ) : null}
                     </div>
                     <div className={styles.inputGroup}>
                       <label htmlFor="industry">Industry</label>
@@ -148,8 +276,19 @@ export default function SignUp() {
                         type="text"
                         id="industry"
                         value={industry}
-                        onChange={(e) => setIndustry(e.target.value)}
+                        onChange={(e) => {
+                          setIndustry(e.target.value.trim());
+                          setError({ ...error, industry: !e.target.value });
+                        }}
+                        onBlur={() => {
+                          setError({ ...error, industry: !industry });
+                        }}
                       />
+                      {error.industry ? (
+                        <span className={styles.errorMessage}>
+                          Field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                   <div className={styles.col}>
@@ -159,13 +298,23 @@ export default function SignUp() {
                         type="text"
                         id="vat"
                         value={vat}
-                        onChange={(e) => setVat(e.target.value)}
+                        onChange={(e) => {
+                          setVat(e.target.value.trim());
+                          setError({ ...error, vat: !e.target.value });
+                        }}
+                        onBlur={() => {
+                          setError({ ...error, vat: !vat });
+                        }}
                       />
+                      {error.vat ? (
+                        <span className={styles.errorMessage}>
+                          Field is required
+                        </span>
+                      ) : null}
                     </div>
                   </div>
                 </>
               ) : null}
-
               <div className={styles.col}>
                 <div className={styles.inputGroup}>
                   <label htmlFor="email">E mail</label>
@@ -174,11 +323,35 @@ export default function SignUp() {
                     id="email"
                     autoComplete="username"
                     value={email}
-                    onChange={(e) => setEmail(e.target.value)}
+                    onChange={(e) => {
+                      setEmail(e.target.value.trim());
+                      setError({
+                        ...error,
+                        email: !e.target.value.match(
+                          /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+                        ),
+                      });
+                    }}
+                    onBlur={() => {
+                      setError({
+                        ...error,
+                        email:
+                          !email ||
+                          !email.match(
+                            /^[a-zA-Z0-9.!#$%&'*+/=?^_`{|}~-]+@[a-zA-Z0-9-]+(?:\.[a-zA-Z0-9-]+)*$/
+                          ),
+                      });
+                    }}
                   />
+                  {error.email ? (
+                    <span className={styles.errorMessage}>
+                      Please enter a valid email
+                    </span>
+                  ) : null}
                 </div>
               </div>
               <div className={styles.col}>
+                {/* Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character */}
                 <div className={styles.inputGroup}>
                   <label htmlFor="password">Password</label>
                   <input
@@ -186,28 +359,92 @@ export default function SignUp() {
                     id="password"
                     autoComplete="new-password"
                     value={password}
-                    onChange={(e) => setPassword(e.target.value)}
+                    onChange={(e) => {
+                      setPassword(e.target.value.trim());
+                      setError({
+                        ...error,
+                        password:
+                          !/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/.test(
+                            e.target.value
+                          ),
+                      });
+                    }}
+                    onBlur={() => {
+                      setError({
+                        ...error,
+                        password: !password.match(
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/
+                        ),
+                      });
+                    }}
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
+                    maxLength={10}
+                    minLength={8}
                   />
+                  {error.password ? (
+                    <span className={styles.errorMessage}>
+                      Field is required or doesn&apos;t meet criteria
+                    </span>
+                  ) : null}
                 </div>
                 <div className={styles.inputGroup}>
-                  <label htmlFor="repeatPass">repeat password</label>
+                  <label htmlFor="repeatPass">Repeat Password</label>
                   <input
                     type="password"
                     id="repeatPass"
                     autoComplete="new-password"
                     value={repeatPass}
-                    onChange={(e) => setRepeatPass(e.target.value)}
+                    onChange={(e) => {
+                      setRepeatPass(e.target.value.trim());
+                      setError({
+                        ...error,
+                        repeatPass:
+                          !repeatPass ||
+                          repeatPass.match(
+                            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/
+                          ),
+                      });
+                    }}
+                    onBlur={() => {
+                      setError({
+                        ...error,
+                        repeatPass: !repeatPass.match(
+                          /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$/
+                        ),
+                      });
+                    }}
+                    pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
+                    maxLength={10}
+                    minLength={8}
                   />
+                  {error.repeatPass ? (
+                    <span className={styles.errorMessage}>
+                      Field is required or doesn&apos;t match password
+                    </span>
+                  ) : null}
                 </div>
               </div>
               <div className={styles.col}>
                 <div className={`${styles.inputGroup} ${styles.privacy}`}>
                   {/* TODO checkbox tasarimdaki gibi style edilecek bir ara */}
-                  <input type="checkbox" id="terms" />
+                  <input
+                    type="checkbox"
+                    id="terms"
+                    checked={terms}
+                    onChange={(e) => {
+                      setTerms(e.target.checked);
+                      setError({ ...error, terms: !e.target.checked });
+                    }}
+                  />
                   <label htmlFor="terms">
                     I’ve read and agree to the{" "}
                     <Link to="privacy-policy">privacy policy</Link>
                   </label>
+                  {error.terms ? (
+                    <span className={styles.errorMessage}>
+                      Field is required
+                    </span>
+                  ) : null}
                 </div>
               </div>
               <div className="flex justify-center mt-6">

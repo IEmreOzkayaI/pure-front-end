@@ -193,6 +193,7 @@
       }
       #signUp {
         position: relative;
+        color: $white;
         &::after {
           content: "";
           display: block;
