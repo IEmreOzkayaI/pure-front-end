@@ -380,6 +380,7 @@ export default function SignUp() {
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
                     maxLength={10}
                     minLength={8}
+                    title="Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
                   />
                   {error.password ? (
                     <span className={styles.errorMessage}>
@@ -416,6 +417,7 @@ export default function SignUp() {
                     pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,10}$"
                     maxLength={10}
                     minLength={8}
+                    title="Minimum eight and maximum 10 characters, at least one uppercase letter, one lowercase letter, one number and one special character"
                   />
                   {error.repeatPass ? (
                     <span className={styles.errorMessage}>
