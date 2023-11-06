@@ -5,7 +5,6 @@ import {useParams} from "react-router-dom";
 
 export default function Confirm() {
 	const dispatch = useDispatch();
-	const authInfo = useSelector((state) => state.auth.authInfo);
 	const confirmInfo = useSelector((state) => state.confirm.confirmInfo);
 	const {confirm_url_token} = useParams();
 	const [digits, setDigits] = useState(["", "", "", "", "", ""]);
@@ -41,6 +40,33 @@ export default function Confirm() {
 	useEffect(() => {
 		console.log("confirmInfo", confirmInfo);
 	}, [confirmInfo]);
+
+	function startTimer(duration, display) {
+		let timer = duration;
+		let minutes, seconds;
+
+		const countdown = setInterval(function () {
+			minutes = parseInt(timer / 60, 10);
+			seconds = parseInt(timer % 60, 10);
+
+			minutes = minutes < 10 ? "0" + minutes : minutes;
+			seconds = seconds < 10 ? "0" + seconds : seconds;
+
+			display.textContent = minutes + ":" + seconds;
+
+			if (--timer < 0) {
+				clearInterval(countdown);
+				alert("Süre doldu!");
+			}
+		}, 1000);
+	}
+
+	window.onload = function () {
+		const fiveMinutes = 5 * 60; // 5 dakika saniye cinsinden
+		const display = document.querySelector("#timer");
+		startTimer(fiveMinutes, display);
+	};
+
 	return (
 		<div
 			style={{
@@ -50,6 +76,10 @@ export default function Confirm() {
 				alignItems: "center",
 				height: "100vh",
 			}}>
+			<div id='timer' style={{marginBottom: "2rem", fontSize: "5rem", fontWeight: "bold"}}>
+				00:00
+			</div>
+
 			<div style={{width: "10%", display: "flex", justifyContent: "space-between"}}>
 				{digits.map((digit, index) => (
 					<input
@@ -71,6 +101,9 @@ export default function Confirm() {
 			</div>
 			<button onClick={handleVerify} style={{background: "black", color: "#fff", borderRadius: "5px", width: "150px", height: "50px", fontSize: "20px", marginTop: "20px"}}>
 				Doğrula
+			</button>
+			<button onClick={handleVerify} style={{textDecoration:"underline", color: "black", width: "150px", height: "50px", fontSize: "20px", marginTop: "20px", border:"none"}}>
+				Tekrar Al
 			</button>
 		</div>
 	);

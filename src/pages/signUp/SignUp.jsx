@@ -5,7 +5,7 @@ import Navbar from "../root/Navbar/Navbar";
 import styles from "./SignUp.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { authFetch } from "../../redux/toolkit/authSlice";
+import { registerFetch } from "../../redux/toolkit/registerSlice";
 import { useLocation } from "react-router-dom";
 // TODO user'i ya localstorage'dan ya da redux'tan al
 export default function SignUp() {
@@ -19,7 +19,7 @@ export default function SignUp() {
   const [password, setPassword] = useState("");
   const [repeatPass, setRepeatPass] = useState("");
   const dispatch = useDispatch();
-  const authInfo = useSelector((state) => state.auth.authInfo);
+  const registerInfo = useSelector((state) => state.register.registerInfo);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const user = params.get("user");
@@ -36,13 +36,12 @@ export default function SignUp() {
       terms_of_use: true,
       role: "Individual_User",
     };
-    console.log(user);
-    dispatch(authFetch(user));
+    dispatch(registerFetch(user));
   };
 
   useEffect(() => {
-    console.log(authInfo);
-  }, [authInfo]);
+    console.log(registerInfo);
+  }, [registerInfo]);
 
   return (
     <>

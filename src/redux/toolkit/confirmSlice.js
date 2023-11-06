@@ -12,24 +12,24 @@ const reducers = {
 		state.confirmInfo = null;
 		state.confirmError = false;
 		state.confirmProgress = true;
-		// state.confirmFetch = false;
+		state.confirmFetch = null;
 	},
 	confirmSuccess: (state, action) => {
 		state.confirmInfo = action.payload;
 		state.confirmError = false;
-		state.confirmFetch = false;
+		state.confirmFetch = null;
 		state.confirmProgress = false;
 	},
 	confirmFailure: (state, action) => {
 		state.confirmError = action.payload;
 		state.confirmInfo = null;
 		state.confirmProgress = false;
-		state.confirmFetch = false;
+		state.confirmFetch = null;
 	},
 	clearConfirmInfo: (state) => {
 		state.confirmInfo = null;
 		state.confirmError = false;
-		state.confirmFetch = false;
+		state.confirmFetch = null;
 		state.confirmProgress = false;
 	},
 	confirmFetch: (state, action) => {

@@ -22,7 +22,7 @@ function* register(action) {
 function* registerWrapper(payload) {
 	const promise = yield new Promise((resolve, reject) => {
 		axios
-			.post("https://the-pure-backend.cyclic.app/api/user/register", payload, {
+			.post("http://localhost:3000/api/user/register", payload, {
 				withCredentials: true,
 			})
 			.then((res) => {
