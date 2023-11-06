@@ -4,6 +4,11 @@
   margin: 2.2rem 2.2rem 0 2.2rem;
   border-radius: 1.4rem;
   background: $very-dark-gray;
+  .errorMessage {
+    color: tomato;
+    margin-top: 1rem;
+  }
+
   & + div {
     margin-inline: 2.2rem;
     margin-bottom: 2.2rem;
