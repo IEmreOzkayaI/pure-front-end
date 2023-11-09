@@ -1,4 +1,4 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/shared/Button/Button";
 import Footer from "../root/Footer/Footer";
 import Navbar from "../root/Navbar/Navbar";
@@ -6,9 +6,10 @@ import styles from "./SignUp.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { registerFetch } from "../../redux/toolkit/registerSlice";
-import { useLocation } from "react-router-dom";
-// TODO user'i ya localstorage'dan ya da redux'tan al
+import { motion } from "framer-motion";
+
 export default function SignUp() {
+  const navigateTo = useNavigate();
   const [firstName, setFirstName] = useState("");
   const [lastName, setLastName] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
@@ -20,7 +21,7 @@ export default function SignUp() {
   const [repeatPass, setRepeatPass] = useState("");
   const [terms, setTerms] = useState(false);
   const dispatch = useDispatch();
-  const registerInfo = useSelector((state) => state.register.registerInfo);
+  const { registerInfo } = useSelector((state) => state.register);
   const location = useLocation();
   const params = new URLSearchParams(location.search);
   const user = params.get("user");
@@ -50,7 +51,7 @@ export default function SignUp() {
         terms_of_use: terms,
         role: "Individual_User",
       };
-      dispatch(registerFetch(Individual_User));
+      dispatch(registerFetch({ Individual_User, navigateTo }));
     }
     if (user === "company") {
       //TODO address'i formda ekleyince buraya da ekleyecegiz
@@ -67,7 +68,7 @@ export default function SignUp() {
         role: "Company_User",
         address: "bizim formda adres kismi yok",
       };
-      dispatch(registerFetch(Company_User));
+      dispatch(registerFetch({ Company_User, navigateTo }));
     }
   };
 
@@ -132,7 +133,7 @@ export default function SignUp() {
   }, [registerInfo]);
 
   return (
-    <>
+    <motion.div>
       <div className={styles.container}>
         <Navbar />
         <div
@@ -459,6 +460,6 @@ export default function SignUp() {
       <div>
         <Footer />
       </div>
-    </>
+    </motion.div>
   );
 }

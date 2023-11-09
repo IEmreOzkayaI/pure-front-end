@@ -1,4 +1,4 @@
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import Button from "../../components/shared/Button/Button";
 import Footer from "../root/Footer/Footer";
 import Navbar from "../root/Navbar/Navbar";
@@ -7,8 +7,11 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { logInFetch } from "../../redux/toolkit/logInSlice";
 import { useEffect } from "react";
+import { motion } from "framer-motion";
+
 // TODO user'i ya localstorage'dan ya da redux'tan al
 export default function Login() {
+  const navigateTo = useNavigate();
   const [logInForm, setLogInForm] = useState({
     email: "",
     password: "",
@@ -26,7 +29,7 @@ export default function Login() {
 
   const handleLogIn = (e) => {
     e.preventDefault();
-    dispatch(logInFetch(logInForm));
+    dispatch(logInFetch({ logInForm, navigateTo }));
   };
 
   const handleFormChange = (e) => {
@@ -38,7 +41,7 @@ export default function Login() {
   }, [logInInfo]);
 
   return (
-    <>
+    <motion.div>
       <div className={styles.container}>
         <Navbar />
         <div
@@ -48,11 +51,7 @@ export default function Login() {
           <div className={styles.explanation}>
             <div className={styles.texts}>
               <div>pure code</div>
-              {user === "company" ? (
-                <div>For Companies</div>
-              ) : (
-                <div>For Users</div>
-              )}
+              <div></div>
 
               <div>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.
@@ -171,6 +170,6 @@ export default function Login() {
       <div>
         <Footer />
       </div>
-    </>
+    </motion.div>
   );
 }

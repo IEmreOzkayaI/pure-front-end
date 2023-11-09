@@ -5,6 +5,7 @@ import styles from "./Pricing.module.scss";
 import RangeSlider from "../../components/shared/RangeSlider/RangeSlider";
 import Card from "../../components/shared/Card/Card";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const marks = [
   {
@@ -41,7 +42,11 @@ export default function Pricing() {
     });
   }, []);
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className={styles.pricing} id="pricing">
         <Navbar />
         <div className={styles.grayBackground}>
@@ -98,6 +103,6 @@ export default function Pricing() {
       <div className={styles.footer}>
         <Footer />
       </div>
-    </>
+    </motion.div>
   );
 }
