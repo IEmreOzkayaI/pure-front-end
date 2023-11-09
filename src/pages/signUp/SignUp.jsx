@@ -143,7 +143,7 @@ export default function SignUp() {
           <div className={styles.explanation}>
             <div className={styles.texts}>
               <div>pure code</div>
-              <div></div>
+              <div>asfasf</div>
 
               <div>
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit.

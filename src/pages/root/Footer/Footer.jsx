@@ -31,43 +31,43 @@ const Footer = () => {
       </div>
       <div className={styles.listContainer}>
         <ul>
-          <div>Kurumsal</div>
+          <div>Corporate</div>
           <li>
-            <a href="">Hakkımızda</a>
+            <a href="">About Us</a>
           </li>
           <li>
-            <a href="">Takım</a>
+            <a href="">Team</a>
           </li>
           <li>
-            <a href="">İletişim</a>
-          </li>
-        </ul>
-        <ul>
-          <div>Hizmetlerimiz</div>
-          <li>
-            <a href="">Ürünler</a>
-          </li>
-          <li>
-            <a href="">Fiyatlandırma</a>
+            <a href="">Contact</a>
           </li>
         </ul>
         <ul>
-          <div>Yasal Metinler</div>
+          <div>Services</div>
           <li>
-            <a href="">Gizlilik Politikası</a>
+            <a href="">Products</a>
           </li>
           <li>
-            <a href="">Kullanım Şartları</a>
+            <a href="">Pricing</a>
+          </li>
+        </ul>
+        <ul>
+          <div>Legal</div>
+          <li>
+            <a href="">Privacy Policy</a>
+          </li>
+          <li>
+            <a href="">Terms of Use</a>
           </li>
         </ul>
 
         <ul>
-          <div>Ekler</div>
+          <div>Attachments</div>
           <li>
-            <a href="">SSS</a>
+            <a href="">FAQs</a>
           </li>
           <li>
-            <a href="">Destek</a>
+            <a href="">Support</a>
           </li>
           <li>
             <a href="">Blog</a>
