@@ -20,7 +20,35 @@ export default function Confirm() {
     useRef(null),
     useRef(null),
   ];
-  console.log("COOKIE", document.cookie);
+
+  const getInitialTime = () => {
+    const storedTime = localStorage.getItem("timerStartTime");
+    return storedTime ? parseInt(storedTime, 10) : null;
+  };
+
+  const setInitialTime = () => {
+    const currentTime = Math.floor(Date.now() / 1000);
+    localStorage.setItem("timerStartTime", currentTime);
+    return currentTime;
+  };
+
+  const initialTime = getInitialTime() || setInitialTime();
+
+  const [timer, setTimer] = useState(300 - (Math.floor(Date.now() / 1000) - initialTime));
+
+  useEffect(() => {
+    const countdown = setInterval(() => {
+      setTimer((prevTimer) => prevTimer - 1);
+    }, 1000);
+
+    return () => clearInterval(countdown);
+  }, []);
+
+  const formatTime = (time) => {
+    const minutes = Math.floor(time / 60);
+    const seconds = time % 60;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+  };
 
   const handleChange = (e, index) => {
     const value = e.target.value;
@@ -41,9 +69,9 @@ export default function Confirm() {
       }
     }
   };
+
   const handleVerify = () => {
     const digitsCombined = digits.join("");
-    console.log(digitsCombined);
     const confirm = {
       confirm_credential: digitsCombined,
       confirm_token: confirm_url_token,
@@ -55,30 +83,23 @@ export default function Confirm() {
     console.log("confirmInfo", confirmInfo);
   }, [confirmInfo]);
 
-  function startTimer(duration, display) {
-    let timer = duration;
-    let minutes, seconds;
-
-    const countdown = setInterval(function () {
-      minutes = parseInt(timer / 60, 10);
-      seconds = parseInt(timer % 60, 10);
-
-      minutes = minutes < 10 ? "0" + minutes : minutes;
-      seconds = seconds < 10 ? "0" + seconds : seconds;
-
-      display.textContent = minutes + ":" + seconds;
-
-      if (--timer < 0) {
-        clearInterval(countdown);
-        alert("Süre doldu!");
-      }
-    }, 1000);
-  }
-
-  window.onload = function () {
-    const fiveMinutes = 5 * 60; // 5 dakika saniye cinsinden
+  useEffect(() => {
     const display = document.querySelector("#timer");
-    startTimer(fiveMinutes, display);
+    display.textContent = formatTime(timer);
+
+    if (timer <= 0) {
+      clearInterval();
+      alert("Time is up!");
+    }
+  }, [timer]);
+  const resetTimer = () => {
+    const currentTime = Math.floor(Date.now() / 1000);
+    localStorage.setItem("timerStartTime", currentTime);
+    setTimer(300);
+  };
+
+  const handleTekrarAl = () => {
+    resetTimer();
   };
 
   return (
@@ -98,7 +119,7 @@ export default function Confirm() {
         id="timer"
         style={{ marginBottom: "2rem", fontSize: "5rem", fontWeight: "bold" }}
       >
-        00:00
+        {formatTime(timer)}
       </div>
       <div>
         {confirmError?.message === "User Verification Error" && (
@@ -147,7 +168,7 @@ export default function Confirm() {
         Doğrula
       </button>
       <button
-        onClick={handleVerify}
+        onClick={handleTekrarAl}
         style={{
           textDecoration: "underline",
           color: "black",
