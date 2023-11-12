@@ -32,6 +32,14 @@
         justify-content: space-between;
         align-items: center;
         padding: 4.217rem 13.3rem 0 13.3rem;
+
+        @media (width <= 1386px) {
+          padding: 4.217rem;
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          gap: 1.5rem;
+          place-items: center;
+        }
       }
     }
   }
