@@ -33,6 +33,67 @@
     .content {
       margin: 14.6rem 47.5rem 23.6rem 4.3rem;
 
+      @media (2277px <= width) {
+        margin-right: 28.5rem;
+      }
+      @media (2136px <= width <= 2193px) {
+        margin-right: 103.6rem;
+      }
+      @media (2123px <= width <= 2135px) {
+        margin-right: 102.3rem;
+      }
+      @media (2065px <= width <= 2122px) {
+        margin-right: 103.6rem;
+      }
+      @media (2052px <= width <= 2064px) {
+        margin-right: 102.3rem;
+      }
+      @media (1981px <= width <= 2051px) {
+        margin-right: 96.5rem;
+      }
+      @media (1981px <= width <= 1993px) {
+        margin-right: 95.2rem;
+      }
+      @media (1923px <= width <= 1980px) {
+        margin-right: 89.4rem;
+      }
+      @media (1910px <= width <= 1922px) {
+        margin-right: 88.1rem;
+      }
+      @media (1840px <= width <= 1909px) {
+        margin-right: 82.3rem;
+      }
+      @media (1770px <= width <= 1839px) {
+        margin-right: 75.3rem;
+      }
+      @media (1700px <= width <= 1769px) {
+        margin-right: 68.3rem;
+      }
+      @media (1629px <= width <= 1699px) {
+        margin-right: 61.3rem;
+      }
+      @media (1571px <= width <= 1628px) {
+        margin-right: 54.2rem;
+      }
+      @media (1562px <= width <= 1570px) {
+        margin-right: 48.4rem;
+      }
+      @media (1446px <= width <= 1503px) {
+        margin-right: 41.7rem;
+      }
+      @media (1388px <= width <= 1445px) {
+        margin-right: 35.9rem;
+      }
+      @media (1330px<= width <= 1387px) {
+        margin-right: 30.1rem;
+      }
+      @media (1272px<= width <= 1329px) {
+        margin-right: 24.3rem;
+      }
+      @media (width <= 1271px) {
+        margin-right: 18.5rem;
+      }
+
       .title {
         color: $very-dark-gray;
         font-size: 2.4rem;
@@ -56,6 +117,50 @@
       margin: 33.6rem 18.9rem 0 12.4rem;
       min-width: 14rem;
 
+      @media (2277px <= width) {
+        margin-left: 108.7rem;
+      }
+      @media (2265px <= width <= 2276px) {
+        margin-left: 88.5rem;
+      }
+      @media (2194px <= width <= 2264px) {
+        margin-left: 82.7rem;
+      }
+
+      @media (2194px <= width <= 2206px) {
+        margin-left: 81.4rem;
+      }
+      @media (2123px <= width <= 2193px) {
+        margin-left: 19.5rem;
+      }
+      @media (1910px <= width <=1922px) {
+        margin-left: 11.2rem;
+      }
+      @media (1898px <= width <= 1851px) {
+        margin-left: 11.2rem;
+      }
+      @media (1840px <= width <= 1851px) {
+        margin-left: 11.2rem;
+      }
+      @media (1770px <= width <= 1781px) {
+        margin-left: 11.2rem;
+      }
+      @media (1700px <= width <= 1711px) {
+        margin-left: 11.2rem;
+      }
+      @media (1629px <= width <= 1641px) {
+        margin-left: 11.1rem;
+      }
+      @media (1156px <= width <= 1213px) {
+        margin-left: 6.6rem;
+      }
+      @media (1098px <= width <= 1155px) {
+        margin-left: 0.8rem;
+      }
+      @media (width <= 1097px) {
+        margin-right: 13.1rem;
+      }
+
       div {
         margin-bottom: 1rem;
       }
@@ -71,22 +176,97 @@
     margin: 21rem 15.7rem 8.5rem 13.7rem;
     z-index: 2;
     background: rgba(108, 123, 159, 0.4);
-    //buradaki widthler ve font sizelar, card yukari tasininca eski hallerine donecek
     width: 100.7rem;
     transition: margin 2s;
     * {
       font-size: 0.6rem;
+    }
+    @media (2051px <= width) {
+      height: 51.5rem;
+      width: 155rem;
+    }
+    @media (1856px <= width <=2050px) {
+      height: 51.5rem;
+      width: 137rem;
+    }
+    @media (1713px <= width <=1855px) {
+      height: 51.5rem;
+      width: 121rem;
+    }
+    @media (1562px <= width <=1712px) {
+      height: 51.5rem;
+      width: 110rem;
+    }
+
+    @media (1446px <= width <= 1503px) {
+      height: 51.5rem;
+    }
+    @media (1351px<= width <=1445px) {
+      height: 51.5rem;
+      width: 93rem;
+    }
+    @media (1280px<= width <=1350px) {
+      height: 51.5rem;
+      width: 86rem;
+    }
+    @media (1201px<= width <=1279px) {
+      height: 51.5rem;
+      width: 80rem;
+    }
+    @media (1141px<= width <=1200px) {
+      height: 51.5rem;
+      width: 74rem;
+    }
+    @media (width <=1140px) {
+      height: 51.5rem;
+      width: 69rem;
     }
   }
   #card3 {
     margin: 22rem 15.7rem 8.5rem 13.7rem;
     z-index: 1;
     background: rgba(108, 123, 159, 0.2);
-    //buradaki widthler ve font sizelar, card yukari tasininca eski hallerine donecek
+
     width: 91.9258rem;
     transition: margin 2s;
     * {
       font-size: 0.6rem;
+    }
+    @media (2051px <= width) {
+      height: 52.2rem;
+      width: 141rem;
+    }
+    @media (1856px <= width <=2050px) {
+      height: 52.2rem;
+      width: 124rem;
+    }
+    @media (1713px <= width <=1855px) {
+      height: 52.2rem;
+      width: 110.8rem;
+    }
+    @media (1562px <= width <=1712px) {
+      height: 52.2rem;
+      width: 100.1rem;
+    }
+    @media (1351px<= width <= 1445px) {
+      height: 52.2rem;
+      width: 85rem;
+    }
+    @media (1280px< width <= 1350px) {
+      height: 52.2rem;
+      width: 78rem;
+    }
+    @media (1201px<= width <=1279px) {
+      height: 51.5rem;
+      width: 72.8rem;
+    }
+    @media (1141px <= width <=1200px) {
+      height: 51.5rem;
+      width: 67rem;
+    }
+    @media (width <=1140px) {
+      height: 51.5rem;
+      width: 62rem;
     }
   }
 
