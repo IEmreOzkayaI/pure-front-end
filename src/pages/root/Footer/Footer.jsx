@@ -1,5 +1,5 @@
 import styles from "./Footer.module.scss";
-import pureLogo from "/pure-logo.svg";
+import pureLogo from "/pure-logo-2.svg";
 
 const Footer = () => {
   return (
