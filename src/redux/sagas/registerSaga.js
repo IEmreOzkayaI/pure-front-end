@@ -35,7 +35,11 @@ function* registerWrapper(payload) {
       .then((res) => {
         if (res.status === 201) {
           const confirm_url_token = res.data.confirm_url_token;
-          navigateTo(`/confirm/${confirm_url_token}`);
+          navigateTo(
+            `/confirm/${confirm_url_token}?user=${
+              user.role === "Individual_User" ? "user" : "company"
+            }`
+          );
         }
         const data = res.data;
         console.log("res", res);

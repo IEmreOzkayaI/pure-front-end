@@ -1,12 +1,14 @@
 import { useEffect, useRef, useState } from "react";
-import { confirmFetch } from "../../redux/toolkit/confirmSlice";
+import { confirmFetch, reConfirmFetch } from "../../redux/toolkit/confirmSlice";
 import { useDispatch, useSelector } from "react-redux";
-import { useParams, useNavigate } from "react-router-dom";
+import { useParams, useNavigate, useSearchParams } from "react-router-dom";
 import { motion } from "framer-motion";
 
 export default function Confirm() {
   const dispatch = useDispatch();
   const navigateTo = useNavigate();
+  const [searchParams] = useSearchParams();
+  const user = searchParams.get("user");
   const confirmInfo = useSelector((state) => state.confirm.confirmInfo);
   const confirmError = useSelector((state) => state.confirm.confirmError);
 
@@ -34,11 +36,21 @@ export default function Confirm() {
 
   const initialTime = getInitialTime() || setInitialTime();
 
-  const [timer, setTimer] = useState(300 - (Math.floor(Date.now() / 1000) - initialTime));
+  const [timer, setTimer] = useState(
+    300 - (Math.floor(Date.now() / 1000) - initialTime)
+  );
 
   useEffect(() => {
     const countdown = setInterval(() => {
-      setTimer((prevTimer) => prevTimer - 1);
+      setTimer((prevTimer) => {
+        const newTimer = prevTimer - 1;
+        if (newTimer === 0) {
+          alert("Time is up!");
+          // Handle any additional actions after the timer reaches 0
+          return 0;
+        }
+        return newTimer; // Ensure the timer doesn't go below 0
+      });
     }, 1000);
 
     return () => clearInterval(countdown);
@@ -47,7 +59,9 @@ export default function Confirm() {
   const formatTime = (time) => {
     const minutes = Math.floor(time / 60);
     const seconds = time % 60;
-    return `${minutes < 10 ? "0" : ""}${minutes}:${seconds < 10 ? "0" : ""}${seconds}`;
+    return `${minutes < 10 ? "0" : ""}${minutes}:${
+      seconds < 10 ? "0" : ""
+    }${seconds}`;
   };
 
   const handleChange = (e, index) => {
@@ -75,6 +89,7 @@ export default function Confirm() {
     const confirm = {
       confirm_credential: digitsCombined,
       confirm_token: confirm_url_token,
+      user: user === "Company_User" ? "company" : "user",
     };
     dispatch(confirmFetch({ confirm, navigateTo }));
   };
@@ -86,12 +101,8 @@ export default function Confirm() {
   useEffect(() => {
     const display = document.querySelector("#timer");
     display.textContent = formatTime(timer);
-
-    if (timer <= 0) {
-      clearInterval();
-      alert("Time is up!");
-    }
   }, [timer]);
+
   const resetTimer = () => {
     const currentTime = Math.floor(Date.now() / 1000);
     localStorage.setItem("timerStartTime", currentTime);
@@ -99,6 +110,13 @@ export default function Confirm() {
   };
 
   const handleTekrarAl = () => {
+    const digitsCombined = digits.join("");
+    const confirm = {
+      confirm_credential: digitsCombined,
+      confirm_token: confirm_url_token,
+      user: user === "Company_User" ? "company" : "user",
+    };
+    dispatch(reConfirmFetch({ confirm }));
     resetTimer();
   };
 
