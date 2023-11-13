@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../root/Navbar/Navbar";
 import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
@@ -35,12 +35,6 @@ export default function Pricing() {
   const user = new URLSearchParams(location.search).get("user");
   const [activeTab, setActiveTab] = useState(user || "company");
   const [sliderValue, setSliderValue] = useState(10);
-  useEffect(() => {
-    window.scrollTo({
-      top: document.getElementById("pricing").offsetTop,
-      behavior: "smooth",
-    });
-  }, []);
   return (
     <motion.div
       initial={{ opacity: 0 }}

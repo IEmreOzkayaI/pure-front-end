@@ -16,6 +16,22 @@
     background-color: $dark-gray;
     position: relative;
 
+    @media (2525px<=width) {
+      padding-left: 29%;
+    }
+    @media (2446px<=width<= 2524px) {
+      padding-left: 27.5%;
+    }
+    @media (2256px<=width<= 2445px) {
+      padding-left: 22.5%;
+    }
+    @media (2000px<=width<= 2255px) {
+      padding-left: 17.5%;
+    }
+    @media (1800px<=width<= 2000px) {
+      padding-left: 12.5%;
+    }
+
     .sliderContainer {
       margin-top: 6rem;
     }

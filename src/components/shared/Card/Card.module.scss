@@ -7,6 +7,24 @@
   border-radius: 2rem;
   width: 24rem;
   top: 28rem;
+  @media (2525px<=width) {
+    margin-left: 27%;
+  }
+  @media (2446px<=width<= 2524px) {
+    margin-left: 25%;
+  }
+  @media (2256px<=width<= 2445px) {
+    margin-left: 20%;
+  }
+  @media (2000px<=width<= 2255px) {
+    margin-left: 15%;
+  }
+  @media (1800px<=width<= 2000px) {
+    margin-left: 7.5%;
+  }
+  @media (1024px <= width <= 1440px) {
+    margin-left: -3.5%;
+  }
 
   &.order-1 {
     left: 11.9rem;
