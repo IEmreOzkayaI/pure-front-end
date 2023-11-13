@@ -117,7 +117,16 @@
       margin: 33.6rem 18.9rem 0 12.4rem;
       min-width: 14rem;
 
-      @media (2277px <= width) {
+      @media (2475px <= width) {
+        margin-left: 127.7rem;
+      }
+      @media (2405px <= width <=2474px) {
+        margin-left: 122.7rem;
+      }
+      @media (2335px <= width <=2404px) {
+        margin-left: 115.7rem;
+      }
+      @media (2277px <= width <=2334px) {
         margin-left: 108.7rem;
       }
       @media (2265px <= width <= 2276px) {
