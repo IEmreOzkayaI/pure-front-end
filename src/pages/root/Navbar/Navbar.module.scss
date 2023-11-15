@@ -9,6 +9,44 @@
     padding-left: 5.3rem;
   }
 
+  .hamburger,
+  .fullNav {
+    display: none;
+  }
+  @media (width <= 1024px) {
+    .hamburger {
+      display: block;
+      position: absolute;
+      right: 4rem;
+      top: 7rem;
+    }
+    .fullNav {
+      color: $very-dark-gray;
+      background-color: $white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      font-size: 5rem;
+      z-index: 1000;
+      .close {
+        position: absolute;
+        top: 2rem;
+        right: 5rem;
+        color: $very-dark-gray;
+        cursor: pointer;
+      }
+      a {
+        color: $very-dark-gray;
+      }
+    }
+  }
+
   a {
     color: $white;
     text-transform: uppercase;
@@ -45,12 +83,21 @@
         padding-right: 5.2rem;
       }
     }
+
+    @media (width <= 1024px) {
+      :not(:first-child) {
+        display: none;
+      }
+    }
   }
   .lastChild {
     display: flex;
     align-items: center;
     position: relative;
 
+    @media (width <= 1024px) {
+      display: none;
+    }
     .userName {
       user-select: none;
       color: #f5f3f3;
