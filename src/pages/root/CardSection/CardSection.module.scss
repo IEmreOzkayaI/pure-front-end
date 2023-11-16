@@ -30,6 +30,9 @@
     position: absolute;
     display: flex;
     transition: all 0.5s;
+    @media (width <= 761px) {
+      flex-direction: column;
+    }
     .content {
       margin: 14.6rem 47.5rem 23.6rem 4.3rem;
 
@@ -90,8 +93,28 @@
       @media (1272px<= width <= 1329px) {
         margin-right: 24.3rem;
       }
-      @media (width <= 1271px) {
+      @media (1098px<=width <= 1271px) {
         margin-right: 18.5rem;
+      }
+      @media (1072px<=width <= 1097px) {
+        margin-right: 10.1rem;
+      }
+      @media (1032px<=width <= 1071px) {
+        margin-right: 6.1rem;
+      }
+      @media (1011px<=width <= 1031px) {
+        margin-right: 3.1rem;
+      }
+      @media (761px<=width <= 1011px) {
+        margin-right: -1.9rem;
+      }
+      @media (755px<=width <= 761px) {
+        margin-right: 5.1rem;
+        margin-bottom: 10rem;
+      }
+      @media (width <= 754px) {
+        margin-right: 5.1rem;
+        margin-bottom: 8rem;
       }
 
       .title {
@@ -166,8 +189,38 @@
       @media (1098px <= width <= 1155px) {
         margin-left: 0.8rem;
       }
-      @media (width <= 1097px) {
+      @media (952px<=width <= 1097px) {
         margin-right: 13.1rem;
+      }
+      @media (912px<=width <= 951px) {
+        margin-right: 9.1rem;
+      }
+      @media (882px<=width <= 911px) {
+        margin-right: 6.1rem;
+      }
+      @media (852px<= width <= 881px) {
+        margin-right: 3.1rem;
+      }
+      @media (822px<=width <= 851px) {
+        margin-right: 3.1rem;
+
+        margin-left: 9.4rem;
+      }
+      @media (792px<=width <= 821px) {
+        margin-right: 3.1rem;
+
+        margin-left: 6.4rem;
+      }
+      @media (762px<=width <= 791px) {
+        margin-right: 3.1rem;
+
+        margin-left: 3.4rem;
+      }
+      @media (width <= 761px) {
+        margin-right: 3.1rem;
+        margin-left: 4.5rem;
+        margin-top: 0;
+        margin-bottom: 4rem;
       }
 
       div {
@@ -226,9 +279,29 @@
       height: 51.5rem;
       width: 74rem;
     }
-    @media (width <=1140px) {
+    @media (1097px<=width <=1140px) {
       height: 51.5rem;
       width: 69rem;
+    }
+    @media (1000px<=width <=1096px) {
+      height: 51.5rem;
+      width: 63rem;
+    }
+    @media (918px<=width <=999px) {
+      height: 51.5rem;
+      width: 54rem;
+    }
+    @media (837px<=width <=917px) {
+      height: 51.5rem;
+      width: 47rem;
+    }
+    @media (762px<=width <=836px) {
+      height: 51.5rem;
+      width: 39rem;
+    }
+    @media (width <=761px) {
+      height: 43.5rem;
+      width: 32rem;
     }
   }
   #card3 {
@@ -273,9 +346,29 @@
       height: 51.5rem;
       width: 67rem;
     }
-    @media (width <=1140px) {
+    @media (1097px<=width <=1140px) {
       height: 51.5rem;
       width: 62rem;
+    }
+    @media (1000px<=width <=1096px) {
+      height: 51.5rem;
+      width: 56.7rem;
+    }
+    @media (918px<=width <=999px) {
+      height: 51.5rem;
+      width: 48.6rem;
+    }
+    @media (837px<=width <=917px) {
+      height: 51.5rem;
+      width: 42.3rem;
+    }
+    @media (762px<=width <=836px) {
+      height: 51.5rem;
+      width: 35.1rem;
+    }
+    @media (width <=761px) {
+      height: 43.5rem;
+      width: 28.8rem;
     }
   }
 
@@ -289,6 +382,9 @@
     margin-right: auto;
     width: 11.1rem;
     z-index: 999;
+    @media (width <= 761px) {
+      bottom: 18rem;
+    }
   }
 
   .nextBtn {

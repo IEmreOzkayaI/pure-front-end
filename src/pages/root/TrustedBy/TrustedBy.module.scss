@@ -2,12 +2,22 @@
 
 .outBorder_line {
   background-color: $very-dark-gray;
+
+  @media (width<= 1024px) {
+    grid-column: span 2;
+  }
   .outerBorder {
     border: solid $white;
     border-width: 1.6rem 0 0 1.6rem;
     border-radius: 1.4rem 0 0 0;
     background-color: $white;
     position: relative;
+
+    @media (width<= 1024px) {
+      border-width: 0;
+      border-radius: 0;
+      padding-top: 1.6rem;
+    }
     .trustedBy {
       background-color: $blue-gray;
       // width: 68.0625rem;
