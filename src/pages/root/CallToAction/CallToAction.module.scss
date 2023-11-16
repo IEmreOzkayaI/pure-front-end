@@ -4,6 +4,11 @@
   display: flex;
   margin-top: 2rem;
 
+  @media (width<=800px) {
+    flex-direction: column;
+    gap: 3rem;
+  }
+
   .companyService {
     margin-right: 2.4rem;
   }

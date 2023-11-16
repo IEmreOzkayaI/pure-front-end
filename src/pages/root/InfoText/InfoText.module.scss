@@ -7,6 +7,11 @@
   margin-top: 15.4rem;
   margin-bottom: 13.8rem;
   width: 57.1rem;
+  @media (width<=730px) {
+    margin-left: 2.3rem;
+    width: auto;
+    margin-right: 2rem;
+  }
 
   header {
     color: $white;
