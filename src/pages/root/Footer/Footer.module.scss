@@ -8,6 +8,9 @@ footer {
   padding: 11.7rem 11.4rem 15.6rem 11.4rem;
   margin-top: 3.2rem;
   border-radius: 1.4rem;
+  @media (width <= 768px) {
+    border-radius: 0;
+  }
 
   @media (width <= 1100px) {
     flex-direction: column;

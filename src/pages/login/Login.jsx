@@ -84,7 +84,7 @@ export default function Login() {
             <div className={styles.header}>
               <span id={styles.getStarted}>Get Started Now</span>
               <div className="flex">
-                <span>Not a member ?</span>
+                <span className={styles.hideOnMobile}>Not a member ?</span>
                 <Button className={["dark"]}>Sign Up</Button>
               </div>
             </div>

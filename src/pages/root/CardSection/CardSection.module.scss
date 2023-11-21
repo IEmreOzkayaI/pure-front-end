@@ -9,6 +9,9 @@
   display: flex;
   justify-content: center;
   //   align-items: center;
+  @media (width <= 768px) {
+    border-radius: 0;
+  }
   .grayBackground {
     flex: 1;
     display: inline-block;
@@ -233,6 +236,9 @@
     margin: 19rem 15.7rem 8.5rem 13.7rem;
     z-index: 3;
     transition: margin opacity 2s;
+    @media (width <= 590px) {
+      width: 100%;
+    }
   }
   #card2 {
     margin: 21rem 15.7rem 8.5rem 13.7rem;
@@ -299,9 +305,12 @@
       height: 51.5rem;
       width: 39rem;
     }
-    @media (width <=761px) {
+    @media (591px<=width <=761px) {
       height: 43.5rem;
       width: 32rem;
+    }
+    @media (width <= 590px) {
+      width: 100%;
     }
   }
   #card3 {
@@ -366,9 +375,12 @@
       height: 51.5rem;
       width: 35.1rem;
     }
-    @media (width <=761px) {
+    @media (591px<=width <=761px) {
       height: 43.5rem;
       width: 28.8rem;
+    }
+    @media (width <= 590px) {
+      width: 100%;
     }
   }
 
@@ -382,8 +394,17 @@
     margin-right: auto;
     width: 11.1rem;
     z-index: 999;
-    @media (width <= 761px) {
+    @media (591px<=width <= 761px) {
       bottom: 18rem;
+    }
+    @media (421px<=width <= 590px) {
+      bottom: 21rem;
+    }
+    @media (351px<=width <= 420px) {
+      bottom: 19rem;
+    }
+    @media (width <= 350px) {
+      bottom: 17rem;
     }
   }
 
@@ -394,6 +415,11 @@
     top: 44.2rem;
     bottom: 30.4rem;
     z-index: 999;
+
+    @media (width <= 590px) {
+      right: 0.4rem;
+      top: 38.2rem;
+    }
   }
 
   #firstIndex {

@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 export default function RangeSlider({ marks, setSliderValue, sliderValue }) {
   return (
-    <Box sx={{ width: 300 }}>
+    <Box>
       <Slider
         aria-label="Compay Size"
         defaultValue={10}
@@ -49,6 +49,23 @@ const Slider = styled(BaseSlider)(
   cursor: pointer;
   touch-action: none;
   -webkit-tap-highlight-color: transparent;
+
+   @media (1025px<=width<=1338px) {
+   width: 63.8rem;
+  }
+   @media (701px<=width<=1024px) {
+   width: 60.8rem;
+  }
+   @media (571px<=width<=700px) {
+   width:39.8rem;
+  }
+   @media (420px<=width<=570px) {
+   width:39.8rem;
+  }
+   @media (width<=419px) {
+   width:30.8rem;
+  }
+  
 
   &:hover {
     opacity: 1;

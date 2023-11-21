@@ -21,6 +21,9 @@
     padding: 7.5rem 6.4rem;
     text-align: center;
     position: relative;
+    @media (width <= 768px) {
+      border-radius: 0;
+    }
 
     p {
       font-size: 1.6rem;

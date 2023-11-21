@@ -70,28 +70,30 @@ export default function Pricing() {
               sliderValue={sliderValue}
             />
           </div>
-          <Card
-            order={1}
-            title="demo"
-            user={activeTab}
-            sliderValue={sliderValue}
-            explanation="Get our starter plan for getting your scale services."
-          />
-          <Card
-            dark
-            title="monthly"
-            order={2}
-            user={activeTab}
-            sliderValue={sliderValue}
-            explanation="Get our starter plan for getting your scale services."
-          />
-          <Card
-            title="yearly"
-            order={3}
-            user={activeTab}
-            sliderValue={sliderValue}
-            explanation="Get our starter plan for getting your scale services."
-          />
+          <div>
+            <Card
+              order={1}
+              title="demo"
+              user={activeTab}
+              sliderValue={sliderValue}
+              explanation="Get our starter plan for getting your scale services."
+            />
+            <Card
+              dark
+              title="monthly"
+              order={2}
+              user={activeTab}
+              sliderValue={sliderValue}
+              explanation="Get our starter plan for getting your scale services."
+            />
+            <Card
+              title="yearly"
+              order={3}
+              user={activeTab}
+              sliderValue={sliderValue}
+              explanation="Get our starter plan for getting your scale services."
+            />
+          </div>
         </div>
       </div>
       <div className={styles.footer}>

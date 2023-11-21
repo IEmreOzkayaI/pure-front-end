@@ -25,6 +25,9 @@
       border-radius: 1.4rem;
       display: flex;
       flex-direction: column;
+      @media (width <= 768px) {
+        border-radius: 0;
+      }
 
       @media (width <=500px) {
         height: auto;
@@ -55,9 +58,14 @@
           place-items: center;
         }
 
-        @media (width <=500px) {
+        @media (367px<=width <=500px) {
           grid-template-columns: repeat(2, 1fr);
           gap: 2.5rem;
+        }
+        @media (width <=366px) {
+          grid-template-columns: repeat(2, 1fr);
+          gap: 2.5rem;
+          padding: 1.5rem;
         }
       }
     }
