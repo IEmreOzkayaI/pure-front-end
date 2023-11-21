@@ -4,7 +4,7 @@
   margin: 2.2rem 2.2rem 0 2.2rem;
   border-radius: 1.4rem;
   background: $very-dark-gray;
-  @media (width <=424px) {
+  @media (width <=768px) {
     margin: 0;
     border-radius: 0;
   }
@@ -17,6 +17,11 @@
   & + div {
     margin-inline: 2.2rem;
     margin-bottom: 2.2rem;
+
+    @media (width <=768px) {
+      margin: 0;
+      border-radius: 0;
+    }
   }
   .grid {
     display: grid;
