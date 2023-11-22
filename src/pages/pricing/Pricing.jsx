@@ -1,10 +1,11 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Navbar from "../root/Navbar/Navbar";
 import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
 import RangeSlider from "../../components/shared/RangeSlider/RangeSlider";
 import Card from "../../components/shared/Card/Card";
 import { useLocation } from "react-router-dom";
+import { motion } from "framer-motion";
 
 const marks = [
   {
@@ -34,14 +35,12 @@ export default function Pricing() {
   const user = new URLSearchParams(location.search).get("user");
   const [activeTab, setActiveTab] = useState(user || "company");
   const [sliderValue, setSliderValue] = useState(10);
-  useEffect(() => {
-    window.scrollTo({
-      top: document.getElementById("pricing").offsetTop,
-      behavior: "smooth",
-    });
-  }, []);
   return (
-    <>
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className={styles.pricing} id="pricing">
         <Navbar />
         <div className={styles.grayBackground}>
@@ -71,33 +70,35 @@ export default function Pricing() {
               sliderValue={sliderValue}
             />
           </div>
-          <Card
-            order={1}
-            title="demo"
-            user={activeTab}
-            sliderValue={sliderValue}
-            explanation="Get our starter plan for getting your scale services."
-          />
-          <Card
-            dark
-            title="monthly"
-            order={2}
-            user={activeTab}
-            sliderValue={sliderValue}
-            explanation="Get our starter plan for getting your scale services."
-          />
-          <Card
-            title="yearly"
-            order={3}
-            user={activeTab}
-            sliderValue={sliderValue}
-            explanation="Get our starter plan for getting your scale services."
-          />
+          <div>
+            <Card
+              order={1}
+              title="demo"
+              user={activeTab}
+              sliderValue={sliderValue}
+              explanation="Get our starter plan for getting your scale services."
+            />
+            <Card
+              dark
+              title="monthly"
+              order={2}
+              user={activeTab}
+              sliderValue={sliderValue}
+              explanation="Get our starter plan for getting your scale services."
+            />
+            <Card
+              title="yearly"
+              order={3}
+              user={activeTab}
+              sliderValue={sliderValue}
+              explanation="Get our starter plan for getting your scale services."
+            />
+          </div>
         </div>
       </div>
       <div className={styles.footer}>
         <Footer />
       </div>
-    </>
+    </motion.div>
   );
 }

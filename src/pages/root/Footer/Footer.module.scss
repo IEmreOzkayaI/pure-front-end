@@ -8,13 +8,27 @@ footer {
   padding: 11.7rem 11.4rem 15.6rem 11.4rem;
   margin-top: 3.2rem;
   border-radius: 1.4rem;
+  @media (width <= 768px) {
+    border-radius: 0;
+  }
+
+  @media (width <= 1100px) {
+    flex-direction: column;
+  }
 
   .listContainer {
     display: flex;
     margin-top: 3.7rem;
+    @media (width <= 1100px) {
+      justify-content: space-between;
+    }
+    @media (width <=697px) {
+      flex-direction: column;
+      gap: 3rem;
+      text-align: center;
+    }
     div {
       font-size: 1.4rem;
-      height: 2rem; // tasarımda 3.4 rem ama ben böyle yaptım arayüzde biraz farklı duruyor.
     }
     a {
       text-decoration: none;
@@ -25,6 +39,9 @@ footer {
 
     ul:not(:last-child) {
       margin-right: 5.2rem;
+      @media (width <=697px) {
+        margin-right: 0;
+      }
     }
 
     ul div {
@@ -43,27 +60,38 @@ footer {
     div:first-child {
       width: 33.1rem;
       margin-bottom: 3.2rem;
+      @media (width <= 1100px) {
+        width: 100%;
+      }
+      .logos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3.2rem;
+        @media (width <=583px) {
+          flex-direction: column;
+          gap: 2rem;
+        }
+        img {
+          width: 11.9rem;
+        }
+        .companyName {
+          font-size: 3.6rem;
+          font-weight: 400;
+
+          @media (width <=583px) {
+            font-size: 2.6rem;
+          }
+        }
+      }
+      .companyMotto {
+        width: 100%;
+        text-align: justify;
+        font-size: 1.6rem;
+        color: $white;
+      }
     }
 
-    .logos {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      margin-bottom: 3.2rem;
-      img {
-        width: 11.9rem;
-      }
-      .companyName {
-        font-size: 3.6rem;
-        font-weight: 400;
-      }
-    }
-    .companyMotto {
-      width: 100%;
-      text-align: justify;
-      font-size: 1.6rem;
-      color: $white;
-    }
     .socials {
       display: flex;
       align-items: center;

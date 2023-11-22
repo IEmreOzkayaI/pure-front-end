@@ -4,14 +4,36 @@
   margin: 2.2rem 2.2rem 0 2.2rem;
   border-radius: 1.4rem;
   background: $very-dark-gray;
+  @media (width <=768px) {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .errorMessage {
+    color: tomato;
+    margin-top: 1rem;
+  }
+
   & + div {
     margin-inline: 2.2rem;
     margin-bottom: 2.2rem;
+
+    @media (width <=768px) {
+      margin: 0;
+      border-radius: 0;
+    }
   }
   .grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     padding: 11rem 11.2rem 9.2rem 11.2rem;
+    @media (425px<=width <=1024px) {
+      padding: 11rem 5.6rem;
+    }
+    @media (width <=424px) {
+      padding: 11rem 1rem;
+    }
+
     .explanation {
       display: grid;
       gap: 1rem;
@@ -19,6 +41,10 @@
       border-radius: 5.9rem;
       max-height: 85rem;
       overflow: hidden;
+
+      @media (width <=1024px) {
+        display: none;
+      }
 
       .texts {
         padding-inline: 5rem;
@@ -38,7 +64,7 @@
           font-size: 2.8rem;
           font-style: normal;
           font-weight: 400;
-          margin-top: 2rem;
+          margin-top: 8rem;
         }
         :nth-child(3) {
           text-align: justify;
@@ -68,6 +94,13 @@
       padding-inline: 5.1rem;
       padding-top: 5.8rem;
 
+      @media (width <=1024px) {
+        grid-column: span 2;
+      }
+      @media (width <=424px) {
+        padding: 0;
+      }
+
       .header {
         display: flex;
         justify-content: space-between;
@@ -91,8 +124,17 @@
           margin-right: 0.5rem;
           align-self: center;
         }
+        .hideOnMobile {
+          @media (width <=424px) {
+            display: none;
+          }
+        }
+
         button {
           font-size: 1rem;
+          @media (width <=424px) {
+            display: none;
+          }
         }
         & + div {
           color: rgba(255, 255, 255, 0.5);
@@ -102,6 +144,9 @@
           line-height: normal;
           margin-top: 5.2rem;
           margin-bottom: 4.5rem;
+          @media (width <=424px) {
+            display: none;
+          }
         }
       }
       form {
@@ -119,9 +164,6 @@
           padding: 1.2rem;
           background-color: $very-dark-gray;
           color: $white;
-        }
-        input[type="password"] {
-          width: 50%;
         }
         .inputGroup {
           display: flex;

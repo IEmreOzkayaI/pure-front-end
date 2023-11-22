@@ -3,10 +3,18 @@
 .welcome {
   border-radius: 1.4rem;
   position: relative;
+
   .welcome_sub {
     height: 78.6rem;
     background-color: $very-dark-gray;
     border-radius: 1.4rem 1.4rem 1.4rem 0;
+
+    @media (width<= 1024px) {
+      border-radius: 1.4rem;
+    }
+    @media (width <= 768px) {
+      border-radius: 0;
+    }
   }
   .backgroundImage {
     position: absolute;
@@ -23,6 +31,10 @@
     .blackBox {
       background-color: $very-dark-gray;
       border-radius: 0 0 1.4rem 1.4rem;
+
+      @media (width<= 1024px) {
+        display: none;
+      }
     }
   }
 }

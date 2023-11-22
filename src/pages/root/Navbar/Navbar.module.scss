@@ -5,6 +5,48 @@
   padding-left: 11.3rem;
   background-color: $very-dark-gray;
   border-radius: 1.4rem;
+  @media (width <= 1100px) {
+    padding-left: 5.3rem;
+  }
+
+  .hamburger,
+  .fullNav {
+    display: none;
+  }
+  @media (width <= 1024px) {
+    .hamburger {
+      display: block;
+      position: absolute;
+      right: 4rem;
+      top: 7rem;
+    }
+    .fullNav {
+      color: $very-dark-gray;
+      background-color: $white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: space-evenly;
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      font-size: 5rem;
+      z-index: 1000;
+      .close {
+        position: absolute;
+        top: 2rem;
+        right: 5rem;
+        color: $very-dark-gray;
+        cursor: pointer;
+      }
+      a {
+        color: $very-dark-gray;
+      }
+    }
+  }
+
   a {
     color: $white;
     text-transform: uppercase;
@@ -28,10 +70,24 @@
     align-items: center;
     :nth-child(2) {
       padding-left: 8.5rem;
+
+      @media (width <= 960px) {
+        padding-left: 5.5rem;
+      }
     }
     :nth-child(3) {
       padding-left: 9.2rem;
       padding-right: 9.2rem;
+      @media (width <= 960px) {
+        padding-left: 5.2rem;
+        padding-right: 5.2rem;
+      }
+    }
+
+    @media (width <= 1024px) {
+      :not(:first-child) {
+        display: none;
+      }
     }
   }
   .lastChild {
@@ -39,6 +95,9 @@
     align-items: center;
     position: relative;
 
+    @media (width <= 1024px) {
+      display: none;
+    }
     .userName {
       user-select: none;
       color: #f5f3f3;
@@ -193,6 +252,7 @@
       }
       #signUp {
         position: relative;
+        color: $white;
         &::after {
           content: "";
           display: block;
@@ -209,12 +269,16 @@
       }
       &:last-child {
         margin-right: 13.3rem;
-        background-color: rgba($color: $blue-gray, $alpha: 0.2);
+        background-color: $very-dark-gray;
         border: 1px solid $white;
         border-radius: 1rem;
         padding: 1.3rem 2.8rem;
         text-transform: uppercase;
         word-wrap: break-word;
+
+        @media (width <= 1100px) {
+          margin-right: 5.3rem;
+        }
       }
       .dropdownContentLogin,
       .dropdownContentSignUp {
