@@ -46,5 +46,5 @@ const registerSlice = createSlice({
 	reducers,
 });
 
-export const {registerProgress, registerFailure, registerSuccess, clearAuthInfo, registerFetch} = registerSlice.actions;
+export const {registerProgress, registerFailure, registerSuccess, clearRegisterInfo, registerFetch} = registerSlice.actions;
 export default registerSlice.reducer;
