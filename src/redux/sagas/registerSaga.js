@@ -33,7 +33,7 @@ function* registerWrapper(payload) {
 				resolve(data);
 			})
 			.catch((err) => {
-				if (err.response.data.message === "User Already Exists") navigateTo("/login");
+				if (err.response.data.message === "User Already Exists");
 				reject(err);
 			});
 	});

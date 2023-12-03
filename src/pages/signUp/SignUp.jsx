@@ -1,4 +1,4 @@
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import Button from "../../components/shared/Button/Button";
 import Footer from "../root/Footer/Footer";
 import Navbar from "../root/Navbar/Navbar";
@@ -8,7 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {clearRegisterInfo, registerFetch} from "../../redux/toolkit/registerSlice";
 import {motion} from "framer-motion";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
-import { clearConfirmInfo } from "../../redux/toolkit/confirmSlice";
+import {clearConfirmInfo} from "../../redux/toolkit/confirmSlice";
 
 export default function SignUp() {
 	const [firstName, setFirstName] = useState("");
@@ -21,6 +21,8 @@ export default function SignUp() {
 	const [password, setPassword] = useState("");
 	const [repeatPass, setRepeatPass] = useState("");
 	const [terms, setTerms] = useState(false);
+	const [employeeCount, setEmployeeCount] = useState("");
+	const [webSite, setWebSite] = useState("");
 	const dispatch = useDispatch();
 	const {registerInfo} = useSelector((state) => state.register);
 	const [confirmModal, setConfirmModal] = useState(false);
@@ -37,6 +39,8 @@ export default function SignUp() {
 		password: false,
 		repeatPass: false,
 		terms: false,
+		employeeCount: false,
+		webSite: false,
 	});
 
 	const registerRequest = (e) => {
@@ -58,16 +62,16 @@ export default function SignUp() {
 			//TODO address'i formda ekleyince buraya da ekleyecegiz
 			//TODO vat da eklenecek,
 			const Company_User = {
-				name: firstName,
+				name: companyName,
 				email,
 				phone_number: phoneNumber,
 				password,
 				privacy_policy: terms,
 				terms_of_use: terms,
-				company_name: companyName,
 				industry,
+				employee_count: employeeCount,
+				web_site: webSite,
 				role: "Company_User",
-				address: "bizim formda adres kismi yok",
 			};
 			dispatch(registerFetch({Company_User}));
 		}
@@ -103,10 +107,8 @@ export default function SignUp() {
 			}
 		}
 		if (user === "company") {
-			if (!firstName || !lastName || !phoneNumber || !companyName || !industry || !vat || !email || !password || !repeatPass || !terms) {
+			if (!phoneNumber || !companyName || !industry || !vat || !email || !password || !repeatPass || !terms || !employeeCount || !webSite) {
 				setError({
-					firstName: !firstName,
-					lastName: !lastName,
 					phoneNumber: !phoneNumber,
 					companyName: !companyName,
 					industry: !industry,
@@ -114,6 +116,8 @@ export default function SignUp() {
 					email: !email,
 					password: !password,
 					repeatPass: !repeatPass,
+					employee_count: !employeeCount,
+					webSite: !webSite,
 					terms: !terms,
 				});
 				return;
@@ -158,58 +162,45 @@ export default function SignUp() {
 						</div>
 						<div>Welcome in our service, create account to start your experience.</div>
 						<form onSubmit={handleOnSubmit}>
-							<div className={styles.col}>
-								<div className={styles.inputGroup}>
-									<label htmlFor='firstName'>First Name</label>
-									<input
-										type='text'
-										id='firstName'
-										value={firstName}
-										onChange={(e) => {
-											setFirstName(e.target.value.trim());
-											setError({...error, firstName: !e.target.value});
-										}}
-										onBlur={() => {
-											setError({...error, firstName: !firstName});
-										}}
-									/>
-									{error.firstName ? <span className={styles.errorMessage}>Field is required</span> : null}
-								</div>
-								<div className={styles.inputGroup}>
-									<label htmlFor='lastName'>Last Name</label>
-									<input
-										type='text'
-										id='lastName'
-										value={lastName}
-										onChange={(e) => {
-											setLastName(e.target.value.trim());
-											setError({...error, lastName: !e.target.value});
-										}}
-										onBlur={() => {
-											setError({...error, lastName: !lastName});
-										}}
-									/>
-									{error.lastName ? <span className={styles.errorMessage}>Field is required</span> : null}
-								</div>
-							</div>
-							<div className={styles.col}>
-								<div className={styles.inputGroup}>
-									<label htmlFor='phoneNumber'>Phone Number</label>
-									<input
-										type='text'
-										id='phoneNumber'
-										value={phoneNumber}
-										onChange={(e) => {
-											setPhoneNumber(e.target.value.trim());
-											setError({...error, phoneNumber: !e.target.value});
-										}}
-										onBlur={() => {
-											setError({...error, phoneNumber: !phoneNumber});
-										}}
-									/>
-									{error.phoneNumber ? <span className={styles.errorMessage}>Field is required</span> : null}
-								</div>
-							</div>
+							{user === "user" && (
+								<>
+									<div className={styles.col}>
+										<div className={styles.inputGroup}>
+											<label htmlFor='firstName'>First Name</label>
+											<input
+												type='text'
+												id='firstName'
+												value={firstName}
+												onChange={(e) => {
+													setFirstName(e.target.value.trim());
+													setError({...error, firstName: !e.target.value});
+												}}
+												onBlur={() => {
+													setError({...error, firstName: !firstName});
+												}}
+											/>
+											{error.firstName ? <span className={styles.errorMessage}>Field is required</span> : null}
+										</div>
+										<div className={styles.inputGroup}>
+											<label htmlFor='lastName'>Last Name</label>
+											<input
+												type='text'
+												id='lastName'
+												value={lastName}
+												onChange={(e) => {
+													setLastName(e.target.value.trim());
+													setError({...error, lastName: !e.target.value});
+												}}
+												onBlur={() => {
+													setError({...error, lastName: !lastName});
+												}}
+											/>
+											{error.lastName ? <span className={styles.errorMessage}>Field is required</span> : null}
+										</div>
+									</div>
+								</>
+							)}
+
 							{user === "company" ? (
 								<>
 									<div className={styles.col}>
@@ -266,6 +257,66 @@ export default function SignUp() {
 									</div>
 								</>
 							) : null}
+							<div className={styles.col}>
+								<div className={styles.inputGroup}>
+									<label htmlFor='phoneNumber'>Phone Number</label>
+									<input
+										type='text'
+										id='phoneNumber'
+										inputMode='numeric'
+										value={phoneNumber}
+										onChange={(e) => {
+											setPhoneNumber(e.target.value.trim());
+											setError({...error, phoneNumber: !e.target.value});
+										}}
+										onBlur={() => {
+											setError({...error, phoneNumber: !phoneNumber});
+										}}
+									/>
+									{error.phoneNumber ? <span className={styles.errorMessage}>Field is required</span> : null}
+								</div>
+							</div>
+							{user === "company" && (
+								<>
+									<div className={styles.col}>
+										<div className={styles.inputGroup}>
+											<label htmlFor='employeeCount'>Employee Count</label>
+											<input
+												type='text'
+												id='employeeCount'
+												inputMode='numeric'
+												value={employeeCount}
+												onChange={(e) => {
+													setEmployeeCount(e.target.value.trim());
+													setError({...error, employeeCount: !e.target.value});
+												}}
+												onBlur={() => {
+													setError({...error, employeeCount: !employeeCount});
+												}}
+											/>
+											{error.phoneNumber ? <span className={styles.errorMessage}>Field is required</span> : null}
+										</div>
+									</div>
+									<div className={styles.col}>
+										<div className={styles.inputGroup}>
+											<label htmlFor='webSite'>Web Site</label>
+											<input
+												type='text'
+												id='webSite'
+												value={webSite}
+												onChange={(e) => {
+													setWebSite(e.target.value.trim());
+													setError({...error, webSite: !e.target.value});
+												}}
+												onBlur={() => {
+													setError({...error, webSite: !webSite});
+												}}
+											/>
+											{error.phoneNumber ? <span className={styles.errorMessage}>Field is required</span> : null}
+										</div>
+									</div>
+								</>
+							)}
 							<div className={styles.col}>
 								<div className={styles.inputGroup}>
 									<label htmlFor='email'>E mail</label>
@@ -374,7 +425,7 @@ export default function SignUp() {
 				</div>
 			</div>
 			<div>
-				{confirmModal && <ConfirmModal handleModal={handleModal} />}
+				{confirmModal && <ConfirmModal handleModal={handleModal} redirectPath={"/login"} />}
 				<Footer />
 			</div>
 		</motion.div>

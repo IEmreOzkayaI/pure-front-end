@@ -1,26 +1,21 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
-import React from "react";
 import styles from "./ConfirmModal.module.scss";
-import {confirmFetch, reConfirmFetch, clearConfirmInfo} from "../../redux/toolkit/confirmSlice";
-import {clearRegisterInfo} from "../../redux/toolkit/registerSlice";
+import {confirmFetch} from "../../redux/toolkit/confirmSlice";
+import {reConfirmFetch} from "../../redux/toolkit/reConfirmSlice";
 import {useDispatch, useSelector} from "react-redux";
 import CloseIcon from "/close.svg";
 import Shape from "/shape.svg";
 import {useState} from "react";
 import {useRef} from "react";
 import {useEffect} from "react";
-import toast, {Toaster} from "react-hot-toast";
 import {useNavigate} from "react-router-dom";
-import {getCookie} from "../../utils/cookieParser";
-import {clear} from "@testing-library/user-event/dist/clear";
 const ConfirmModal = (props) => {
-	const {handleModal} = props;
+	const {handleModal, redirectPath} = props;
 	const dispatch = useDispatch();
 	const navigateTo = useNavigate();
 	const confirmError = useSelector((state) => state.confirm.confirmError);
 	const confirmInfo = useSelector((state) => state.confirm.confirmInfo);
-	const confirmInit = useSelector((state) => state.confirm.confirmInit);
-	const confirmProgress = useSelector((state) => state.confirm.confirmProgress);
 	const [digits, setDigits] = useState(["", "", "", "", "", ""]);
 	const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
 	const [timer, setTimer] = useState(localStorage.getItem("timer") || 60);
@@ -60,7 +55,7 @@ const ConfirmModal = (props) => {
 	};
 
 	const handleConfirm = () => {
-		dispatch(confirmFetch({confirm_credential: digits.join(""), navigateTo}));
+		dispatch(confirmFetch({confirm_credential: digits.join("")}));
 	};
 
 	useEffect(() => {
@@ -71,9 +66,9 @@ const ConfirmModal = (props) => {
 	useEffect(() => {
 		if (confirmInfo?.status === "success") {
 			setTimeout(() => {
-				navigateTo("/login");
+				navigateTo(redirectPath);
 				handleModal();
-			}, 4000);
+			}, 2000);
 		}
 	}, [confirmInfo]);
 
@@ -105,64 +100,65 @@ const ConfirmModal = (props) => {
 	};
 
 	return (
-		<div className={styles.confirm_modal_fallback}>
-			<div className={styles.confirm_modal_content_outer}>
-				<div className={styles.confirm_modal_content_container}>
-					<div className={styles.confirm_modal_content}>
-						<div className={styles.header}>
-							<div className={styles.close} onClick={() => handleModal()}>
-								<img src={CloseIcon} alt='' />
-							</div>
-							<div className={styles.label}>pure code</div>
-							<div className={styles.image}>
-								<img src={Shape} alt='' />
-							</div>
-						</div>
-						<div className={styles.verification_step}>
-							{confirmInfo === null && confirmError === false && (
-								<div className={styles.timer}>
-									<div className={styles.timer_value}>{timer}</div>
+		<>
+			<div className={styles.confirm_modal_fallback}>
+				<div className={styles.confirm_modal_content_outer}>
+					<div className={styles.confirm_modal_content_container}>
+						<div className={styles.confirm_modal_content}>
+							<div className={styles.header}>
+								<div className={styles.close} onClick={() => handleModal()}>
+									<img src={CloseIcon} alt='' />
 								</div>
-							)}
-							{confirmError?.status === "error" && confirmInfo === null && (
-								<svg xmlns='http://www.w3.org/2000/svg' width='184' height='184' viewBox='0 0 184 184' fill='none'>
-									<circle cx='91.9717' cy='91.9727' r='43' fill='#F77777' stroke='#F5F3F3' stroke-width='6' />
-									<rect x='104' y='82' width='31.9992' height='4' rx='2' transform='rotate(133.998 104 82)' fill='#F5F3F3' />
-									<rect x='101' y='105' width='31.9992' height='4' rx='2' transform='rotate(-134 101 105)' fill='#F5F3F3' />
-								</svg>
-							)}
-							{confirmInfo?.status === "success" && (
-								<svg xmlns='http://www.w3.org/2000/svg' width='184' height='184' viewBox='0 0 184 184' fill='none'>
-									<circle cx='91.9717' cy='92' r='43' fill='#A3BE8C' stroke='#F5F3F3' stroke-width='6' />
-									<rect x='109.642' y='81.7773' width='31.9992' height='4' rx='2' transform='rotate(133.998 109.642 81.7773)' fill='#F5F3F3' />
-									<rect x='78.751' y='90.8809' width='15.8959' height='4' rx='2' transform='rotate(43.9985 78.751 90.8809)' fill='#F5F3F3' />
-								</svg>
-							)}
-						</div>
-						<div className={styles.content}>
-							<div className={styles.title}>
-								{timer !== 0 && <span>Verification Code</span>}
-								{timer === 0 && <span>Time Is Up</span>}
+								<div className={styles.label}>pure code</div>
+								<div className={styles.image}>
+									<img src={Shape} alt='' />
+								</div>
 							</div>
-							<div className={styles.subtitle}>
-								{timer !== 0 && <span>Check your email!</span>}
-								{timer === 0 && <span>Get code again!</span>}
+							<div className={styles.verification_step}>
+								{confirmInfo === null && confirmError === false && (
+									<div className={styles.timer}>
+										<div className={styles.timer_value}>{timer}</div>
+									</div>
+								)}
+								{confirmError?.status === "error" && confirmInfo === null && (
+									<svg xmlns='http://www.w3.org/2000/svg' width='184' height='184' viewBox='0 0 184 184' fill='none'>
+										<circle cx='91.9717' cy='91.9727' r='43' fill='#F77777' stroke='#F5F3F3' strokeWidth='6' />
+										<rect x='104' y='82' width='31.9992' height='4' rx='2' transform='rotate(133.998 104 82)' fill='#F5F3F3' />
+										<rect x='101' y='105' width='31.9992' height='4' rx='2' transform='rotate(-134 101 105)' fill='#F5F3F3' />
+									</svg>
+								)}
+								{confirmInfo?.status === "success" && (
+									<svg xmlns='http://www.w3.org/2000/svg' width='184' height='184' viewBox='0 0 184 184' fill='none'>
+										<circle cx='91.9717' cy='92' r='43' fill='#A3BE8C' stroke='#F5F3F3' strokeWidth='6' />
+										<rect x='109.642' y='81.7773' width='31.9992' height='4' rx='2' transform='rotate(133.998 109.642 81.7773)' fill='#F5F3F3' />
+										<rect x='78.751' y='90.8809' width='15.8959' height='4' rx='2' transform='rotate(43.9985 78.751 90.8809)' fill='#F5F3F3' />
+									</svg>
+								)}
 							</div>
-							<div className={styles.line}></div>
-							<div className={styles.input_box}>
-								{digits.map((digit, index) => (
-									<input disabled={timer === 0} key={index} type='text' maxLength={1} value={digit} onKeyDown={(e) => handleCodeChange(e, index)} onChange={(e) => handleCodeChange(e, index)} ref={inputRefs[index]} />
-								))}
-							</div>
-							<div className={styles.reconfirm} onClick={() => handleResend()}>
-								<span>Get Code Again</span>
+							<div className={styles.content}>
+								<div className={styles.title}>
+									{timer !== 0 && <span>Verification Code</span>}
+									{timer === 0 && <span>Time Is Up</span>}
+								</div>
+								<div className={styles.subtitle}>
+									{timer !== 0 && <span>Check your email!</span>}
+									{timer === 0 && <span>Get code again!</span>}
+								</div>
+								<div className={styles.line} />
+								<div className={styles.input_box}>
+									{digits.map((digit, index) => (
+										<input disabled={timer === 0} key={index} type='text' maxLength={1} value={digit} onKeyDown={(e) => handleCodeChange(e, index)} onChange={(e) => handleCodeChange(e, index)} ref={inputRefs[index]} />
+									))}
+								</div>
+								<div className={styles.reconfirm} onClick={() => handleResend()}>
+									<span>Get Code Again</span>
+								</div>
 							</div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<Toaster position='top-right' reverseOrder={false} />
-		</div>
+		</>
 	);
 };
 
