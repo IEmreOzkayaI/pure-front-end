@@ -4,7 +4,7 @@ const initialState = {
 	registerInfo: null,
 	registerError: false,
 	registerProgress: false,
-	registerFetch: null,
+	registerInit: null,
 };
 
 const reducers = {
@@ -12,28 +12,28 @@ const reducers = {
 		state.registerInfo = null;
 		state.registerError = false;
 		state.registerProgress = true;
-		// state.registerFetch = false;
+		state.registerInit = false;
 	},
 	registerSuccess: (state, action) => {
 		state.registerInfo = action.payload;
 		state.registerError = false;
-		state.registerFetch = false;
+		state.registerInit = false;
 		state.registerProgress = false;
 	},
 	registerFailure: (state, action) => {
 		state.registerError = action.payload;
 		state.registerInfo = null;
 		state.registerProgress = false;
-		state.registerFetch = false;
+		state.registerInit = false;
 	},
 	clearRegisterInfo: (state) => {
 		state.registerInfo = null;
 		state.registerError = false;
-		state.registerFetch = false;
+		state.registerInit = false;
 		state.registerProgress = false;
 	},
 	registerFetch: (state, action) => {
-		state.registerFetch = action.payload;
+		state.registerInit = action.payload;
 		state.registerInfo = null;
 		state.registerError = false;
 		state.registerProgress = false;
@@ -46,5 +46,5 @@ const registerSlice = createSlice({
 	reducers,
 });
 
-export const {registerProgress, registerFailure, registerSuccess, clearAuthInfo, registerFetch} = registerSlice.actions;
+export const {registerProgress, registerFailure, registerSuccess, clearRegisterInfo, registerFetch} = registerSlice.actions;
 export default registerSlice.reducer;

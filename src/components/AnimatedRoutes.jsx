@@ -1,36 +1,53 @@
-import { Route, Routes } from "react-router-dom";
-import App from "../App";
-import Pricing from "../pages/pricing/Pricing";
-import SignUp from "../pages/signUp/SignUp";
-import Login from "../pages/login/Login";
-import Confirm from "../pages/ConfirmPage/Confirm";
-import Interview from "../pages/Interview/Interview";
-import InterviewSignUp from "../pages/InterviewSignUp/InterviewSignUp";
-import { useLocation } from "react-router-dom/dist";
-import { AnimatePresence } from "framer-motion";
+import {Route, Routes} from "react-router-dom";
+import {useLocation} from "react-router-dom/dist";
+import {AnimatePresence} from "framer-motion";
+import {lazy} from "react";
+import {Suspense} from "react";
+import Redirect from "./shared/Redirect/Redirect";
 
-const defaultErrorElement = (
-  <div style={{ fontSize: "4em", textAlign: "center" }}>
-    Oops, there is an error!
-  </div>
-);
+const defaultErrorElement = <div style={{fontSize: "4em", textAlign: "center"}}>Oops, there is an error!</div>;
 
 export default function AnimatedRoutes() {
-  const location = useLocation();
-  return (
-    <AnimatePresence mode="wait" initial={false}>
-      <Routes location={location} key={location.pathname}>
-        <Route path="/" element={<App />} />
-        <Route path="pricing" element={<Pricing />} />
-        <Route path="signUp" element={<SignUp />} />
-        <Route path="login" element={<Login />} />
-        <Route path="confirm/:confirm_url_token" element={<Confirm />} />
-        <Route path="interview" element={<Interview />}>
-          <Route path="signUp" element={<InterviewSignUp />} />
-          <Route path="playground" element={<Interview />} />
-        </Route>
-        <Route path="*" element={defaultErrorElement} />
-      </Routes>
-    </AnimatePresence>
-  );
+	const location = useLocation();
+	const LazyLanding = lazy(() => {
+		return new Promise((resolve) => setTimeout(() => resolve(import("../pages/landing/Landing")), 0));
+	});
+	const LazyPricing = lazy(() => {
+		return new Promise((resolve) => setTimeout(() => resolve(import("../pages/pricing/Pricing")), 0));
+	});
+
+	const LazySignUp = lazy(() => {
+		return new Promise((resolve) => setTimeout(() => resolve(import("../pages/signUp/SignUp")), 0));
+	});
+	const LazyLogin = lazy(() => {
+		return new Promise((resolve) => setTimeout(() => resolve(import("../pages/login/Login")), 0));
+	});
+	const LazyInterviewPlayground = lazy(() => {
+		return new Promise((resolve) => setTimeout(() => resolve(import("../pages/interview/Interview")), 2000));
+	});
+	const LazyInterviewSignUp = lazy(() => {
+		return new Promise((resolve) => setTimeout(() => resolve(import("../pages/interviewSignUp/InterviewSignUp")), 2000));
+	});
+	const LazyDashboard = lazy(() => {
+		return new Promise((resolve) => setTimeout(() => resolve(import("../pages/dashboard/Dashboard")), 2000));
+	});
+
+	return (
+		<AnimatePresence mode='wait' initial={false}>
+			<Suspense fallback={<Redirect />}>
+				<Routes location={location} key={location.pathname}>
+					<Route path='/' element={<LazyLanding />} />
+					<Route path='pricing' element={<LazyPricing />} />
+					<Route path='signUp' element={<LazySignUp />} />
+					<Route path='login' element={<LazyLogin />} />
+					<Route path='dashboard' element={<LazyDashboard />} />
+					<Route path='interview'>
+						<Route path='signUp' element={<LazyInterviewSignUp />} />
+						<Route path='playground' element={<LazyInterviewPlayground />} />
+					</Route>
+					<Route path='*' element={defaultErrorElement} />
+				</Routes>
+			</Suspense>
+		</AnimatePresence>
+	);
 }
