@@ -1,6 +1,5 @@
 import { Link, useLocation } from "react-router-dom";
 import Button from "../../components/shared/Button/Button";
-import Footer from "../root/Footer/Footer";
 import styles from "./SignUp.module.scss";
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -536,7 +535,6 @@ export default function SignUp() {
         {confirmModal && (
           <ConfirmModal handleModal={handleModal} redirectPath={"/login"} />
         )}
-        <Footer />
       </div>
     </motion.div>
   );

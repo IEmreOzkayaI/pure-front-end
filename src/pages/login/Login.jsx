@@ -1,5 +1,4 @@
 import Button from "../../components/shared/Button/Button";
-import Footer from "../root/Footer/Footer";
 import styles from "./Login.module.scss";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -196,7 +195,6 @@ export default function Login() {
         {confirmModal && (
           <ConfirmModal handleModal={handleModal} redirectPath={"/dashboard"} />
         )}
-        <Footer />
       </div>
     </motion.div>
   );

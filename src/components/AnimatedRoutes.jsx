@@ -5,6 +5,7 @@ import { lazy } from "react";
 import { Suspense } from "react";
 import Redirect from "./shared/Redirect/Redirect";
 import Navbar from "../pages/root/Navbar/Navbar";
+import Footer from "../pages/root/Footer/Footer";
 
 const defaultErrorElement = (
   <div style={{ fontSize: "4em", textAlign: "center" }}>
@@ -71,6 +72,7 @@ export default function AnimatedRoutes() {
           <Route path="*" element={defaultErrorElement} />
         </Routes>
       </Suspense>
+      <Footer />
     </AnimatePresence>
   );
 }

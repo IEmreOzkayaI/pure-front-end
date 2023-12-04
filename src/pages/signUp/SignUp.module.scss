@@ -40,6 +40,10 @@
       max-height: 85rem;
       overflow: hidden;
 
+      @media (width <=1024px) {
+        display: none;
+      }
+
       @media (width <= 768px) {
         display: none;
       }

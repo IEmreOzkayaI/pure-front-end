@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
 import RangeSlider from "../../components/shared/RangeSlider/RangeSlider";
 import Card from "../../components/shared/Card/Card";
@@ -93,9 +92,6 @@ export default function Pricing() {
             />
           </div>
         </div>
-      </div>
-      <div className={styles.footer}>
-        <Footer />
       </div>
     </motion.div>
   );
