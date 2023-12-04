@@ -1,5 +1,4 @@
 import { useState } from "react";
-import Navbar from "../root/Navbar/Navbar";
 import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
 import RangeSlider from "../../components/shared/RangeSlider/RangeSlider";
@@ -42,7 +41,6 @@ export default function Pricing() {
       exit={{ opacity: 0 }}
     >
       <div className={styles.pricing} id="pricing">
-        <Navbar />
         <div className={styles.grayBackground}>
           <div className={styles.tabs}>
             <div

@@ -1,10 +1,11 @@
 @import "../../global.scss";
 
 .pricing {
-  margin: 2.1rem 2rem;
+  margin: 0 2rem 2.1rem 2rem;
   background-color: $very-dark-gray;
-  border-radius: 1.4rem;
-  height: 118.4rem;
+  border-radius: 0 0 1.4rem 1.4rem;
+  height: 107.4rem;
+  padding-top: 12.5rem;
 
   @media (width<=768px) {
     margin: 0;
@@ -12,7 +13,7 @@
   }
 
   .grayBackground {
-    margin: 12.5rem 11.5rem 45.5rem 11.2rem;
+    margin: 0 11.5rem 45.5rem 11.2rem;
     padding: 3.7rem 9rem 0 9.1rem;
     border-radius: 4.5rem;
     height: 45.3rem;

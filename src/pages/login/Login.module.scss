@@ -1,8 +1,8 @@
 @import "../../global.scss";
 
 .container {
-  margin: 2.2rem 2.2rem 0 2.2rem;
-  border-radius: 1.4rem;
+  margin: 0 2rem 0 2rem;
+  border-radius: 0 0 1.4rem 1.4rem;
   background: $very-dark-gray;
   @media (width <=768px) {
     margin: 0;
