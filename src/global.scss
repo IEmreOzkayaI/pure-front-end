@@ -8,7 +8,6 @@ $text-color: #a1aeb7;
 $black: #000000;
 $real-white: #ffffff;
 
-
 *,
 *::before,
 *::after {
@@ -31,6 +30,7 @@ ul {
 
 .globalContainer {
   margin: 2.1rem 2rem;
+  margin-top: 0;
   @media (width <= 768px) {
     margin: 0;
   }

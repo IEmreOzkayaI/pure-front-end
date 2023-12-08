@@ -1,6 +1,4 @@
 import { useState } from "react";
-import Navbar from "../root/Navbar/Navbar";
-import Footer from "../root/Footer/Footer";
 import styles from "./Pricing.module.scss";
 import RangeSlider from "../../components/shared/RangeSlider/RangeSlider";
 import Card from "../../components/shared/Card/Card";
@@ -42,7 +40,6 @@ export default function Pricing() {
       exit={{ opacity: 0 }}
     >
       <div className={styles.pricing} id="pricing">
-        <Navbar />
         <div className={styles.grayBackground}>
           <div className={styles.tabs}>
             <div
@@ -95,9 +92,6 @@ export default function Pricing() {
             />
           </div>
         </div>
-      </div>
-      <div className={styles.footer}>
-        <Footer />
       </div>
     </motion.div>
   );
