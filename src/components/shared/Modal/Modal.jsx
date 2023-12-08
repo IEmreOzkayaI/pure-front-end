@@ -39,5 +39,5 @@ Modal.propTypes = {
   children: PropTypes.node.isRequired,
   closeModal: PropTypes.func.isRequired,
   title: PropTypes.string.isRequired,
-  dark: PropTypes.bool.isRequired,
+  dark: PropTypes.bool,
 };

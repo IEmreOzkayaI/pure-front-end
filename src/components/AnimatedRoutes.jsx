@@ -56,9 +56,9 @@ export default function AnimatedRoutes() {
   });
 
   return (
-    <AnimatePresence mode="wait" initial={false}>
-      <Navbar />
-      <Suspense fallback={<Redirect />}>
+    <AnimatePresence mode="initial" initial={false}>
+      <Navbar key={"navbar"}/>
+      <Suspense fallback={<Redirect />} key={"suspense"}>
         <Routes location={location} key={location.pathname}>
           <Route path="/" element={<LazyLanding />} />
           <Route path="pricing" element={<LazyPricing />} />
