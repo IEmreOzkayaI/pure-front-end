@@ -16,12 +16,13 @@ $real-white: #ffffff;
   box-sizing: border-box;
 }
 html {
-  background-color: $white;
+  background-color: #ffffff;
 }
 
 :root {
   font-family: "Ubuntu", sans-serif;
   font-size: 10px; // so you can 1rem as 16px
+  background-color: #ffffff;
 }
 
 ul {

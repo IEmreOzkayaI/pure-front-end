@@ -1,91 +1,92 @@
-import { useState } from "react";
+import {useEffect} from "react";
 import styles from "./Interview.module.scss";
 import InterviewNavigation from "../../components/interviewNavigation/InterviewNavigation";
 import InterviewContent from "../../components/interviewContent/interviewContent";
-import { useRef } from "react";
-import { motion } from "framer-motion";
+import {useRef} from "react";
+import {motion} from "framer-motion";
+
+import {setCurrentQuestion, setQuestions,} from "../../redux/toolkit/interviewManagementSlice.js";
+import {useDispatch} from "react-redux";
+import InterviewHeader from "../../components/interviewHeader/interviewHeader.jsx";
 
 const Interview = () => {
-  const interview = useRef(dummyData).current;
-  const [currentQuestion, setCurrentQuestion] = useState({
-    number: 1,
-    question: interview.questions[0],
-  });
+    const dispatch = useDispatch();
+    const interview = useRef(dummyData).current;
 
-  const handleSelectedQuestion = (index) => {
-    const newQuestion = {
-      number: index + 1,
-      question: interview.questions[index],
+    useEffect(() => {
+        dispatch(setQuestions(interview.questions));
+        dispatch(setCurrentQuestion(interview.questions[0]));
+    }, []);
+
+    const handleSelectedQuestion = (index) => {
+        dispatch(setCurrentQuestion(interview.questions[index]));
     };
-    setCurrentQuestion(newQuestion);
-  };
 
-  const handleInterview = () => {
-    alert("Interview is finished");
-  };
+    const handleInterview = () => {
+        alert("Interview is finished");
+    };
 
-  return (
-    <motion.div
-      className={styles.interview}
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1 }}
-      exit={{ opacity: 0 }}
-    >
-      <InterviewNavigation
-        handleSelectedQuestion={handleSelectedQuestion}
-        handleInterview={handleInterview}
-        questionList={interview.questions}
-      />
-      <InterviewContent currentQuestion={currentQuestion} />
-    </motion.div>
-  );
+    return (<motion.div
+            className={styles.interview_container}
+            initial={{opacity: 0}}
+            animate={{opacity: 1}}
+            exit={{opacity: 0}}
+        >
+            <div className={styles.interview}>
+                <div className={styles.interview_up}>
+                    <InterviewHeader/>
+                </div>
+                <div className={styles.interview_down}>
+                    <div className={styles.interview_navigation}>
+                        <InterviewNavigation
+                            handleSelectedQuestion={handleSelectedQuestion}
+                        />
+                    </div>
+                    <div className={styles.interview_content}>
+                        <InterviewContent/>
+                    </div>
+                </div>
+            </div>
+        </motion.div>);
 };
 
 export default Interview;
 
+
 const dummyData = {
-  questions: [
-    {
-      diagram: {
-        question: "Diagram sorusu",
-      },
-    },
-    {
-      test: {
-        question: ["Test sorusu 1", "Test sorusu 2", "Test sorusu 3"],
-      },
-    },
-    {
-      algorithm: {
-        question: "Kod sorusu",
-      },
-    },
-    {
-      document: {
-        question: "Döküman sorusu",
-      },
-    },
-  ],
-  answers: [
-    {
-      diagram: {
-        answer: "Diagram cevabı",
-      },
-    },
-    {
-      test: {
-        answer: ["Test cevabı 1", "Test cevabı 2", "Test cevabı 3"],
-      },
-    },
-    {
-      algorithm: {
-        answer: "Kod cevabı",
-      },
-    },
-    {
-      document: {
-        answer: "Döküman cevabı",
-      },
-    },
-  ],
+    questions: [{
+        number: 0,
+        type: "diagram",
+        question: "\n" + "Diagram ipsum dolor sit amet, consectetur adipiscing elit. Cras mi ante, tempus et urna ac, interdum posuere libero. Phasellus ac tortor sit amet felis blandit tempor ac vel velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris a sagittis mauris. Vivamus scelerisque ultrices ipsum. Vestibulum molestie leo et dignissim vestibulum. Duis molestie arcu nunc, vitae fringilla massa viverra sed. Fusce non erat at massa condimentum pulvinar. Aliquam lacinia diam nunc, euismod tincidunt dui porta vitae. Integer urna ligula, sodales et orci sed, pellentesque cursus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse massa nulla, condimentum sed pharetra ac, pulvinar ac neque. Nunc accumsan fringilla sapien et cursus. Nunc egestas massa dolor, quis porta lorem venenatis vel. Integer pretium lectus diam, nec malesuada eros posuere sit amet.\n" + "\n" + "Donec pretium convallis fermentum. Donec varius leo urna, ac cursus nisi euismod quis. Nullam at odio ac est egestas consequat. Curabitur efficitur dolor ac tortor tempor, in porta nulla congue. Quisque ligula purus, cursus eu justo quis, vestibulum tempus est. Integer metus lacus, aliquam id nunc nec, imperdiet pretium elit. Curabitur nec dictum neque, in tempus sem. Phasellus egestas nulla finibus massa convallis facilisis. Quisque rhoncus nulla ut dignissim tincidunt. Aliquam tellus tellus, volutpat nec ante iaculis, condimentum condimentum tortor. Morbi ornare faucibus arcu, sed sollicitudin erat commodo malesuada. Pellentesque iaculis, nisi non condimentum euismod, eros tellus vulputate est, non imperdiet mauris tortor at risus. Cras pretium eros sed nisl feugiat, vel cursus dolor pellentesque.\n" + "\n" + "Vivamus nunc risus, bibendum eu condimentum vel, dignissim eget est. Integer aliquam molestie odio tempus porttitor. In venenatis tellus quis feugiat euismod. Nullam ut lacus sed lorem aliquam mollis eu eu elit. Morbi id dolor venenatis dolor ornare dapibus. Suspendisse convallis auctor risus, at scelerisque ipsum sagittis vitae. Quisque condimentum erat ut turpis dapibus, in tempus turpis volutpat. Integer bibendum nisl in dapibus scelerisque. In viverra blandit massa, in finibus nunc feugiat ac. Sed molestie a sapien eget blandit. Pellentesque imperdiet consectetur tristique.\n" + "\n" + "Phasellus vitae egestas dui. Vestibulum vel libero ornare, blandit ante sed, venenatis arcu. Duis ornare, velit eget varius consectetur, dui magna laoreet metus, viverra sollicitudin lectus ante nec felis. Nam ut lacus gravida enim aliquam varius. Praesent varius, justo vitae euismod finibus, massa urna eleifend eros, in aliquet diam orci nec massa. Proin ut gravida massa, a accumsan sem. Proin ut lorem ac nisi congue porttitor vitae at turpis. Fusce maximus ullamcorper lacus, sit amet tempor enim pulvinar in. Phasellus quis nunc posuere, ultrices dui quis, condimentum nisi. Nam blandit feugiat diam.\n" + "\n" + "Maecenas fermentum porttitor metus, ac imperdiet turpis porttitor eu. Etiam vel vehicula nisl. Donec et tristique odio, in mollis sem. Nam nec vestibulum justo, a ultrices turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi nec ante euismod, laoreet lectus at, posuere urna. Donec in pretium enim. Nunc venenatis vulputate mi, eu imperdiet diam pulvinar nec. Integer rhoncus molestie leo. Duis interdum ullamcorper ipsum, in condimentum erat ullamcorper vel. Integer sed augue eu risus placerat pharetra.",
+    }, {
+        number: 1, type: "test", question: ["Test sorusu 1", "Test sorusu 2", "Test sorusu 3"],
+    }, {
+        number: 2,
+        type: "algorithm",
+        question: "\n" + "Algoritma ipsum dolor sit amet, consectetur adipiscing elit. Cras mi ante, tempus et urna ac, interdum posuere libero. Phasellus ac tortor sit amet felis blandit tempor ac vel velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris a sagittis mauris. Vivamus scelerisque ultrices ipsum. Vestibulum molestie leo et dignissim vestibulum. Duis molestie arcu nunc, vitae fringilla massa viverra sed. Fusce non erat at massa condimentum pulvinar. Aliquam lacinia diam nunc, euismod tincidunt dui porta vitae. Integer urna ligula, sodales et orci sed, pellentesque cursus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse massa nulla, condimentum sed pharetra ac, pulvinar ac neque. Nunc accumsan fringilla sapien et cursus. Nunc egestas massa dolor, quis porta lorem venenatis vel. Integer pretium lectus diam, nec malesuada eros posuere sit amet.\n" + "\n" + "Donec pretium convallis fermentum. Donec varius leo urna, ac cursus nisi euismod quis. Nullam at odio ac est egestas consequat. Curabitur efficitur dolor ac tortor tempor, in porta nulla congue. Quisque ligula purus, cursus eu justo quis, vestibulum tempus est. Integer metus lacus, aliquam id nunc nec, imperdiet pretium elit. Curabitur nec dictum neque, in tempus sem. Phasellus egestas nulla finibus massa convallis facilisis. Quisque rhoncus nulla ut dignissim tincidunt. Aliquam tellus tellus, volutpat nec ante iaculis, condimentum condimentum tortor. Morbi ornare faucibus arcu, sed sollicitudin erat commodo malesuada. Pellentesque iaculis, nisi non condimentum euismod, eros tellus vulputate est, non imperdiet mauris tortor at risus. Cras pretium eros sed nisl feugiat, vel cursus dolor pellentesque.\n" + "\n" + "Vivamus nunc risus, bibendum eu condimentum vel, dignissim eget est. Integer aliquam molestie odio tempus porttitor. In venenatis tellus quis feugiat euismod. Nullam ut lacus sed lorem aliquam mollis eu eu elit. Morbi id dolor venenatis dolor ornare dapibus. Suspendisse convallis auctor risus, at scelerisque ipsum sagittis vitae. Quisque condimentum erat ut turpis dapibus, in tempus turpis volutpat. Integer bibendum nisl in dapibus scelerisque. In viverra blandit massa, in finibus nunc feugiat ac. Sed molestie a sapien eget blandit. Pellentesque imperdiet consectetur tristique.\n" + "\n" + "Phasellus vitae egestas dui. Vestibulum vel libero ornare, blandit ante sed, venenatis arcu. Duis ornare, velit eget varius consectetur, dui magna laoreet metus, viverra sollicitudin lectus ante nec felis. Nam ut lacus gravida enim aliquam varius. Praesent varius, justo vitae euismod finibus, massa urna eleifend eros, in aliquet diam orci nec massa. Proin ut gravida massa, a accumsan sem. Proin ut lorem ac nisi congue porttitor vitae at turpis. Fusce maximus ullamcorper lacus, sit amet tempor enim pulvinar in. Phasellus quis nunc posuere, ultrices dui quis, condimentum nisi. Nam blandit feugiat diam.\n" + "\n" + "Maecenas fermentum porttitor metus, ac imperdiet turpis porttitor eu. Etiam vel vehicula nisl. Donec et tristique odio, in mollis sem. Nam nec vestibulum justo, a ultrices turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi nec ante euismod, laoreet lectus at, posuere urna. Donec in pretium enim. Nunc venenatis vulputate mi, eu imperdiet diam pulvinar nec. Integer rhoncus molestie leo. Duis interdum ullamcorper ipsum, in condimentum erat ullamcorper vel. Integer sed augue eu risus placerat pharetra.",
+    }, {
+        number: 3,
+        type: "document",
+        question: "\n" + "Döküman ipsum dolor sit amet, consectetur adipiscing elit. Cras mi ante, tempus et urna ac, interdum posuere libero. Phasellus ac tortor sit amet felis blandit tempor ac vel velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris a sagittis mauris. Vivamus scelerisque ultrices ipsum. Vestibulum molestie leo et dignissim vestibulum. Duis molestie arcu nunc, vitae fringilla massa viverra sed. Fusce non erat at massa condimentum pulvinar. Aliquam lacinia diam nunc, euismod tincidunt dui porta vitae. Integer urna ligula, sodales et orci sed, pellentesque cursus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse massa nulla, condimentum sed pharetra ac, pulvinar ac neque. Nunc accumsan fringilla sapien et cursus. Nunc egestas massa dolor, quis porta lorem venenatis vel. Integer pretium lectus diam, nec malesuada eros posuere sit amet.\n" + "\n" + "Donec pretium convallis fermentum. Donec varius leo urna, ac cursus nisi euismod quis. Nullam at odio ac est egestas consequat. Curabitur efficitur dolor ac tortor tempor, in porta nulla congue. Quisque ligula purus, cursus eu justo quis, vestibulum tempus est. Integer metus lacus, aliquam id nunc nec, imperdiet pretium elit. Curabitur nec dictum neque, in tempus sem. Phasellus egestas nulla finibus massa convallis facilisis. Quisque rhoncus nulla ut dignissim tincidunt. Aliquam tellus tellus, volutpat nec ante iaculis, condimentum condimentum tortor. Morbi ornare faucibus arcu, sed sollicitudin erat commodo malesuada. Pellentesque iaculis, nisi non condimentum euismod, eros tellus vulputate est, non imperdiet mauris tortor at risus. Cras pretium eros sed nisl feugiat, vel cursus dolor pellentesque.\n" + "\n" + "Vivamus nunc risus, bibendum eu condimentum vel, dignissim eget est. Integer aliquam molestie odio tempus porttitor. In venenatis tellus quis feugiat euismod. Nullam ut lacus sed lorem aliquam mollis eu eu elit. Morbi id dolor venenatis dolor ornare dapibus. Suspendisse convallis auctor risus, at scelerisque ipsum sagittis vitae. Quisque condimentum erat ut turpis dapibus, in tempus turpis volutpat. Integer bibendum nisl in dapibus scelerisque. In viverra blandit massa, in finibus nunc feugiat ac. Sed molestie a sapien eget blandit. Pellentesque imperdiet consectetur tristique.\n" + "\n" + "Phasellus vitae egestas dui. Vestibulum vel libero ornare, blandit ante sed, venenatis arcu. Duis ornare, velit eget varius consectetur, dui magna laoreet metus, viverra sollicitudin lectus ante nec felis. Nam ut lacus gravida enim aliquam varius. Praesent varius, justo vitae euismod finibus, massa urna eleifend eros, in aliquet diam orci nec massa. Proin ut gravida massa, a accumsan sem. Proin ut lorem ac nisi congue porttitor vitae at turpis. Fusce maximus ullamcorper lacus, sit amet tempor enim pulvinar in. Phasellus quis nunc posuere, ultrices dui quis, condimentum nisi. Nam blandit feugiat diam.\n" + "\n" + "Maecenas fermentum porttitor metus, ac imperdiet turpis porttitor eu. Etiam vel vehicula nisl. Donec et tristique odio, in mollis sem. Nam nec vestibulum justo, a ultrices turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi nec ante euismod, laoreet lectus at, posuere urna. Donec in pretium enim. Nunc venenatis vulputate mi, eu imperdiet diam pulvinar nec. Integer rhoncus molestie leo. Duis interdum ullamcorper ipsum, in condimentum erat ullamcorper vel. Integer sed augue eu risus placerat pharetra.",
+    }, {
+        number: 4,
+        type: "document",
+        question: "\n" + "Döküman ipsum dolor sit amet, consectetur adipiscing elit. Cras mi ante, tempus et urna ac, interdum posuere libero. Phasellus ac tortor sit amet felis blandit tempor ac vel velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris a sagittis mauris. Vivamus scelerisque ultrices ipsum. Vestibulum molestie leo et dignissim vestibulum. Duis molestie arcu nunc, vitae fringilla massa viverra sed. Fusce non erat at massa condimentum pulvinar. Aliquam lacinia diam nunc, euismod tincidunt dui porta vitae. Integer urna ligula, sodales et orci sed, pellentesque cursus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse massa nulla, condimentum sed pharetra ac, pulvinar ac neque. Nunc accumsan fringilla sapien et cursus. Nunc egestas massa dolor, quis porta lorem venenatis vel. Integer pretium lectus diam, nec malesuada eros posuere sit amet.\n" + "\n" + "Donec pretium convallis fermentum. Donec varius leo urna, ac cursus nisi euismod quis. Nullam at odio ac est egestas consequat. Curabitur efficitur dolor ac tortor tempor, in porta nulla congue. Quisque ligula purus, cursus eu justo quis, vestibulum tempus est. Integer metus lacus, aliquam id nunc nec, imperdiet pretium elit. Curabitur nec dictum neque, in tempus sem. Phasellus egestas nulla finibus massa convallis facilisis. Quisque rhoncus nulla ut dignissim tincidunt. Aliquam tellus tellus, volutpat nec ante iaculis, condimentum condimentum tortor. Morbi ornare faucibus arcu, sed sollicitudin erat commodo malesuada. Pellentesque iaculis, nisi non condimentum euismod, eros tellus vulputate est, non imperdiet mauris tortor at risus. Cras pretium eros sed nisl feugiat, vel cursus dolor pellentesque.\n" + "\n" + "Vivamus nunc risus, bibendum eu condimentum vel, dignissim eget est. Integer aliquam molestie odio tempus porttitor. In venenatis tellus quis feugiat euismod. Nullam ut lacus sed lorem aliquam mollis eu eu elit. Morbi id dolor venenatis dolor ornare dapibus. Suspendisse convallis auctor risus, at scelerisque ipsum sagittis vitae. Quisque condimentum erat ut turpis dapibus, in tempus turpis volutpat. Integer bibendum nisl in dapibus scelerisque. In viverra blandit massa, in finibus nunc feugiat ac. Sed molestie a sapien eget blandit. Pellentesque imperdiet consectetur tristique.\n" + "\n" + "Phasellus vitae egestas dui. Vestibulum vel libero ornare, blandit ante sed, venenatis arcu. Duis ornare, velit eget varius consectetur, dui magna laoreet metus, viverra sollicitudin lectus ante nec felis. Nam ut lacus gravida enim aliquam varius. Praesent varius, justo vitae euismod finibus, massa urna eleifend eros, in aliquet diam orci nec massa. Proin ut gravida massa, a accumsan sem. Proin ut lorem ac nisi congue porttitor vitae at turpis. Fusce maximus ullamcorper lacus, sit amet tempor enim pulvinar in. Phasellus quis nunc posuere, ultrices dui quis, condimentum nisi. Nam blandit feugiat diam.\n" + "\n" + "Maecenas fermentum porttitor metus, ac imperdiet turpis porttitor eu. Etiam vel vehicula nisl. Donec et tristique odio, in mollis sem. Nam nec vestibulum justo, a ultrices turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi nec ante euismod, laoreet lectus at, posuere urna. Donec in pretium enim. Nunc venenatis vulputate mi, eu imperdiet diam pulvinar nec. Integer rhoncus molestie leo. Duis interdum ullamcorper ipsum, in condimentum erat ullamcorper vel. Integer sed augue eu risus placerat pharetra.",
+    }, {
+        number: 5,
+        type: "document",
+        question: "\n" + "Döküman ipsum dolor sit amet, consectetur adipiscing elit. Cras mi ante, tempus et urna ac, interdum posuere libero. Phasellus ac tortor sit amet felis blandit tempor ac vel velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris a sagittis mauris. Vivamus scelerisque ultrices ipsum. Vestibulum molestie leo et dignissim vestibulum. Duis molestie arcu nunc, vitae fringilla massa viverra sed. Fusce non erat at massa condimentum pulvinar. Aliquam lacinia diam nunc, euismod tincidunt dui porta vitae. Integer urna ligula, sodales et orci sed, pellentesque cursus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse massa nulla, condimentum sed pharetra ac, pulvinar ac neque. Nunc accumsan fringilla sapien et cursus. Nunc egestas massa dolor, quis porta lorem venenatis vel. Integer pretium lectus diam, nec malesuada eros posuere sit amet.\n" + "\n" + "Donec pretium convallis fermentum. Donec varius leo urna, ac cursus nisi euismod quis. Nullam at odio ac est egestas consequat. Curabitur efficitur dolor ac tortor tempor, in porta nulla congue. Quisque ligula purus, cursus eu justo quis, vestibulum tempus est. Integer metus lacus, aliquam id nunc nec, imperdiet pretium elit. Curabitur nec dictum neque, in tempus sem. Phasellus egestas nulla finibus massa convallis facilisis. Quisque rhoncus nulla ut dignissim tincidunt. Aliquam tellus tellus, volutpat nec ante iaculis, condimentum condimentum tortor. Morbi ornare faucibus arcu, sed sollicitudin erat commodo malesuada. Pellentesque iaculis, nisi non condimentum euismod, eros tellus vulputate est, non imperdiet mauris tortor at risus. Cras pretium eros sed nisl feugiat, vel cursus dolor pellentesque.\n" + "\n" + "Vivamus nunc risus, bibendum eu condimentum vel, dignissim eget est. Integer aliquam molestie odio tempus porttitor. In venenatis tellus quis feugiat euismod. Nullam ut lacus sed lorem aliquam mollis eu eu elit. Morbi id dolor venenatis dolor ornare dapibus. Suspendisse convallis auctor risus, at scelerisque ipsum sagittis vitae. Quisque condimentum erat ut turpis dapibus, in tempus turpis volutpat. Integer bibendum nisl in dapibus scelerisque. In viverra blandit massa, in finibus nunc feugiat ac. Sed molestie a sapien eget blandit. Pellentesque imperdiet consectetur tristique.\n" + "\n" + "Phasellus vitae egestas dui. Vestibulum vel libero ornare, blandit ante sed, venenatis arcu. Duis ornare, velit eget varius consectetur, dui magna laoreet metus, viverra sollicitudin lectus ante nec felis. Nam ut lacus gravida enim aliquam varius. Praesent varius, justo vitae euismod finibus, massa urna eleifend eros, in aliquet diam orci nec massa. Proin ut gravida massa, a accumsan sem. Proin ut lorem ac nisi congue porttitor vitae at turpis. Fusce maximus ullamcorper lacus, sit amet tempor enim pulvinar in. Phasellus quis nunc posuere, ultrices dui quis, condimentum nisi. Nam blandit feugiat diam.\n" + "\n" + "Maecenas fermentum porttitor metus, ac imperdiet turpis porttitor eu. Etiam vel vehicula nisl. Donec et tristique odio, in mollis sem. Nam nec vestibulum justo, a ultrices turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi nec ante euismod, laoreet lectus at, posuere urna. Donec in pretium enim. Nunc venenatis vulputate mi, eu imperdiet diam pulvinar nec. Integer rhoncus molestie leo. Duis interdum ullamcorper ipsum, in condimentum erat ullamcorper vel. Integer sed augue eu risus placerat pharetra.",
+    }, {
+        number: 6,
+        type: "document",
+        question: "\n" + "Döküman ipsum dolor sit amet, consectetur adipiscing elit. Cras mi ante, tempus et urna ac, interdum posuere libero. Phasellus ac tortor sit amet felis blandit tempor ac vel velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris a sagittis mauris. Vivamus scelerisque ultrices ipsum. Vestibulum molestie leo et dignissim vestibulum. Duis molestie arcu nunc, vitae fringilla massa viverra sed. Fusce non erat at massa condimentum pulvinar. Aliquam lacinia diam nunc, euismod tincidunt dui porta vitae. Integer urna ligula, sodales et orci sed, pellentesque cursus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse massa nulla, condimentum sed pharetra ac, pulvinar ac neque. Nunc accumsan fringilla sapien et cursus. Nunc egestas massa dolor, quis porta lorem venenatis vel. Integer pretium lectus diam, nec malesuada eros posuere sit amet.\n" + "\n" + "Donec pretium convallis fermentum. Donec varius leo urna, ac cursus nisi euismod quis. Nullam at odio ac est egestas consequat. Curabitur efficitur dolor ac tortor tempor, in porta nulla congue. Quisque ligula purus, cursus eu justo quis, vestibulum tempus est. Integer metus lacus, aliquam id nunc nec, imperdiet pretium elit. Curabitur nec dictum neque, in tempus sem. Phasellus egestas nulla finibus massa convallis facilisis. Quisque rhoncus nulla ut dignissim tincidunt. Aliquam tellus tellus, volutpat nec ante iaculis, condimentum condimentum tortor. Morbi ornare faucibus arcu, sed sollicitudin erat commodo malesuada. Pellentesque iaculis, nisi non condimentum euismod, eros tellus vulputate est, non imperdiet mauris tortor at risus. Cras pretium eros sed nisl feugiat, vel cursus dolor pellentesque.\n" + "\n" + "Vivamus nunc risus, bibendum eu condimentum vel, dignissim eget est. Integer aliquam molestie odio tempus porttitor. In venenatis tellus quis feugiat euismod. Nullam ut lacus sed lorem aliquam mollis eu eu elit. Morbi id dolor venenatis dolor ornare dapibus. Suspendisse convallis auctor risus, at scelerisque ipsum sagittis vitae. Quisque condimentum erat ut turpis dapibus, in tempus turpis volutpat. Integer bibendum nisl in dapibus scelerisque. In viverra blandit massa, in finibus nunc feugiat ac. Sed molestie a sapien eget blandit. Pellentesque imperdiet consectetur tristique.\n" + "\n" + "Phasellus vitae egestas dui. Vestibulum vel libero ornare, blandit ante sed, venenatis arcu. Duis ornare, velit eget varius consectetur, dui magna laoreet metus, viverra sollicitudin lectus ante nec felis. Nam ut lacus gravida enim aliquam varius. Praesent varius, justo vitae euismod finibus, massa urna eleifend eros, in aliquet diam orci nec massa. Proin ut gravida massa, a accumsan sem. Proin ut lorem ac nisi congue porttitor vitae at turpis. Fusce maximus ullamcorper lacus, sit amet tempor enim pulvinar in. Phasellus quis nunc posuere, ultrices dui quis, condimentum nisi. Nam blandit feugiat diam.\n" + "\n" + "Maecenas fermentum porttitor metus, ac imperdiet turpis porttitor eu. Etiam vel vehicula nisl. Donec et tristique odio, in mollis sem. Nam nec vestibulum justo, a ultrices turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi nec ante euismod, laoreet lectus at, posuere urna. Donec in pretium enim. Nunc venenatis vulputate mi, eu imperdiet diam pulvinar nec. Integer rhoncus molestie leo. Duis interdum ullamcorper ipsum, in condimentum erat ullamcorper vel. Integer sed augue eu risus placerat pharetra.",
+    },], answers: [{
+        type: "diagram", answer: "Diagram cevabı",
+    }, {
+        type: "test", answer: ["Test cevabı 1", "Test cevabı 2", "Test cevabı 3"],
+    }, {
+        type: "algorithm", answer: "Kod cevabı",
+    }, {
+        type: "document", answer: "Döküman cevabı",
+    },],
 };

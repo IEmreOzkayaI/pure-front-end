@@ -1,46 +1,43 @@
 @import "../../../global.scss";
 
 .horizontal {
-    color: $black;
-    position: relative;
-    background-color: $white;
-    cursor: pointer;
-    .border_image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        background-color: rgba($color: $white, $alpha: 0.5);
-        border-radius: 50%;
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */
-        transition: all 0.3s ease-in-out;
-        &:hover {
-            background-color: rgba($color: $white, $alpha: 1);
-        }
+  position: relative;
+  cursor: pointer;
+  border: 1rem solid $very-dark-gray;
+  color: $real-white;
+
+  .border_image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    font-size: 1.5rem;
+    &:hover {
+      transform: translate(-50%, -50%) scale(1.2);
     }
+  }
 }
 
 .vertical {
-    color: $black;
-    position: relative;
-    background-color: $white;
-    cursor: pointer;
-    .border_image {
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%) rotate(-90deg);
-        background-color: rgba($color: $white, $alpha: 0.5);
-        border-radius: 50%;
-        -webkit-user-select: none; /* Safari */
-        -ms-user-select: none; /* IE 10 and IE 11 */
-        user-select: none; /* Standard syntax */
-        &:hover {
-            transform: translate(-50%, -50%) rotate(-90deg);
-            background-color: rgba($color: $white, $alpha: 1);
-        }
+  position: relative;
+  cursor: pointer;
+  border: 1rem solid $very-dark-gray;
+  color: $real-white;
+  .border_image {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) rotate(-90deg);
+    -webkit-user-select: none; /* Safari */
+    -ms-user-select: none; /* IE 10 and IE 11 */
+    user-select: none; /* Standard syntax */
+    font-size: 1.5rem;
+    &:hover {
+      transform: translate(-50%, -50%) rotate(-90deg);
     }
+  }
 }
 
