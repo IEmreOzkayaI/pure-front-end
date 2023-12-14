@@ -16,7 +16,6 @@ const reducers = {
         state.questionsResults = action.payload;
     },
     setCurrentQuestion: (state, action) => {
-        console.log(action.payload)
         state.currentQuestion = action.payload;
     },
     setRemainingTime: (state, action) => {

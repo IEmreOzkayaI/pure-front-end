@@ -6,6 +6,7 @@ import {Suspense} from "react";
 import Redirect from "./shared/Redirect/Redirect";
 import Navbar from "../pages/root/Navbar/Navbar";
 import Footer from "../pages/root/Footer/Footer";
+import systemWarning from "../systemWarning.js";
 
 const defaultErrorElement = (
     <div style={{fontSize: "4em", textAlign: "center"}}>
@@ -58,7 +59,7 @@ export default function AnimatedRoutes() {
 
     return (
         <AnimatePresence mode="initial" initial={false}>
-            <Suspense fallback={<Redirect/>} key={"suspense"}>
+            <Suspense fallback={<Redirect text={systemWarning.redirect_message}/>} key={"suspense"}>
                 <Routes location={location} key={location.pathname}>
                     <Route path="/" element={<LazyLanding/>}/>
                     <Route path="pricing" element={<LazyPricing/>}/>

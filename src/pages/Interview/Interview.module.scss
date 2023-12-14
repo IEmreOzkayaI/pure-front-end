@@ -27,26 +27,12 @@
       grid-column: 1 / -1;
       grid-row: 2 / 3;
       padding: 0 3rem 9rem 0;
-
+      align-items: center;
 
       display: grid;
       grid-template-columns: 8rem 1fr;
       grid-template-rows: 1fr;
       height: calc(100vh - 13rem);
-      .interview_navigation {
-        display: grid;
-        justify-content: center;
-        align-items: center;
-        grid-column: 1 / 2;
-        grid-row: 1 / 2;
-      }
-
-      .interview_content {
-        display: grid;
-        grid-column: 2 / 3;
-        grid-row: 1 / 2;
-        overflow: hidden;
-      }
     }
   }
 

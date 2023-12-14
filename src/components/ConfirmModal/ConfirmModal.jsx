@@ -37,7 +37,6 @@ const ConfirmModal = (props) => {
 					setDigits(["", "", "", "", "", ""]);
 					return 0;
 				}
-				console.log(newTimer);
 				localStorage.setItem("timer", newTimer);
 				return newTimer; // Ensure the timer doesn't go below 0
 			});

@@ -6,8 +6,9 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    align-content: center;
     max-height: 28rem;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
     svg {
         cursor: pointer;
     }

@@ -1,7 +1,16 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import styles from './interviewHeader.module.scss';
+import {useDispatch, useSelector} from "react-redux";
+import useCountdown from "../../hooks/useCountdown.jsx";
+import {setInterviewStatus} from "../../redux/toolkit/interviewManagementSlice.js";
+
 
 const InterviewHeader = () => {
+    const dispatch = useDispatch();
+    const remainingTime = useSelector((state) => state.interviewManagement.remainingTime);
+    const displayTime = useCountdown(remainingTime);
+    dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
+
     return (
         <header className={styles.interview__container__header}>
             <div className={styles.interview__container__header__title}>
@@ -32,18 +41,14 @@ const InterviewHeader = () => {
             <div className={styles.interview__container__header__theme__light}>
                 light
             </div>
-            <div className={styles.interview__container__header__language}>
-                <div>language</div>
-                <svg
-                    width="10"
-                    height="18"
-                    viewBox="0 0 20 13"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                >
-                    <path d="M1 1L10 11L19 1" stroke="white" strokeWidth="2"/>
-                </svg>
-            </div>
+            <select className={styles.interview__container__header__language}>
+                <option value="Language">Language</option>
+                <option value="c">C</option>
+                <option value="cpp">C++</option>
+                <option value="java">Java</option>
+                <option value="python">Python</option>
+            </select>
+
             {/*<div className={styles.interview__container__header__closeBtn}>*/}
             {/*    <svg*/}
             {/*        width="18"*/}
@@ -66,7 +71,7 @@ const InterviewHeader = () => {
                     <line x1="23.5944" y1="9.21152" x2="27.3107" y2="12.3071" stroke="white"/>
                 </svg>
                 <div className={styles.interview__container__header__clock__box}>
-                    00:00
+                    {displayTime}
                 </div>
             </div>
 
