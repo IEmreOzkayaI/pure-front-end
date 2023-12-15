@@ -49,7 +49,7 @@ export default Interview;
 
 
 const dummyData = {
-    remainingTime: "00:05",
+    remainingTime: "60:05",
     questions: [{
         number: 0,
         type: "diagram",

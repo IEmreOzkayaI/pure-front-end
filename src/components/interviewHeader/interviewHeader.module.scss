@@ -13,7 +13,9 @@
 
     &__title {
       display: flex;
-
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
       &__icon {
         text-align: start;
       }
@@ -91,7 +93,9 @@
       align-items: center;
       justify-content: space-between;
       padding: 0 0 0 1rem;
-
+      -webkit-user-select: none; /* Safari */
+      -ms-user-select: none; /* IE 10 and IE 11 */
+      user-select: none; /* Standard syntax */
       &__box {
         color: $white;
         text-align: center;

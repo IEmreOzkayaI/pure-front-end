@@ -10,6 +10,7 @@ import {useState} from "react";
 import {useRef} from "react";
 import {useEffect} from "react";
 import {useNavigate} from "react-router-dom";
+import {decryptAndRetrieve, encryptAndStore} from "../../utils/localStorageManagement.js";
 const ConfirmModal = (props) => {
 	const {handleModal, redirectPath} = props;
 	const dispatch = useDispatch();
@@ -18,7 +19,7 @@ const ConfirmModal = (props) => {
 	const confirmInfo = useSelector((state) => state.confirm.confirmInfo);
 	const [digits, setDigits] = useState(["", "", "", "", "", ""]);
 	const inputRefs = [useRef(null), useRef(null), useRef(null), useRef(null), useRef(null), useRef(null)];
-	const [timer, setTimer] = useState(localStorage.getItem("timer") || 60);
+	const [timer, setTimer] = useState(decryptAndRetrieve("timer") || 60);
 	const [countdown, setCountdown] = useState(null);
 	const [resetTimer, setResetTimer] = useState(false);
 	useEffect(() => {
@@ -31,13 +32,13 @@ const ConfirmModal = (props) => {
 				}
 				const newTimer = prevTimer - 1;
 				if (newTimer === 0) {
-					localStorage.setItem("timer", newTimer);
+					encryptAndStore("timer", newTimer);
 					// Handle any additional actions after the timer reaches 0
 					clearInterval(countdown); // Durdurma işlemi burada yapılıyor
 					setDigits(["", "", "", "", "", ""]);
 					return 0;
 				}
-				localStorage.setItem("timer", newTimer);
+				encryptAndStore("timer", newTimer);
 				return newTimer; // Ensure the timer doesn't go below 0
 			});
 		}, 1000);
@@ -48,7 +49,7 @@ const ConfirmModal = (props) => {
 	const handleResend = () => {
 		dispatch(reConfirmFetch());
 		clearInterval(countdown);
-		localStorage.setItem("timer", 60);
+		encryptAndStore("timer", 60);
 		setTimer(60);
 		setResetTimer(!resetTimer);
 	};

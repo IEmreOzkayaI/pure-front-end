@@ -8,6 +8,7 @@ import {setInterviewStatus} from "../../redux/toolkit/interviewManagementSlice.j
 const InterviewHeader = () => {
     const dispatch = useDispatch();
     const remainingTime = useSelector((state) => state.interviewManagement.remainingTime);
+    const questionType = useSelector((state) => state.interviewManagement.currentQuestion.type);
     const displayTime = useCountdown(remainingTime);
     dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
 
@@ -31,7 +32,7 @@ const InterviewHeader = () => {
 
                 </div>
                 <div className={styles.interview__container__header__title__text}>
-                    Kodlama
+                    {questionType}
                 </div>
             </div>
 

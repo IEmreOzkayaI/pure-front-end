@@ -15,6 +15,7 @@
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
     font-size: 1.5rem;
+    transition: all 0.2s ease-in-out;
     &:hover {
       transform: translate(-50%, -50%) scale(1.2);
     }
@@ -35,8 +36,9 @@
     -ms-user-select: none; /* IE 10 and IE 11 */
     user-select: none; /* Standard syntax */
     font-size: 1.5rem;
+    transition: all 0.2s ease-in-out;
     &:hover {
-      transform: translate(-50%, -50%) rotate(-90deg);
+      transform: translate(-50%, -50%) rotate(-90deg) scale(1.2);
     }
   }
 }

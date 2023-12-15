@@ -1,4 +1,5 @@
 import {useEffect, useState} from 'react';
+import {decryptAndRetrieve, encryptAndStore} from "../utils/localStorageManagement.js";
 
 const convertToSeconds = (timeString) => {
     if (!timeString) return -1;
@@ -14,7 +15,7 @@ const formatTime = (currentTime) => {
 
 const useCountdown = (initialTime, interval = 1000) => {
     const [time, setTime] = useState(() => {
-        const storedTime = localStorage.getItem('countdownTime');
+        const storedTime = decryptAndRetrieve('countdownTime');
         return storedTime ? convertToSeconds(storedTime) : convertToSeconds(initialTime);
     });
     const [displayTime, setDisplayTime] = useState(initialTime);
@@ -34,7 +35,7 @@ const useCountdown = (initialTime, interval = 1000) => {
 
             return () => clearInterval(countdown);
         } else {
-            if (localStorage.getItem('countdownTime')) {
+            if (decryptAndRetrieve('countdownTime')) {
                 setCanStart(true)
                 return;
             }
@@ -47,7 +48,7 @@ const useCountdown = (initialTime, interval = 1000) => {
     useEffect(() => {
         if (time < 0) return;
         setDisplayTime(formatTime(time));
-        localStorage.setItem('countdownTime', formatTime(time));
+        encryptAndStore('countdownTime', formatTime(time));
     }, [time]);
 
     return displayTime;

@@ -23,6 +23,10 @@ html {
   font-family: "Ubuntu", sans-serif;
   font-size: 10px; // so you can 1rem as 16px
   background-color: #ffffff;
+  ::selection {
+    background-color: #ffffff;
+    color: #000000;
+  }
 }
 
 ul {

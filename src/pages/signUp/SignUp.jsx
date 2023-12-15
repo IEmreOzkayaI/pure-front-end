@@ -10,6 +10,7 @@ import {
 import { motion } from "framer-motion";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
 import { clearConfirmInfo } from "../../redux/toolkit/confirmSlice";
+import {decryptAndRetrieve, encryptAndStore} from "../../utils/localStorageManagement.js";
 
 export default function SignUp() {
   const [firstName, setFirstName] = useState("");
@@ -28,8 +29,8 @@ export default function SignUp() {
   const { registerInfo } = useSelector((state) => state.register);
   const [confirmModal, setConfirmModal] = useState(false);
   const location = useLocation();
-  const user = localStorage.getItem("user_type")
-    ? localStorage.getItem("user_type")
+  const user = decryptAndRetrieve("user_type")
+    ? encryptAndStore("user_type")
     : location.state.type;
   const [error, setError] = useState({
     firstName: false,
