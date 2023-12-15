@@ -59,6 +59,7 @@ export default function AnimatedRoutes() {
 
     return (
         <AnimatePresence mode="initial" initial={false}>
+            {pathname.startsWith("/interview") ? null : <Navbar/>}
             <Suspense fallback={<Redirect text={systemWarning.redirect_message}/>} key={"suspense"}>
                 <Routes location={location} key={location.pathname}>
                     <Route path="/" element={<LazyLanding/>}/>

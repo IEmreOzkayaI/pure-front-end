@@ -7,10 +7,11 @@ import {setInterviewStatus} from "../../redux/toolkit/interviewManagementSlice.j
 
 const InterviewHeader = () => {
     const dispatch = useDispatch();
-    const remainingTime = useSelector((state) => state.interviewManagement.remainingTime);
-    const questionType = useSelector((state) => state.interviewManagement.currentQuestion.type);
+    const remainingTime = useSelector((state) => state.interviewManagement?.remainingTime);
+    const questionType = useSelector((state) => state.interviewManagement.currentQuestion?.type);
     const displayTime = useCountdown(remainingTime);
     dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
+
 
     return (
         <header className={styles.interview__container__header}>
@@ -78,6 +79,6 @@ const InterviewHeader = () => {
 
         </header>
     );
-};
 
-export default InterviewHeader;
+}
+    export default InterviewHeader;
