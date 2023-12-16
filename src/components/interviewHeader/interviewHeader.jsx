@@ -2,16 +2,21 @@ import React, {useEffect} from 'react';
 import styles from './interviewHeader.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import useCountdown from "../../hooks/useCountdown.jsx";
-import {setInterviewStatus} from "../../redux/toolkit/interviewManagementSlice.js";
+import {setCurrentQuestion, setInterviewStatus} from "../../redux/toolkit/interviewManagementSlice.js";
 
 
 const InterviewHeader = () => {
     const dispatch = useDispatch();
+    const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
     const remainingTime = useSelector((state) => state.interviewManagement?.remainingTime);
     const questionType = useSelector((state) => state.interviewManagement.currentQuestion?.type);
     const displayTime = useCountdown(remainingTime);
     dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
 
+    const handleLanguageChange = (e) => {
+        const mode = e.target.value;
+        dispatch(setCurrentQuestion({...currentQuestion, mode: mode}))
+    };
 
     return (
         <header className={styles.interview__container__header}>
@@ -37,19 +42,25 @@ const InterviewHeader = () => {
                 </div>
             </div>
 
-            <div className={styles.interview__container__header__theme__dark}>
-                dark
-            </div>
-            <div className={styles.interview__container__header__theme__light}>
-                light
-            </div>
-            <select className={styles.interview__container__header__language}>
-                <option value="Language">Language</option>
-                <option value="c">C</option>
-                <option value="cpp">C++</option>
-                <option value="java">Java</option>
-                <option value="python">Python</option>
-            </select>
+            {/*<div className={styles.interview__container__header__theme__dark}>*/}
+            {/*    dark*/}
+            {/*</div>*/}
+            {/*<div className={styles.interview__container__header__theme__light}>*/}
+            {/*    light*/}
+            {/*</div>*/}
+            {
+                questionType === 'algorithm' && (
+                    <select className={styles.interview__container__header__language} value={currentQuestion?.mode}
+                            onChange={e => handleLanguageChange(e)}>
+                        <option value="Language">Language</option>
+                        <option value="ace/mode/c_cpp">C</option>
+                        <option value="ace/mode/java">Java</option>
+                        <option value="ace/mode/python">Python</option>
+                        <option value="ace/mode/php">PHP</option>
+                        <option value="ace/mode/javascript">JavaScript</option>
+                    </select>
+                )
+            }
 
             {/*<div className={styles.interview__container__header__closeBtn}>*/}
             {/*    <svg*/}
@@ -81,4 +92,4 @@ const InterviewHeader = () => {
     );
 
 }
-    export default InterviewHeader;
+export default InterviewHeader;
