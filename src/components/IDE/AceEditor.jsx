@@ -15,9 +15,6 @@ import useAceEditor from "./useAceEditor.jsx"; // Import the mode directly
 const AceEditor = () => {
     const {editorRef , handleEditorContent} = useAceEditor();
 
-
-
-
     return (
         <div className={styles.editor} id='ace-editor' onKeyUp={handleEditorContent}></div>
     )

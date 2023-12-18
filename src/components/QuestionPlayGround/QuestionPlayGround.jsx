@@ -3,6 +3,7 @@ import {memo} from "react";
 import PropTypes from "prop-types";
 import styles from "./QuestionPlayGround.module.scss";
 import {useSelector} from "react-redux";
+import ReactMarkdown from 'react-markdown';
 
 const QuestionPlayGround = memo(
     (props) => {
@@ -11,7 +12,21 @@ const QuestionPlayGround = memo(
 
         return (
             <div className={styles.left_side} style={{width: `${leftSideWidth}%`}}>
-                <div className={styles.left_side_content}>{currentQuestion?.question}</div>
+
+                <div className={styles.left_side_content}>
+                    {
+                        currentQuestion?.type === 'algorithm' && (<ReactMarkdown>
+                            {currentQuestion?.question}
+                        </ReactMarkdown>)
+                    }
+                    {
+                        currentQuestion?.type !== 'algorithm' && (<span>
+                            {currentQuestion?.question}
+                        </span>
+                        )
+                    }
+
+                </div>
             </div>
         );
     },
