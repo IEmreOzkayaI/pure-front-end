@@ -23,9 +23,6 @@
     &.input {
       border-color: #0041d0;
     }
-    &.output {
-      border-color: #ff0072;
-    }
     &.actor {
       background-image: url("/diagram_actor.png");
       background-position: center;
@@ -86,8 +83,18 @@
         bottom: 3.5rem;
       }
     }
+    &.end {
+      height: 5rem;
+      border: none;
+      background-image: url("/endstate.png");
+      background-position: center;
+      aspect-ratio: 1/1;
+      background-size: contain;
+      background-repeat: no-repeat;
+    }
   }
-  .startNodeContainer {
+  .startNodeContainer,
+  .endStateNodeContainer {
     display: flex;
     flex-direction: column;
     justify-content: center;

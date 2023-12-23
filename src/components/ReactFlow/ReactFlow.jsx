@@ -22,6 +22,7 @@ import { useState } from "react";
 import DecisionNode from "./DecisionNode/DecisionNode";
 import Fork from "./Fork/Fork";
 import Join from "./Join/Join";
+import EndStateNode from "./EndStateNode/EndStateNode";
 // const edgeTypes = {
 //   "custom-edge": CustomEdge,
 // };
@@ -34,6 +35,7 @@ const nodeTypes = {
   decisionNode: DecisionNode,
   fork: Fork,
   join: Join,
+  endStateNode: EndStateNode,
 };
 
 const initialNodes = [
@@ -68,6 +70,12 @@ const initialNodes = [
     position: { x: 100, y: 500 },
     data: { value: 123, label: "join" },
     type: "join",
+  },
+  {
+    id: "8",
+    position: { x: 200, y: 500 },
+    data: { value: 123, label: "end" },
+    type: "endStateNode",
   },
 ];
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];

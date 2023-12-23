@@ -20,13 +20,6 @@ export default function SideBar() {
       </div>
 
       <div
-        className={`${styles.dndnode} ${styles.output}`}
-        onDragStart={(event) => onDragStart(event, "output")}
-        draggable
-      >
-        Output Node
-      </div>
-      <div
         className={`${styles.dndnode} ${styles.actor}`}
         onDragStart={(event) => onDragStart(event, "actorNode")}
         draggable
@@ -66,6 +59,14 @@ export default function SideBar() {
         draggable
       >
         <span>Join</span>
+      </div>
+      <div className={styles.endStateNodeContainer}>
+        <div
+          className={`${styles.dndnode} ${styles.end}`}
+          onDragStart={(event) => onDragStart(event, "endState")}
+          draggable
+        ></div>
+        <span>End State Node</span>
       </div>
     </aside>
   );
