@@ -63,7 +63,7 @@ export default function SideBar() {
       <div className={styles.endStateNodeContainer}>
         <div
           className={`${styles.dndnode} ${styles.end}`}
-          onDragStart={(event) => onDragStart(event, "endState")}
+          onDragStart={(event) => onDragStart(event, "endStateNode")}
           draggable
         ></div>
         <span>End State Node</span>

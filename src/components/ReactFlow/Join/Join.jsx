@@ -1,32 +1,61 @@
-import { Handle, Position } from "reactflow";
+import {
+  Handle,
+  Position,
+  useUpdateNodeInternals,
+  NodeResizer,
+} from "reactflow";
 import styles from "./Join.module.scss";
+import { useCallback } from "react";
 
-function Join({ data, isConnectable }) {
+function Join({ data, isConnectable, id }) {
   console.log("data", data);
+  const updateNodeInternals = useUpdateNodeInternals();
+  const changeBottomHandlePosition = useCallback(() => {
+    const bottomHandle = document.querySelector(
+      `[data-handleid="joinTargetDown_${id}"]`
+    );
+
+    const bottomResizer = document.querySelector(`#join_${id}`);
+
+    bottomHandle.style.top = `${
+      bottomResizer.previousElementSibling.offsetTop - 16
+    }px`;
+
+    updateNodeInternals(id);
+  }, [updateNodeInternals, id]);
   return (
-    <div className={styles.join}>
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="joinTargetUp"
-        className={styles.handleLeftUp}
-        isConnectable={isConnectable}
+    <>
+      <NodeResizer
+        isVisible
+        minHeight={70}
+        minWidth={3}
+        maxWidth={3}
+        onResize={changeBottomHandlePosition}
       />
-      <Handle
-        type="target"
-        position={Position.Left}
-        id="joinTargetDown"
-        className={styles.handleLeftDown}
-        isConnectable={isConnectable}
-      />
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="joinSource"
-        className={styles.handleSource}
-        isConnectable={isConnectable}
-      />
-    </div>
+      <div className={styles.join} id={`join_${id}`}>
+        <Handle
+          type="target"
+          position={Position.Left}
+          id="joinTargetUp"
+          className={styles.handleLeftUp}
+          isConnectable={isConnectable}
+        />
+        <Handle
+          type="target"
+          position={Position.Left}
+          id={`joinTargetDown_${id}`}
+          className={styles.handleLeftDown}
+          isConnectable={isConnectable}
+        />
+        <Handle
+          type="source"
+          position={Position.Right}
+          id="joinSource"
+          className={styles.handleSource}
+          isConnectable={isConnectable}
+        />
+      </div>
+    </>
   );
 }
 

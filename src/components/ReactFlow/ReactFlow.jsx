@@ -38,55 +38,55 @@ const nodeTypes = {
   endStateNode: EndStateNode,
 };
 
-const initialNodes = [
-  { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
-  { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
-  {
-    id: "3",
-    position: { x: 100, y: 100 },
-    data: { value: 123, label: "-" },
-    type: "actorNode",
-  },
-  {
-    id: "6",
-    position: { x: 100, y: 300 },
-    data: { value: 123, label: "startNode" },
-    type: "startNode",
-  },
-  {
-    id: "5",
-    position: { x: 0, y: 400 },
-    data: { value: 123, label: "actionStateNode" },
-    type: "actionStateNode",
-  },
-  {
-    id: "6",
-    position: { x: 0, y: 500 },
-    data: { value: 123, label: "fork" },
-    type: "fork",
-  },
-  {
-    id: "7",
-    position: { x: 100, y: 500 },
-    data: { value: 123, label: "join" },
-    type: "join",
-  },
-  {
-    id: "8",
-    position: { x: 200, y: 500 },
-    data: { value: 123, label: "end" },
-    type: "endStateNode",
-  },
-];
-const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
+// const initialNodes = [
+//   { id: "1", position: { x: 0, y: 0 }, data: { label: "1" } },
+//   { id: "2", position: { x: 0, y: 100 }, data: { label: "2" } },
+//   {
+//     id: "3",
+//     position: { x: 100, y: 100 },
+//     data: { value: 123, label: "-" },
+//     type: "actorNode",
+//   },
+//   {
+//     id: "6",
+//     position: { x: 100, y: 300 },
+//     data: { value: 123, label: "startNode" },
+//     type: "startNode",
+//   },
+//   {
+//     id: "5",
+//     position: { x: 0, y: 400 },
+//     data: { value: 123, label: "actionStateNode" },
+//     type: "actionStateNode",
+//   },
+//   {
+//     id: "6",
+//     position: { x: 0, y: 500 },
+//     data: { value: 123, label: "fork" },
+//     type: "fork",
+//   },
+//   {
+//     id: "7",
+//     position: { x: 100, y: 500 },
+//     data: { value: 123, label: "join" },
+//     type: "join",
+//   },
+//   {
+//     id: "8",
+//     position: { x: 200, y: 500 },
+//     data: { value: 123, label: "end" },
+//     type: "endStateNode",
+//   },
+// ];
+// const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 export default function DiagramFlow() {
   const reactFlowWrapper = useRef(null);
-  const [nodes, setNodes, onNodesChange] = useNodesState(initialNodes);
-  const [edges, setEdges, onEdgesChange] = useEdgesState(initialEdges);
+  const [nodes, setNodes, onNodesChange] = useNodesState([]);
+  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
 
   const onConnect = useCallback(
