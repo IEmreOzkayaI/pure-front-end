@@ -1,6 +1,5 @@
-import React, { useCallback } from "react";
+import { useCallback } from "react";
 import ReactFlow, {
-  MiniMap,
   Controls,
   Background,
   useNodesState,
@@ -8,7 +7,7 @@ import ReactFlow, {
   addEdge,
   ReactFlowProvider,
 } from "reactflow";
-import CustomEdge from "./CustomEdge/CustomEdge";
+//import CustomEdge from "./CustomEdge/CustomEdge";
 import CustomNode from "./CustomNode/CustomNode";
 import ActorNode from "./ActorNode/ActorNode";
 import StartNode from "./StartNode/StartNode";
@@ -17,7 +16,7 @@ import ActionStateNode from "./ActionStateNode/ActionStateNode";
 import "reactflow/dist/style.css";
 import SideBar from "./Sidebar/Sidebar";
 import styles from "./ReactFlow.module.scss";
-import { useRef } from "react";
+
 import { useState } from "react";
 import DecisionNode from "./DecisionNode/DecisionNode";
 import Fork from "./Fork/Fork";
@@ -84,7 +83,6 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 export default function DiagramFlow() {
-  const reactFlowWrapper = useRef(null);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
