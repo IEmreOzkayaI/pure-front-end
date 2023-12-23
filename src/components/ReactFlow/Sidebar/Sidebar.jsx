@@ -41,6 +41,24 @@ export default function SideBar() {
         ></div>
         <span>Start Node</span>
       </div>
+
+      <div className="flex justify-center mt-3 mb-2">
+        <div
+          className={`${styles.dndnode} ${styles.decision}`}
+          onDragStart={(event) => onDragStart(event, "decisionNode")}
+          draggable
+        >
+          <span>Decision Node</span>
+        </div>
+      </div>
+      <div className={styles.forkContainer}>
+        <div
+          className={`${styles.dndnode} ${styles.fork}`}
+          onDragStart={(event) => onDragStart(event, "fork")}
+          draggable
+        ></div>
+        <span>Fork</span>
+      </div>
     </aside>
   );
 }

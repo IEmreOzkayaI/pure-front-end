@@ -1,0 +1,18 @@
+.fork {
+  height: 7rem;
+  color: black;
+  border: 0.3rem solid black;
+
+  .handleUp {
+    background-color: red;
+    top: 1rem;
+  }
+  .handleDown {
+    background-color: red;
+    top: 6rem;
+  }
+
+  .handleLeft {
+    background-color: red;
+  }
+}

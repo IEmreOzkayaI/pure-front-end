@@ -51,6 +51,24 @@
       border-radius: 1.4rem;
       padding: 2rem;
     }
+    &.decision {
+      width: 5rem;
+      background-image: url("/decisionNode.png");
+      background-position: center;
+      aspect-ratio: 1/1;
+      background-size: contain;
+      background-repeat: no-repeat;
+      border: none;
+    }
+    &.fork {
+      background-image: url("/fork.png");
+      background-position: center;
+      aspect-ratio: 1/1;
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: relative;
+      border: none;
+    }
   }
   .startNodeContainer {
     display: flex;

@@ -19,6 +19,8 @@ import SideBar from "./Sidebar/Sidebar";
 import styles from "./ReactFlow.module.scss";
 import { useRef } from "react";
 import { useState } from "react";
+import DecisionNode from "./DecisionNode/DecisionNode";
+import Fork from "./Fork/Fork";
 // const edgeTypes = {
 //   "custom-edge": CustomEdge,
 // };
@@ -28,6 +30,8 @@ const nodeTypes = {
   customNode: CustomNode,
   startNode: StartNode,
   actionStateNode: ActionStateNode,
+  decisionNode: DecisionNode,
+  fork: Fork,
 };
 
 const initialNodes = [
@@ -48,8 +52,14 @@ const initialNodes = [
   {
     id: "5",
     position: { x: 0, y: 400 },
-    data: { value: 123, label: "action state" },
+    data: { value: 123, label: "actionStateNode" },
     type: "actionStateNode",
+  },
+  {
+    id: "6",
+    position: { x: 0, y: 500 },
+    data: { value: 123, label: "fork" },
+    type: "fork",
   },
 ];
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];

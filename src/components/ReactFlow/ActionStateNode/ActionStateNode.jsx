@@ -2,6 +2,7 @@ import { Handle, Position } from "reactflow";
 import styles from "./ActionStateNode.module.scss";
 
 function ActionStateNode({ data, isConnectable }) {
+  console.log("data", data);
   return (
     <div className={styles.actionState}>
       <Handle
@@ -10,7 +11,6 @@ function ActionStateNode({ data, isConnectable }) {
         id="actionStateNodeTarget"
         isConnectable={isConnectable}
       />
-      <div>{data?.label}</div>
       <Handle
         type="source"
         position={Position.Bottom}
