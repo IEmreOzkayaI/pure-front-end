@@ -3,6 +3,9 @@
 .diagramActor {
   background-image: url("/diagram_actor.png");
   background-position: center;
-  height: 300px;
-  width: 150px;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  min-height: 30rem;
+  min-width: 15rem;
 }
