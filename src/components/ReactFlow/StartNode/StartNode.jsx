@@ -1,16 +1,21 @@
-import { Handle, Position } from "reactflow";
+import { Handle, Position, NodeResizer } from "reactflow";
 import styles from "./StartNode.module.scss";
 
 function StartNode({ data, isConnectable }) {
+  const id = new Date().getUTCMilliseconds();
+
   return (
-    <div className={styles.startNode}>
-      <Handle
-        type="source"
-        position={Position.Right}
-        id="startNodeSource"
-        isConnectable={isConnectable}
-      />
-    </div>
+    <>
+      <NodeResizer isVisible minHeight={50} minWidth={50} />
+      <div className={styles.startNode} id={`startNode_${id}`}>
+        <Handle
+          type="source"
+          position={Position.Right}
+          id="startNodeSource"
+          isConnectable={isConnectable}
+        />
+      </div>
+    </>
   );
 }
 
