@@ -21,6 +21,7 @@ import { useRef } from "react";
 import { useState } from "react";
 import DecisionNode from "./DecisionNode/DecisionNode";
 import Fork from "./Fork/Fork";
+import Join from "./Join/Join";
 // const edgeTypes = {
 //   "custom-edge": CustomEdge,
 // };
@@ -32,6 +33,7 @@ const nodeTypes = {
   actionStateNode: ActionStateNode,
   decisionNode: DecisionNode,
   fork: Fork,
+  join: Join,
 };
 
 const initialNodes = [
@@ -60,6 +62,12 @@ const initialNodes = [
     position: { x: 0, y: 500 },
     data: { value: 123, label: "fork" },
     type: "fork",
+  },
+  {
+    id: "7",
+    position: { x: 100, y: 500 },
+    data: { value: 123, label: "join" },
+    type: "join",
   },
 ];
 const initialEdges = [{ id: "e1-2", source: "1", target: "2" }];

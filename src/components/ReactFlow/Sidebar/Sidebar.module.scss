@@ -68,6 +68,23 @@
       background-repeat: no-repeat;
       position: relative;
       border: none;
+      span {
+        position: absolute;
+        bottom: 3.5rem;
+      }
+    }
+    &.join {
+      background-image: url("/join.png");
+      background-position: center;
+      aspect-ratio: 1/1;
+      background-size: contain;
+      background-repeat: no-repeat;
+      position: relative;
+      border: none;
+      span {
+        position: absolute;
+        bottom: 3.5rem;
+      }
     }
   }
   .startNodeContainer {

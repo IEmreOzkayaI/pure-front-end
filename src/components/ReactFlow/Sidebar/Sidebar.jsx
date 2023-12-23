@@ -51,13 +51,21 @@ export default function SideBar() {
           <span>Decision Node</span>
         </div>
       </div>
-      <div className={styles.forkContainer}>
-        <div
-          className={`${styles.dndnode} ${styles.fork}`}
-          onDragStart={(event) => onDragStart(event, "fork")}
-          draggable
-        ></div>
+
+      <div
+        className={`${styles.dndnode} ${styles.fork}`}
+        onDragStart={(event) => onDragStart(event, "fork")}
+        draggable
+      >
         <span>Fork</span>
+      </div>
+
+      <div
+        className={`${styles.dndnode} ${styles.join}`}
+        onDragStart={(event) => onDragStart(event, "join")}
+        draggable
+      >
+        <span>Join</span>
       </div>
     </aside>
   );
