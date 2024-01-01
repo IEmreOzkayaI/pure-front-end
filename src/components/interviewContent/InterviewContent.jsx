@@ -8,7 +8,6 @@ import {useDrag} from "../../hooks/useDrag.jsx";
 
 const InterviewContent = () => {
     const { width: leftSideWidth, height: rightSideHeight, handleHorizontalDrag, handleVerticalDrag } = useDrag(49, 70);
-    console.log(rightSideHeight)
 
     return (
         <div id='content' className={styles.interview_content}>

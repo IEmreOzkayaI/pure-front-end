@@ -16,14 +16,14 @@ const AnswerConsole = () => {
                  onClick={() => setActiveTab(0)}>
                 CONSOLE
             </div>
-            <div className={`${styles.right_side_content_down_title_custom} ${activeTab === 1 && styles.active}`}
-                 onClick={() => setActiveTab(1)}>
-                CUSTOM INPUT
-            </div>
+            {/*<div className={`${styles.right_side_content_down_title_custom} ${activeTab === 1 && styles.active}`}*/}
+            {/*     onClick={() => setActiveTab(1)}>*/}
+            {/*    CUSTOM INPUT*/}
+            {/*</div>*/}
         </div>
         <div className={styles.right_side_content_down_body}>
             <div className={styles.right_side_content_down_body_output}>
-                    adasdasd asd asdad asdadas a dasdasd asdads
+                    Successful
             </div>
             <div className={styles.right_side_content_down_body_actions}>
                 <button onClick={()=>handleCodeExecute()}>

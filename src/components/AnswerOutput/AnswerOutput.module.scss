@@ -32,11 +32,16 @@
     border-radius: 1rem;
     display: grid;
     grid-template-columns: 1fr;
-    grid-template-rows: 2fr 5rem;
+    grid-template-rows: 2fr 3rem;
 
     &_output {
       grid-row: 1 / 2;
       padding: 1rem;
+      display: grid;
+      align-items: center;
+      justify-content: center;
+      color: $green;
+      font-size: 1.4rem;
 
     }
 
@@ -60,6 +65,11 @@
         border-radius: .4rem;
         color: $white;
         margin-right: .5rem;
+        cursor: pointer;
+        transition: all .2s ease-in-out;
+        &:hover{
+          background-color: rgba($very-dark-gray, 0.5);
+        }
 
         svg {
           width: 1rem;
