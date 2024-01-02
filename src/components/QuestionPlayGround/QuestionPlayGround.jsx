@@ -15,13 +15,16 @@ const QuestionPlayGround = memo(
 
                 <div className={styles.left_side_content}>
                     {
-                        currentQuestion?.type === 'algorithm' && (<ReactMarkdown>
-                            {currentQuestion?.question}
-                        </ReactMarkdown>)
+                        currentQuestion?.type === 'Algorithm' && (
+                            <div>
+                                {currentQuestion?.question.description.scenario}<br/><br/>
+                                {currentQuestion?.question.description.question}
+                            </div>)
+
                     }
                     {
-                        currentQuestion?.type !== 'algorithm' && (<span>
-                            {currentQuestion?.question}
+                        currentQuestion?.type !== 'Algorithm' && (<span>
+                            {currentQuestion?.question.description}
                         </span>
                         )
                     }

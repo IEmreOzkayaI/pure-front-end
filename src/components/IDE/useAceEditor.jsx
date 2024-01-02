@@ -7,14 +7,13 @@ const useAceEditor = () => {
         const dispatch = useDispatch();
         const editorRef = useRef(null);
         const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
-
         useEffect(() => {
             initializeEditor();
         }, []);
 
         useEffect(() => {
             updateEditorModeAndValue();
-        }, [currentQuestion?.mode]);
+        }, [currentQuestion?.mode , currentQuestion?.question]);
 
         const initializeEditor = () => {
             const editor = ace.edit("ace-editor");
@@ -33,7 +32,8 @@ const useAceEditor = () => {
         };
 
         const setEditorValue = (editor) => {
-            editorRef.current?.setValue(currentQuestion?.code);
+            const language = currentQuestion && typeof currentQuestion.mode === 'string' ? currentQuestion.mode.split('/')[2] : 'javascript';
+            editorRef.current?.setValue(currentQuestion?.question.missing_part[language === "csp" ? "csharp" : language]);
         };
 
         const updateEditorModeAndValue = () => {

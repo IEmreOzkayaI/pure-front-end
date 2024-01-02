@@ -11,7 +11,7 @@ const InterviewHeader = () => {
     const remainingTime = useSelector((state) => state.interviewManagement?.remainingTime);
     const questionType = useSelector((state) => state.interviewManagement.currentQuestion?.type);
     const displayTime = useCountdown(remainingTime);
-    dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
+    // dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
 
     const handleLanguageChange = (e) => {
         const mode = e.target.value;
@@ -49,14 +49,13 @@ const InterviewHeader = () => {
             {/*    light*/}
             {/*</div>*/}
             {
-                questionType === 'algorithm' && (
+                questionType === 'Algorithm' && (
                     <select className={styles.interview__container__header__language} value={currentQuestion?.mode}
                             onChange={e => handleLanguageChange(e)}>
                         <option value="Language">Language</option>
-                        <option value="ace/mode/c_cpp">C</option>
                         <option value="ace/mode/java">Java</option>
                         <option value="ace/mode/python">Python</option>
-                        <option value="ace/mode/php">PHP</option>
+                        <option value="ace/mode/csp">C#</option>
                         <option value="ace/mode/javascript">JavaScript</option>
                     </select>
                 )

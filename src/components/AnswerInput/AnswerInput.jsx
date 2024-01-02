@@ -10,7 +10,7 @@ const AnswerInput = (props) => {
     return (
         <div className={styles.right_side_content_up} style={{height: `${rightSideHeight}%`}}>
             {
-                currentQuestion?.type === 'algorithm' && (
+                currentQuestion?.type === 'Algorithm' && (
                     <AceEditor/>
                 )
             }

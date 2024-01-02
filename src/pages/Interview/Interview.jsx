@@ -5,28 +5,43 @@ import InterviewContent from "../../components/interviewContent/interviewContent
 import {useRef} from "react";
 import {motion} from "framer-motion";
 
-import {setCurrentQuestion, setQuestions, setRemainingTime,} from "../../redux/toolkit/interviewManagementSlice.js";
-import {useDispatch} from "react-redux";
+import {
+    setCurrentQuestion,
+    setQuestionAmount,
+    setQuestions,
+    setRemainingTime,
+} from "../../redux/toolkit/interviewManagementSlice.js";
+import {useDispatch, useSelector} from "react-redux";
 import InterviewHeader from "../../components/interviewHeader/interviewHeader.jsx";
 import Redirect from "../../components/shared/Redirect/Redirect.jsx";
 import systemWarning from "../../systemWarning.js";
 import {useResponsiveBlock} from "../../hooks/useResponsiveBlock.jsx";
 import AceEditor from "../../components/IDE/AceEditor.jsx";
+import {interviewFetch} from "../../redux/toolkit/interviewSlice.js";
 
 
 const Interview = () => {
     const dispatch = useDispatch();
-    const interview = useRef(dummyData).current;
     const responsiveBlock = useResponsiveBlock();
+    const interviewInfo = useSelector((state) => state.interview?.interviewInfo);
+    const questionList = useSelector((state) => state.interviewManagement.questions);
+
 
     useEffect(() => {
-        dispatch(setQuestions(interview.questions));
-        dispatch(setCurrentQuestion(interview.questions[0]));
-        dispatch(setRemainingTime(interview.remainingTime));
+        dispatch(interviewFetch("08de5872-5868-4400-a655-71800a22bf78"));
+
     }, []);
 
+    useEffect(() => {
+        dispatch(setQuestions(interviewInfo?.data.questions));
+        dispatch(setCurrentQuestion(interviewInfo?.data.questions[0]));
+        dispatch(setRemainingTime(interviewInfo?.data.interview_time));
+        dispatch(setQuestionAmount(interviewInfo?.question_amount));
+    }, [interviewInfo]);
+
     const handleSelectedQuestion = (index) => {
-        dispatch(setCurrentQuestion(interview.questions[index]));
+        console.log(questionList)
+        dispatch(setCurrentQuestion(questionList[index]));
     };
 
     return (<motion.div
@@ -66,8 +81,34 @@ const dummyData = {
             mode: "ace/mode/javascript",
             number: 2,
             type: "algorithm",
-            question: "\n" + "Algoritma ipsum dolor sit amet, consectetur adipiscing elit. Cras mi ante, tempus et urna ac, interdum posuere libero. Phasellus ac tortor sit amet felis blandit tempor ac vel velit. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Mauris a sagittis mauris. Vivamus scelerisque ultrices ipsum. Vestibulum molestie leo et dignissim vestibulum. Duis molestie arcu nunc, vitae fringilla massa viverra sed. Fusce non erat at massa condimentum pulvinar. Aliquam lacinia diam nunc, euismod tincidunt dui porta vitae. Integer urna ligula, sodales et orci sed, pellentesque cursus velit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Suspendisse massa nulla, condimentum sed pharetra ac, pulvinar ac neque. Nunc accumsan fringilla sapien et cursus. Nunc egestas massa dolor, quis porta lorem venenatis vel. Integer pretium lectus diam, nec malesuada eros posuere sit amet.\n" + "\n" + "Donec pretium convallis fermentum. Donec varius leo urna, ac cursus nisi euismod quis. Nullam at odio ac est egestas consequat. Curabitur efficitur dolor ac tortor tempor, in porta nulla congue. Quisque ligula purus, cursus eu justo quis, vestibulum tempus est. Integer metus lacus, aliquam id nunc nec, imperdiet pretium elit. Curabitur nec dictum neque, in tempus sem. Phasellus egestas nulla finibus massa convallis facilisis. Quisque rhoncus nulla ut dignissim tincidunt. Aliquam tellus tellus, volutpat nec ante iaculis, condimentum condimentum tortor. Morbi ornare faucibus arcu, sed sollicitudin erat commodo malesuada. Pellentesque iaculis, nisi non condimentum euismod, eros tellus vulputate est, non imperdiet mauris tortor at risus. Cras pretium eros sed nisl feugiat, vel cursus dolor pellentesque.\n" + "\n" + "Vivamus nunc risus, bibendum eu condimentum vel, dignissim eget est. Integer aliquam molestie odio tempus porttitor. In venenatis tellus quis feugiat euismod. Nullam ut lacus sed lorem aliquam mollis eu eu elit. Morbi id dolor venenatis dolor ornare dapibus. Suspendisse convallis auctor risus, at scelerisque ipsum sagittis vitae. Quisque condimentum erat ut turpis dapibus, in tempus turpis volutpat. Integer bibendum nisl in dapibus scelerisque. In viverra blandit massa, in finibus nunc feugiat ac. Sed molestie a sapien eget blandit. Pellentesque imperdiet consectetur tristique.\n" + "\n" + "Phasellus vitae egestas dui. Vestibulum vel libero ornare, blandit ante sed, venenatis arcu. Duis ornare, velit eget varius consectetur, dui magna laoreet metus, viverra sollicitudin lectus ante nec felis. Nam ut lacus gravida enim aliquam varius. Praesent varius, justo vitae euismod finibus, massa urna eleifend eros, in aliquet diam orci nec massa. Proin ut gravida massa, a accumsan sem. Proin ut lorem ac nisi congue porttitor vitae at turpis. Fusce maximus ullamcorper lacus, sit amet tempor enim pulvinar in. Phasellus quis nunc posuere, ultrices dui quis, condimentum nisi. Nam blandit feugiat diam.\n" + "\n" + "Maecenas fermentum porttitor metus, ac imperdiet turpis porttitor eu. Etiam vel vehicula nisl. Donec et tristique odio, in mollis sem. Nam nec vestibulum justo, a ultrices turpis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Morbi nec ante euismod, laoreet lectus at, posuere urna. Donec in pretium enim. Nunc venenatis vulputate mi, eu imperdiet diam pulvinar nec. Integer rhoncus molestie leo. Duis interdum ullamcorper ipsum, in condimentum erat ullamcorper vel. Integer sed augue eu risus placerat pharetra.",
-            code: "console.log(\"Hello, World!\");"
+            question: "# Forest Management: Optimal Tree Arrangement\n" +
+                "\n" +
+                "**ID:** `tree-forest-management-1024`  \n" +
+                "**Topic:** Trees  \n" +
+                "**Difficulty Level:** Advanced\n" +
+                "\n" +
+                "## Description\n" +
+                "\n" +
+                "### Scenario\n" +
+                "In a new forest management program, a variety of tree species are being planted in rows. Each tree species has a different growth rate and environmental impact. The goal is to arrange the trees in each row so that the total environmental impact is maximized over a given time period. Each tree species is represented by a unique integer, and their growth rates and environmental impact scores are given in arrays.\n" +
+                "\n" +
+                "### Question\n" +
+                "Given arrays representing different tree species, their growth rates, and their environmental impact scores, find an arrangement of trees that maximizes the total environmental impact over the given period.\n" +
+                "\n" +
+                "## Real Life Application\n" +
+                "This problem mirrors real-world scenarios in environmental planning and forest management, where maximizing the ecological benefit of tree planting is crucial.\n" +
+                "\n" +
+                "## Time Complexity Analysis\n" +
+                "- **Best Case:** O(n log n)\n" +
+                "- **Average Case:** O(n^2)\n" +
+                "- **Worst Case:** O(n^2)\n" +
+                "\n" +
+                "## Example\n" +
+                "**Input:**  \n" +
+                "`[{species: 1, growthRate: 3, impact: 5}, {species: 2, growthRate: 2, impact: 6}, {species: 3, growthRate: 1, impact: 7}]`\n" +
+                "\n" +
+                "**Output:**  \n" +
+                "`[3, 2, 1]`",   code: "console.log(\"Hello, World!\");"
         }, {
             mode: "ace/mode/java",
             number: 3,
