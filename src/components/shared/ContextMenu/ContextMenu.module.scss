@@ -1,7 +1,7 @@
 .menu {
   display: flex;
   flex-direction: column;
-  background-color: #fff;
+  background-color: #001e2b;
   border-radius: 10px;
   box-shadow: 0 10px 20px rgba(#404040, 0.15);
 }
@@ -28,8 +28,10 @@
   display: flex;
   align-items: center;
   position: relative;
-  background-color: #fff;
+  background-color: #001e2b;
   font-size: 1.5rem;
+  color: #fff;
+
   &:hover {
     background-color: #898c94;
     & + .menu-sub-list {
@@ -44,7 +46,6 @@
     width: 20px;
     height: 20px;
     margin-right: 10px;
-    stroke: #898c94;
     &:nth-of-type(2) {
       margin-right: 0;
       position: absolute;

@@ -13,7 +13,7 @@ export default function ContextMenu({ position }) {
           <li className={styles["menu-item"]}>
             <button className={styles["menu-button"]}>
               <GoPencil />
-              <span>Add A Label</span>
+              <span>Rename</span>
             </button>
           </li>
         </ul>
