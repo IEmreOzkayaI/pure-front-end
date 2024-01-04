@@ -36,7 +36,7 @@ function Join({ data, isConnectable, id }) {
         <Handle
           type="target"
           position={Position.Left}
-          id="joinTargetUp"
+          id={`joinTargetUp_${id}`}
           className={styles.handleLeftUp}
           isConnectable={isConnectable}
         />
@@ -50,7 +50,7 @@ function Join({ data, isConnectable, id }) {
         <Handle
           type="source"
           position={Position.Right}
-          id="joinSource"
+          id={`joinSource_${id}`}
           className={styles.handleSource}
           isConnectable={isConnectable}
         />

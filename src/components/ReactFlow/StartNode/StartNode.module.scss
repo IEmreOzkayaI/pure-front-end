@@ -1,10 +1,16 @@
 @import "../../../global.scss";
 
 .startNode {
-  min-height: 5rem;
+  min-height: 6rem;
   min-width: 5rem;
   height: 100%;
   width: 100%;
   border-radius: 50%;
   background-color: #000;
+}
+.label {
+  font-size: 1.5rem;
+  color: #000;
+  text-align: center;
+  margin-top: 1rem;
 }

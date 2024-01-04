@@ -22,6 +22,7 @@ import DecisionNode from "./DecisionNode/DecisionNode";
 import Fork from "./Fork/Fork";
 import Join from "./Join/Join";
 import EndStateNode from "./EndStateNode/EndStateNode";
+import ContextMenu from "../shared/ContextMenu/ContextMenu";
 // const edgeTypes = {
 //   "custom-edge": CustomEdge,
 // };
@@ -86,10 +87,16 @@ export default function DiagramFlow() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
+  const [showContextMenu, setShowContextMenu] = useState(false);
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
 
   const onConnect = useCallback(
     (params) => {
-      setEdges((eds) => addEdge(params, eds));
+      setEdges((eds) => {
+        addEdge(params, eds);
+        console.log(eds);
+        console.log(params);
+      });
     },
     [setEdges]
   );
@@ -118,8 +125,9 @@ export default function DiagramFlow() {
         id: getId(),
         type,
         position,
-        data: { label: `${type} node` },
+        data: { label: `${type}` },
       };
+      console.log("new node", newNode);
 
       setNodes((nds) => nds.concat(newNode));
     },
@@ -130,6 +138,16 @@ export default function DiagramFlow() {
     <div
       style={{ width: "100%", height: "100%" }}
       className={styles.reactFlowContainer}
+      onContextMenu={(event) => {
+        if (event.target.id.includes("dndnode")) {
+          event.preventDefault();
+          setShowContextMenu(true);
+          setCursorPosition({ x: event.clientX, y: event.clientY });
+        }
+      }}
+      onClick={() => {
+        setShowContextMenu(false);
+      }}
     >
       <ReactFlowProvider>
         <ReactFlow
@@ -150,6 +168,8 @@ export default function DiagramFlow() {
         </ReactFlow>
         <SideBar />
       </ReactFlowProvider>
+
+      {showContextMenu && <ContextMenu position={cursorPosition} />}
     </div>
   );
 }

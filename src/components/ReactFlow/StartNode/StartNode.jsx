@@ -13,6 +13,7 @@ function StartNode({ data, isConnectable, id }) {
           isConnectable={isConnectable}
         />
       </div>
+      <div className={styles.label}>{data?.label}</div>
     </>
   );
 }

@@ -35,14 +35,14 @@ function Fork({ data, isConnectable, id }) {
         <Handle
           type="target"
           position={Position.Left}
-          id="forkTarget"
+          id={`forkTarget_${id}`}
           className={styles.handleLeft}
           isConnectable={isConnectable}
         />
         <Handle
           type="target"
           position={Position.Right}
-          id="forkSourceUp"
+          id={`forkSourceUp_${id}`}
           className={styles.handleUp}
           isConnectable={isConnectable}
         />
