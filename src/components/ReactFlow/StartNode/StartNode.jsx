@@ -1,10 +1,10 @@
 import { Handle, Position, NodeResizer } from "reactflow";
 import styles from "./StartNode.module.scss";
 
-function StartNode({ data, isConnectable, id }) {
+function StartNode({ data, isConnectable, id, selected }) {
   return (
     <>
-      <NodeResizer isVisible minHeight={50} minWidth={50} />
+      <NodeResizer isVisible={selected} minHeight={50} minWidth={50} />
       <div className={styles.startNode} id={`startNode_${id}`}>
         <Handle
           type="source"

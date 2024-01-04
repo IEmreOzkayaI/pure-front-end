@@ -7,7 +7,7 @@ import {
 import styles from "./Join.module.scss";
 import { useCallback } from "react";
 
-function Join({ data, isConnectable, id }) {
+function Join({ data, isConnectable, id, selected }) {
   console.log("data", data);
   const updateNodeInternals = useUpdateNodeInternals();
   const changeBottomHandlePosition = useCallback(() => {
@@ -26,7 +26,7 @@ function Join({ data, isConnectable, id }) {
   return (
     <>
       <NodeResizer
-        isVisible
+        isVisible={selected}
         minHeight={70}
         minWidth={3}
         maxWidth={3}

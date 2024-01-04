@@ -7,7 +7,7 @@ import {
 import styles from "./Fork.module.scss";
 import { useCallback } from "react";
 
-function Fork({ data, isConnectable, id }) {
+function Fork({ data, isConnectable, id, selected }) {
   const updateNodeInternals = useUpdateNodeInternals();
   const changeBottomHandlePosition = useCallback(() => {
     const bottomHandle = document.querySelector(
@@ -25,7 +25,7 @@ function Fork({ data, isConnectable, id }) {
   return (
     <>
       <NodeResizer
-        isVisible
+        isVisible={selected}
         minHeight={70}
         minWidth={3}
         maxWidth={3}

@@ -1,10 +1,10 @@
 import { Handle, Position, NodeResizer } from "reactflow";
 import styles from "./ActorNode.module.scss";
 
-function ActorNode({ data, isConnectable, id }) {
+function ActorNode({ data, isConnectable, id, selected }) {
   return (
     <>
-      <NodeResizer isVisible minHeight={300} minWidth={150} />
+      <NodeResizer isVisible={selected} minHeight={300} minWidth={150} />
 
       <div className={styles.diagramActor} id={`actorNode_${id}`}>
         <Handle

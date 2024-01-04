@@ -1,10 +1,10 @@
 import { Handle, Position, NodeResizer } from "reactflow";
 import styles from "./ActionStateNode.module.scss";
 
-function ActionStateNode({ data, isConnectable, id }) {
+function ActionStateNode({ data, isConnectable, id, selected }) {
   return (
     <>
-      <NodeResizer isVisible minHeight={80} minWidth={160} />
+      <NodeResizer isVisible={selected} minHeight={80} minWidth={160} />
 
       <div className={styles.actionState} id={`decisionStateNode_${id}`}>
         <Handle

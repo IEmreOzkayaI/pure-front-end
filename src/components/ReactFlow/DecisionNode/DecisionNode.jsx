@@ -1,10 +1,10 @@
 import { Handle, Position, NodeResizer } from "reactflow";
 import styles from "./DecisionNode.module.scss";
 
-function DecisionNode({ data, isConnectable, id }) {
+function DecisionNode({ data, isConnectable, id, selected }) {
   return (
     <>
-      <NodeResizer isVisible minWidth={50} minHeight={50} />
+      <NodeResizer isVisibisVisible={selected} minWidth={50} minHeight={50} />
 
       <div className={styles.decision} id={`decisionNode_${id}`}>
         <Handle
