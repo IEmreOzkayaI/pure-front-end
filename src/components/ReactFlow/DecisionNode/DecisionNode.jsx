@@ -4,7 +4,7 @@ import styles from "./DecisionNode.module.scss";
 function DecisionNode({ data, isConnectable, id, selected }) {
   return (
     <>
-      <NodeResizer isVisibisVisible={selected} minWidth={50} minHeight={50} />
+      <NodeResizer isVisible={selected} minWidth={50} minHeight={50} />
 
       <div className={styles.decision} id={`decisionNode_${id}`}>
         <Handle
