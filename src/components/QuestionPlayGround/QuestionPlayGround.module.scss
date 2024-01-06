@@ -7,7 +7,7 @@
   min-width: 20rem;
   border-radius: 1rem;
   text-align: justify;
-  padding: 4rem;
+  padding: 2rem 4rem;
   height: 100%;
   max-height: 100%;
   -webkit-user-select: none; /* Safari */
@@ -16,5 +16,262 @@
   .left_side_content {
     height: 100%;
     overflow: auto;
+
+    .name {
+      font-size: 2rem;
+      font-weight: bold;
+      text-align: center;
+      width: 100%;
+      line-height: 4rem;
+      border-radius: .5rem;
+      color: $black;
+      background-color: rgba($real-white, 0.8);
+      margin-bottom: 1rem;
+    }
+
+    .topic_level {
+      display: flex;
+      justify-content: space-between;
+
+      .topic {
+        font-weight: bold;
+        color: $black;
+        background-color: rgba($real-white, 0.8);
+        border-radius: .5rem;
+        width: fit-content;
+        padding: .5rem 1rem;
+      }
+
+      .level {
+        font-weight: bold;
+        color: $black;
+        background-color: rgba($real-white, 0.8);
+        border-radius: .5rem;
+        width: fit-content;
+        padding: .5rem 1rem;
+      }
+    }
+
+    .scenario {
+      &_title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2rem 0 0 0;
+        background-color: $black;
+        color: $real-white;
+        border-radius: .5rem .5rem 0 0;
+        width: fit-content;
+        padding: .5rem 1rem;
+      }
+
+      &_content {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        padding: .5rem 1rem;
+        border-radius: 0 .5rem .5rem .5rem;
+        background-color: $black;
+        width: 100%;
+        color: $real-white;
+      }
+    }
+
+    .question {
+      &_title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2rem 0 0 0;
+        background-color: $black;
+        color: $real-white;
+        border-radius: .5rem .5rem 0 0;
+        width: fit-content;
+        padding: .5rem 1rem;
+      }
+
+      &_content {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        padding: .5rem 1rem;
+        border-radius: 0 .5rem .5rem .5rem;
+        background-color: $black;
+        width: 100%;
+        color: $real-white;
+      }
+    }
+
+    .real_life {
+      &_title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2rem 0 0 0;
+        background-color: $black;
+        color: $real-white;
+        border-radius: .5rem .5rem 0 0;
+        width: fit-content;
+        padding: .5rem 1rem;
+      }
+
+      &_content {
+        font-size: 1.4rem;
+        margin-bottom: 1rem;
+        padding: .5rem 1rem;
+        border-radius: 0 .5rem .5rem .5rem;
+        background-color: $black;
+        width: 100%;
+        color: $real-white;
+      }
+    }
+
+    .example {
+      &_title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2rem 0 0 0;
+        background-color: $black;
+        color: $real-white;
+        border-radius: .5rem .5rem 0 0;
+        width: fit-content;
+        padding: .5rem 1rem;
+
+
+      }
+
+      &_content {
+        padding: .5rem 1rem;
+        border-radius: 0 .5rem .5rem .5rem;
+        background-color: $black;
+        width: 100%;
+        color: $real-white;
+        margin-bottom: 1rem;
+
+        .example_input {
+          font-size: 1.4rem;
+          margin-bottom: 1rem;
+        }
+
+        .example_output {
+          font-size: 1.4rem;
+        }
+      }
+
+
+    }
+
+    .time_complexity_analysis {
+      &_title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2rem 0 0 0;
+        background-color: $black;
+        color: $real-white;
+        border-radius: .5rem .5rem 0 0;
+        width: fit-content;
+        padding: .5rem 1rem;
+      }
+
+      &_content {
+        padding: .5rem 1rem;
+        border-radius: 0 .5rem .5rem .5rem;
+        background-color: $black;
+        width: 100%;
+        color: $real-white;
+        margin-bottom: 1rem;
+      }
+
+      &_item {
+        margin: .5rem 0;
+      }
+    }
+
+    .additional_resources {
+      &_title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2rem 0 0 0;
+        background-color: $black;
+        color: $real-white;
+        border-radius: .5rem;
+        width: auto;
+        padding: .5rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        .icon{
+          font-size: 3rem;
+          line-height: 0;
+          margin-right: -.5rem;
+        }
+      }
+
+      &_title_active {
+        border-radius: .5rem .5rem 0 0 !important;
+      }
+
+      &_links {
+        display: none;
+        transition: all .3s ease ;
+        &_item{
+          margin: 1rem 0;
+          a {
+            color: $real-white;
+          }
+        }
+      }
+      &_links_active {
+        display: block;
+        padding: .5rem 1rem;
+        border-radius: 0 0 .5rem .5rem;
+        background-color: $black;
+        width: 100%;
+        color: $real-white;
+        margin-bottom: 1rem;
+      }
+    }
+
+    .interactive_steps{
+      &_title {
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 2rem 0 0 0;
+        background-color: $black;
+        color: $real-white;
+        border-radius: .5rem;
+        width: auto;
+        padding: .5rem 1rem;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        cursor: pointer;
+        .icon{
+          font-size: 1.8rem;
+          line-height: 0;
+        }
+      }
+
+      &_title_active {
+        border-radius: .5rem .5rem 0 0 !important;
+      }
+
+      &_content {
+        display: none;
+        &_item{
+          margin: 1rem 0;
+          a {
+            color: $real-white;
+          }
+        }
+      }
+      &_content_active {
+        display: block;
+        padding: .5rem 1rem;
+        border-radius: 0 0 .5rem .5rem;
+        background-color: $black;
+        width: 100%;
+        color: $real-white;
+        margin-bottom: 1rem;
+      }
+    }
+
+
   }
 }

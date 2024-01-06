@@ -9,18 +9,21 @@ const initialState = {
 
 const reducers = {
     algorithmProgress: (state) => {
+        console.log("algorithmProgress")
         state.algorithmInfo = null;
         state.algorithmError = false;
         state.algorithmProgress = true;
         state.algorithmInit = null;
     },
     algorithmSuccess: (state, action) => {
+        console.log("algorithmSuccess",action.payload)
         state.algorithmInfo = action.payload;
         state.algorithmError = false;
         state.algorithmInit = null;
         state.algorithmProgress = false;
     },
     algorithmFailure: (state, action) => {
+        console.log("algorithmFailure")
         state.algorithmError = action.payload;
         state.algorithmInfo = null;
         state.algorithmProgress = false;

@@ -4,7 +4,7 @@ export const useResponsiveBlock = () => {
     const [responsiveBlock, setResponsiveBlock] = useState(window.innerWidth >= 1440);
 
     const handleResize = useCallback(() => {
-        setResponsiveBlock(window.innerWidth >= 1440);
+        // setResponsiveBlock(window.innerWidth >= 1440);
     }, []);
 
     useEffect(() => {

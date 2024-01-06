@@ -14,10 +14,6 @@ const Dashboard = () => {
     const [clickCount, setClickCount] = useState(0);
 
     useEffect(() => {
-        dispatch(userFetch());
-    }, []);
-
-    useEffect(() => {
         userInfo !== null && setUser(userInfo);
     }, [userInfo]);
 

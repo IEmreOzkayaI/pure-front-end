@@ -5,10 +5,10 @@ import {useEffect, useState} from "react";
 import FullScreenNavbar from "./FullScreenNavbar";
 import {useDispatch, useSelector} from "react-redux";
 import {logOutFetch} from "../../../redux/toolkit/logOutSlice.js";
+import {userFetch} from "../../../redux/toolkit/userSlice.js";
 
 const Navbar = () => {
     const [user, setUser] = useState();
-
     const dispatch = useDispatch();
     const [fullNav, setFullNav] = useState(false);
     const userInfo = useSelector(state => state.user.userInfo);
