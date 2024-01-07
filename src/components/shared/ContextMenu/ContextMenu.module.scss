@@ -69,3 +69,38 @@
   justify-content: center;
   z-index: 100;
 }
+.menu-sub-list {
+  display: none;
+  padding: 8px;
+  background-color: #001e2b;
+  border-radius: 10px;
+  box-shadow: 0 10px 20px rgba(#404040, 0.15);
+  position: absolute;
+  left: 100%;
+  z-index: 100;
+  top: 0;
+  flex-direction: column;
+  &:hover {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  .menu-item {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+  }
+}
+
+.rename-input {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  font: inherit;
+  font-size: 1.5rem;
+  background-color: #fff;
+  &:focus {
+    border-color: #3a3c42;
+  }
+}

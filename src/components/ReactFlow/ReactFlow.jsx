@@ -44,10 +44,15 @@ export default function DiagramFlow() {
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+  const [targetNodeId, setTargetNodeId] = useState(null);
 
   const onConnect = useCallback(
     (params) => {
-      setEdges((eds) => addEdge(params, eds));
+      setEdges((eds) => {
+        console.log("edges", eds);
+        console.log("params", params);
+        return addEdge(params, eds);
+      });
     },
     [setEdges]
   );
@@ -94,10 +99,13 @@ export default function DiagramFlow() {
           event.preventDefault();
           setShowContextMenu(true);
           setCursorPosition({ x: event.clientX, y: event.clientY });
+          setTargetNodeId(
+            event.target.childNodes[0].getAttribute("data-nodeid")
+          );
         }
       }}
-      onClick={() => {
-        setShowContextMenu(false);
+      onClick={(event) => {
+        setShowContextMenu(event.target.tagName.toLowerCase() !== "div");
       }}
     >
       <ReactFlowProvider>
@@ -120,7 +128,13 @@ export default function DiagramFlow() {
         <SideBar />
       </ReactFlowProvider>
 
-      {showContextMenu && <ContextMenu position={cursorPosition} />}
+      {showContextMenu && (
+        <ContextMenu
+          position={cursorPosition}
+          targetNodeId={targetNodeId}
+          setNodes={setNodes}
+        />
+      )}
     </div>
   );
 }
