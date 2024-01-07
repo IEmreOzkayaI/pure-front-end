@@ -1,8 +1,14 @@
 import styles from "./ContextMenu.module.scss";
 import { GoPencil } from "react-icons/go";
 import { FiTrash2 } from "react-icons/fi";
+import { useCallback } from "react";
 
-export default function ContextMenu({ position, targetNodeId, setNodes }) {
+export default function ContextMenu({
+  position,
+  targetNodeId,
+  setNodes,
+  setEdges,
+}) {
   const handleRename = (nodeLabel) => {
     setNodes((nodes) =>
       nodes.map((node) => {
@@ -17,6 +23,11 @@ export default function ContextMenu({ position, targetNodeId, setNodes }) {
       })
     );
   };
+  const deleteNode = useCallback(() => {
+    setNodes((nodes) => nodes.filter((node) => node.id !== targetNodeId));
+    setEdges((edges) => edges.filter((edge) => edge.source !== targetNodeId));
+  }, [setNodes, setEdges, targetNodeId]);
+
   return (
     <div
       className={styles.container}
@@ -47,6 +58,7 @@ export default function ContextMenu({ position, targetNodeId, setNodes }) {
           <li className={styles["menu-item"]}>
             <button
               className={`${styles["menu-button"]} ${styles["menu-button--delete"]}`}
+              onClick={deleteNode}
             >
               <FiTrash2 />
               <span>Delete</span>

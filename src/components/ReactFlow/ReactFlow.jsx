@@ -160,6 +160,7 @@ export default function DiagramFlow() {
           position={cursorPosition}
           targetNodeId={targetNodeId}
           setNodes={setNodes}
+          setEdges={setEdges}
         />
       )}
     </div>
