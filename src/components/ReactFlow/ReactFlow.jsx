@@ -45,13 +45,15 @@ export default function DiagramFlow() {
   const [showContextMenu, setShowContextMenu] = useState(false);
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
   const [targetNodeId, setTargetNodeId] = useState(null);
-
+  // console.log(reactFlowInstance?.getEdges());
   const onConnect = useCallback(
-    (params) => {
+    (thisEdge) => {
       setEdges((eds) => {
-        console.log("edges", eds);
-        console.log("params", params);
-        return addEdge(params, eds);
+        const newEdge = {
+          ...thisEdge,
+          id: `${thisEdge.sourceHandle} -> ${thisEdge.targetHandle}`,
+        };
+        return addEdge(newEdge, eds);
       });
     },
     [setEdges]
@@ -118,7 +120,6 @@ export default function DiagramFlow() {
           onInit={setReactFlowInstance}
           onDrop={onDrop}
           onDragOver={onDragOver}
-          // edgeTypes={edgeTypes}
           nodeTypes={nodeTypes}
           style={{ backgroundColor: "#fff" }}
         >
