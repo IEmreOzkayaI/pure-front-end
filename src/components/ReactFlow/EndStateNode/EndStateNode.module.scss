@@ -1,0 +1,17 @@
+.endStateNode {
+  height: 100%;
+  width: 100%;
+  min-height: 5rem;
+  min-width: 5rem;
+  border: none;
+  background-image: url("/endstate.png");
+  background-position: center;
+  aspect-ratio: 1/1;
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+.label {
+  font-size: 1.5rem;
+  color: #000;
+  text-align: center;
+}

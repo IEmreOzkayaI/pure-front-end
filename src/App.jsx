@@ -15,6 +15,7 @@ const App = () => {
 	}, [logInInfo]);
 
 	return <AnimatedRoutes />;
+
 };
 
 export default App;
