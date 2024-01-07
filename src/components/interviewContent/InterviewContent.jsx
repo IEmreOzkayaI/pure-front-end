@@ -7,7 +7,7 @@ import DragBar from "../shared/DragBar/DragBar";
 import {useDrag} from "../../hooks/useDrag.jsx";
 
 const InterviewContent = () => {
-    const { width: leftSideWidth, height: rightSideHeight, handleHorizontalDrag, handleVerticalDrag } = useDrag(49, 70);
+    const { width: leftSideWidth, height: rightSideHeight, handleHorizontalDrag, handleVerticalDrag } = useDrag(49, 95);
 
     return (
         <div id='content' className={styles.interview_content}>

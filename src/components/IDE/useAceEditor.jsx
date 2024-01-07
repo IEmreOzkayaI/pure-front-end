@@ -13,7 +13,7 @@ const useAceEditor = () => {
 
         useEffect(() => {
             updateEditorModeAndValue();
-        }, [currentQuestion?.mode , currentQuestion?.question]);
+        }, [currentQuestion?.mode, currentQuestion?.question]);
 
         const initializeEditor = () => {
             const editor = ace.edit("ace-editor");
@@ -32,15 +32,17 @@ const useAceEditor = () => {
         };
 
         const setEditorValue = (editor) => {
-            const language = currentQuestion && typeof currentQuestion.mode === 'string' ? currentQuestion.mode.split('/')[2] : 'javascript';
-            editorRef.current?.setValue(currentQuestion?.question.missing_part[language === "csp" ? "csharp" : language]);
+            const language = currentQuestion && typeof currentQuestion.mode === 'string' && currentQuestion.mode.split('/')[2] ;
+            console.log("language", language)
+            if (language)
+                editorRef.current?.setValue(currentQuestion?.question.missing_part[language === "csp" ? "csharp" : language]);
+            else
+                editorRef.current?.setValue("Please select a language");
         };
 
         const updateEditorModeAndValue = () => {
             setEditorMode(editorRef.current);
             setEditorValue(editorRef.current);
-
-
         };
 
         const handleEditorContent = () => {

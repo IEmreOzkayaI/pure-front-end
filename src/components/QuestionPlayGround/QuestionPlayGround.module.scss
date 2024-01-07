@@ -4,7 +4,7 @@
   background-color: $dark-gray;
   color: $white;
   font-size: 1.5rem;
-  min-width: 20rem;
+  min-width: 40rem;
   border-radius: 1rem;
   text-align: justify;
   padding: 2rem 4rem;
@@ -13,6 +13,7 @@
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
+
   .left_side_content {
     height: 100%;
     overflow: auto;
@@ -21,7 +22,7 @@
       font-size: 2rem;
       font-weight: bold;
       text-align: center;
-      width: 100%;
+      width: 99%;
       line-height: 4rem;
       border-radius: .5rem;
       color: $black;
@@ -32,6 +33,7 @@
     .topic_level {
       display: flex;
       justify-content: space-between;
+      width: 99%;
 
       .topic {
         font-weight: bold;
@@ -70,7 +72,7 @@
         padding: .5rem 1rem;
         border-radius: 0 .5rem .5rem .5rem;
         background-color: $black;
-        width: 100%;
+        width: 99%;
         color: $real-white;
       }
     }
@@ -93,7 +95,7 @@
         padding: .5rem 1rem;
         border-radius: 0 .5rem .5rem .5rem;
         background-color: $black;
-        width: 100%;
+        width: 99%;
         color: $real-white;
       }
     }
@@ -116,7 +118,7 @@
         padding: .5rem 1rem;
         border-radius: 0 .5rem .5rem .5rem;
         background-color: $black;
-        width: 100%;
+        width: 99%;
         color: $real-white;
       }
     }
@@ -139,7 +141,7 @@
         padding: .5rem 1rem;
         border-radius: 0 .5rem .5rem .5rem;
         background-color: $black;
-        width: 100%;
+        width: 99%;
         color: $real-white;
         margin-bottom: 1rem;
 
@@ -172,7 +174,7 @@
         padding: .5rem 1rem;
         border-radius: 0 .5rem .5rem .5rem;
         background-color: $black;
-        width: 100%;
+        width: 99%;
         color: $real-white;
         margin-bottom: 1rem;
       }
@@ -190,7 +192,7 @@
         background-color: $black;
         color: $real-white;
         border-radius: .5rem;
-        width: auto;
+        width: 99%;
         padding: .5rem 1rem;
         display: flex;
         justify-content: space-between;
@@ -222,7 +224,7 @@
         padding: .5rem 1rem;
         border-radius: 0 0 .5rem .5rem;
         background-color: $black;
-        width: 100%;
+        width: 99%;
         color: $real-white;
         margin-bottom: 1rem;
       }
@@ -236,7 +238,7 @@
         background-color: $black;
         color: $real-white;
         border-radius: .5rem;
-        width: auto;
+        width: 99%;
         padding: .5rem 1rem;
         display: flex;
         justify-content: space-between;
@@ -266,10 +268,28 @@
         padding: .5rem 1rem;
         border-radius: 0 0 .5rem .5rem;
         background-color: $black;
-        width: 100%;
+        width: 99%;
         color: $real-white;
         margin-bottom: 1rem;
       }
+    }
+
+    &::-webkit-scrollbar-track
+    {
+      -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar
+    {
+      width: 3px;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb
+    {
+      border-radius: 1rem;
+      background-color: #000000;
     }
 
 

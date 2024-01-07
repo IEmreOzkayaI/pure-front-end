@@ -25,6 +25,7 @@ const Interview = () => {
     const responsiveBlock = useResponsiveBlock();
     const interviewInfo = useSelector((state) => state.interview?.interviewInfo);
     const questionList = useSelector((state) => state.interviewManagement.questions);
+    const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
 
 
     useEffect(() => {
@@ -40,8 +41,8 @@ const Interview = () => {
     }, [interviewInfo]);
 
     const handleSelectedQuestion = (index) => {
-        console.log(questionList)
         dispatch(setCurrentQuestion(questionList[index]));
+        console.log("current question", questionList);
     };
 
     return (<motion.div
