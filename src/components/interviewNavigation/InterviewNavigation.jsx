@@ -7,6 +7,7 @@ const InterviewNavigation = (props) => {
     const questionList = useSelector((state) => state.interviewManagement.questions);
     const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
 
+
     return (
         <div className={styles.interview_navigation}>
             <svg

@@ -13,8 +13,8 @@ const AnswerInput = (props) => {
         className={styles.right_side_content_up}
         style={{ height: `${rightSideHeight}%` }}
       >
-        {currentQuestion?.type === "algorithm" && <AceEditor />}
-        {currentQuestion?.type === "diagram" && <DiagramFlow/>}
+        {currentQuestion?.type === "Algorithm" && <AceEditor />}
+        {currentQuestion?.type === "Diagram" && <DiagramFlow/>}
       </div>
     );
 };

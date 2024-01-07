@@ -2,6 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 
 const initialState = {
     questions: null,
+    questionAmount: null,
     questionsResults: null,
     currentQuestion: null,
     remainingTime: null,
@@ -24,6 +25,9 @@ const reducers = {
     setInterviewStatus: (state, action) => {
         state.interviewStatus = action.payload;
     },
+    setQuestionAmount: (state, action) => {
+        state.questionAmount = action.payload;
+    },
     clearInterview: (state) => {
         state.questions = null;
         state.questionsResults = null;
@@ -39,5 +43,5 @@ const interviewManagementSlice = createSlice({
     reducers,
 });
 
-export const {setQuestions, setQuestionsResults, setCurrentQuestion, setRemainingTime, setInterviewStatus, clearInterview} = interviewManagementSlice.actions;
+export const {setQuestions,setQuestionAmount, setQuestionsResults, setCurrentQuestion, setRemainingTime, setInterviewStatus, clearInterview} = interviewManagementSlice.actions;
 export default interviewManagementSlice.reducer;
