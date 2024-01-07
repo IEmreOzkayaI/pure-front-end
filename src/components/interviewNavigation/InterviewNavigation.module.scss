@@ -1,30 +1,51 @@
 @import "../../global.scss";
 
-.navigation {
-    width: 20rem;
+.interview_navigation {
+    color: $white;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     flex-direction: column;
-    font-size: 2rem;
-    background-color: rgba($color: $black, $alpha: 0.4);
-    border: 0.5rem solid $white;
-    border-radius: 1rem;
-    li {
-        list-style: none;
+    justify-content: center;
+    align-items: center;
+    max-height: 28rem;
+    grid-column: 1 / 2;
+    grid-row: 1 / 2;
+    svg {
         cursor: pointer;
-        background-color: $white;
-        padding: 1.5rem 2rem;
-        border-radius: 50%;
-        color: $black;
-        margin: 5rem 0;
-        transition: all 0.3s ease-in-out;
-        &:hover {
-            background-color: rgba($dark-gray, $alpha: 0.1);
-            color: $white;
-        }
     }
-    button {
-        margin-bottom: 5rem;
+    &_list {
+        overflow: scroll;
+        &_item {
+            user-select: none;
+            cursor: pointer;
+            font-size: 2rem;
+            font-style: normal;
+            font-weight: 300;
+            line-height: 1.8rem; /* 90% */
+            text-transform: uppercase;
+            -webkit-user-select: none; /* Safari */
+            -ms-user-select: none; /* IE 10 and IE 11 */
+            user-select: none; /* Standard syntax */
+
+            &:first-child {
+                margin-top: 2.7rem;
+            }
+            &:last-child {
+                margin-bottom: 4.2rem;
+            }
+
+            &:not(:last-child) {
+                margin-bottom: 2.7rem;
+            }
+        }
+        &_item.selected {
+            font-size: 2.4rem;
+            font-weight: 500;
+        }
+        &::-webkit-scrollbar {
+            display: none;
+        }
+        -ms-overflow-style: none;  /* IE and Edge */
+        scrollbar-width: none;  /* Firefox */
+
     }
 }

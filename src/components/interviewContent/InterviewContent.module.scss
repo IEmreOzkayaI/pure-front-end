@@ -1,6 +1,9 @@
 @import "../../global.scss";
-.content {
+.interview_content {
 	display: flex;
 	flex: 1;
-	height: 98svh;
+	height: 100%;
+	overflow: hidden;
+	grid-column: 2 / 3;
+	grid-row: 1 / 2;
 }

@@ -11,10 +11,13 @@ import userSaga from "./sagas/userSaga";
 import authorization from "./toolkit/authorizationSlice";
 import authorizationSaga from "./sagas/authorizationSaga";
 
+import interview from "./toolkit/interviewSlice";
+import interviewManagement from "./toolkit/interviewManagementSlice";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
-	reducer: {logIn, confirm, register, user, authorization},
-	middleware: [saga],
+    reducer: {logIn, confirm, register, user, authorization, interview, interviewManagement},
+    middleware: [saga],
 });
 saga.run(logInSaga);
 saga.run(confirmSaga);

@@ -1,11 +1,9 @@
 @import '../../global.scss';
 
 .right_side_content_up {
-    background-color: rgba($color: $black, $alpha: 0.3);
-    min-height: 10rem;
-    border-radius: 1rem;
-    border: 0.5rem solid $white;
-    color: $white;
-    text-align: center;
-    font-size: 5rem;
+  background-color: $dark-gray;
+  border-radius: 1rem;
+  color: $white;
+  text-align: center;
+  font-size: 5rem;
 }

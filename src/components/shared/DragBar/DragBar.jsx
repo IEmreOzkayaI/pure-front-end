@@ -1,22 +1,26 @@
 import PropTypes from "prop-types";
+import {FaGripLinesVertical} from "react-icons/fa";
 import styles from "./DragBar.module.scss";
+
 const DragBar = (props) => {
-	const {handleDrag} = props;
-	let className = props.className?.map((className) => {
-		return styles[className];
-	});
+    const {handleDrag} = props;
+    let className = props.className?.map((className) => {
+        return styles[className];
+    });
 
-	className?.push(styles.button);
+    className?.push(styles.button);
 
-	return (
-		<div {...props} className={className?.join(" ")} >
-			<img onMouseDown={handleDrag} className={styles.border_image} src='https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/24/external-move-animation-royyan-wijaya-detailed-outline-royyan-wijaya-3.png' alt='' />
-		</div>
-	);
+    return (
+        <div {...props} className={className?.join(" ")}>
+            <FaGripLinesVertical onMouseDown={handleDrag} className={styles.border_image}
+                                 src='https://img.icons8.com/external-royyan-wijaya-detailed-outline-royyan-wijaya/24/external-move-animation-royyan-wijaya-detailed-outline-royyan-wijaya-3.png'
+                                 alt=''/>
+        </div>
+    );
 };
 
 DragBar.propTypes = {
-	handleDrag: PropTypes.func,
+    handleDrag: PropTypes.func,
     className: PropTypes.arrayOf(PropTypes.string),
 };
 
