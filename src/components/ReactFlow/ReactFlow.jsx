@@ -1,4 +1,4 @@
-import { useCallback } from "react";
+import { useCallback, useRef } from "react";
 import ReactFlow, {
   Controls,
   Background,
@@ -6,6 +6,7 @@ import ReactFlow, {
   useEdgesState,
   addEdge,
   ReactFlowProvider,
+  updateEdge,
 } from "reactflow";
 
 import CustomNode from "./CustomNode/CustomNode";
@@ -39,6 +40,7 @@ let id = 0;
 const getId = () => `dndnode_${id++}`;
 
 export default function DiagramFlow() {
+  const edgeUpdateSuccessful = useRef(true);
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
@@ -55,6 +57,27 @@ export default function DiagramFlow() {
         };
         return addEdge(newEdge, eds);
       });
+    },
+    [setEdges]
+  );
+  const onEdgeUpdateStart = useCallback(() => {
+    edgeUpdateSuccessful.current = false;
+  }, []);
+
+  const onEdgeUpdate = useCallback(
+    (oldEdge, newConnection) => {
+      edgeUpdateSuccessful.current = true;
+      setEdges((els) => updateEdge(oldEdge, newConnection, els));
+    },
+    [setEdges]
+  );
+  const onEdgeUpdateEnd = useCallback(
+    (_, edge) => {
+      if (!edgeUpdateSuccessful.current) {
+        setEdges((eds) => eds.filter((e) => e.id !== edge.id));
+      }
+
+      edgeUpdateSuccessful.current = true;
     },
     [setEdges]
   );
@@ -121,6 +144,9 @@ export default function DiagramFlow() {
           onDrop={onDrop}
           onDragOver={onDragOver}
           nodeTypes={nodeTypes}
+          onEdgeUpdate={onEdgeUpdate}
+          onEdgeUpdateStart={onEdgeUpdateStart}
+          onEdgeUpdateEnd={onEdgeUpdateEnd}
           style={{ backgroundColor: "#fff" }}
         >
           <Controls />
