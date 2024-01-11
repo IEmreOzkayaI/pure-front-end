@@ -22,6 +22,16 @@ const useCountdown = (initialTime, interval = 1000) => {
     const [canStart, setCanStart] = useState(false);
 
     useEffect(() => {
+        if (initialTime !== null && initialTime !== '') {
+            setCanStart(true);
+            setTime(convertToSeconds(initialTime));
+            setDisplayTime(initialTime);
+        }
+    }, [initialTime]);
+
+
+
+    useEffect(() => {
         if (initialTime !== null && canStart) {
             const countdown = setInterval(() => {
                 setTime(prevTime => {

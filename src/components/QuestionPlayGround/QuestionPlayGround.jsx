@@ -18,15 +18,15 @@ const QuestionPlayGround = memo(
             <div className={styles.left_side} style={{width: `${leftSideWidth}%`}}>
 
                 <div className={styles.left_side_content}>
+                    <div className={styles.name}>{currentQuestion?.question.name}</div>
+                    <div className={styles.topic_level}>
+                        <div className={styles.topic}>Topic: {currentQuestion?.question.topic}</div>
+                        {/*<div className={styles.level}>{currentQuestion?.question.level}</div>*/}
+                        <div className={styles.level}>Level: Intermediate</div>
+                    </div>
                     {
                         currentQuestion?.type === 'Algorithm' && (
                             <div>
-                                <div className={styles.name}>{currentQuestion?.question.name}</div>
-                                <div className={styles.topic_level}>
-                                    <div className={styles.topic}>Topic: {currentQuestion?.question.topic}</div>
-                                    {/*<div className={styles.level}>{currentQuestion?.question.level}</div>*/}
-                                    <div className={styles.level}>Level: Intermediate</div>
-                                </div>
                                 <div className={styles.scenario}>
                                     <div className={styles.scenario_title}> Scenario</div>
                                     <div className={styles.scenario_content}>
@@ -82,7 +82,7 @@ const QuestionPlayGround = memo(
                                         onClick={() => setAdditionalResources(!additional_resources)}>
                                         Additional Resources
                                         <div className={styles.icon}>
-                                            <RiArrowDropDownLine />
+                                            <RiArrowDropDownLine/>
                                         </div>
 
                                     </div>
@@ -104,7 +104,7 @@ const QuestionPlayGround = memo(
                                         Interactive Steps
                                         {/*<IoLockClosedOutline />*/}
                                         <div className={styles.icon}>
-                                            <IoLockOpenOutline />
+                                            <IoLockOpenOutline/>
                                         </div>
                                     </div>
                                     <div
@@ -124,7 +124,9 @@ const QuestionPlayGround = memo(
                     }
                     {
                         currentQuestion?.type !== 'Algorithm' && (<span>
-                            {currentQuestion?.question.description}
+                            <ReactMarkdown>
+                                {currentQuestion?.question.description}
+                            </ReactMarkdown>
                         </span>
                         )
                     }

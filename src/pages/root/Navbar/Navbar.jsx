@@ -13,8 +13,9 @@ const Navbar = () => {
     const [fullNav, setFullNav] = useState(false);
     const userInfo = useSelector(state => state.user.userInfo);
 
+    console.log("page refreshed this is user ", userInfo)
     useEffect(() => {
-        userInfo !== null && setUser(userInfo);
+        if (userInfo !== null) setUser(userInfo);
     }, [userInfo]);
 
     const handleLogOut = () => {
@@ -37,7 +38,7 @@ const Navbar = () => {
 						<Link to={"/about-us"}>About Us</Link>
 					</li>
 					<li>
-						<Link to={"/pricing"} >Pricing</Link>
+						<Link to={"/pricing"}>Pricing</Link>
 					</li>
 				</span>
                 )
@@ -83,7 +84,7 @@ const Navbar = () => {
                                      fill='none'>
                                     <path d='M6.5 1H1V12H6.5M5 6H12.5M12.5 6L9.5 3M12.5 6L9.5 9' stroke='#CD6E60'/>
                                 </svg>
-                                <Link onClick={()=> handleLogOut()}>Log Out</Link>
+                                <Link onClick={() => handleLogOut()}>Log Out</Link>
                             </div>
                         </div>
                     </>)}

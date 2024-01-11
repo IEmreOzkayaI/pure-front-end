@@ -52,7 +52,7 @@ const Interview = () => {
         exit={{opacity: 0}}
     >
         {responsiveBlock && <div className={styles.interview}>
-            {/* <InterviewHeader/> */}
+             <InterviewHeader/>
             <div className={styles.interview_down}>
                 <InterviewNavigation handleSelectedQuestion={handleSelectedQuestion}/>
                 <InterviewContent/>

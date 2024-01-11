@@ -3,22 +3,31 @@ import Button from "../../components/shared/Button/Button";
 import styles from "./Dashboard.module.scss";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect, useState} from "react";
-import {userFetch} from "../../redux/toolkit/userSlice.js";
+import {clearUserInfo, userFetch} from "../../redux/toolkit/userSlice.js";
+import Cookies from "js-cookie";
+import {deleteItem, encryptAndStore} from "../../utils/localStorageManagement.js";
+import {clearLogInInfo} from "../../redux/toolkit/logInSlice.js";
 
 const Dashboard = () => {
 
     const dispatch = useDispatch();
     const userInfo = useSelector(state => state.user.userInfo);
-    const logOutInfo = useSelector(state => state.logOut?.logOutInfo);
+    const logOutInfo = useSelector(state => state.logOutSlice?.logOutInfo);
     const [user, setUser] = useState({});
     const [clickCount, setClickCount] = useState(0);
 
     useEffect(() => {
-        userInfo !== null && setUser(userInfo);
+        if (userInfo !== null) {
+            setUser(userInfo)
+            console.log("page refreshed this is user ", userInfo)
+            encryptAndStore('user_role', userInfo.role)
+        }
     }, [userInfo]);
 
     useEffect(() => {
-        logOutInfo !== null && setUser({});
+        if (logOutInfo !== null) {
+            setUser({})
+        }
     }, [logOutInfo]);
 
     const handleClick = () => {
@@ -26,16 +35,32 @@ const Dashboard = () => {
     }
     return (
         <div className={styles.dashboard_container} onClick={handleClick}>
-            <div className={styles.dashboard}>
-                {clickCount < 5 &&
-                    <div>
-                        Hello , We are now developing this page. <br/>
-                        But If you want to demo interview screen you can click the "interview" field above. <br/>
-                    </div>
-                }
+            {userInfo.role === "Admin_User" && <div>Admin</div>}
+            {userInfo.role === "Individual_User" &&
+                <div className={styles.dashboard}>
+                    {clickCount < 5 &&
+                        <div>
+                            Hello Welcome To Individual User Dashboard , We are now developing this page. <br/>
+                            But If you want to demo interview screen you can click the "interview" field above. <br/>
+                        </div>
+                    }
 
-                {clickCount >= 5 && JSON.stringify(user, null, 2)}
-            </div>
+                    {clickCount >= 5 && JSON.stringify(user, null, 2)}
+                </div>
+            }
+            {userInfo.role === "Company_User" &&
+                <div className={styles.dashboard}>
+                    {clickCount < 5 &&
+                        <div>
+                            Hello Welcome To Company Dashboard , We are now developing this page. <br/>
+                            But If you want to demo interview screen you can click the "interview" field above. <br/>
+                        </div>
+                    }
+
+                    {clickCount >= 5 && JSON.stringify(user, null, 2)}
+                </div>
+            }
+
 
         </div>
     );
