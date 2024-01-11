@@ -32,11 +32,6 @@ const AnswerConsole = () => {
         }
     };
 
-    useEffect(() => {
-        console.log("bitti mi la")
-        console.log(algorithmInfo)
-        // dispatch(clearAlgorithmInfo());
-    }, [algorithmInfo]);
 
 
     return <div className={styles.right_side_content_down}>

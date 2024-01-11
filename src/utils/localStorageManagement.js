@@ -26,4 +26,11 @@ function decryptAndRetrieve(key) {
     return decryptedValue;
 }
 
-export {encryptAndStore, decryptAndRetrieve};
+function deleteItem(key) {
+    // Parametreyi şifrele
+    const encryptedKey = CryptoJS.SHA256(key).toString();
+    // Şifrelenmiş parametreyi localStorage'dan sil
+    localStorage.removeItem(encryptedKey);
+}
+
+export {encryptAndStore, decryptAndRetrieve, deleteItem};
