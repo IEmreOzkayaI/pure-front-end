@@ -1,6 +1,6 @@
-import {all, put, call, takeLatest} from "redux-saga/effects";
+import {all, call, put, takeLatest} from "redux-saga/effects";
 import axios from "axios";
-import {registerProgress, registerSuccess, registerFailure} from "../toolkit/registerSlice";
+import {registerFailure, registerProgress, registerSuccess} from "../toolkit/registerSlice";
 
 export default function* registerSaga() {
 	yield all([registerWatcher()]);
@@ -23,9 +23,9 @@ function* registerWrapper(payload) {
 	const {Individual_User, Company_User} = payload;
 	const user = Individual_User ? Individual_User : Company_User;
 
-	const promise = yield new Promise((resolve, reject) => {
+	return yield new Promise((resolve, reject) => {
 		axios
-			.post("http://localhost:3000/api/user/register", user, {
+			.post(import.meta.env.VITE_REGISTER_USER_API, user, {
 				withCredentials: true,
 			})
 			.then((res) => {
@@ -33,10 +33,8 @@ function* registerWrapper(payload) {
 				resolve(data);
 			})
 			.catch((err) => {
-				if (err.response.data.message === "User Already Exists");
+				if (err.response.data.message === "User Already Exists") ;
 				reject(err);
 			});
 	});
-
-	return promise;
 }

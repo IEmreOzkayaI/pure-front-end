@@ -1,6 +1,6 @@
-import {all, put, call, takeLatest} from "redux-saga/effects";
+import {all, call, put, takeLatest} from "redux-saga/effects";
 import axios from "axios";
-import {logInProgress, logInSuccess, logInFailure} from "../toolkit/logInSlice";
+import {logInFailure, logInProgress, logInSuccess} from "../toolkit/logInSlice";
 
 export default function* logInSaga() {
 	yield all([logInWatcher()]);
@@ -21,9 +21,9 @@ function* logIn(action) {
 
 function* logInWrapper(payload) {
 	const {logInForm} = payload;
-	const promise = yield new Promise((resolve, reject) => {
+	return yield new Promise((resolve, reject) => {
 		axios
-			.post("http://localhost:3000/api/user/log-in", logInForm, {
+			.post(import.meta.env.VITE_LOG_IN_USER_API, logInForm, {
 				withCredentials: true,
 			})
 			.then((res) => {
@@ -36,5 +36,4 @@ function* logInWrapper(payload) {
 				reject(err.response.data);
 			});
 	});
-	return promise;
 }

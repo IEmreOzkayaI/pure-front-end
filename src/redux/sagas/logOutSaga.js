@@ -1,6 +1,6 @@
-import {all, put, call, takeLatest} from "redux-saga/effects";
+import {all, call, put, takeLatest} from "redux-saga/effects";
 import axios from "axios";
-import {logOutProgress, logOutSuccess, logOutFailure} from "../toolkit/logOutSlice";
+import {logOutFailure, logOutProgress, logOutSuccess} from "../toolkit/logOutSlice";
 
 export default function* logOutSaga() {
     yield all([logOutWatcher()]);
@@ -21,9 +21,9 @@ function* logOut() {
 }
 
 function* logOutWrapper() {
-    const promise = yield new Promise((resolve, reject) => {
+    return yield new Promise((resolve, reject) => {
         axios
-            .get("http://localhost:3000/api/user/log-out", {
+            .get(import.meta.env.VITE_LOG_OUT_USER_API, {
                 withCredentials: true,
             })
             .then((res) => {
@@ -35,5 +35,4 @@ function* logOutWrapper() {
                 reject(err.response.data);
             });
     });
-    return promise;
 }

@@ -1,4 +1,4 @@
-import {all, put, call, takeLatest} from "redux-saga/effects";
+import {all, call, put, takeLatest} from "redux-saga/effects";
 import axios from "axios";
 import {reConfirmFailure, reConfirmProgress, reConfirmSuccess} from "../toolkit/reConfirmSlice";
 
@@ -21,9 +21,9 @@ function* reconfirm() {
 }
 
 function* reConfirmWrapper() {
-	const promise = yield new Promise((resolve, reject) => {
+	return yield new Promise((resolve, reject) => {
 		axios
-			.get("http://localhost:3000/api/user/re-confirm", {
+			.get(import.meta.env.VITE_RECONFIRM_USER_API, {
 				withCredentials: true,
 				headers: {
 					"Content-Type": "application/json",
@@ -39,5 +39,4 @@ function* reConfirmWrapper() {
 				reject(err.response.data);
 			});
 	});
-	return promise;
 }

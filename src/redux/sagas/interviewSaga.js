@@ -1,6 +1,6 @@
-import {all, put, call, takeLatest} from "redux-saga/effects";
+import {all, call, put, takeLatest} from "redux-saga/effects";
 import axios from "axios";
-import {interviewProgress, interviewSuccess, interviewFailure} from "../toolkit/interviewSlice";
+import {interviewFailure, interviewProgress, interviewSuccess} from "../toolkit/interviewSlice";
 
 export default function* interviewSaga() {
     yield all([interviewWatcher()]);
@@ -21,9 +21,9 @@ function* interview(action) {
 }
 
 function* interviewWrapper(interview_id) {
-    const promise = yield new Promise((resolve, reject) => {
+    return yield new Promise((resolve, reject) => {
         axios
-            .get(`http://localhost:3000/api/interview/get_by_interview_id/${interview_id}`, {
+            .get(`${import.meta.env.VITE_GET_INTERVIEW_BY_INTERVIEW_ID_API}/${interview_id}`, {
                 withCredentials: true,
             })
             .then((res) => {
@@ -34,5 +34,4 @@ function* interviewWrapper(interview_id) {
                 reject(err.response.data);
             });
     });
-    return promise;
 }

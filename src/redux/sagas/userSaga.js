@@ -1,6 +1,6 @@
-import {all, put, call, takeLatest} from "redux-saga/effects";
+import {all, call, put, takeLatest} from "redux-saga/effects";
 import axios from "axios";
-import {userProgress, userSuccess, userFailure} from "../toolkit/userSlice";
+import {userFailure, userProgress, userSuccess} from "../toolkit/userSlice";
 
 export default function* logInSaga() {
     yield all([userWatcher()]);
@@ -21,9 +21,9 @@ function* user(action) {
 }
 
 function* userWrapper() {
-    const promise = yield new Promise((resolve, reject) => {
+    return yield new Promise((resolve, reject) => {
         axios
-            .get("http://localhost:3000/api/user/current", {
+            .get(import.meta.env.VITE_CURRENT_USER_API, {
                 withCredentials: true,
             })
             .then((res) => {
@@ -38,5 +38,4 @@ function* userWrapper() {
                 reject(err.response.data);
             });
     });
-    return promise;
 }
