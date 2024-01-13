@@ -40,13 +40,13 @@ export default function AnimatedRoutes() {
     });
     const LazyInterviewPlayground = lazy(() => {
         return new Promise((resolve) =>
-            setTimeout(() => resolve(import("../pages/interview/Interview")), 2000)
+            setTimeout(() => resolve(import("../pages/Interview/Interview")), 2000)
         );
     });
     const LazyInterviewSignUp = lazy(() => {
         return new Promise((resolve) =>
             setTimeout(
-                () => resolve(import("../pages/interviewSignUp/InterviewSignUp")),
+                () => resolve(import("../pages/InterviewSignUp/InterviewSignUp")),
                 2000
             )
         );
