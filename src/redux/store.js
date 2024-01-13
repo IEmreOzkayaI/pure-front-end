@@ -15,7 +15,7 @@ import algorithmSaga from "./sagas/compiler/algorithmSaga.js";
 import algorithmSlice from "./toolkit/compiler/algorithmSlice.js";
 
 import logOutSaga from "./sagas/logOutSaga.js";
-import logOutSlice from "./toolkit/logoutSlice.js";
+import logOutSlice from "./toolkit/logOutSlice.js";
 import interviewSlice from "./toolkit/interviewSlice.js";
 import interviewSaga from "./sagas/interviewSaga.js";
 
