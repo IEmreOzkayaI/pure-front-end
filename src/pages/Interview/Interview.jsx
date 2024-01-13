@@ -1,8 +1,7 @@
 import {useEffect} from "react";
 import styles from "./Interview.module.scss";
-import InterviewNavigation from "../../components/interviewNavigation/InterviewNavigation";
-import InterviewContent from "../../components/interviewContent/interviewContent";
-import {useRef} from "react";
+import InterviewNavigation from "../../components/InterviewNavigation/InterviewNavigation";
+import InterviewContent from "../../components/InterviewContent/interviewContent";
 import {motion} from "framer-motion";
 
 import {
@@ -12,11 +11,10 @@ import {
     setRemainingTime,
 } from "../../redux/toolkit/interviewManagementSlice.js";
 import {useDispatch, useSelector} from "react-redux";
-import InterviewHeader from "../../components/interviewHeader/interviewHeader.jsx";
+import InterviewHeader from "../../components/InterviewHeader/interviewHeader.jsx";
 import Redirect from "../../components/shared/Redirect/Redirect.jsx";
 import systemWarning from "../../systemWarning.js";
 import {useResponsiveBlock} from "../../hooks/useResponsiveBlock.jsx";
-import AceEditor from "../../components/IDE/AceEditor.jsx";
 import {interviewFetch} from "../../redux/toolkit/interviewSlice.js";
 
 
