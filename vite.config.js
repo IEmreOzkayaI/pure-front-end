@@ -8,11 +8,11 @@ export default defineConfig({
       include: "**/*.jsx",
     }),
   ],
-  server: {
-    watch: {
-      usePolling: true,
-    },
-    port: 3001,
-    open:"/"
-  },
+  // server: {
+  //   watch: {
+  //     usePolling: true,
+  //   },
+  //   port: 3001,
+  //   open:"/"
+  // },
 });
