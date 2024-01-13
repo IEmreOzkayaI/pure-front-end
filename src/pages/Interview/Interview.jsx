@@ -1,7 +1,7 @@
 import {useEffect} from "react";
 import styles from "./Interview.module.scss";
 import InterviewNavigation from "../../components/interviewNavigation/InterviewNavigation";
-import InterviewContent from "../../components/interviewContent/interviewContent";
+import InterviewContent from "../../components/interviewContent/InterviewContent";
 import {motion} from "framer-motion";
 
 import {
