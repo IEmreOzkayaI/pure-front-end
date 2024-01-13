@@ -11,7 +11,7 @@ import {
     setRemainingTime,
 } from "../../redux/toolkit/interviewManagementSlice.js";
 import {useDispatch, useSelector} from "react-redux";
-import InterviewHeader from "../../components/interviewHeader/InterviewHeader";
+import InterviewHeader from "../../components/interviewHeader/InterviewHeader.jsx";
 import Redirect from "../../components/shared/Redirect/Redirect.jsx";
 import systemWarning from "../../systemWarning.js";
 import {useResponsiveBlock} from "../../hooks/useResponsiveBlock.jsx";
