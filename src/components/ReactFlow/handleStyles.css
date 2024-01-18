@@ -1,0 +1,11 @@
+.react-flow .react-flow__handle {
+  transition: all 0.2s ease;
+}
+.react-flow .react-flow__handle:hover {
+  width: 15px;
+  height: 15px;
+}
+.react-flow .react-flow__edge path,
+.react-flow__connectionline path {
+  stroke-width: 3;
+}

@@ -24,6 +24,7 @@ import Fork from "./Fork/Fork";
 import Join from "./Join/Join";
 import EndStateNode from "./EndStateNode/EndStateNode";
 import ContextMenu from "./ContextMenu/ContextMenu";
+import "./handleStyles.css";
 
 const nodeTypes = {
   actorNode: ActorNode,
