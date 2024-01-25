@@ -23,7 +23,8 @@ import DecisionNode from "./DecisionNode/DecisionNode";
 import Fork from "./Fork/Fork";
 import Join from "./Join/Join";
 import EndStateNode from "./EndStateNode/EndStateNode";
-import ContextMenu from "../shared/ContextMenu/ContextMenu";
+import ContextMenu from "./ContextMenu/ContextMenu";
+import "./handleStyles.css";
 
 const nodeTypes = {
   actorNode: ActorNode,
@@ -44,10 +45,8 @@ export default function DiagramFlow() {
   const [nodes, setNodes, onNodesChange] = useNodesState([]);
   const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const [showContextMenu, setShowContextMenu] = useState(false);
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-  const [targetNodeId, setTargetNodeId] = useState(null);
-  // console.log(reactFlowInstance?.getEdges());
+  const [menu, setMenu] = useState(null);
+
   const onConnect = useCallback(
     (thisEdge) => {
       setEdges((eds) => {
@@ -115,23 +114,31 @@ export default function DiagramFlow() {
     [reactFlowInstance, setNodes]
   );
 
+  const onNodeContextMenu = useCallback(
+    (event, node) => {
+      // Prevent native context menu from showing
+      event.preventDefault();
+
+      // Calculate position of the context menu. We want to make sure it
+      // doesn't get positioned off-screen.
+      // const pane = reactFlowInstance.getBoundingClientRect();
+      setMenu({
+        id: node.id,
+        top: event.clientX,
+        bottom: event.clientY,
+      });
+    },
+    [setMenu]
+  );
+
+  const onPaneClick = useCallback(() => {
+    return setMenu(null);
+  }, [setMenu]);
+
   return (
     <div
       style={{ width: "100%", height: "100%" }}
       className={styles.reactFlowContainer}
-      onContextMenu={(event) => {
-        if (event.target.id.includes("dndnode")) {
-          event.preventDefault();
-          setShowContextMenu(true);
-          setCursorPosition({ x: event.clientX, y: event.clientY });
-          setTargetNodeId(
-            event.target.childNodes[0].getAttribute("data-nodeid")
-          );
-        }
-      }}
-      onClick={(event) => {
-        setShowContextMenu(event.target.tagName.toLowerCase() !== "div");
-      }}
     >
       <ReactFlowProvider>
         <ReactFlow
@@ -147,7 +154,9 @@ export default function DiagramFlow() {
           onEdgeUpdate={onEdgeUpdate}
           onEdgeUpdateStart={onEdgeUpdateStart}
           onEdgeUpdateEnd={onEdgeUpdateEnd}
-          style={{ backgroundColor: "#fff" }}
+          onNodeContextMenu={onNodeContextMenu}
+          style={{ backgroundColor: "#fff", borderRadius: "1rem" }}
+          onClick={onPaneClick}
         >
           <Controls />
           <Background variant="dots" gap={12} size={1} />
@@ -155,12 +164,12 @@ export default function DiagramFlow() {
         <SideBar />
       </ReactFlowProvider>
 
-      {showContextMenu && (
+      {menu && (
         <ContextMenu
-          position={cursorPosition}
-          targetNodeId={targetNodeId}
+          onClick={onPaneClick}
           setNodes={setNodes}
           setEdges={setEdges}
+          {...menu}
         />
       )}
     </div>

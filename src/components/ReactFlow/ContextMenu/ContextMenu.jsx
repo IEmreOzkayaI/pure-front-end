@@ -1,18 +1,21 @@
+import { useCallback } from "react";
 import styles from "./ContextMenu.module.scss";
 import { GoPencil } from "react-icons/go";
 import { FiTrash2 } from "react-icons/fi";
-import { useCallback } from "react";
 
-export default function ContextMenu({
-  position,
-  targetNodeId,
-  setNodes,
-  setEdges,
-}) {
+export default function ContextMenu({ ...props }) {
+  const { setNodes, setEdges, id, bottom, top, onClick } = props;
+
+  const deleteNode = useCallback(() => {
+    setNodes((nodes) => nodes.filter((node) => node.id !== id));
+    setEdges((edges) => edges.filter((edge) => edge.source !== id));
+    onClick();
+  }, [id, setNodes, setEdges, onClick]);
+
   const handleRename = (nodeLabel) => {
     setNodes((nodes) =>
       nodes.map((node) => {
-        if (node.id === targetNodeId) {
+        if (node.id === id) {
           node.data = {
             ...node.data,
             label: nodeLabel,
@@ -23,15 +26,11 @@ export default function ContextMenu({
       })
     );
   };
-  const deleteNode = useCallback(() => {
-    setNodes((nodes) => nodes.filter((node) => node.id !== targetNodeId));
-    setEdges((edges) => edges.filter((edge) => edge.source !== targetNodeId));
-  }, [setNodes, setEdges, targetNodeId]);
 
   return (
     <div
+      style={{ left: `${top}px`, top: `${bottom}px` }}
       className={styles.container}
-      style={{ left: `${position.x}px`, top: `${position.y}px` }}
     >
       <div className={styles.menu}>
         <ul className={styles["menu-list"]}>

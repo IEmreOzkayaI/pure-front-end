@@ -258,19 +258,6 @@
       #signUp {
         position: relative;
         color: $white;
-        &::after {
-          content: "";
-          display: block;
-          height: 3.5rem;
-          background-color: transparent;
-          position: absolute;
-          top: 2rem;
-          transform: rotate(90deg);
-          left: 0;
-          right: 0;
-          margin: auto;
-          width: 2.5rem;
-        }
       }
       &:last-child {
         margin-right: 13.3rem;
@@ -280,7 +267,18 @@
         padding: 1.3rem 2.8rem;
         text-transform: uppercase;
         word-wrap: break-word;
-
+        &::after {
+          content: "";
+          display: block;
+          height: 3.5rem;
+          background-color: transparent;
+          position: absolute;
+          top: 2rem;
+          left: 0;
+          right: 0;
+          margin: auto;
+          width: 8.5rem;
+        }
         @media (width <= 1100px) {
           margin-right: 5.3rem;
         }
@@ -292,7 +290,7 @@
         min-width: 16rem;
         z-index: 1;
         left: 3rem;
-        top: 5.7rem;
+        top: 5rem;
         flex-direction: column;
         gap: 3rem;
         background-color: $white;
