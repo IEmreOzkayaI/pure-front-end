@@ -155,7 +155,7 @@ export default function DiagramFlow() {
           onEdgeUpdateStart={onEdgeUpdateStart}
           onEdgeUpdateEnd={onEdgeUpdateEnd}
           onNodeContextMenu={onNodeContextMenu}
-          style={{ backgroundColor: "#fff" }}
+          style={{ backgroundColor: "#fff", borderRadius: "1rem" }}
           onClick={onPaneClick}
         >
           <Controls />

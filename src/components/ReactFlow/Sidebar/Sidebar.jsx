@@ -13,61 +13,57 @@ export default function SideBar() {
         You can drag these nodes to the pane on the right.
       </div>
       <div
-        className={`${styles.dndnode} ${styles.actionStateNode}`}
+        className={`${styles.dndnode} `}
         onDragStart={(event) => onDragStart(event, "actionStateNode")}
         draggable
       >
-        Action State
+        <img src="/actionState.png" alt="" />
       </div>
 
       <div
-        className={`${styles.dndnode} ${styles.actor}`}
+        className={`${styles.dndnode} `}
         onDragStart={(event) => onDragStart(event, "actorNode")}
         draggable
       >
-        <span className={styles.text}>Actor</span>
+        <img src="/diagram_actor.png" alt="" />
       </div>
-      <div className={styles.startNodeContainer}>
-        <div
-          className={`${styles.dndnode} ${styles.start}`}
-          onDragStart={(event) => onDragStart(event, "startNode")}
-          draggable
-        ></div>
-        <span>Start Node</span>
-      </div>
-
-      <div className="flex justify-center mt-3 mb-2">
-        <div
-          className={`${styles.dndnode} ${styles.decision}`}
-          onDragStart={(event) => onDragStart(event, "decisionNode")}
-          draggable
-        >
-          <span>Decision Node</span>
-        </div>
+      <div
+        className={`${styles.dndnode} `}
+        onDragStart={(event) => onDragStart(event, "startNode")}
+        draggable
+      >
+        <img src="/startNode.png" alt="" />
       </div>
 
       <div
-        className={`${styles.dndnode} ${styles.fork}`}
+        className={`${styles.dndnode} `}
+        onDragStart={(event) => onDragStart(event, "decisionNode")}
+        draggable
+      >
+        <img src="/decisionNode.png" alt="" />
+      </div>
+
+      <div
+        className={`${styles.dndnode}`}
         onDragStart={(event) => onDragStart(event, "fork")}
         draggable
       >
-        <span>Fork</span>
+        <img src="/fork.png" alt="" />
       </div>
 
       <div
-        className={`${styles.dndnode} ${styles.join}`}
+        className={`${styles.dndnode} `}
         onDragStart={(event) => onDragStart(event, "join")}
         draggable
       >
-        <span>Join</span>
+        <img src="/join.png" alt="" />
       </div>
-      <div className={styles.endStateNodeContainer}>
-        <div
-          className={`${styles.dndnode} ${styles.end}`}
-          onDragStart={(event) => onDragStart(event, "endStateNode")}
-          draggable
-        ></div>
-        <span>End State Node</span>
+      <div
+        className={`${styles.dndnode}`}
+        onDragStart={(event) => onDragStart(event, "endStateNode")}
+        draggable
+      >
+        <img src="/endstate.png" alt="" />
       </div>
     </aside>
   );
