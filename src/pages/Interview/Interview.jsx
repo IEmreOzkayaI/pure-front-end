@@ -16,6 +16,7 @@ import Redirect from "../../components/shared/Redirect/Redirect.jsx";
 import systemWarning from "../../systemWarning.js";
 import {useResponsiveBlock} from "../../hooks/useResponsiveBlock.jsx";
 import {interviewFetch} from "../../redux/toolkit/interviewSlice.js";
+import TestQuestion from "../../components/test/TestQuestion.jsx";
 
 
 const Interview = () => {
@@ -28,7 +29,6 @@ const Interview = () => {
 
     useEffect(() => {
         dispatch(interviewFetch("08de5872-5868-4400-a655-71800a22bf78"));
-
     }, []);
 
     useEffect(() => {
@@ -50,10 +50,11 @@ const Interview = () => {
         exit={{opacity: 0}}
     >
         {responsiveBlock && <div className={styles.interview}>
-             <InterviewHeader/>
+            <InterviewHeader/>
             <div className={styles.interview_down}>
                 <InterviewNavigation handleSelectedQuestion={handleSelectedQuestion}/>
-                <InterviewContent/>
+                {currentQuestion?.type !== "Test" && <InterviewContent/>}
+                {currentQuestion?.type === "Test" && <TestQuestion/>}
             </div>
         </div>}
         {!responsiveBlock && <Redirect text={systemWarning.no_responsive_design}/>}
@@ -107,7 +108,7 @@ const dummyData = {
                 "`[{species: 1, growthRate: 3, impact: 5}, {species: 2, growthRate: 2, impact: 6}, {species: 3, growthRate: 1, impact: 7}]`\n" +
                 "\n" +
                 "**Output:**  \n" +
-                "`[3, 2, 1]`",   code: "console.log(\"Hello, World!\");"
+                "`[3, 2, 1]`", code: "console.log(\"Hello, World!\");"
         }, {
             mode: "ace/mode/java",
             number: 3,
@@ -355,98 +356,104 @@ const question_3 = {
     ]
 }
 
-const best_question={
+const best_question = {
     "id": "003",
     "name": "Queue Operations in a Supermarket",
     "topic": "queue",
     "level": "medium",
     "description": {
-    "scenario": "In a busy supermarket, customers form a single queue to be served at multiple counters. Each customer has a distinct number of items to check out. The supermarket implements a system where the customer with the least number of items is served first. This requires dynamically arranging the queue as new customers join.",
+        "scenario": "In a busy supermarket, customers form a single queue to be served at multiple counters. Each customer has a distinct number of items to check out. The supermarket implements a system where the customer with the least number of items is served first. This requires dynamically arranging the queue as new customers join.",
         "question": "Implement a queue system that can efficiently sort customers based on the number of items they have, allowing the customer with the least number of items to be served next."
-},
+    },
     "real_life_application": "This system can be used in supermarkets, banks, or any service area where customers need to be served based on certain priorities to ensure fairness and efficiency.",
     "time_complexity_analysis": {
-    "best_case": "O(log n)",
+        "best_case": "O(log n)",
         "average_case": "O(log n)",
         "worst_case": "O(n)"
-},
+    },
     "example_input": "enqueue(5), enqueue(3), enqueue(6), dequeue(), enqueue(2), dequeue()",
     "example_output": "dequeue -> 3, dequeue -> 2",
     "missing_part": [
-    {
-        "language": "JavaScript",
-        "code_snippet": "function PriorityQueue() {\n    // Your code here\n    this.enqueue = function(item) {};\n    this.dequeue = function() {};\n}"
-    },
-    {
-        "language": "Java",
-        "code_snippet": "public class PriorityQueue {\n    // Your code here\n    public void enqueue(int item) {}\n    public int dequeue() {}\n}"
-    },
-    {
-        "language": "Python",
-        "code_snippet": "class PriorityQueue:\n    def __init__(self):\n        # Your code here\n    def enqueue(self, item):\n        pass\n    def dequeue(self):\n        pass"
-    },
-    {
-        "language": "C#",
-        "code_snippet": "public class PriorityQueue {\n    // Your code here\n    public void Enqueue(int item) {}\n    public int Dequeue() {}\n}"
-    }
-],
+        {
+            "language": "JavaScript",
+            "code_snippet": "function PriorityQueue() {\n    // Your code here\n    this.enqueue = function(item) {};\n    this.dequeue = function() {};\n}"
+        },
+        {
+            "language": "Java",
+            "code_snippet": "public class PriorityQueue {\n    // Your code here\n    public void enqueue(int item) {}\n    public int dequeue() {}\n}"
+        },
+        {
+            "language": "Python",
+            "code_snippet": "class PriorityQueue:\n    def __init__(self):\n        # Your code here\n    def enqueue(self, item):\n        pass\n    def dequeue(self):\n        pass"
+        },
+        {
+            "language": "C#",
+            "code_snippet": "public class PriorityQueue {\n    // Your code here\n    public void Enqueue(int item) {}\n    public int Dequeue() {}\n}"
+        }
+    ],
     "answer": [
-    {
-        "language": "JavaScript",
-        "solution_code": "function PriorityQueue() {\n    this.items = [];\n    this.enqueue = function(item) {\n        var added = false;\n        for (var i = 0; i < this.items.length; i++) {\n            if (item < this.items[i]) {\n                this.items.splice(i, 0, item);\n                added = true;\n                break;\n            }\n        }\n        if (!added) {\n            this.items.push(item);\n        }\n    };\n    this.dequeue = function() {\n        return this.items.shift();\n    };\n}"
-    },
-    {
-        "language": "Java",
-        "solution_code": "public class PriorityQueue {\n    private ArrayList<Integer> items = new ArrayList<Integer>();\n\n    public void enqueue(int item) {\n        int i;\n        for (i = 0; i < items.size(); i++) {\n            if (item < items.get(i)) {\n                break;\n            }\n        }\n        items.add(i, item);\n    }\n\n    public int dequeue() {\n        return items.remove(0);\n    }\n}"
-    },
-    {
-        "language": "Python",
-        "solution_code": "class PriorityQueue:\n    def __init__(self):\n        self.items = []\n\n    def enqueue(self, item):\n        for i, current_item in enumerate(self.items):\n            if item < current_item:\n                self.items.insert(i, item)\n                return\n        self.items.append(item)\n\n    def dequeue(self):\n        return self.items.pop(0)"
-    },
-    {
-        "language": "C#",
-        "solution_code": "public class PriorityQueue {\n    private List<int> items = new List<int>();\n\n    public void Enqueue(int item) {\n        int i;\n        for (i = 0; i < items.Count; i++) {\n            if (item < items[i]) {\n                break;\n            }\n        }\n        items.Insert(i, item);\n    }\n\n    public int Dequeue() {\n        int item = items[0];\n        items.RemoveAt(0);\n        return item;\n    }\n}"
-    }
-],
+        {
+            "language": "JavaScript",
+            "solution_code": "function PriorityQueue() {\n    this.items = [];\n    this.enqueue = function(item) {\n        var added = false;\n        for (var i = 0; i < this.items.length; i++) {\n            if (item < this.items[i]) {\n                this.items.splice(i, 0, item);\n                added = true;\n                break;\n            }\n        }\n        if (!added) {\n            this.items.push(item);\n        }\n    };\n    this.dequeue = function() {\n        return this.items.shift();\n    };\n}"
+        },
+        {
+            "language": "Java",
+            "solution_code": "public class PriorityQueue {\n    private ArrayList<Integer> items = new ArrayList<Integer>();\n\n    public void enqueue(int item) {\n        int i;\n        for (i = 0; i < items.size(); i++) {\n            if (item < items.get(i)) {\n                break;\n            }\n        }\n        items.add(i, item);\n    }\n\n    public int dequeue() {\n        return items.remove(0);\n    }\n}"
+        },
+        {
+            "language": "Python",
+            "solution_code": "class PriorityQueue:\n    def __init__(self):\n        self.items = []\n\n    def enqueue(self, item):\n        for i, current_item in enumerate(self.items):\n            if item < current_item:\n                self.items.insert(i, item)\n                return\n        self.items.append(item)\n\n    def dequeue(self):\n        return self.items.pop(0)"
+        },
+        {
+            "language": "C#",
+            "solution_code": "public class PriorityQueue {\n    private List<int> items = new List<int>();\n\n    public void Enqueue(int item) {\n        int i;\n        for (i = 0; i < items.Count; i++) {\n            if (item < items[i]) {\n                break;\n            }\n        }\n        items.Insert(i, item);\n    }\n\n    public int Dequeue() {\n        int item = items[0];\n        items.RemoveAt(0);\n        return item;\n    }\n}"
+        }
+    ],
     "answer_explanation": "This solution implements a priority queue where each enqueue operation inserts the item in a position that maintains the order of the queue based on the number of items each customer has. The dequeue operation simply removes and returns the first element, which is always the customer with the least number of items.",
     "test_input_output_10": [
-    [{"input": "enqueue(10), enqueue(20), dequeue()", "output": "dequeue -> 10"}],
-    [{"input": "enqueue(5), enqueue(15), enqueue(3), dequeue()", "output": "dequeue -> 3"}],
-    [{"input": "enqueue(7), enqueue(2), enqueue(9), dequeue(), dequeue()", "output": "dequeue -> 2, dequeue -> 7"}],
-    [{"input": "enqueue(4), dequeue(), enqueue(6), dequeue()", "output": "dequeue -> 4, dequeue -> 6"}],
-    [{"input": "enqueue(1), enqueue(1), enqueue(1), dequeue()", "output": "dequeue -> 1"}],
-    [{"input": "enqueue(12), enqueue(6), enqueue(18), dequeue(), enqueue(5)", "output": "dequeue -> 6"}],
-    [{"input": "enqueue(22), enqueue(11), enqueue(33), dequeue(), dequeue()", "output": "dequeue -> 11, dequeue -> 22"}],
-    [{"input": "enqueue(8), enqueue(8), enqueue(8), dequeue()", "output": "dequeue -> 8"}],
-    [{"input": "enqueue(17), enqueue(14), enqueue(19), dequeue(), dequeue()", "output": "dequeue -> 14, dequeue -> 17"}],
-    [{"input": "enqueue(13), enqueue(21), enqueue(10), dequeue()", "output": "dequeue -> 10"}]
-],
+        [{"input": "enqueue(10), enqueue(20), dequeue()", "output": "dequeue -> 10"}],
+        [{"input": "enqueue(5), enqueue(15), enqueue(3), dequeue()", "output": "dequeue -> 3"}],
+        [{"input": "enqueue(7), enqueue(2), enqueue(9), dequeue(), dequeue()", "output": "dequeue -> 2, dequeue -> 7"}],
+        [{"input": "enqueue(4), dequeue(), enqueue(6), dequeue()", "output": "dequeue -> 4, dequeue -> 6"}],
+        [{"input": "enqueue(1), enqueue(1), enqueue(1), dequeue()", "output": "dequeue -> 1"}],
+        [{"input": "enqueue(12), enqueue(6), enqueue(18), dequeue(), enqueue(5)", "output": "dequeue -> 6"}],
+        [{
+            "input": "enqueue(22), enqueue(11), enqueue(33), dequeue(), dequeue()",
+            "output": "dequeue -> 11, dequeue -> 22"
+        }],
+        [{"input": "enqueue(8), enqueue(8), enqueue(8), dequeue()", "output": "dequeue -> 8"}],
+        [{
+            "input": "enqueue(17), enqueue(14), enqueue(19), dequeue(), dequeue()",
+            "output": "dequeue -> 14, dequeue -> 17"
+        }],
+        [{"input": "enqueue(13), enqueue(21), enqueue(10), dequeue()", "output": "dequeue -> 10"}]
+    ],
     "additional_resources": [
-    {
-        "name": "Understanding Priority Queues",
-        "link": "https://www.geeksforgeeks.org/priority-queue-set-1-introduction/"
-    },
-    {
-        "name": "Implementing Priority Queues in Different Languages",
-        "link": "https://www.programiz.com/dsa/priority-queue"
-    }
-],
+        {
+            "name": "Understanding Priority Queues",
+            "link": "https://www.geeksforgeeks.org/priority-queue-set-1-introduction/"
+        },
+        {
+            "name": "Implementing Priority Queues in Different Languages",
+            "link": "https://www.programiz.com/dsa/priority-queue"
+        }
+    ],
     "interactive_steps": [
-    {
-        "step_number": 1,
-        "step_description": "Create a data structure to store the queue elements."
-    },
-    {
-        "step_number": 2,
-        "step_description": "Define the enqueue method to insert elements based on their priority."
-    },
-    {
-        "step_number": 3,
-        "step_description": "Implement the dequeue method to remove and return the element with the highest priority (in this case, the smallest number)."
-    },
-    {
-        "step_number": 4,
-        "step_description": "Ensure that the queue maintains its order after each operation."
-    }
-]
+        {
+            "step_number": 1,
+            "step_description": "Create a data structure to store the queue elements."
+        },
+        {
+            "step_number": 2,
+            "step_description": "Define the enqueue method to insert elements based on their priority."
+        },
+        {
+            "step_number": 3,
+            "step_description": "Implement the dequeue method to remove and return the element with the highest priority (in this case, the smallest number)."
+        },
+        {
+            "step_number": 4,
+            "step_description": "Ensure that the queue maintains its order after each operation."
+        }
+    ]
 }
