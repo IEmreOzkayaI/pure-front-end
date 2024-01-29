@@ -23,9 +23,10 @@ function* logOut() {
 function* logOutWrapper() {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(import.meta.env.VITE_LOG_OUT_USER_API, {
-                withCredentials: true,
-            })
+            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/log-out`
+                , {
+                    withCredentials: true,
+                })
             .then((res) => {
                 const data = res.data;
                 window.location.href = "/";

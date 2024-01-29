@@ -23,9 +23,10 @@ function* user(action) {
 function* userWrapper() {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(import.meta.env.VITE_CURRENT_USER_API, {
-                withCredentials: true,
-            })
+            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/current`
+                , {
+                    withCredentials: true,
+                })
             .then((res) => {
                 if (res.status === 200) {
                     const data = res.data;

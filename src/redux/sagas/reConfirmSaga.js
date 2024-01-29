@@ -23,13 +23,14 @@ function* reconfirm() {
 function* reConfirmWrapper() {
 	return yield new Promise((resolve, reject) => {
 		axios
-			.get(import.meta.env.VITE_RECONFIRM_USER_API, {
-				withCredentials: true,
-				headers: {
-					"Content-Type": "application/json",
-					Accept: "application/json",
-				},
-			})
+			.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/re-confirm`,
+				{
+					withCredentials: true,
+					headers: {
+						"Content-Type": "application/json",
+						Accept: "application/json",
+					},
+				})
 			.then((res) => {
 				const data = res.data;
 				resolve(data);
