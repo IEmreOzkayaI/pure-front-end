@@ -41,13 +41,6 @@ const InterviewHeader = () => {
                     {questionType}
                 </div>
             </div>
-
-            {/*<div className={styles.interview__container__header__theme__dark}>*/}
-            {/*    dark*/}
-            {/*</div>*/}
-            {/*<div className={styles.interview__container__header__theme__light}>*/}
-            {/*    light*/}
-            {/*</div>*/}
             {
                 questionType === 'Algorithm' && (
                     <select className={styles.interview__container__header__language} value={currentQuestion?.mode}
@@ -61,17 +54,6 @@ const InterviewHeader = () => {
                 )
             }
 
-            {/*<div className={styles.interview__container__header__closeBtn}>*/}
-            {/*    <svg*/}
-            {/*        width="18"*/}
-            {/*        height="18"*/}
-            {/*        viewBox="0 0 18 18"*/}
-            {/*        fill="none"*/}
-            {/*        xmlns="http://www.w3.org/2000/svg"*/}
-            {/*    >*/}
-            {/*        <path d="M1 1L17 17M17 1L1 17" stroke="white" strokeWidth="2"/>*/}
-            {/*    </svg>*/}
-            {/*</div>*/}
             <div className={styles.interview__container__header__clock}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="33" height="19" viewBox="0 0 33 19" fill="none">
                     <circle cx="23.2744" cy="9.5" r="9" stroke="white"/>
@@ -86,6 +68,9 @@ const InterviewHeader = () => {
                     {displayTime}
                 </div>
             </div>
+            <button className={styles.interview__container__header__finish__button}>
+                Finish
+            </button>
 
         </header>
     );

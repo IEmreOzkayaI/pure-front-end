@@ -23,7 +23,7 @@ function* interview(action) {
 function* interviewWrapper(interview_id) {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(`${import.meta.env.VITE_GET_INTERVIEW_BY_INTERVIEW_ID_API}/${interview_id}`, {
+            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/interview/get_by_interview_id/${interview_id}`, {
                 withCredentials: true,
             })
             .then((res) => {

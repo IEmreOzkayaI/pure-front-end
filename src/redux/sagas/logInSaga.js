@@ -23,7 +23,7 @@ function* logInWrapper(payload) {
 	const {logInForm} = payload;
 	return yield new Promise((resolve, reject) => {
 		axios
-			.post(import.meta.env.VITE_LOG_IN_USER_API, logInForm, {
+			.post(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/log-in`, logInForm, {
 				withCredentials: true,
 			})
 			.then((res) => {

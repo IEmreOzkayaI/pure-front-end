@@ -7,8 +7,8 @@ $very-dark-gray: #16161b;
 $text-color: #a1aeb7;
 $black: #000000;
 $real-white: #ffffff;
-$green : #A3BE8C;
-$red :#F77777;
+$green: #A3BE8C;
+$red: #F77777;
 $yellow: #EBCB8B;
 
 *,
@@ -18,6 +18,7 @@ $yellow: #EBCB8B;
   padding: 0;
   box-sizing: border-box;
 }
+
 html {
   background-color: #ffffff;
 }
@@ -26,6 +27,7 @@ html {
   font-family: "Ubuntu", sans-serif;
   font-size: 10px; // so you can 1rem as 16px
   background-color: #ffffff;
+
   ::selection {
     background-color: #ffffff;
     color: #000000;
@@ -47,12 +49,15 @@ ul {
 .flex {
   display: flex;
 }
+
 .justify-space-between {
   justify-content: space-between;
 }
+
 .justify-center {
   justify-content: center;
 }
+
 .align-items-center {
   align-items: center;
 }
@@ -97,4 +102,13 @@ ul {
   width: 10px;
   height: 10px;
   border-radius: 100%;
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: #ffffff !important;
+}
+
+input {
+  outline: none;
 }

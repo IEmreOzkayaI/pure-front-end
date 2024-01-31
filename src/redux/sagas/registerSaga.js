@@ -25,9 +25,10 @@ function* registerWrapper(payload) {
 
 	return yield new Promise((resolve, reject) => {
 		axios
-			.post(import.meta.env.VITE_REGISTER_USER_API, user, {
-				withCredentials: true,
-			})
+			.post(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/register`,
+				user, {
+					withCredentials: true,
+				})
 			.then((res) => {
 				const data = res.data;
 				resolve(data);
