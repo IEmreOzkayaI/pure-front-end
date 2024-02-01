@@ -9,6 +9,7 @@ import ReactFlow, {
   updateEdge,
 } from "reactflow";
 
+import CustomNode from "./CustomNode/CustomNode";
 import ActorNode from "./ActorNode/ActorNode";
 import StartNode from "./StartNode/StartNode";
 import ActionStateNode from "./ActionStateNode/ActionStateNode";
@@ -27,6 +28,7 @@ import "./handleStyles.css";
 
 const nodeTypes = {
   actorNode: ActorNode,
+  customNode: CustomNode,
   startNode: StartNode,
   actionStateNode: ActionStateNode,
   decisionNode: DecisionNode,
@@ -114,9 +116,12 @@ export default function DiagramFlow() {
 
   const onNodeContextMenu = useCallback(
     (event, node) => {
+      // Prevent native context menu from showing
       event.preventDefault();
 
-      console.log(event.target);
+      // Calculate position of the context menu. We want to make sure it
+      // doesn't get positioned off-screen.
+      // const pane = reactFlowInstance.getBoundingClientRect();
       setMenu({
         id: node.id,
         top: event.clientX,
