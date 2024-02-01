@@ -44,19 +44,12 @@ export default function SideBar() {
 
       <div
         className={`${styles.dndnode}`}
-        onDragStart={(event) => onDragStart(event, "fork")}
+        onDragStart={(event) => onDragStart(event, "forkjoin")}
         draggable
       >
         <img src="/fork.png" alt="" />
       </div>
 
-      <div
-        className={`${styles.dndnode} `}
-        onDragStart={(event) => onDragStart(event, "join")}
-        draggable
-      >
-        <img src="/join.png" alt="" />
-      </div>
       <div
         className={`${styles.dndnode}`}
         onDragStart={(event) => onDragStart(event, "endStateNode")}

@@ -26,7 +26,7 @@ function* confirmWrapper(payload) {
     return yield new Promise((resolve, reject) => {
         axios
             .post(
-                `${import.meta.env.VITE_BACKEND_BASE_URL}/user/confirm`,
+                `${import.meta.env.VITE_BACKEND_BASE_URL}api/user/confirm`,
                 {confirm_credential},
                 {
                     withCredentials: true,

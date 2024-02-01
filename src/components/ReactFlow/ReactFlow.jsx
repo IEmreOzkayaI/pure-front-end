@@ -19,8 +19,7 @@ import styles from "./ReactFlow.module.scss";
 
 import { useState } from "react";
 import DecisionNode from "./DecisionNode/DecisionNode";
-import Fork from "./Fork/Fork";
-import Join from "./Join/Join";
+import ForkJoin from "./ForkJoin/ForkJoin";
 import EndStateNode from "./EndStateNode/EndStateNode";
 import ContextMenu from "./ContextMenu/ContextMenu";
 import "./handleStyles.css";
@@ -30,8 +29,7 @@ const nodeTypes = {
   startNode: StartNode,
   actionStateNode: ActionStateNode,
   decisionNode: DecisionNode,
-  fork: Fork,
-  join: Join,
+  forkjoin: ForkJoin,
   endStateNode: EndStateNode,
 };
 
@@ -114,9 +112,12 @@ export default function DiagramFlow() {
 
   const onNodeContextMenu = useCallback(
     (event, node) => {
+      // Prevent native context menu from showing
       event.preventDefault();
 
-      console.log(event.target);
+      // Calculate position of the context menu. We want to make sure it
+      // doesn't get positioned off-screen.
+      // const pane = reactFlowInstance.getBoundingClientRect();
       setMenu({
         id: node.id,
         top: event.clientX,
@@ -150,8 +151,9 @@ export default function DiagramFlow() {
           onEdgeUpdateStart={onEdgeUpdateStart}
           onEdgeUpdateEnd={onEdgeUpdateEnd}
           onNodeContextMenu={onNodeContextMenu}
-          style={{ backgroundColor: "#fff", borderRadius: "1rem" }}
+          style={{ backgroundColor: "#fff" }}
           onClick={onPaneClick}
+          connectionMode="loose"
         >
           <Controls />
           <Background variant="dots" gap={12} size={1} />
