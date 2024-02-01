@@ -1,60 +1,63 @@
 import { Handle, Position, NodeResizer } from "reactflow";
-import styles from "./ActionStateNode.module.scss";
+import styles from "./ForkJoin.module.scss";
 
-function ActionStateNode({ data, id, selected }) {
+function ForkJoin({ id, selected }) {
   return (
     <>
-      <NodeResizer isVisible={selected} minHeight={80} minWidth={160} />
-
-      <div className={styles.actionState} id={`decisionStateNode_${id}`}>
+      <NodeResizer
+        isVisible={selected}
+        minHeight={70}
+        minWidth={3}
+        maxWidth={15}
+      />
+      <div className={styles.fork} id={`fork_${id}`}>
         <div className="handleWrapperRight">
           <Handle
             position={Position.Right}
+            id={`fork_${id}_right_1`}
             className="handleStyle"
-            id={`actionStateNode_${id}_right_1`}
           />
           <Handle
-            className="handleStyle"
             position={Position.Right}
-            id={`actionStateNode_${id}_right_2`}
+            id={`fork_${id}_right_2`}
+            className="handleStyle"
           />
           <Handle
-            className="handleStyle"
             position={Position.Right}
-            id={`actionStateNode_${id}_right_3`}
+            id={`fork_${id}_right_3`}
+            className="handleStyle"
           />
           <Handle
-            className="handleStyle"
             position={Position.Right}
-            id={`actionStateNode_${id}_right_4`}
+            id={`fork_${id}_right_4`}
+            className="handleStyle"
           />
         </div>
         <div className="handleWrapperLeft">
           <Handle
             position={Position.Left}
-            id={`actionStateNode_${id}_left_1`}
+            id={`fork_${id}_left_1`}
             className="handleStyle"
           />
           <Handle
             position={Position.Left}
-            id={`actionStateNode_${id}_left_2`}
+            id={`fork_${id}_left_2`}
             className="handleStyle"
           />
           <Handle
             position={Position.Left}
-            id={`actionStateNode_${id}_left_3`}
+            id={`fork_${id}_left_3`}
             className="handleStyle"
           />
           <Handle
             position={Position.Left}
+            id={`fork_${id}_left_4`}
             className="handleStyle"
-            id={`actionStateNode_${id}_left_4`}
           />
         </div>
       </div>
-      <div className={styles.label}>{data?.label}</div>
     </>
   );
 }
 
-export default ActionStateNode;
+export default ForkJoin;

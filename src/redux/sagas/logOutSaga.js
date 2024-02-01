@@ -23,7 +23,7 @@ function* logOut() {
 function* logOutWrapper() {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/log-out`
+            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}api/user/log-out`
                 , {
                     withCredentials: true,
                 })

@@ -9,3 +9,28 @@
 .react-flow__connectionline path {
   stroke-width: 3;
 }
+
+.handleWrapperRight {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  right: 0;
+  flex-direction: column;
+  top: 0;
+  justify-content: space-between;
+}
+.handleWrapperLeft {
+  display: flex;
+  position: absolute;
+  height: 100%;
+  left: 0;
+  flex-direction: column;
+  top: 0;
+  justify-content: space-between;
+}
+
+.handleStyle {
+  position: relative;
+  transform: none;
+  top: auto;
+}
