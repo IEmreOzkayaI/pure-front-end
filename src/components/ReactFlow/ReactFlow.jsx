@@ -7,6 +7,7 @@ import ReactFlow, {
   addEdge,
   ReactFlowProvider,
   updateEdge,
+  getConnectedEdges,
 } from "reactflow";
 
 import ActorNode from "./ActorNode/ActorNode";
@@ -46,14 +47,20 @@ export default function DiagramFlow() {
   const onConnect = useCallback(
     (thisEdge) => {
       setEdges((eds) => {
+        const sourceNode = nodes.find((node) => node.id === thisEdge.source);
+        const targetNode = nodes.find((node) => node.id === thisEdge.target);
         const newEdge = {
           ...thisEdge,
           id: `${thisEdge.sourceHandle} -> ${thisEdge.targetHandle}`,
+          sourceNodeLabel: sourceNode.data.label,
+          targetNodeLabel: targetNode.data.label,
         };
+        console.log("new edge", newEdge);
+        console.log("allEDGES", getConnectedEdges(nodes, edges));
         return addEdge(newEdge, eds);
       });
     },
-    [setEdges]
+    [setEdges, nodes, edges]
   );
   const onEdgeUpdateStart = useCallback(() => {
     edgeUpdateSuccessful.current = false;

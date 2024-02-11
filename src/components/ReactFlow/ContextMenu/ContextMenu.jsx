@@ -25,6 +25,18 @@ export default function ContextMenu({ ...props }) {
         return node;
       })
     );
+
+    setEdges((edges) =>
+      edges.map((edge) => {
+        if (edge.source === id) {
+          edge.sourceNodeLabel = nodeLabel;
+        }
+        if (edge.target === id) {
+          edge.targetNodeLabel = nodeLabel;
+        }
+        return edge;
+      })
+    );
   };
 
   return (
