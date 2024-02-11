@@ -12,8 +12,11 @@
     background-color: $very-dark-gray;
     border-radius: 0 0 1.4rem  1.4rem;
     color: $real-white;
+    grid-template-columns: 84vw;
 
-    align-items: center;
+
+    padding-top: 4rem;
+    align-items: flex-start;
     justify-content: center;
     text-align: center;
     font-size: 2rem;

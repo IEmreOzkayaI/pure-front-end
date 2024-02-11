@@ -23,7 +23,7 @@ function* user(action) {
 function* userWrapper() {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/user/current`
+            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/user/current`
                 , {
                     withCredentials: true,
                 })

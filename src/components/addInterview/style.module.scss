@@ -1,0 +1,61 @@
+@import "../../global.scss";
+
+.add__interview__container {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 1rem;
+
+  &__left__side {
+    grid-column: 1/2;
+    justify-content: center;
+
+    form {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      height: 100%;
+    }
+
+    &__general__info__header, &__question__info__header {
+      color: $very-dark-gray;
+      text-align: center;
+    }
+
+    &__question__info__header {
+      margin-top: 2rem;
+    }
+
+    &__general__info, &__question__info {
+      border: 1px solid $gray;
+      padding: 2rem;
+      border-radius: .5rem;
+    }
+
+    &__question__info {
+      height: 30rem;
+      overflow: scroll;
+    }
+
+  }
+
+  &__right__side {
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    &__general__info {
+      border: 1px solid $gray;
+      height: 100%;
+      border-radius: .5rem;
+
+
+      &__header {
+        color: $very-dark-gray;
+        text-align: center;
+      }
+    }
+
+
+  }
+}
