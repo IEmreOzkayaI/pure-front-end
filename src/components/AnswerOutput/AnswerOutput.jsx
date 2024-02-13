@@ -3,8 +3,9 @@ import {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import algorithmSlice, {algorithmFetch, clearAlgorithmInfo} from "../../redux/toolkit/compiler/algorithmSlice.js";
 import {setQuestions} from "../../redux/toolkit/interviewManagementSlice.js";
+import { getEdgesAndNodes } from "../../redux/toolkit/diagramSlice.js";
 
-const AnswerConsole = () => {
+const AnswerConsole = ({edges}) => {
     const dispatch = useDispatch();
     const [activeTab, setActiveTab] = useState(0);
     const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
@@ -61,7 +62,7 @@ const AnswerConsole = () => {
                 {algorithmProgress !== false && <div className={`${styles.status} ${styles.loading}`}>Loading</div>}
             </div>
             <div className={styles.right_side_content_down_body_actions}>
-                <button onClick={() => handleCodeExecute()}>
+                {currentQuestion?.type === 'Diagram' ? <button onClick={() => dispatch(getEdgesAndNodes(edges))} className={styles.diagram}>Submit Diagram</button> : <><button onClick={() => handleCodeExecute()}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
                         <path
                             d="M1 7.86496V2.13504C1 1.2872 1.98886 0.824047 2.64018 1.36682L6.07813 4.23178C6.55789 4.63157 6.55789 5.36843 6.07814 5.76822L2.64018 8.63318C1.98886 9.17595 1 8.7128 1 7.86496Z"
@@ -69,7 +70,8 @@ const AnswerConsole = () => {
                     </svg>
                     Run
                 </button>
-                <button>Submit</button>
+                <button>Submit</button></>}
+                
 
             </div>
         </div>

@@ -2,12 +2,12 @@ import { useCallback, useRef } from "react";
 import ReactFlow, {
   Controls,
   Background,
-  useNodesState,
-  useEdgesState,
   addEdge,
   ReactFlowProvider,
   updateEdge,
   getConnectedEdges,
+  applyEdgeChanges,
+  applyNodeChanges,
 } from "reactflow";
 
 import ActorNode from "./ActorNode/ActorNode";
@@ -37,10 +37,9 @@ const nodeTypes = {
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-export default function DiagramFlow() {
+export default function DiagramFlow({edges,setEdges}) {
   const edgeUpdateSuccessful = useRef(true);
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
+  const [nodes, setNodes] = useState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [menu, setMenu] = useState(null);
 
@@ -137,6 +136,15 @@ export default function DiagramFlow() {
   const onPaneClick = useCallback(() => {
     return setMenu(null);
   }, [setMenu]);
+
+   const onNodesChange = useCallback(
+     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+     [setNodes]
+   );
+   const onEdgesChange = useCallback(
+     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+     [setEdges]
+   );
 
   return (
     <div
