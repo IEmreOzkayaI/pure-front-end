@@ -13,6 +13,7 @@ export default function ContextMenu({ ...props }) {
   }, [id, setNodes, setEdges, onClick]);
 
   const handleRename = (nodeLabel) => {
+    if(nodeLabel === "") return;
     setNodes((nodes) =>
       nodes.map((node) => {
         if (node.id === id) {
@@ -58,7 +59,7 @@ export default function ContextMenu({ ...props }) {
                   className={styles["rename-input"]}
                   placeholder="Rename a Node"
                   onChange={(event) => {
-                    handleRename(event.target.value);
+                    handleRename(event.target.value.trim());
                   }}
                 />
               </li>

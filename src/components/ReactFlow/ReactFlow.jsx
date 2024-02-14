@@ -5,7 +5,6 @@ import ReactFlow, {
   addEdge,
   ReactFlowProvider,
   updateEdge,
-  getConnectedEdges,
   applyEdgeChanges,
   applyNodeChanges,
 } from "reactflow";
@@ -37,9 +36,8 @@ const nodeTypes = {
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-export default function DiagramFlow({edges,setEdges}) {
+export default function DiagramFlow({edges,setEdges,nodes,setNodes}) {
   const edgeUpdateSuccessful = useRef(true);
-  const [nodes, setNodes] = useState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [menu, setMenu] = useState(null);
 
@@ -54,12 +52,10 @@ export default function DiagramFlow({edges,setEdges}) {
           sourceNodeLabel: sourceNode.data.label,
           targetNodeLabel: targetNode.data.label,
         };
-        console.log("new edge", newEdge);
-        console.log("allEDGES", getConnectedEdges(nodes, edges));
         return addEdge(newEdge, eds);
       });
     },
-    [setEdges, nodes, edges]
+    [setEdges, nodes]
   );
   const onEdgeUpdateStart = useCallback(() => {
     edgeUpdateSuccessful.current = false;
@@ -109,7 +105,6 @@ export default function DiagramFlow({edges,setEdges}) {
         position,
         data: { label: `${type}` },
       };
-      console.log("new node", newNode);
 
       setNodes((nds) => nds.concat(newNode));
     },
