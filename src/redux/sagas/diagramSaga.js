@@ -28,36 +28,69 @@ function* diagram(action) {
 function* diagramWrapper(payload) {
   return yield new Promise((resolve, reject) => {
     try {
-      const { edges, nodes } = payload;
-      let actors = [], actionStateBoxes = []
+      const { edges, nodes, currentQuestion } = payload;
+      let actors = [],
+        actionStateBoxes = [],
+        lifeLines = [];
       let plantUML = "@startuml\n";
 
-      nodes.forEach((node) => { // find all actors and their edges
-        if (node.type === "actorNode") {
-          const tempNode = structuredClone(node)
-          plantUML += `actor ${tempNode.id} as "${tempNode.data?.label}"\n`;
-          const actorsEdges = edges.filter((edge) => edge.source === tempNode.id);
-          tempNode['edges'] = actorsEdges
-          actors.push(tempNode);
-          console.log("tempNode", tempNode);
-        }
-      });
+      if (edges.length === 0 || nodes.length === 0)
+        reject("There should be atleast one node or edge");
 
-      nodes.forEach((node) => { // find actionStateNodes / useCase shapes
-        if (node.type === "actionStateNode") {
-          actionStateBoxes.push(node);
-          plantUML += `usecase "${node.data?.label}" as ${node.id}\n`;
-        }
-        // buraya sidebardaki tum itemler icin conditionlar ekle
-      });
+      if (currentQuestion.question.topic === "Use-Case Diagram") {
+        const isDiagramValid = nodes.every((node) => {
+          return node.type === "actorNode" || node.type === "actionStateNode";
+        });
+        if (!isDiagramValid)
+          reject("Use case should only contain actor and actionStateNodes");
+      }
 
-      edges.forEach((edge)=>{
-       plantUML += `${edge.source} --> ${edge.target}\n`
-      })
+      if (currentQuestion.question.topic === "Use-Case Diagram") {
+        nodes.forEach((node) => {
+          // find all actors and their edges
+          if (node.type === "actorNode") {
+            const tempNode = structuredClone(node);
+            plantUML += `actor ${tempNode.id} as "${tempNode.data?.label}"\n`;
+            const actorsEdges = edges.filter(
+              (edge) => edge.source === tempNode.id
+            );
+            tempNode["edges"] = actorsEdges;
+            actors.push(tempNode);
+            console.log("tempNode", tempNode);
+          }
+        });
 
+        nodes.forEach((node) => {
+          // find actionStateNodes / useCase shapes
+          if (node.type === "actionStateNode") {
+            actionStateBoxes.push(node);
+            plantUML += `usecase "${node.data?.label}" as ${node.id}\n`;
+          }
+        });
 
-      plantUML += '@enduml'
-      console.log("actors", actors);
+        edges.forEach((edge) => {
+          plantUML += `${edge.source} --> ${edge.target}\n`;
+        });
+      }
+
+      if (currentQuestion.question.topic === "Sequence Diagram") {
+        plantUML = "@startuml\n";
+        nodes.forEach((node) => {
+          if (node.type === "lifeLine") {
+            const tempNode = structuredClone(node);
+            //TODO edgelerin type'ini degistirebilmeli ve ona gore uml'e eklemeli
+            // Edge e sag tik atinca filterlayip label eklesin ve type degistirsin
+            plantUML += `${tempNode.data.label} \n`;
+            const lifeLinesEdges = edges.filter(
+              (edge) => edge.source === tempNode.id
+            );
+            tempNode["edges"] = lifeLinesEdges;
+            lifeLines.push(tempNode);
+          }
+        });
+      }
+      plantUML += "@enduml";
+      console.log("lifelines", lifeLines);
       console.log("actionStateBoxes", actionStateBoxes);
       console.log("nodes", nodes);
       console.log("edges", edges);

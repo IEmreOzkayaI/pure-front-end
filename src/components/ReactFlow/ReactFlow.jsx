@@ -22,6 +22,7 @@ import DecisionNode from "./DecisionNode/DecisionNode";
 import ForkJoin from "./ForkJoin/ForkJoin";
 import EndStateNode from "./EndStateNode/EndStateNode";
 import ContextMenu from "./ContextMenu/ContextMenu";
+import LifeLine from "./LifeLine/LifeLine";
 import "./handleStyles.css";
 
 const nodeTypes = {
@@ -31,12 +32,13 @@ const nodeTypes = {
   decisionNode: DecisionNode,
   forkjoin: ForkJoin,
   endStateNode: EndStateNode,
+  lifeLine: LifeLine,
 };
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-export default function DiagramFlow({edges,setEdges,nodes,setNodes}) {
+export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
   const edgeUpdateSuccessful = useRef(true);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [menu, setMenu] = useState(null);
@@ -132,14 +134,14 @@ export default function DiagramFlow({edges,setEdges,nodes,setNodes}) {
     return setMenu(null);
   }, [setMenu]);
 
-   const onNodesChange = useCallback(
-     (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
-     [setNodes]
-   );
-   const onEdgesChange = useCallback(
-     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
-     [setEdges]
-   );
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes]
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  );
 
   return (
     <div

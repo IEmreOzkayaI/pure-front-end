@@ -62,7 +62,7 @@ const AnswerConsole = ({edges,nodes}) => {
                 {algorithmProgress !== false && <div className={`${styles.status} ${styles.loading}`}>Loading</div>}
             </div>
             <div className={styles.right_side_content_down_body_actions}>
-                {currentQuestion?.type === 'Diagram' ? <button onClick={() => dispatch(getEdgesAndNodes({edges,nodes}))} className={styles.diagram}>Submit Diagram</button> : <><button onClick={() => handleCodeExecute()}>
+                {currentQuestion?.type === 'Diagram' ? <button onClick={() => dispatch(getEdgesAndNodes({edges,nodes,currentQuestion}))} className={styles.diagram}>Submit Diagram</button> : <><button onClick={() => handleCodeExecute()}>
                     <svg xmlns="http://www.w3.org/2000/svg" width="7" height="10" viewBox="0 0 7 10" fill="none">
                         <path
                             d="M1 7.86496V2.13504C1 1.2872 1.98886 0.824047 2.64018 1.36682L6.07813 4.23178C6.55789 4.63157 6.55789 5.36843 6.07814 5.76822L2.64018 8.63318C1.98886 9.17595 1 8.7128 1 7.86496Z"

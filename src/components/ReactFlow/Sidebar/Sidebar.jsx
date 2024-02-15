@@ -18,6 +18,13 @@ export default function SideBar() {
       >
         <img src="/actionState.png" alt="" />
       </div>
+      <div
+        className={`${styles.dndnode} `}
+        onDragStart={(event) => onDragStart(event, "lifeLine")}
+        draggable
+      >
+        <img src="/lifeline.png" alt="" />
+      </div>
 
       <div
         className={`${styles.dndnode} `}
