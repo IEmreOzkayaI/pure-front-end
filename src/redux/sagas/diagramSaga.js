@@ -43,9 +43,7 @@ function* diagramWrapper(payload) {
         });
         if (!isDiagramValid)
           reject("Use case should only contain actor and actionStateNodes");
-      }
 
-      if (currentQuestion.question.topic === "Use-Case Diagram") {
         nodes.forEach((node) => {
           // find all actors and their edges
           if (node.type === "actorNode") {
@@ -78,15 +76,19 @@ function* diagramWrapper(payload) {
         nodes.forEach((node) => {
           if (node.type === "lifeLine") {
             const tempNode = structuredClone(node);
-            //TODO edgelerin type'ini degistirebilmeli ve ona gore uml'e eklemeli
-            // Edge e sag tik atinca filterlayip label eklesin ve type degistirsin
-            plantUML += `${tempNode.data.label} \n`;
             const lifeLinesEdges = edges.filter(
               (edge) => edge.source === tempNode.id
             );
             tempNode["edges"] = lifeLinesEdges;
             lifeLines.push(tempNode);
           }
+        });
+        lifeLines.forEach((lifeLine) => {
+          lifeLine.edges.forEach((edge) => {
+            plantUML += `${lifeLine.data.label + "_" + edge.source} ${
+              edge.animated ? "-->" : "->"
+            } ${edge.targetNodeLabel + "_" + edge.target}: ${edge.label} \n`;
+          });
         });
       }
       plantUML += "@enduml";

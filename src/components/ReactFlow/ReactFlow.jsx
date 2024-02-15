@@ -121,6 +121,7 @@ export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
       // Calculate position of the context menu. We want to make sure it
       // doesn't get positioned off-screen.
       // const pane = reactFlowInstance.getBoundingClientRect();
+      console.log("node", node);
       setMenu({
         id: node.id,
         top: event.clientX,
@@ -142,7 +143,20 @@ export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
     (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
     [setEdges]
   );
-
+  const onEdgeContextMenu = useCallback(
+    (event, edge) => {
+      // Prevent native context menu from showing
+      event.preventDefault();
+      console.log("edge", edge);
+      setMenu({
+        id: edge.id,
+        top: event.clientX,
+        bottom: event.clientY,
+        edgeType: edge.animated ? "Dashed" : "Solid",
+      });
+    },
+    [setMenu]
+  );
   return (
     <div
       style={{ width: "100%", height: "100%" }}
@@ -166,6 +180,7 @@ export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
           style={{ backgroundColor: "#fff" }}
           onClick={onPaneClick}
           connectionMode="loose"
+          onEdgeContextMenu={onEdgeContextMenu}
         >
           <Controls />
           <Background variant="dots" gap={12} size={1} />
