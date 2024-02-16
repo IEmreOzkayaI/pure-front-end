@@ -32,19 +32,20 @@ const reducers = {
         state.questionInit = false;
         state.questionProgress = false;
     },
-    filteredQuestionFetch: (state, action) => {
+    questionFetch: (state, action) => {
         state.questionInit = action.payload;
         state.questionInfo = null;
         state.questionError = false;
         state.questionProgress = false;
     },
+
 }
 
 const questionSlice = createSlice({
-    name: "question",
+    name: "getQuestion",
     initialState,
     reducers,
 });
 
-export const {questionProgress, questionFailure, questionSuccess, clearQuestionInfo, filteredQuestionFetch} = questionSlice.actions;
+export const {questionProgress, questionFailure, questionSuccess, clearQuestionInfo,questionFetch} = questionSlice.actions;
 export default questionSlice.reducer;

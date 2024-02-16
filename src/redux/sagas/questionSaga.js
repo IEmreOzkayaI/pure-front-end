@@ -7,21 +7,21 @@ export default function* questionSaga() {
 }
 
 function* questionWatcher() {
-    yield takeLatest("question/questionFetch", question);
+    yield takeLatest("question/filteredQuestionFetch", filteredQuestion);
 }
 
-function* question(action) {
+function* filteredQuestion(action) {
     try {
         console.log("action",action.payload)
         yield put(questionProgress());
-        const questionResponse = yield call(questionWrapper, action.payload);
+        const questionResponse = yield call(filteredQuestionQuestionWrapper, action.payload);
         yield put(questionSuccess(questionResponse));
     } catch (err) {
         yield put(questionFailure(err));
     }
 }
 
-function* questionWrapper(payload) {
+function* filteredQuestionQuestionWrapper(payload) {
     return yield new Promise((resolve, reject) => {
         axios
             .get(`http://localhost:3001/api/question/`, {
@@ -37,3 +37,4 @@ function* questionWrapper(payload) {
             });
     });
 }
+
