@@ -28,7 +28,7 @@ function* diagram(action) {
 function* diagramWrapper(payload) {
   return yield new Promise((resolve, reject) => {
     try {
-      const { edges, nodes, currentQuestion } = payload;
+      const { edges, nodes, currentQuestion, setEdges, setNodes } = payload;
       let actors = [],
         actionStateBoxes = [],
         lifeLines = [];
@@ -83,12 +83,11 @@ function* diagramWrapper(payload) {
             lifeLines.push(tempNode);
           }
         });
-        lifeLines.forEach((lifeLine) => {
-          lifeLine.edges.forEach((edge) => {
-            plantUML += `${lifeLine.data.label + "_" + edge.source} ${
-              edge.animated ? "-->" : "->"
-            } ${edge.targetNodeLabel + "_" + edge.target}: ${edge.label} \n`;
-          });
+
+        edges.forEach((edge) => {
+          plantUML += `${edge.sourceNodeLabel}_${edge.source} ${
+            edge.animated ? "-->" : "->"
+          } ${edge.targetNodeLabel}_${edge.target}: ${edge.label} \n`;
         });
       }
       plantUML += "@enduml";
@@ -97,6 +96,9 @@ function* diagramWrapper(payload) {
       console.log("nodes", nodes);
       console.log("edges", edges);
       console.log("plantUML", plantUML);
+      //TODO burda plantUML'i api'ye gönder
+      setEdges(edges);
+      setNodes(nodes);
       resolve(payload);
     } catch (error) {
       reject(error);

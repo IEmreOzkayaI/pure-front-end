@@ -4,8 +4,13 @@
   color: #000;
   height: 100%;
   width: 100%;
-  min-height: 8rem;
   min-width: 16rem;
+  background-image: url("/actionState.png");
+  background-position: center;
+  aspect-ratio: 1/1;
+  background-size: contain;
+  background-repeat: no-repeat;
+  border: none;
 }
 .label {
   font-size: 1.5rem;

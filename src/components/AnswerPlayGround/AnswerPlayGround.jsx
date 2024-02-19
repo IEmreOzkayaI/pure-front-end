@@ -6,9 +6,8 @@ import AnswerInput from "../AnswerInput/AnswerInput";
 import {useState} from "react";
 
 const AnswerPlayGround = (props) => {
-	const {handleDrag, rightSideHeight} = props;
-  const [edges, setEdges] = useState([]);
-  const [nodes, setNodes] = useState([]);
+	const {handleDrag, rightSideHeight,edges,nodes,setEdges,setNodes} = props;
+
 
 	return (
     <div className={styles.right_side}>
@@ -21,7 +20,12 @@ const AnswerPlayGround = (props) => {
           nodes={nodes}
         />
         <DragBar handleDrag={handleDrag} className={["vertical"]} />
-        <AnswerOutput edges={edges} nodes={nodes} />
+        <AnswerOutput
+          edges={edges}
+          nodes={nodes}
+          setNodes={setNodes}
+          setEdges={setEdges}
+        />
       </div>
     </div>
   );
