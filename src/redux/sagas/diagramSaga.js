@@ -28,7 +28,7 @@ function* diagram(action) {
 function* diagramWrapper(payload) {
   return yield new Promise((resolve, reject) => {
     try {
-      const { edges, nodes, currentQuestion, setEdges, setNodes } = payload;
+      const { edges, nodes, currentQuestion } = payload;
       let actors = [],
         actionStateBoxes = [],
         lifeLines = [];
@@ -96,9 +96,6 @@ function* diagramWrapper(payload) {
       console.log("nodes", nodes);
       console.log("edges", edges);
       console.log("plantUML", plantUML);
-      //TODO burda plantUML'i api'ye gönder
-      setEdges(edges);
-      setNodes(nodes);
       resolve(payload);
     } catch (error) {
       reject(error);
