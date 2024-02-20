@@ -2,11 +2,11 @@ import { useCallback, useRef } from "react";
 import ReactFlow, {
   Controls,
   Background,
-  useNodesState,
-  useEdgesState,
   addEdge,
   ReactFlowProvider,
   updateEdge,
+  applyEdgeChanges,
+  applyNodeChanges,
 } from "reactflow";
 
 import ActorNode from "./ActorNode/ActorNode";
@@ -22,6 +22,7 @@ import DecisionNode from "./DecisionNode/DecisionNode";
 import ForkJoin from "./ForkJoin/ForkJoin";
 import EndStateNode from "./EndStateNode/EndStateNode";
 import ContextMenu from "./ContextMenu/ContextMenu";
+import LifeLine from "./LifeLine/LifeLine";
 import "./handleStyles.css";
 
 const nodeTypes = {
@@ -31,29 +32,32 @@ const nodeTypes = {
   decisionNode: DecisionNode,
   forkjoin: ForkJoin,
   endStateNode: EndStateNode,
+  lifeLine: LifeLine,
 };
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 
-export default function DiagramFlow() {
+export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
   const edgeUpdateSuccessful = useRef(true);
-  const [nodes, setNodes, onNodesChange] = useNodesState([]);
-  const [edges, setEdges, onEdgesChange] = useEdgesState([]);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [menu, setMenu] = useState(null);
 
   const onConnect = useCallback(
     (thisEdge) => {
       setEdges((eds) => {
+        const sourceNode = nodes.find((node) => node.id === thisEdge.source);
+        const targetNode = nodes.find((node) => node.id === thisEdge.target);
         const newEdge = {
           ...thisEdge,
           id: `${thisEdge.sourceHandle} -> ${thisEdge.targetHandle}`,
+          sourceNodeLabel: sourceNode.data.label,
+          targetNodeLabel: targetNode.data.label,
         };
         return addEdge(newEdge, eds);
       });
     },
-    [setEdges]
+    [setEdges, nodes]
   );
   const onEdgeUpdateStart = useCallback(() => {
     edgeUpdateSuccessful.current = false;
@@ -103,7 +107,6 @@ export default function DiagramFlow() {
         position,
         data: { label: `${type}` },
       };
-      console.log("new node", newNode);
 
       setNodes((nds) => nds.concat(newNode));
     },
@@ -118,6 +121,7 @@ export default function DiagramFlow() {
       // Calculate position of the context menu. We want to make sure it
       // doesn't get positioned off-screen.
       // const pane = reactFlowInstance.getBoundingClientRect();
+      console.log("node", node);
       setMenu({
         id: node.id,
         top: event.clientX,
@@ -131,6 +135,28 @@ export default function DiagramFlow() {
     return setMenu(null);
   }, [setMenu]);
 
+  const onNodesChange = useCallback(
+    (changes) => setNodes((nds) => applyNodeChanges(changes, nds)),
+    [setNodes]
+  );
+  const onEdgesChange = useCallback(
+    (changes) => setEdges((eds) => applyEdgeChanges(changes, eds)),
+    [setEdges]
+  );
+  const onEdgeContextMenu = useCallback(
+    (event, edge) => {
+      // Prevent native context menu from showing
+      event.preventDefault();
+      console.log("edge", edge);
+      setMenu({
+        id: edge.id,
+        top: event.clientX,
+        bottom: event.clientY,
+        edgeType: edge.animated ? "Dashed" : "Solid",
+      });
+    },
+    [setMenu]
+  );
   return (
     <div
       style={{ width: "100%", height: "100%" }}
@@ -154,6 +180,7 @@ export default function DiagramFlow() {
           style={{ backgroundColor: "#fff" }}
           onClick={onPaneClick}
           connectionMode="loose"
+          onEdgeContextMenu={onEdgeContextMenu}
         >
           <Controls />
           <Background variant="dots" gap={12} size={1} />

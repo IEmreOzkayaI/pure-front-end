@@ -3,7 +3,7 @@ import PropTypes from "prop-types";
 import {useSelector} from "react-redux";
 
 const InterviewNavigation = (props) => {
-    const {handleSelectedQuestion} = props;
+    const {handleSelectedQuestion ,setEdges,setNodes} = props;
     const questionList = useSelector((state) => state.interviewManagement.questions);
     const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
 
@@ -17,8 +17,11 @@ const InterviewNavigation = (props) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 onClick={() => {
-                    if (currentQuestion.number - 1 >= 0)
+                    if (currentQuestion.number - 1 >= 0){
                         handleSelectedQuestion(currentQuestion.number - 1)
+                        setEdges([]);
+                        setNodes([]);
+                    }
                 }}
             >
                 <path d="M1 16L14.5 1L28 16" stroke="white" strokeWidth="0.75"/>
@@ -31,7 +34,7 @@ const InterviewNavigation = (props) => {
                         className={`${styles.interview_navigation_list_item} ${
                             currentQuestion.number === index ? styles.selected : ""
                         }`}
-                        onClick={() => handleSelectedQuestion(index)}
+                        onClick={() => {handleSelectedQuestion(index); setEdges([]); setNodes([])}}
                     >
                         {index + 1}
                     </li>
@@ -45,8 +48,11 @@ const InterviewNavigation = (props) => {
                 fill="none"
                 xmlns="http://www.w3.org/2000/svg"
                 onClick={() => {
-                    if (currentQuestion.number + 1 < questionList.length)
+                    if (currentQuestion.number + 1 < questionList.length){
                         handleSelectedQuestion(currentQuestion.number + 1)
+                        setEdges([]);
+                        setNodes([]);
+                    }
                 }}
             >
                 <path d="M2 1L15.5 16L29 1" stroke="white" strokeWidth="3"/>
