@@ -1,0 +1,32 @@
+@import "../../global.scss";
+
+.company__dashboard__container {
+  width: 100%;
+  height: 90%;
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1rem;
+
+  &__first__line {
+    grid-row: 1/2;
+
+  }
+
+  &__second__line {
+    grid-row: 2/3;
+
+    display: grid;
+    grid-template-columns: 3fr 7fr;
+    grid-gap: 1rem;
+
+    &__first__column {
+      grid-column: 1/2;
+    }
+
+    &__second__column {
+      grid-column: 2/3;
+
+    }
+  }
+
+}

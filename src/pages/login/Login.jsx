@@ -8,7 +8,6 @@ import {motion} from "framer-motion";
 import {clearConfirmInfo} from "../../redux/toolkit/confirmSlice";
 import {clearRegisterInfo} from "../../redux/toolkit/registerSlice";
 import ConfirmModal from "../../components/ConfirmModal/ConfirmModal";
-import {userFetch} from "../../redux/toolkit/userSlice";
 import {useNavigate} from "react-router-dom";
 
 // TODO user'i ya localstorage'dan ya da redux'tan al

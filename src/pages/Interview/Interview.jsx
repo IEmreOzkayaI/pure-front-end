@@ -30,7 +30,7 @@ const Interview = () => {
     const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
-        dispatch(interviewFetch("08de5872-5868-4400-a655-71800a22bf78"));
+        dispatch(interviewFetch("eeadce37-c0d8-4869-add9-d690f23929fa"));
     }, []);
 
     useEffect(() => {
@@ -38,6 +38,8 @@ const Interview = () => {
         dispatch(setCurrentQuestion(interviewInfo?.data.questions[0]));
         dispatch(setRemainingTime(interviewInfo?.data.interview_time));
         dispatch(setQuestionAmount(interviewInfo?.question_amount));
+
+        console.log(interviewInfo?.data.interview_time)
     }, [interviewInfo]);
 
     const handleSelectedQuestion = (index) => {
