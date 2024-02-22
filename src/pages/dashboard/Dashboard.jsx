@@ -9,6 +9,8 @@ const Dashboard = () => {
   const userInfo = useSelector((state) => state.user.userInfo);
   const [clickCount, setClickCount] = useState(0);
 
+  console.log("user info", userInfo);
+
   useEffect(() => {
     if (userInfo !== null) {
       encryptAndStore("user_role", userInfo.role);

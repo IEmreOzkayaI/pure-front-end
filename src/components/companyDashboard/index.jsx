@@ -28,7 +28,7 @@ const CompanyDashboard = () => {
                 setIsOpen={setIsModalOpen}
             >
                 <div>
-                    <AddInterview/>
+                    <AddInterview setIsModalOpen={setIsModalOpen}/>
                 </div>
             </CustomModal>
         </>

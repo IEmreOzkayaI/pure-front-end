@@ -26,9 +26,25 @@ import questionSaga from "./sagas/questionSaga.js";
 import getQuestionSlice from "./toolkit/getQuestionSlice.js";
 import getQuestionSaga from "./sagas/getQuestionSaga.js";
 
+import addInterviewSaga from "./sagas/addInterviewSaga.js";
+import addInterviewSlice from "./toolkit/addInterviewSlice.js";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
-    reducer: {logIn, confirm, register, user, interview, interviewManagement , algorithmSlice , logOutSlice , interviewSlice, questionSlice, getQuestionSlice },
+    reducer: {
+        logIn,
+        confirm,
+        register,
+        user,
+        interview,
+        interviewManagement,
+        algorithmSlice,
+        logOutSlice,
+        interviewSlice,
+        questionSlice,
+        getQuestionSlice,
+        addInterviewSlice
+    },
     middleware: [saga],
 });
 saga.run(logInSaga);
@@ -40,5 +56,6 @@ saga.run(logOutSaga)
 saga.run(interviewSaga)
 saga.run(questionSaga)
 saga.run(getQuestionSaga)
+saga.run(addInterviewSaga)
 
 export default store;

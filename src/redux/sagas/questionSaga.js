@@ -24,7 +24,7 @@ function* filteredQuestion(action) {
 function* filteredQuestionQuestionWrapper(payload) {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(`http://localhost:3001/api/question/`, {
+            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/question/`, {
                 withCredentials: true,
                 params: payload, // payload'ı query string olarak gönder
             })

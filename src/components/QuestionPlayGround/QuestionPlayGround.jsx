@@ -123,10 +123,63 @@ const QuestionPlayGround = memo(
 
                     }
                     {
-                        currentQuestion?.type !== 'Algorithm' && (<span>
-                            <ReactMarkdown>
+                        currentQuestion?.type === 'Diagram' && (<span>
+
+                                <div className={styles.question}>
+                                    <div className={styles.question_title}>Question</div>
+                                    <div className={styles.question_content}>
                                 {currentQuestion?.question.description}
-                            </ReactMarkdown>
+                                    </div>
+                                </div>
+
+                                <div className={styles.question}>
+                                    <div className={styles.question_title}>Real Life Application</div>
+                                    <div className={styles.question_content}>
+                                {currentQuestion?.question.real_life_application}
+                                    </div>
+                                </div>
+
+                             <div className={`${styles.additional_resources}`}>
+                                    <div
+                                        className={`${styles.additional_resources_title} ${additional_resources && styles.additional_resources_title_active}`}
+                                        onClick={() => setAdditionalResources(!additional_resources)}>
+                                        Additional Resources
+                                        <div className={styles.icon}>
+                                            <RiArrowDropDownLine/>
+                                        </div>
+
+                                    </div>
+                                    <div
+                                        className={`${styles.additional_resources_links} ${additional_resources && styles.additional_resources_links_active}`}>
+                                        {currentQuestion?.question.additional_resources_about_topic.map((resource) => {
+                                            return <div className={styles.additional_resources_links_item}>
+                                                <a href={resource.link} target="_blank">{resource.name}</a>
+                                            </div>
+                                        })}
+                                    </div>
+                                </div>
+
+
+                                <div className={styles.interactive_steps}>
+                                    <div
+                                        className={`${styles.interactive_steps_title} ${interactive_steps && styles.interactive_steps_title_active}`}
+                                        onClick={() => setInteractiveSteps(!interactive_steps)}>
+                                        Interactive Steps
+                                        {/*<IoLockClosedOutline />*/}
+                                        <div className={styles.icon}>
+                                            <IoLockOpenOutline/>
+                                        </div>
+                                    </div>
+                                    <div
+                                        className={`${styles.interactive_steps_content} ${interactive_steps && styles.interactive_steps_content_active}`}>
+                                        {currentQuestion?.question.interactive_steps.map((step) => {
+                                            return <div className={styles.interactive_steps_content_item}>
+                                                {step.step_number}. {step.description}
+                                            </div>
+                                        })}
+                                    </div>
+                                </div>
+
                         </span>
                         )
                     }
