@@ -17,6 +17,7 @@ import systemWarning from "../../systemWarning.js";
 import {useResponsiveBlock} from "../../hooks/useResponsiveBlock.jsx";
 import {interviewFetch} from "../../redux/toolkit/interviewSlice.js";
 import TestQuestion from "../../components/test/TestQuestion.jsx";
+import { useState } from "react";
 
 
 const Interview = () => {
@@ -25,7 +26,8 @@ const Interview = () => {
     const interviewInfo = useSelector((state) => state.interview?.interviewInfo);
     const questionList = useSelector((state) => state.interviewManagement.questions);
     const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
-
+    const [edges, setEdges] = useState([]);
+    const [nodes, setNodes] = useState([]);
 
     useEffect(() => {
         dispatch(interviewFetch("eeadce37-c0d8-4869-add9-d690f23929fa"));
@@ -45,23 +47,39 @@ const Interview = () => {
         console.log("current question", questionList);
     };
 
-    return (<motion.div
+    return (
+      <motion.div
         className={styles.interview_container}
-        initial={{opacity: 0}}
-        animate={{opacity: 1}}
-        exit={{opacity: 0}}
-    >
-        {responsiveBlock && <div className={styles.interview}>
-            <InterviewHeader/>
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        {responsiveBlock && (
+          <div className={styles.interview}>
+            <InterviewHeader />
             <div className={styles.interview_down}>
-                <InterviewNavigation handleSelectedQuestion={handleSelectedQuestion}/>
-                {currentQuestion?.type !== "Test" && <InterviewContent/>}
-                {currentQuestion?.type === "Test" && <TestQuestion/>}
+              <InterviewNavigation
+                handleSelectedQuestion={handleSelectedQuestion}
+                setEdges={setEdges}
+                setNodes={setNodes}
+              />
+              {currentQuestion?.type !== "Test" && (
+                <InterviewContent
+                  edges={edges}
+                  nodes={nodes}
+                  setEdges={setEdges}
+                  setNodes={setNodes}
+                />
+              )}
+              {currentQuestion?.type === "Test" && <TestQuestion />}
             </div>
-        </div>}
-        {!responsiveBlock && <Redirect text={systemWarning.no_responsive_design}/>}
-
-    </motion.div>);
+          </div>
+        )}
+        {!responsiveBlock && (
+          <Redirect text={systemWarning.no_responsive_design} />
+        )}
+      </motion.div>
+    );
 };
 
 export default Interview;

@@ -6,7 +6,7 @@ import DiagramFlow from "../ReactFlow/ReactFlow.jsx";
 import TestQuestion from "../test/TestQuestion.jsx";
 
 const AnswerInput = (props) => {
-    const {rightSideHeight} = props;
+    const { rightSideHeight, edges ,setEdges,nodes,setNodes} = props;
     const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
 
     return (
@@ -15,7 +15,7 @@ const AnswerInput = (props) => {
             style={{height: `${rightSideHeight}%`}}
         >
             {currentQuestion?.type === "Algorithm" && <AceEditor/>}
-            {currentQuestion?.type === "Diagram" && <DiagramFlow/>}
+            {currentQuestion?.type === "Diagram" && <DiagramFlow edges={edges} setEdges={setEdges} nodes={nodes} setNodes={setNodes}/>}
         </div>
     );
 };

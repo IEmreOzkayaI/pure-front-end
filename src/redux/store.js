@@ -1,4 +1,4 @@
-import {configureStore} from "@reduxjs/toolkit";
+import { configureStore } from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import logIn from "./toolkit/logInSlice";
 import logInSaga from "./sagas/logInSaga";
@@ -19,6 +19,8 @@ import logOutSlice from "./toolkit/logOutSlice.js";
 
 import interviewSlice from "./toolkit/interviewSlice.js";
 import interviewSaga from "./sagas/interviewSaga.js";
+import diagramSaga from "./sagas/diagramSaga.js";
+import diagramSlice from "./toolkit/diagramSlice.js";
 
 import questionSlice from "./toolkit/questionSlice.js";
 import questionSaga from "./sagas/questionSaga.js";
@@ -41,6 +43,7 @@ const store = configureStore({
         algorithmSlice,
         logOutSlice,
         interviewSlice,
+        diagramSlice,
         questionSlice,
         getQuestionSlice,
         addInterviewSlice
@@ -57,5 +60,6 @@ saga.run(interviewSaga)
 saga.run(questionSaga)
 saga.run(getQuestionSaga)
 saga.run(addInterviewSaga)
+saga.run(diagramSaga);
 
 export default store;
