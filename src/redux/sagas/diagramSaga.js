@@ -96,7 +96,7 @@ function* diagramWrapper(payload) {
       console.log("nodes", nodes);
       console.log("edges", edges);
       console.log("plantUML", plantUML);
-      resolve(payload);
+      resolve(plantUML);
     } catch (error) {
       reject(error);
     }
