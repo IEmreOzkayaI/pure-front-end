@@ -1,32 +1,76 @@
 @import "../../global.scss";
-
-.company__dashboard__container {
-  width: 100%;
-  height: 90%;
-  display: grid;
-  grid-template-rows: 1fr 1fr;
-  grid-gap: 1rem;
-
-  &__first__line {
-    grid-row: 1/2;
-
+.main {
+  display: flex;
+  background-color: #fff;
+  padding: 4rem;
+  border-radius: 1.4rem;
+  p {
+    text-align: start;
+    font-size: 3.2rem;
+    margin-bottom: 1.6rem;
+    color: $very-dark-gray;
   }
+  .left_side {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    margin-right: 2rem;
+    gap: 1.2rem;
 
-  &__second__line {
-    grid-row: 2/3;
-
-    display: grid;
-    grid-template-columns: 3fr 7fr;
-    grid-gap: 1rem;
-
-    &__first__column {
-      grid-column: 1/2;
+    input {
+      align-self: start;
+      background-color: #ededed;
+      border-radius: 1.2rem;
+      padding: 1.2rem;
+      border: none;
+      width: 100%;
+      padding-left: 5rem;
+      position: relative;
+      background-image: url(./magnifying-glass.png);
+      background-repeat: no-repeat;
+      background-position: 10px;
+    }
+  }
+  .right_side {
+    .flex {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .flexColumn {
+      display: flex;
+      flex-direction: column;
+      align-items: start;
+      flex: 1;
     }
 
-    &__second__column {
-      grid-column: 2/3;
+    .text {
+      font-size: 1.5rem;
+      font-weight: 600;
+    }
+    .textMuted {
+      font-size: 1.2rem;
+      color: #6b6b6b;
+    }
 
+    .lower {
+      display: flex;
+      flex-direction: column;
+      margin-top: 10rem;
+
+      .row {
+        display: grid;
+        border-top: 1px solid #ededed;
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        grid-template-columns: 100px 1fr;
+        place-items: start;
+        font-size: 1.4rem;
+
+        .title {
+          color: #a8a8b2;
+        }
+      }
     }
   }
-
 }
