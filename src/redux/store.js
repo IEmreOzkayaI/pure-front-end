@@ -31,35 +31,40 @@ import getQuestionSaga from "./sagas/getQuestionSaga.js";
 import addInterviewSaga from "./sagas/addInterviewSaga.js";
 import addInterviewSlice from "./toolkit/addInterviewSlice.js";
 
+import getInterviewByCompanyIdSlice from "./toolkit/getInterviewByCompanyIdSlice.js";
+import getInterviewByCompanyIdSaga from "./sagas/getInterviewByCompanyIdSaga.js";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
-    reducer: {
-        logIn,
-        confirm,
-        register,
-        user,
-        interview,
-        interviewManagement,
-        algorithmSlice,
-        logOutSlice,
-        interviewSlice,
-        diagramSlice,
-        questionSlice,
-        getQuestionSlice,
-        addInterviewSlice
-    },
-    middleware: [saga],
+  reducer: {
+    logIn,
+    confirm,
+    register,
+    user,
+    interview,
+    interviewManagement,
+    algorithmSlice,
+    logOutSlice,
+    interviewSlice,
+    diagramSlice,
+    questionSlice,
+    getQuestionSlice,
+    addInterviewSlice,
+    getInterviewByCompanyIdSlice,
+  },
+  middleware: [saga],
 });
 saga.run(logInSaga);
 saga.run(confirmSaga);
 saga.run(registerSaga);
 saga.run(userSaga);
-saga.run(algorithmSaga)
-saga.run(logOutSaga)
-saga.run(interviewSaga)
-saga.run(questionSaga)
-saga.run(getQuestionSaga)
-saga.run(addInterviewSaga)
+saga.run(algorithmSaga);
+saga.run(logOutSaga);
+saga.run(interviewSaga);
+saga.run(questionSaga);
+saga.run(getQuestionSaga);
+saga.run(addInterviewSaga);
 saga.run(diagramSaga);
+saga.run(getInterviewByCompanyIdSaga);
 
 export default store;

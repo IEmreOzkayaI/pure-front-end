@@ -12,91 +12,61 @@ import styles from "./style.module.scss";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { CiCalendarDate } from "react-icons/ci";
 import { MdPerson2 } from "react-icons/md";
+import { interviewFetch } from "../../redux/toolkit/getInterviewByCompanyIdSlice.js";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
 
 const { Meta } = Card;
 
 const columns = [
   {
-    title: "Candidate Name",
+    title: "Interview Title",
     dataIndex: "name",
-    key: "name",
   },
   {
-    title: "Position",
-    dataIndex: "age",
-    key: "age",
+    title: "Question Count",
+    dataIndex: "question_amount",
   },
   {
-    title: "Interview Date",
-    dataIndex: "address",
-    key: "address",
+    title: "Start Date",
+    dataIndex: "start_date",
   },
   {
-    title: "Status",
-    key: "tags",
-    dataIndex: "tags",
-    render: (_, { tags }) => (
-      <>
-        {tags.map((tag) => {
-          let color;
-          if (tag === "Upcoming") {
-            color = "purple";
-          } else if (tag === "Completed") {
-            color = "green";
-          } else if (tag === "Pending") {
-            color = "orange";
-          } else if (tag === "Cancelled") {
-            color = "red";
-          }
-          return (
-            <Tag bordered={false} color={color} key={tag}>
-              {tag.toUpperCase()}
-            </Tag>
-          );
-        })}
-      </>
-    ),
+    title: "End Date",
+    dataIndex: "end_date",
   },
-  {
-    title: "Details",
-    key: "action",
-    dataIndex: "details",
-  },
+  // {
+  //   title: "Status",
+  //   dataIndex: "tags",
+  //   render: (_, { tags }) => (
+  //     <>
+  //       {tags.map((tag) => {
+  //         let color;
+  //         if (tag === "Upcoming") {
+  //           color = "purple";
+  //         } else if (tag === "Completed") {
+  //           color = "green";
+  //         } else if (tag === "Pending") {
+  //           color = "orange";
+  //         } else if (tag === "Cancelled") {
+  //           color = "red";
+  //         }
+  //         return (
+  //           <Tag bordered={false} color={color} key={tag}>
+  //             {tag.toUpperCase()}
+  //           </Tag>
+  //         );
+  //       })}
+  //     </>
+  //   ),
+  // },
+  // {
+  //   title: "Details",
+  //   key: "action",
+  //   dataIndex: "details",
+  // },
 ];
-const dataSource = [
-  {
-    key: "1",
-    name: "John Brown",
-    age: 32,
-    address: "New York No. 1 Lake Park",
-    tags: ["Upcoming"],
-    details: "View Profile",
-  },
-  {
-    key: "2",
-    name: "Jim Green",
-    age: 42,
-    address: "London No. 1 Lake Park",
-    tags: ["Completed"],
-    details: "View Profile",
-  },
-  {
-    key: "3",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["Cancelled"],
-    details: "View Profile",
-  },
-  {
-    key: "4",
-    name: "Joe Black",
-    age: 32,
-    address: "Sydney No. 1 Lake Park",
-    tags: ["Pending"],
-    details: "View Profile",
-  },
-];
+
 const CompanyDashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [data, setData] = useState([]);
@@ -108,6 +78,14 @@ const CompanyDashboard = () => {
   const handleChange = (newValue) => {
     setValue(newValue);
   };
+  const dispatch = useDispatch();
+  const { _id: id } = useSelector((state) => state.user.userInfo);
+  const { interviewInfo } = useSelector(
+    (state) => state.getInterviewByCompanyIdSlice
+  );
+  useEffect(() => {
+    dispatch(interviewFetch(id));
+  }, [dispatch, id]);
 
   return (
     <div className={styles.main}>
@@ -157,9 +135,10 @@ const CompanyDashboard = () => {
         </Select>
 
         <Table
-          dataSource={dataSource}
+          dataSource={interviewInfo || []}
           columns={columns}
           locale={{ emptyText: "No Interviews Yet" }}
+          loading={interviewInfo === null}
         />
       </div>
       <div className={styles.right_side}>
