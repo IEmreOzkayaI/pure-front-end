@@ -9,13 +9,13 @@ import { FaRegClock } from "react-icons/fa";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
 import { ImStopwatch } from "react-icons/im";
 import styles from "./style.module.scss";
-import { FaMagnifyingGlass } from "react-icons/fa6";
 import { CiCalendarDate } from "react-icons/ci";
 import { MdPerson2 } from "react-icons/md";
 import { interviewFetch } from "../../redux/toolkit/getInterviewByCompanyIdSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { interviewFetch as interviewById } from "../../redux/toolkit/interviewSlice.js";
+import { PiShareFat } from "react-icons/pi";
 
 const { Meta } = Card;
 
@@ -90,6 +90,7 @@ const CompanyDashboard = () => {
   }, [dispatch, id]);
 
   const filterTable = (e) => {
+    //tableView a gore filtreledigi degisken ya interview ya da interviewee olacak
     const filteredData = interviewInfo.filter((interview) => {
       return interview.name
         .toLowerCase()
@@ -116,7 +117,11 @@ const CompanyDashboard = () => {
         </p>
         <input
           type="text"
-          placeholder="Search Interviews"
+          placeholder={
+            tableView === "interviews"
+              ? "Search Interviews"
+              : "Search Interviewees"
+          }
           onChange={(e) => {
             setSearchValue(e.target.value);
             filterTable(e);
@@ -221,13 +226,27 @@ const CompanyDashboard = () => {
               </div>
               <CiCalendarDate size={25} />
             </div>
-            <div className={`${styles.flex}`}>
+            <div className={`${styles.flex} mb-2`}>
               <div className={styles.flexColumn}>
                 <div className={styles.text}>Status (status yok) </div>
                 <div className={styles.textMuted}>Upcoming</div>
               </div>
               <GiConfirmed size={20} />
             </div>
+            <Button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#EDEDED",
+                fontWeight: "bold",
+                border: "none",
+              }}
+              icon={<PiShareFat />}
+              block
+            >
+              Interview Link
+            </Button>
             <div className={styles.lower}>
               {/* <div className={styles.row}>
                 <div className={styles.title}>Email</div>
