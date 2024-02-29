@@ -23,15 +23,18 @@ function* interview(action) {
 function* interviewWrapper(interview_id) {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}api/interview/get_by_interview_id/${interview_id}`, {
-                withCredentials: true,
-            })
-            .then((res) => {
-                const data = res.data;
-                resolve(data);
-            })
-            .catch((err) => {
-                reject(err.response.data);
-            });
+          .get(
+            `http://localhost:3001/api/interview/get_by_interview_id/${interview_id}`,
+            {
+              withCredentials: true,
+            }
+          )
+          .then((res) => {
+            const data = res.data;
+            resolve(data);
+          })
+          .catch((err) => {
+            reject(err.response.data);
+          });
     });
 }

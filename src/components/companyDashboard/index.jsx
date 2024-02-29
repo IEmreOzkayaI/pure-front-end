@@ -15,6 +15,7 @@ import { MdPerson2 } from "react-icons/md";
 import { interviewFetch } from "../../redux/toolkit/getInterviewByCompanyIdSlice.js";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
+import { interviewFetch as interviewById } from "../../redux/toolkit/interviewSlice.js";
 
 const { Meta } = Card;
 
@@ -71,22 +72,31 @@ const CompanyDashboard = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [value, setValue] = useState();
-  const handleSearch = (newValue) => {
-    console.log("apiye istek at");
-  };
-  const handleChange = (newValue) => {
-    setValue(newValue);
-  };
+  const [tableView, setTableView] = useState("interviews");
+
+  const [searchResult, setSearchResult] = useState([]);
+  const [searchValue, setSearchValue] = useState("");
+
   const dispatch = useDispatch();
   const { _id: id } = useSelector((state) => state.user.userInfo);
   const { interviewInfo } = useSelector(
     (state) => state.getInterviewByCompanyIdSlice
   );
+  const selectedInterview = useSelector(
+    (state) => state.interview?.interviewInfo
+  );
   useEffect(() => {
     dispatch(interviewFetch(id));
   }, [dispatch, id]);
 
+  const filterTable = (e) => {
+    const filteredData = interviewInfo.filter((interview) => {
+      return interview.name
+        .toLowerCase()
+        .includes(e.target.value.toLowerCase());
+    });
+    setSearchResult(filteredData);
+  };
   return (
     <div className={styles.main}>
       {/* <EmptyInterviewInfoBoard setIsModalOpen={setIsModalOpen}/>
@@ -101,8 +111,18 @@ const CompanyDashboard = () => {
                 </div>
             </CustomModal> */}
       <div className={styles.left_side}>
-        <p>Interview List</p>
-        <input type="text" placeholder="Search Interviews" />
+        <p>
+          {tableView === "interviews" ? "Interview " : "Interviewees "} List
+        </p>
+        <input
+          type="text"
+          placeholder="Search Interviews"
+          onChange={(e) => {
+            setSearchValue(e.target.value);
+            filterTable(e);
+          }}
+          value={searchValue}
+        />
         <Select
           defaultValue="Select an interview status"
           style={{ maxWidth: "20rem" }}
@@ -135,67 +155,116 @@ const CompanyDashboard = () => {
         </Select>
 
         <Table
-          dataSource={interviewInfo || []}
+          dataSource={
+            searchValue.length === 0 ? interviewInfo || [] : searchResult
+          }
           columns={columns}
           locale={{ emptyText: "No Interviews Yet" }}
           loading={interviewInfo === null}
+          onRow={(record) => {
+            return {
+              onClick: () => {
+                dispatch(interviewById(record.id));
+                console.log("clickedInterview", selectedInterview);
+              },
+            };
+          }}
         />
       </div>
       <div className={styles.right_side}>
-        <p>Interview Details</p>
+        <p>
+          {tableView === "interviews" ? "Interview " : "Interviewee "}
+          Details
+        </p>
         <Card>
-          <Skeleton loading={loading} avatar active />
-          <div className={`${styles.flex} mb-2`}>
-            <div className={styles.flexColumn}>
-              <div className={styles.text}>Alice Johnson</div>
-              <div className={styles.textMuted}>April 15, 2023</div>
-            </div>
-            <MdPerson2 size={25} />
-          </div>
-          <div className={`${styles.flex} mb-2`}>
-            <div className={styles.flexColumn}>
-              <div className={styles.text}>Interview Date</div>
-              <div className={styles.textMuted}>April 15, 2023</div>
-            </div>
-            <CiCalendarDate size={25} />
-          </div>
-          <div className={`${styles.flex}`}>
-            <div className={styles.flexColumn}>
-              <div className={styles.text}>Status </div>
-              <div className={styles.textMuted}>Upcoming</div>
-            </div>
-            <GiConfirmed size={20} />
-          </div>
-          <div className={styles.lower}>
-            <div className={styles.row}>
-              <div className={styles.title}>Email</div>
-              <div className={styles.value}>alice.johnson@email.com</div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.title}>Phone</div>
-              <div className={styles.value}>124125125</div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.title}>Location</div>
-              <div className={styles.value}>San Francisco, CA</div>
-            </div>
-            <div className={styles.row}>
-              <div className={styles.title}>Experience</div>
-              <div className={styles.value}>
-                5 years in Software Engineering
+          <Skeleton loading={!selectedInterview} active paragraph={{ rows: 7 }}>
+            <div className={`${styles.flex} mb-2`}>
+              <div className={styles.flexColumn}>
+                <div className={styles.text}>
+                  {tableView === "interviews"
+                    ? selectedInterview?.data.name
+                    : "Alice Johnson"}
+                </div>
+
+                <div className={styles.textMuted}>
+                  {tableView === "interviews" ? (
+                    <div
+                      style={{
+                        overflow: "hidden",
+                        whiteSpace: "nowrap",
+                        textOverflow: "ellipsis",
+                        width: "10rem",
+                      }}
+                      title={selectedInterview?.data?.description}
+                    >
+                      {selectedInterview?.data?.description}
+                    </div>
+                  ) : (
+                    "April 15, 2023"
+                  )}
+                </div>
               </div>
+              <MdPerson2 size={25} />
             </div>
-            <Button
-              style={{
-                backgroundColor: "#EDEDED",
-                marginTop: "2rem",
-                border: "none",
-                fontWeight: "bold",
-              }}
-            >
-              View Interviewees
-            </Button>
-          </div>
+            <div className={`${styles.flex} mb-2`}>
+              <div className={styles.flexColumn}>
+                <div className={styles.text}>
+                  {tableView === "interviews"
+                    ? "Interview Duration"
+                    : "Interview Date"}
+                </div>
+                <div className={styles.textMuted}>
+                  {tableView === "interviews"
+                    ? selectedInterview?.data?.interview_time
+                    : "April 15, 2023"}
+                </div>
+              </div>
+              <CiCalendarDate size={25} />
+            </div>
+            <div className={`${styles.flex}`}>
+              <div className={styles.flexColumn}>
+                <div className={styles.text}>Status (status yok) </div>
+                <div className={styles.textMuted}>Upcoming</div>
+              </div>
+              <GiConfirmed size={20} />
+            </div>
+            <div className={styles.lower}>
+              {/* <div className={styles.row}>
+                <div className={styles.title}>Email</div>
+                <div className={styles.value}>alice.johnson@email.com</div>
+              </div>
+              <div className={styles.row}>
+                <div className={styles.title}>Phone</div>
+                <div className={styles.value}>124125125</div>
+              </div>
+              <div className={styles.row}>
+                <div className={styles.title}>Location</div>
+                <div className={styles.value}>San Francisco, CA</div>
+              </div>
+              <div className={styles.row}>
+                <div className={styles.title}>Experience</div>
+                <div className={styles.value}>
+                  5 years in Software Engineering
+                </div>
+              </div> */}
+              <Button
+                style={{
+                  backgroundColor: "#EDEDED",
+                  marginTop: "2rem",
+                  border: "none",
+                  fontWeight: "bold",
+                }}
+                onClick={() => {
+                  setTableView(
+                    tableView === "interviews" ? "interviewees" : "interviews"
+                  );
+                }}
+              >
+                View{" "}
+                {tableView === "interviews" ? "Interviewees" : "Interviews"}
+              </Button>
+            </div>
+          </Skeleton>
         </Card>
       </div>
     </div>
