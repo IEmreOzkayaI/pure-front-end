@@ -31,6 +31,10 @@ import getQuestionSaga from "./sagas/getQuestionSaga.js";
 import addInterviewSaga from "./sagas/addInterviewSaga.js";
 import addInterviewSlice from "./toolkit/addInterviewSlice.js";
 
+
+import userRegisterInterview from "./toolkit/userRegisterInterviewSlice";
+import userRegisterInterviewSaga from "./sagas/userRegisterInterview.jsx";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
     reducer: {
@@ -46,7 +50,8 @@ const store = configureStore({
         diagramSlice,
         questionSlice,
         getQuestionSlice,
-        addInterviewSlice
+        addInterviewSlice,
+        userRegisterInterview
     },
     middleware: [saga],
 });
@@ -61,5 +66,6 @@ saga.run(questionSaga)
 saga.run(getQuestionSaga)
 saga.run(addInterviewSaga)
 saga.run(diagramSaga);
+saga.run(userRegisterInterviewSaga);
 
 export default store;

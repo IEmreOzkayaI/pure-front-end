@@ -7,6 +7,7 @@ import Redirect from "./shared/Redirect/Redirect";
 import Navbar from "../pages/root/Navbar/Navbar";
 import Footer from "../pages/root/Footer/Footer";
 import systemWarning from "../systemWarning.js";
+import PdfScreen from "../pages/PdfScreen.jsx";
 
 const defaultErrorElement = (
     <div style={{fontSize: "4em", textAlign: "center"}}>
@@ -60,7 +61,7 @@ export default function AnimatedRoutes() {
     return (
         <AnimatePresence mode="initial" initial={false}>
             {pathname.startsWith("/interview") ? null : <Navbar/>}
-            <Suspense fallback={<Redirect text={systemWarning.redirect_message}/>} key={"suspense"}>
+            <Suspense fallback={<Redirect success={false} text={systemWarning.redirect_message}/>} key={"suspense"}>
                 <Routes location={location} key={location.pathname}>
                     <Route path="/" element={<LazyLanding/>}/>
                     <Route path="pricing" element={<LazyPricing/>}/>
@@ -68,8 +69,10 @@ export default function AnimatedRoutes() {
                     <Route path="login" element={<LazyLogin/>}/>
                     <Route path="dashboard" element={<LazyDashboard/>}/>
                     <Route path="interview">
-                        <Route path="signUp" element={<LazyInterviewSignUp/>}/>
+                        <Route path="signUp/:interview_id" element={<LazyInterviewSignUp/>}/>
                         <Route path="playground" element={<LazyInterviewPlayground/>}/>
+                        <Route path="success" element={<Redirect success={true} text={"Interview application success 🥳"}/>}/>
+                        <Route path="pdf" element={<PdfScreen/>}/>
                     </Route>
                     <Route path="*" element={defaultErrorElement}/>
                 </Routes>
