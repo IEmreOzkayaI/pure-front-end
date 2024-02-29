@@ -91,7 +91,7 @@ const CompanyDashboard = () => {
   }, [dispatch, id]);
 
   const filterTable = (e) => {
-    //tableView a gore filtreledigi degisken ya interview ya da interviewee olacak
+    //TODO tableView a gore filtreledigi degisken ya interview ya da interviewee olacak
     const filteredData = interviewInfo.filter((interview) => {
       return interview.name
         .toLowerCase()
@@ -162,10 +162,19 @@ const CompanyDashboard = () => {
 
         <Table
           dataSource={
-            searchValue.length === 0 ? interviewInfo || [] : searchResult
+            tableView === "interviews"
+              ? searchValue.length === 0
+                ? interviewInfo || []
+                : searchResult
+              : []
           }
           columns={columns}
-          locale={{ emptyText: "No Interviews Yet" }}
+          locale={{
+            emptyText:
+              tableView === "interviews"
+                ? "No Interviews Yet"
+                : "No Interviewees Yet",
+          }}
           loading={interviewInfo === null}
           onRow={(record) => {
             return {
