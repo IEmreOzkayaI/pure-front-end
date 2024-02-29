@@ -16,6 +16,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { interviewFetch as interviewById } from "../../redux/toolkit/interviewSlice.js";
 import { PiShareFat } from "react-icons/pi";
+import { toast, Toaster } from "react-hot-toast";
 
 const { Meta } = Card;
 
@@ -233,20 +234,57 @@ const CompanyDashboard = () => {
               </div>
               <GiConfirmed size={20} />
             </div>
-            <Button
-              style={{
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                backgroundColor: "#EDEDED",
-                fontWeight: "bold",
-                border: "none",
-              }}
-              icon={<PiShareFat />}
-              block
-            >
-              Interview Link
-            </Button>
+            {tableView === "interviews" && (
+              <Button
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  backgroundColor: "#EDEDED",
+                  fontWeight: "bold",
+                  border: "none",
+                }}
+                icon={<PiShareFat />}
+                block
+                onClick={() => {
+                  try {
+                    navigator.clipboard.writeText(
+                      selectedInterview?.data?.share_link
+                    );
+                    toast.success("Link copied", {
+                      style: {
+                        border: "1px solid #16161b",
+                        padding: "16px",
+                        color: "#16161b",
+                      },
+                      iconTheme: {
+                        primary: "#16161b",
+                        secondary: "#f5f3f3",
+                      },
+                    });
+                  } catch (e) {
+                    console.log(e);
+                    toast.error(
+                      "Link could not be copied, please try again later.",
+                      {
+                        style: {
+                          border: "1px solid #16161b",
+                          padding: "16px",
+                          color: "#16161b",
+                        },
+                        iconTheme: {
+                          primary: "#16161b",
+                          secondary: "#fff",
+                        },
+                      }
+                    );
+                  }
+                }}
+              >
+                Copy Interview Link
+              </Button>
+            )}
+
             <div className={styles.lower}>
               {/* <div className={styles.row}>
                 <div className={styles.title}>Email</div>
@@ -286,6 +324,7 @@ const CompanyDashboard = () => {
           </Skeleton>
         </Card>
       </div>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };
