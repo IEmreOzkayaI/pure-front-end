@@ -90,6 +90,10 @@ const CompanyDashboard = () => {
     dispatch(interviewFetch(id));
   }, [dispatch, id]);
 
+  useEffect(() => {
+    if (interviewInfo) dispatch(interviewById(interviewInfo[0].id));
+  }, [dispatch, interviewInfo]);
+
   const filterTable = (e) => {
     //TODO tableView a gore filtreledigi degisken ya interview ya da interviewee olacak
     const filteredData = interviewInfo.filter((interview) => {
