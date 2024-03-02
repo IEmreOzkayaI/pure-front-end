@@ -41,7 +41,7 @@ const InterviewTracker = () => {
 						</li>
 						<li className={styles.interview_tracker__container__content__process__steps__items__item}>
 							<div className={styles.interview_tracker__container__content__process__steps__items__item__icon}>
-								<PhoneOutlined style={{transform: "rotate(90deg)"}} />
+								<PhoneOutlined />
 							</div>
 							<div className={styles.interview_tracker__container__content__process__steps__items__item__text}>
 								<h3>Phone Call</h3>
@@ -78,7 +78,7 @@ const InterviewTracker = () => {
 				<div className={styles.interview_tracker__container__content__process__details}>
 					<div className={styles.interview_tracker__container__content__process__details__header}>Current Step</div>
 					<div className={styles.interview_tracker__container__content__process__details__content}>
-						<PhoneOutlined style={{transform: "rotate(90deg)"}} />
+						<PhoneOutlined />
 						<div className={styles.interview_tracker__container__content__process__details__content__card}>
 							<h2>Phone Interview</h2>
 							<p>Feb 15, 2023 10:00 AM - 11:00 AM</p>
@@ -100,7 +100,7 @@ const InterviewTracker = () => {
 				<div className={styles.interview_tracker__container__content__process__details}>
 					<div className={styles.interview_tracker__container__content__process__details__header}>FAQ's</div>
 					<div className={styles.interview_tracker__container__content__process__details__content} onClick={toggleDropdown}>
-						<QuestionCircleOutlined  />
+						<QuestionCircleOutlined />
 						<div className={styles.interview_tracker__container__content__process__details__content__card}>
 							<h2>Phone interview</h2>
 							<p>What can I expect from the phone interview?</p>
@@ -118,7 +118,7 @@ const InterviewTracker = () => {
 						<div className={styles.interview_tracker__container__content__process__details__content__card}>
 							<h2>Next steps</h2>
 							<p>How long will it take to hear back after the phone interview?</p>
-              <div className={`${styles.interview_tracker__container__content__process__details__content__card__detail} ${isOpen ? styles.active : ""}`}>
+							<div className={`${styles.interview_tracker__container__content__process__details__content__card__detail} ${isOpen ? styles.active : ""}`}>
 								<p>
 									What can I expect from the phone interview?What can I expect from the phone interview?What can I expect from the phone interview?What can I expect from the phone interview?What can I expect from the phone interview?What can I expect from the phone interview?What can I expect from
 									the phone interview?What can I expect from the phone interview?What can I expect from the phone interview?What can I expect from the phone interview?
@@ -132,7 +132,6 @@ const InterviewTracker = () => {
 	);
 };
 export default InterviewTracker;
-
 
 // const YourComponent = () => {
 //   const [dropdowns, setDropdowns] = useState(new Array(2).fill(false)); // Initialize with the number of dropdowns you have

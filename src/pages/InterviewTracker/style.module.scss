@@ -19,7 +19,7 @@
 		background-color: $very-dark-gray;
 		color: $real-white;
 		padding-top: 5rem;
-        padding-bottom: 5rem;
+		padding-bottom: 5rem;
 
 		&__process__steps {
 			width: 60%;
@@ -82,7 +82,7 @@
 						padding-left: 1rem;
 						p {
 							padding-top: 1rem;
-                            color: rgba($color: $white, $alpha: 0.5);
+							color: rgba($color: $white, $alpha: 0.5);
 						}
 					}
 				}
@@ -150,7 +150,7 @@
 				display: grid;
 				margin-top: 2.5rem;
 				grid-template-columns: 0.3fr 4.7fr 1fr;
-                cursor: pointer;
+				cursor: pointer;
 				svg {
 					grid-column: 1/2;
 					font-size: 2.5rem;
@@ -171,36 +171,35 @@
 						padding-top: 0.7rem;
 						color: rgba($color: $white, $alpha: 0.5);
 					}
-                    &__detail {
-                        max-height: 0;
-                        overflow: hidden;
-                        transition: max-height 0.5s ease-in-out; /* Adjust timing and easing as needed */
-                        display: flex;
-                        width: 60%;
-                        margin-top: 2.5rem;
-                        p{
-                            text-align: justify;
-                        }
-                        
-                    }
-                    
-                    &__detail.active {
-                        max-height: 1000px; /* Set a large enough value to ensure it covers all possible content heights */
-                    }
+					&__detail {
+						max-height: 0;
+						overflow: hidden;
+						transition: max-height 0.5s ease-in-out; /* Adjust timing and easing as needed */
+						display: flex;
+						width: 100%;
+						margin-top: 2.5rem;
+						p {
+							text-align: justify;
+						}
+					}
+
+					&__detail.active {
+						max-height: 1000px; /* Set a large enough value to ensure it covers all possible content heights */
+					}
 				}
-				button,a {
+				button,
+				a {
 					grid-column: 5/7;
-                    background-color: transparent;
+					background-color: transparent;
 					border: none;
 					color: $real-white;
 					padding: 1rem 2rem;
 					border-radius: 0.5rem;
-                    text-decoration: none;
-                    font-size: 1.4rem;
-                    height: fit-content;
-                    cursor: pointer;
+					text-decoration: none;
+					font-size: 1.4rem;
+					height: fit-content;
+					cursor: pointer;
 				}
-                
 			}
 		}
 	}
