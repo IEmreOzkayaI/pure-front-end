@@ -403,6 +403,7 @@ const CompanyDashboard = () => {
                 setTableView(
                   tableView === "interviews" ? "interviewees" : "interviews"
                 );
+                setSearchValue("");
               }}
             >
               View {tableView === "interviews" ? "Interviewees" : "Interviews"}
