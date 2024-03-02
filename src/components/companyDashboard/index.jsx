@@ -17,10 +17,40 @@ import { useEffect } from "react";
 import { interviewFetch as interviewById } from "../../redux/toolkit/interviewSlice.js";
 import { PiShareFat } from "react-icons/pi";
 import { toast, Toaster } from "react-hot-toast";
+import { intervieweeListFetch } from "../../redux/toolkit/intervieweeListSlice.js";
 
-const { Meta } = Card;
+const columnsInterviewee = [
+  {
+    title: "Name",
+    dataIndex: "name",
+    render: (text, record) => (
+      <>
+        {record.name} {record.surname}
+      </>
+    ),
+  },
+  {
+    title: "Status",
+    dataIndex: "status",
+    render: (_, { status }) => (
+      <>
+        <Tag bordered={false} color={status === "PASSIVE" ? "red" : "green"}>
+          {status}
+        </Tag>
+      </>
+    ),
+  },
+  {
+    title: "Phone Number",
+    dataIndex: "phone_number",
+  },
+  {
+    title: "Email",
+    dataIndex: "email",
+  },
+];
 
-const columns = [
+const columnsInterview = [
   {
     title: "Interview Title",
     dataIndex: "name",
@@ -86,6 +116,9 @@ const CompanyDashboard = () => {
   const selectedInterview = useSelector(
     (state) => state.interview?.interviewInfo
   );
+  const intervieweeListInfo = useSelector(
+    (state) => state.intervieweeListSlice.intervieweeListInfo
+  );
   useEffect(() => {
     dispatch(interviewFetch(id));
   }, [dispatch, id]);
@@ -96,12 +129,34 @@ const CompanyDashboard = () => {
 
   const filterTable = (e) => {
     //TODO tableView a gore filtreledigi degisken ya interview ya da interviewee olacak
-    const filteredData = interviewInfo.filter((interview) => {
-      return interview.name
-        .toLowerCase()
-        .includes(e.target.value.toLowerCase());
-    });
-    setSearchResult(filteredData);
+    if (tableView === "interviews") {
+      const filteredData = interviewInfo.filter((interview) => {
+        return interview.name
+          .toLowerCase()
+          .includes(e.target.value.toLowerCase());
+      });
+      setSearchResult(filteredData);
+    }
+    if (tableView === "interviewees") {
+      const filteredData = intervieweeListInfo.filter((interviewee) => {
+        if (
+          interviewee.name
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase()) ||
+          interviewee.surname
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase()) ||
+          interviewee.email
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase()) ||
+          interviewee.phone_number
+            .toLowerCase()
+            .includes(e.target.value.toLowerCase())
+        )
+          return true;
+      });
+      setSearchResult(filteredData);
+    }
   };
   return (
     <div className={styles.main}>
@@ -164,107 +219,137 @@ const CompanyDashboard = () => {
           </Option>
         </Select>
 
-        <Table
-          dataSource={
-            tableView === "interviews"
-              ? searchValue.length === 0
-                ? interviewInfo || []
+        {tableView === "interviews" ? (
+          <Table
+            dataSource={
+              searchValue.length === 0 ? interviewInfo || [] : searchResult
+            }
+            columns={columnsInterview}
+            locale={{
+              emptyText: "No Interviews Yet",
+            }}
+            loading={interviewInfo === null}
+            onRow={(record) => {
+              return {
+                onClick: () => {
+                  dispatch(interviewById(record.id));
+                  console.log("record", record);
+                  console.log("clickedInterview", selectedInterview);
+
+                  dispatch(intervieweeListFetch(record.id));
+                },
+              };
+            }}
+          />
+        ) : (
+          <Table
+            dataSource={
+              searchValue.length === 0
+                ? intervieweeListInfo || []
                 : searchResult
-              : []
-          }
-          columns={columns}
-          locale={{
-            emptyText:
-              tableView === "interviews"
-                ? "No Interviews Yet"
-                : "No Interviewees Yet",
-          }}
-          loading={interviewInfo === null}
-          onRow={(record) => {
-            return {
-              onClick: () => {
-                dispatch(interviewById(record.id));
-                console.log("clickedInterview", selectedInterview);
-              },
-            };
-          }}
-        />
+            }
+            columns={columnsInterviewee}
+            locale={{
+              emptyText: "No Interviewees Yet",
+            }}
+            loading={!intervieweeListInfo}
+            onRow={(record) => {
+              return {
+                onClick: () => {},
+              };
+            }}
+          />
+        )}
       </div>
       <div className={styles.right_side}>
         <p>
           {tableView === "interviews" ? "Interview " : "Interviewee "}
           Details
         </p>
-        <Card>
-          <Skeleton loading={!selectedInterview} active paragraph={{ rows: 7 }}>
-            <div className={`${styles.flex} mb-2`}>
-              <div className={styles.flexColumn}>
-                <div className={styles.text}>
-                  {tableView === "interviews"
-                    ? selectedInterview?.data.name
-                    : "Alice Johnson"}
-                </div>
+        <Card loading={!selectedInterview}>
+          <div className={`${styles.flex} mb-2`}>
+            <div className={styles.flexColumn}>
+              <div className={styles.text}>
+                {tableView === "interviews"
+                  ? selectedInterview?.data.name
+                  : "Alice Johnson"}
+              </div>
 
-                <div className={styles.textMuted}>
-                  {tableView === "interviews" ? (
-                    <div
-                      style={{
-                        overflow: "hidden",
-                        whiteSpace: "nowrap",
-                        textOverflow: "ellipsis",
-                        width: "10rem",
-                      }}
-                      title={selectedInterview?.data?.description}
-                    >
-                      {selectedInterview?.data?.description}
-                    </div>
-                  ) : (
-                    "April 15, 2023"
-                  )}
-                </div>
+              <div className={styles.textMuted}>
+                {tableView === "interviews" ? (
+                  <div
+                    style={{
+                      overflow: "hidden",
+                      whiteSpace: "nowrap",
+                      textOverflow: "ellipsis",
+                      width: "10rem",
+                    }}
+                    title={selectedInterview?.data?.description}
+                  >
+                    {selectedInterview?.data?.description}
+                  </div>
+                ) : (
+                  "April 15, 2023"
+                )}
               </div>
-              <MdPerson2 size={25} />
             </div>
-            <div className={`${styles.flex} mb-2`}>
-              <div className={styles.flexColumn}>
-                <div className={styles.text}>
-                  {tableView === "interviews"
-                    ? "Interview Duration"
-                    : "Interview Date"}
-                </div>
-                <div className={styles.textMuted}>
-                  {tableView === "interviews"
-                    ? selectedInterview?.data?.interview_time
-                    : "April 15, 2023"}
-                </div>
+            <MdPerson2 size={25} />
+          </div>
+          <div className={`${styles.flex} mb-2`}>
+            <div className={styles.flexColumn}>
+              <div className={styles.text}>
+                {tableView === "interviews"
+                  ? "Interview Duration"
+                  : "Interview Date"}
               </div>
-              <CiCalendarDate size={25} />
-            </div>
-            <div className={`${styles.flex} mb-2`}>
-              <div className={styles.flexColumn}>
-                <div className={styles.text}>Status (status yok) </div>
-                <div className={styles.textMuted}>Upcoming</div>
+              <div className={styles.textMuted}>
+                {tableView === "interviews"
+                  ? selectedInterview?.data?.interview_time
+                  : "April 15, 2023"}
               </div>
-              <GiConfirmed size={20} />
             </div>
-            {tableView === "interviews" && (
-              <Button
-                style={{
-                  display: "flex",
-                  alignItems: "center",
-                  justifyContent: "center",
-                  backgroundColor: "#EDEDED",
-                  fontWeight: "bold",
-                  border: "none",
-                }}
-                icon={<PiShareFat />}
-                block
-                onClick={() => {
-                  try {
-                    navigator.clipboard.writeText(
-                      selectedInterview?.data?.share_link
-                    );
-                    toast.success("Link copied", {
+            <CiCalendarDate size={25} />
+          </div>
+          <div className={`${styles.flex} mb-2`}>
+            <div className={styles.flexColumn}>
+              <div className={styles.text}>Status (status yok) </div>
+              <div className={styles.textMuted}>Upcoming</div>
+            </div>
+            <GiConfirmed size={20} />
+          </div>
+          {tableView === "interviews" && (
+            <Button
+              style={{
+                display: "flex",
+                alignItems: "center",
+                justifyContent: "center",
+                backgroundColor: "#EDEDED",
+                fontWeight: "bold",
+                border: "none",
+              }}
+              icon={<PiShareFat />}
+              block
+              onClick={() => {
+                try {
+                  navigator.clipboard.writeText(
+                    selectedInterview?.data?.share_link
+                  );
+                  toast.success("Link copied", {
+                    style: {
+                      border: "1px solid #16161b",
+                      padding: "16px",
+                      color: "#16161b",
+                    },
+                    iconTheme: {
+                      primary: "#16161b",
+                      secondary: "#f5f3f3",
+                    },
+                  });
+                } catch (e) {
+                  console.log(e);
+                  toast.error(
+                    "Link could not be copied, please try again later.",
+                    {
                       style: {
                         border: "1px solid #16161b",
                         padding: "16px",
@@ -272,69 +357,57 @@ const CompanyDashboard = () => {
                       },
                       iconTheme: {
                         primary: "#16161b",
-                        secondary: "#f5f3f3",
+                        secondary: "#fff",
                       },
-                    });
-                  } catch (e) {
-                    console.log(e);
-                    toast.error(
-                      "Link could not be copied, please try again later.",
-                      {
-                        style: {
-                          border: "1px solid #16161b",
-                          padding: "16px",
-                          color: "#16161b",
-                        },
-                        iconTheme: {
-                          primary: "#16161b",
-                          secondary: "#fff",
-                        },
-                      }
-                    );
-                  }
-                }}
-              >
-                Copy Interview Link
-              </Button>
+                    }
+                  );
+                }
+              }}
+            >
+              Copy Interview Link
+            </Button>
+          )}
+
+          <div className={styles.lower}>
+            {tableView === "interviewees" && (
+              <>
+                <div className={styles.row}>
+                  <div className={styles.title}>Email</div>
+                  <div className={styles.value}>alice.johnson@email.com</div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.title}>Phone</div>
+                  <div className={styles.value}>124125125</div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.title}>Location</div>
+                  <div className={styles.value}>San Francisco, CA</div>
+                </div>
+                <div className={styles.row}>
+                  <div className={styles.title}>Experience</div>
+                  <div className={styles.value}>
+                    5 years in Software Engineering
+                  </div>
+                </div>
+              </>
             )}
 
-            <div className={styles.lower}>
-              {/* <div className={styles.row}>
-                <div className={styles.title}>Email</div>
-                <div className={styles.value}>alice.johnson@email.com</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.title}>Phone</div>
-                <div className={styles.value}>124125125</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.title}>Location</div>
-                <div className={styles.value}>San Francisco, CA</div>
-              </div>
-              <div className={styles.row}>
-                <div className={styles.title}>Experience</div>
-                <div className={styles.value}>
-                  5 years in Software Engineering
-                </div>
-              </div> */}
-              <Button
-                style={{
-                  backgroundColor: "#EDEDED",
-                  marginTop: "2rem",
-                  border: "none",
-                  fontWeight: "bold",
-                }}
-                onClick={() => {
-                  setTableView(
-                    tableView === "interviews" ? "interviewees" : "interviews"
-                  );
-                }}
-              >
-                View{" "}
-                {tableView === "interviews" ? "Interviewees" : "Interviews"}
-              </Button>
-            </div>
-          </Skeleton>
+            <Button
+              style={{
+                backgroundColor: "#EDEDED",
+                marginTop: "2rem",
+                border: "none",
+                fontWeight: "bold",
+              }}
+              onClick={() => {
+                setTableView(
+                  tableView === "interviews" ? "interviewees" : "interviews"
+                );
+              }}
+            >
+              View {tableView === "interviews" ? "Interviewees" : "Interviews"}
+            </Button>
+          </div>
         </Card>
       </div>
       <Toaster position="bottom-right" reverseOrder={false} />
