@@ -20,10 +20,10 @@ function* interview(action) {
     }
 }
 
-function* interviewWrapper(interview_id) {
+function* interviewWrapper(interview_signature) {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/interview/get_by_interview_id/${interview_id}`, {
+            .get(`http://localhost:3001/api/interview/get_by_interview_id/${interview_signature}`, {
                 withCredentials: true,
             })
             .then((res) => {

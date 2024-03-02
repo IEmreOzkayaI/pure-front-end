@@ -52,11 +52,22 @@ export default function AnimatedRoutes() {
             )
         );
     });
+    const LazyInterviewLogIn = lazy(() => {
+        return new Promise((resolve) =>
+            setTimeout(() => resolve(import("../pages/InterviewLogIn/InterviewLogIn")), 2000)
+        );
+    });
     const LazyDashboard = lazy(() => {
         return new Promise((resolve) =>
             setTimeout(() => resolve(import("../pages/dashboard/Dashboard")), 2000)
         );
     });
+    const LazyInterviewTracker = lazy(() => {
+        return new Promise((resolve) =>
+            setTimeout(() => resolve(import("../pages/InterviewTracker")), 2000)
+        );
+    });
+
 
     return (
         <AnimatePresence mode="initial" initial={false}>
@@ -70,7 +81,9 @@ export default function AnimatedRoutes() {
                     <Route path="dashboard" element={<LazyDashboard/>}/>
                     <Route path="interview">
                         <Route path="signUp/:interview_id" element={<LazyInterviewSignUp/>}/>
-                        <Route path="playground" element={<LazyInterviewPlayground/>}/>
+                        <Route path="logIn/:interview_signature" element={<LazyInterviewLogIn/>}/>
+                        <Route path="tracker/:interview_signature" element={<LazyInterviewTracker/>}/>
+                        <Route path="playground/:interview_signature" element={<LazyInterviewPlayground/>}/>
                         <Route path="success" element={<Redirect success={true} text={"Interview application success 🥳"}/>}/>
                         <Route path="pdf" element={<PdfScreen/>}/>
                     </Route>

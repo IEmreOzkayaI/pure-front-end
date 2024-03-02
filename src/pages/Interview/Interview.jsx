@@ -16,9 +16,11 @@ import Redirect from "../../components/shared/Redirect/Redirect.jsx";
 import systemWarning from "../../systemWarning.js";
 import { useResponsiveBlock } from "../../hooks/useResponsiveBlock.jsx";
 import { interviewFetch } from "../../redux/toolkit/interviewSlice.js";
+import { useParams } from "react-router-dom";
 
 const Interview = () => {
   const dispatch = useDispatch();
+  const params = useParams();
   const responsiveBlock = useResponsiveBlock();
   const interviewInfo = useSelector((state) => state.interview?.interviewInfo);
   const questionList = useSelector((state) => state.interviewManagement.questions);
@@ -34,7 +36,7 @@ const Interview = () => {
       dispatch(setRemainingTime(storedInterview?.interview_time));
       dispatch(setQuestionAmount(storedInterview?.question_amount));
     } else {
-      dispatch(interviewFetch("ce6c6d2d-6edb-4e93-899b-75e36e56185d"));
+      dispatch(interviewFetch(params.interview_signature));
     }
   }, [dispatch]);
 

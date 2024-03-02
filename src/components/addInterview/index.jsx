@@ -82,11 +82,11 @@ const AddInterview = ({ setIsModalOpen }) => {
     const algorithm_question_list = values.questions
       .filter((question) => question.type === "algorithm")
       .map((question) => question.question);
-
+    const interview_time_reformated = values.interview_time.format("HH:mm");
     const newInterview = {
       name: values.name,
       description: values.description,
-      interview_time: values.interview_time,
+      interview_time: interview_time_reformated,
       questions: {
         diagram_question_list: diagram_question_list,
         test_question_list: test_question_list,
