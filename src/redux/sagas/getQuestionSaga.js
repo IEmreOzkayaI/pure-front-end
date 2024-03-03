@@ -24,7 +24,7 @@ function* question(action) {
 function* questionWrapper(payload) {
     return yield new Promise((resolve, reject) => {
         axios
-            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/question/get`, {
+            .get(`${import.meta.env.VITE_BACKEND_BASE_URL}api/question/get`, {
                 withCredentials: true,
                 params: payload, // payload'ı query string olarak gönder
             })

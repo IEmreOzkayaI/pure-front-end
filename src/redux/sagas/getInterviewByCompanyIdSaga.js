@@ -4,14 +4,14 @@ import {
   interviewFailure,
   interviewProgress,
   interviewSuccess,
-} from "../toolkit/interviewSlice";
+} from "../toolkit/getInterviewByCompanyIdSlice";
 
-export default function* interviewSaga() {
+export default function* getInterviewByCompanyIdSaga() {
   yield all([interviewWatcher()]);
 }
 
 function* interviewWatcher() {
-  yield takeLatest("interview/interviewFetch", interview);
+  yield takeLatest("getInterviewByCompanyId/interviewFetch", interview);
 }
 
 function* interview(action) {
@@ -24,19 +24,19 @@ function* interview(action) {
   }
 }
 
-function* interviewWrapper(interview_id) {
+function* interviewWrapper(company_id) {
   return yield new Promise((resolve, reject) => {
     axios
       .get(
         `${
           import.meta.env.VITE_BACKEND_BASE_URL
-        }api/interview/get_by_interview_id/${interview_id}`,
+        }api/interview/get_by_company_id/${company_id}`,
         {
           withCredentials: true,
         }
       )
       .then((res) => {
-        const data = res.data;
+        const data = res.data.data;
         resolve(data);
       })
       .catch((err) => {

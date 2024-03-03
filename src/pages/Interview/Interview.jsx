@@ -26,8 +26,8 @@ const Interview = () => {
     const interviewInfo = useSelector((state) => state.interview?.interviewInfo);
     const questionList = useSelector((state) => state.interviewManagement.questions);
     const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
-    const [edges, setEdges] = useState([]);
-    const [nodes, setNodes] = useState([]);
+    const [edges, setEdges] = useState(JSON.parse(localStorage.getItem('edges')) || []);
+    const [nodes, setNodes] = useState(JSON.parse(localStorage.getItem("nodes")) || []);
 
     useEffect(() => {
         dispatch(interviewFetch("eeadce37-c0d8-4869-add9-d690f23929fa"));

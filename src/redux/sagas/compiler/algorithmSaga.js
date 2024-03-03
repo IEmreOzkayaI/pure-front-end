@@ -25,7 +25,7 @@ function* algorithmWrapper(payload) {
     console.log(payload)
     const promise = yield new Promise((resolve, reject) => {
         axios
-            .post(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/question/run_algorithm`, {_id:payload._id,language: payload.language , code:payload.code}, {
+            .post(`${import.meta.env.VITE_BACKEND_BASE_URL}api/question/run_algorithm`, {_id:payload._id,language: payload.language , code:payload.code}, {
                 withCredentials: true, headers: {
                     "Content-Type": "application/json", Accept: "application/json",
                 },
