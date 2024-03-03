@@ -28,7 +28,9 @@ function* userByIdWrapper(individual_user_id) {
   return yield new Promise((resolve, reject) => {
     axios
       .get(
-        `http://localhost:3001/api/user/individual_user/${individual_user_id}`,
+        `${
+          import.meta.env.VITE_BACKEND_BASE_URL
+        }api/user/individual_user/${individual_user_id}`,
         {
           withCredentials: true,
         }

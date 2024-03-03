@@ -31,7 +31,9 @@ function* intervieweeListWrapper(interview_id) {
   return yield new Promise((resolve, reject) => {
     axios
       .get(
-        `http://localhost:3001/api/interview/get_interviewees/${interview_id}`,
+        `${
+          import.meta.env.VITE_BACKEND_BASE_URL
+        }api/interview/get_interviewees/${interview_id}`,
         {
           withCredentials: true,
         }

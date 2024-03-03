@@ -28,7 +28,9 @@ function* interviewWrapper(company_id) {
   return yield new Promise((resolve, reject) => {
     axios
       .get(
-        `http://localhost:3001/api/interview/get_by_company_id/${company_id}`,
+        `${
+          import.meta.env.VITE_BACKEND_BASE_URL
+        }api/interview/get_by_company_id/${company_id}`,
         {
           withCredentials: true,
         }
