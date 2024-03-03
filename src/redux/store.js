@@ -37,6 +37,9 @@ import getInterviewByCompanyIdSaga from "./sagas/getInterviewByCompanyIdSaga.js"
 import intervieweeListSaga from "./sagas/intervieweeListSaga.js";
 import intervieweeListSlice from "./toolkit/intervieweeListSlice.js";
 
+import getUserByIdSlice from "./toolkit/getUserByIdSlice.js";
+import getUserByIdSaga from "./sagas/getUserByIdSaga.js";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
   reducer: {
@@ -55,6 +58,7 @@ const store = configureStore({
     addInterviewSlice,
     getInterviewByCompanyIdSlice,
     intervieweeListSlice,
+    getUserByIdSlice,
   },
   middleware: [saga],
 });
@@ -71,5 +75,6 @@ saga.run(addInterviewSaga);
 saga.run(diagramSaga);
 saga.run(getInterviewByCompanyIdSaga);
 saga.run(intervieweeListSaga);
+saga.run(getUserByIdSaga);
 
 export default store;

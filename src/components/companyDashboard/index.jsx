@@ -18,6 +18,8 @@ import { interviewFetch as interviewById } from "../../redux/toolkit/interviewSl
 import { PiShareFat } from "react-icons/pi";
 import { toast, Toaster } from "react-hot-toast";
 import { intervieweeListFetch } from "../../redux/toolkit/intervieweeListSlice.js";
+import { userByIdFetch } from "../../redux/toolkit/getUserByIdSlice.js";
+import moment from "moment";
 
 const columnsInterviewee = [
   {
@@ -104,7 +106,7 @@ const CompanyDashboard = () => {
   const [data, setData] = useState([]);
   const [loading, setLoading] = useState(false);
   const [tableView, setTableView] = useState("interviews");
-
+  const [selectedInterviewee, setSelectedInterviewee] = useState({});
   const [searchResult, setSearchResult] = useState([]);
   const [searchValue, setSearchValue] = useState("");
 
@@ -119,16 +121,30 @@ const CompanyDashboard = () => {
   const intervieweeListInfo = useSelector(
     (state) => state.intervieweeListSlice.intervieweeListInfo
   );
+  console.log("interwieweeListInfo", intervieweeListInfo);
+  const userByIdInfo = useSelector(
+    (state) => state.getUserByIdSlice.userByIdInfo
+  );
+  console.log("first interviewee", userByIdInfo);
+
   useEffect(() => {
-    dispatch(interviewFetch(id));
+    dispatch(interviewFetch(id)); // get all interviews
   }, [dispatch, id]);
 
   useEffect(() => {
-    if (interviewInfo) dispatch(interviewById(interviewInfo[0].id));
+    if (interviewInfo) {
+      dispatch(interviewById(interviewInfo[0].id));
+      dispatch(intervieweeListFetch(interviewInfo[0].id));
+    }
   }, [dispatch, interviewInfo]);
 
+  useEffect(() => {
+    // get the first interviewee of the selectedInterview
+    if (tableView === "interviewees")
+      dispatch(userByIdFetch(selectedInterview?.data?.interviewee_list[0]));
+  }, [dispatch, tableView, selectedInterview]);
+
   const filterTable = (e) => {
-    //TODO tableView a gore filtreledigi degisken ya interview ya da interviewee olacak
     if (tableView === "interviews") {
       const filteredData = interviewInfo.filter((interview) => {
         return interview.name
@@ -228,7 +244,7 @@ const CompanyDashboard = () => {
             locale={{
               emptyText: "No Interviews Yet",
             }}
-            loading={interviewInfo === null}
+            loading={!interviewInfo}
             onRow={(record) => {
               return {
                 onClick: () => {
@@ -255,7 +271,10 @@ const CompanyDashboard = () => {
             loading={!intervieweeListInfo}
             onRow={(record) => {
               return {
-                onClick: () => {},
+                onClick: () => {
+                  console.log("record", record);
+                  setSelectedInterviewee(record);
+                },
               };
             }}
           />
@@ -272,7 +291,13 @@ const CompanyDashboard = () => {
               <div className={styles.text}>
                 {tableView === "interviews"
                   ? selectedInterview?.data.name
-                  : "Alice Johnson"}
+                  : `${
+                      selectedInterviewee?.name || userByIdInfo?.name || "John"
+                    } ${
+                      selectedInterviewee?.surname ||
+                      userByIdInfo?.surname ||
+                      "Doe"
+                    }`}
               </div>
 
               <div className={styles.textMuted}>
@@ -289,31 +314,42 @@ const CompanyDashboard = () => {
                     {selectedInterview?.data?.description}
                   </div>
                 ) : (
-                  "April 15, 2023"
+                  `Joined on ${moment(
+                    selectedInterviewee?.created_at || userByIdInfo?.created_at
+                  ).format("MM.DD.YYYY")}`
                 )}
               </div>
             </div>
             <MdPerson2 size={25} />
           </div>
-          <div className={`${styles.flex} mb-2`}>
-            <div className={styles.flexColumn}>
-              <div className={styles.text}>
-                {tableView === "interviews"
-                  ? "Interview Duration"
-                  : "Interview Date"}
-              </div>
-              <div className={styles.textMuted}>
-                {tableView === "interviews"
-                  ? selectedInterview?.data?.interview_time
-                  : "April 15, 2023"}
-              </div>
-            </div>
-            <CiCalendarDate size={25} />
+          <div
+            className={`${styles.flex} ${tableView === "interviews" && "mb-2"}`}
+          >
+            {tableView === "interviews" && (
+              <>
+                <div className={styles.flexColumn}>
+                  <div className={styles.text}>Interview Duration</div>
+                  <div className={styles.textMuted}>
+                    {selectedInterview?.data?.interview_time}
+                  </div>
+                </div>
+
+                <CiCalendarDate size={25} />
+              </>
+            )}
           </div>
           <div className={`${styles.flex} mb-2`}>
             <div className={styles.flexColumn}>
-              <div className={styles.text}>Status (status yok) </div>
-              <div className={styles.textMuted}>Upcoming</div>
+              <div className={styles.text}>
+                {tableView === "interviews" ? "Status (status yok)" : "Status"}{" "}
+              </div>
+              <div className={styles.textMuted}>
+                {tableView === "interviewees"
+                  ? selectedInterviewee?.status ||
+                    userByIdInfo?.status ||
+                    "Unknown"
+                  : "Upcoming"}
+              </div>
             </div>
             <GiConfirmed size={20} />
           </div>
@@ -373,20 +409,31 @@ const CompanyDashboard = () => {
               <>
                 <div className={styles.row}>
                   <div className={styles.title}>Email</div>
-                  <div className={styles.value}>alice.johnson@email.com</div>
+                  <div className={styles.value}>
+                    {selectedInterviewee?.email ||
+                      userByIdInfo?.email ||
+                      "example@mail.com"}
+                  </div>
                 </div>
                 <div className={styles.row}>
                   <div className={styles.title}>Phone</div>
-                  <div className={styles.value}>124125125</div>
+                  <div className={styles.value}>
+                    {selectedInterviewee?.phone_number ||
+                      userByIdInfo?.phone_number ||
+                      "+1234566789"}
+                  </div>
                 </div>
-                <div className={styles.row}>
+                {/* <div className={styles.row}>
                   <div className={styles.title}>Location</div>
                   <div className={styles.value}>San Francisco, CA</div>
-                </div>
+                </div> */}
                 <div className={styles.row}>
-                  <div className={styles.title}>Experience</div>
+                  <div className={styles.title}>Cover Letter</div>
                   <div className={styles.value}>
-                    5 years in Software Engineering
+                    {/* {selectedInterviewee?.cover_letter ||
+                      userByIdInfo?.cover_letter ||
+                      "Example Cover Letter"} */}
+                    burasi yapilacak
                   </div>
                 </div>
               </>
