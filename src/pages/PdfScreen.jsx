@@ -8,7 +8,7 @@ const PdfScreen = () => {
   useEffect(() => {
     const fetchPdf = async () => {
       try {
-        const response = await fetch("http://localhost:3001/api/user/individual_user/cv/fcc6aec2-7296-4352-be9a-052a1456c2de", {
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/user/individual_user/cv/fcc6aec2-7296-4352-be9a-052a1456c2de`, {
           method: "GET",
           headers: {
             "Content-Type": "application/pdf",

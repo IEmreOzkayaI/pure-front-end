@@ -23,7 +23,7 @@ function* userRegisterInterviewWrapper(payload) {
   console.log(payload, "payload.formData")
 	return yield new Promise((resolve, reject) => {
 		axios
-			.post(`http://localhost:3001/api/interview/register_user_to_interview/${payload.interview_id}`,
+			.post(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/interview/register_user_to_interview/${payload.interview_id}`,
 				payload.formData, {
 					withCredentials: true,
 					headers: {

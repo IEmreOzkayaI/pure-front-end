@@ -23,7 +23,7 @@ function* userLogInInterviewWrapper(payload) {
   console.log(payload, "payload.formData")
 	return yield new Promise((resolve, reject) => {
 		axios
-			.post(`http://localhost:3001/api/interview/login_user_to_interview/${payload.interview_signature}`,
+			.post(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/interview/login_user_to_interview/${payload.interview_signature}`,
 				payload.logInData, {
 					withCredentials: true,
 				})
