@@ -1,13 +1,10 @@
 import styles from "./AnswerOutput.module.scss";
 import { useDispatch, useSelector } from "react-redux";
-import  {
-  algorithmFetch,
-  
-} from "../../redux/toolkit/compiler/algorithmSlice.js";
+import { algorithmFetch } from "../../redux/toolkit/compiler/algorithmSlice.js";
 import { setQuestions } from "../../redux/toolkit/interviewManagementSlice.js";
 import { getEdgesAndNodes } from "../../redux/toolkit/diagramSlice.js";
 
-const AnswerConsole = ({ edges, nodes ,setNodes,setEdges}) => {
+const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
   const dispatch = useDispatch();
   const currentQuestion = useSelector(
     (state) => state.interviewManagement.currentQuestion
@@ -87,11 +84,23 @@ const AnswerConsole = ({ edges, nodes ,setNodes,setEdges}) => {
         <div className={styles.right_side_content_down_body_actions}>
           {currentQuestion?.type === "Diagram" ? (
             <>
-              <button className={styles.diagram} onClick={resetDiagram}>Reset Diagram</button>
+              <button className={styles.diagram} onClick={resetDiagram}>
+                Reset Diagram
+              </button>
               <button
-                onClick={() =>
-                  dispatch(getEdgesAndNodes({ edges, nodes, currentQuestion,setEdges,setNodes }))
-                }
+                onClick={() => {
+                  dispatch(
+                    getEdgesAndNodes({
+                      edges,
+                      nodes,
+                      currentQuestion,
+                      setEdges,
+                      setNodes,
+                    })
+                  );
+                  localStorage.setItem("edges", JSON.stringify(edges));
+                  localStorage.setItem("nodes", JSON.stringify(nodes));
+                }}
                 className={styles.diagram}
               >
                 Submit Diagram

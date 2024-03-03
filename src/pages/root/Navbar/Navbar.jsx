@@ -5,12 +5,16 @@ import { useEffect, useState } from "react";
 import FullScreenNavbar from "./FullScreenNavbar";
 import { useDispatch, useSelector } from "react-redux";
 import { logOutFetch } from "../../../redux/toolkit/logOutSlice.js";
+import Button from '../../../components/shared/Button/Button';
+import CustomModal from "../../../components/CustomModal.jsx";
+import AddInterview from "../../../components/addInterview/index.jsx";
 
 const Navbar = () => {
   const [user, setUser] = useState();
   const dispatch = useDispatch();
   const [fullNav, setFullNav] = useState(false);
   const userInfo = useSelector((state) => state.user.userInfo);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   console.log("page refreshed this is user ", userInfo);
   useEffect(() => {
@@ -54,6 +58,26 @@ const Navbar = () => {
               </Link>
             </li>
           </span>
+        )}
+        {user && window.location.href.includes('/dashboard')&&(
+          <>
+            <Button
+              className={["dark"]}
+              style={{ alignSelf: "center" ,marginLeft: "auto",marginRight: "5rem"}}
+              onClick={() => setIsModalOpen(true)}
+            >
+              Add Interview
+            </Button>
+            <CustomModal
+              width={"100%"}
+              isOpen={isModalOpen}
+              setIsOpen={setIsModalOpen}
+            >
+              <div>
+                <AddInterview setIsModalOpen={setIsModalOpen} />
+              </div>
+            </CustomModal>
+          </>
         )}
         <span className={styles.lastChild}>
           {user && (

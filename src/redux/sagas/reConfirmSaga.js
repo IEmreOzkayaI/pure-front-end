@@ -23,7 +23,7 @@ function* reconfirm() {
 function* reConfirmWrapper() {
 	return yield new Promise((resolve, reject) => {
 		axios
-			.get(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/user/re-confirm`,
+			.get(`${import.meta.env.VITE_BACKEND_BASE_URL}api/user/re-confirm`,
 				{
 					withCredentials: true,
 					headers: {
