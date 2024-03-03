@@ -1,9 +1,6 @@
 import PropTypes from "prop-types";
-import EmptyInterviewInfoBoard from "../emptyInterviewInfoBoard/index.jsx";
-import CustomModal from "../CustomModal.jsx";
 import { useState } from "react";
-import AddInterview from "../addInterview/index.jsx";
-import { Input, Select, Table, Tag, Card, Skeleton, Button } from "antd";
+import { Select, Table, Tag, Card,  Button } from "antd";
 const { Option } = Select;
 import { FaRegClock } from "react-icons/fa";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
@@ -102,9 +99,6 @@ const columnsInterview = [
 ];
 
 const CompanyDashboard = () => {
-  const [isModalOpen, setIsModalOpen] = useState(false);
-  const [data, setData] = useState([]);
-  const [loading, setLoading] = useState(false);
   const [tableView, setTableView] = useState("interviews");
   const [selectedInterviewee, setSelectedInterviewee] = useState({});
   const [searchResult, setSearchResult] = useState([]);
@@ -176,17 +170,7 @@ const CompanyDashboard = () => {
   };
   return (
     <div className={styles.main}>
-      {/* <EmptyInterviewInfoBoard setIsModalOpen={setIsModalOpen}/>
 
-            <CustomModal
-                width={"100%"}
-                isOpen={isModalOpen}
-                setIsOpen={setIsModalOpen}
-            >
-                <div>
-                    <AddInterview setIsModalOpen={setIsModalOpen}/>
-                </div>
-            </CustomModal> */}
       <div className={styles.left_side}>
         <p>
           {tableView === "interviews" ? "Interview " : "Interviewees "} List
