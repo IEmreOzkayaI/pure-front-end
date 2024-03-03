@@ -59,7 +59,7 @@ const Navbar = () => {
             </li>
           </span>
         )}
-        {user && (
+        {user && window.location.href.includes('/dashboard')&&(
           <>
             <Button
               className={["dark"]}
