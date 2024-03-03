@@ -49,21 +49,21 @@ const Navbar = () => {
             <li>
               <img src={pureLogo} alt="logo" />
             </li>
-            <li>
+            {/* <li>
               <Link to={"/"}>Home</Link>
             </li>
             <li>
               <Link to={"/interview/playground"} target="_blank">
                 Interview
               </Link>
-            </li>
+            </li> */}
           </span>
         )}
         {user && window.location.href.includes('/dashboard')&&(
           <>
             <Button
               className={["dark"]}
-              style={{ alignSelf: "center" ,marginLeft: "auto",marginRight: "5rem"}}
+              style={{ alignSelf: "center" ,marginLeft: "auto",marginRight: "5rem" , padding:"0.5rem 1rem", fontSize:"1.2rem", fontWeight:"100", border:"none"}}
               onClick={() => setIsModalOpen(true)}
             >
               Add Interview

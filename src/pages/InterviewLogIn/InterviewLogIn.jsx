@@ -10,7 +10,7 @@ import { useEffect } from "react";
 import { toast,Toaster } from "react-hot-toast";
 import { useNavigate } from "react-router-dom";
 import { userLogInInterviewInit } from "../../redux/toolkit/userLogInInterviewSlice";
-import { interviewFetch } from "../../redux/toolkit/interviewSlice";
+import { interviewSignaturedFetch } from "../../redux/toolkit/interviewSignaturedSlice";
 
 const InterviewLogIn = () => {
   const params = useParams();
@@ -19,8 +19,8 @@ const InterviewLogIn = () => {
 
   const logInError = useSelector((state) => state.userLogInInterview?.userLogInInterviewError);
   const logInSuccess = useSelector((state) => state.userLogInInterview?.userLogInInterviewInfo);
-  const interviewSuccess = useSelector((state) => state.interview?.interviewInfo);
-  const interviewError = useSelector((state) => state.interview?.interviewError);
+  const interviewSuccess = useSelector((state) => state.interviewSignatured?.interviewSignaturedInfo);
+  const interviewError = useSelector((state) => state.interviewSignatured?.interviewSignaturedError);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [terms, setTerms] = useState(false);
@@ -32,7 +32,7 @@ const InterviewLogIn = () => {
   });
 
   useEffect(() => {
-    dispatch(interviewFetch(params.interview_signature));
+    dispatch(interviewSignaturedFetch(params.interview_signature));
   }, []);
 
   const handleLogIn = (e) => {
@@ -115,7 +115,7 @@ const InterviewLogIn = () => {
         },
       },1500);
 
-      dispatch(interviewFetch(params.interview_signature));
+      dispatch(interviewSignaturedFetch(params.interview_signature));
 
     }
     }, [logInSuccess]);
