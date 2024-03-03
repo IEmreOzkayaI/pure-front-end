@@ -24,6 +24,9 @@ import EndStateNode from "./EndStateNode/EndStateNode";
 import ContextMenu from "./ContextMenu/ContextMenu";
 import LifeLine from "./LifeLine/LifeLine";
 import "./handleStyles.css";
+import { useDispatch, useSelector } from "react-redux";
+import { useEffect } from "react";
+import { setQuestions } from "../../redux/toolkit/interviewManagementSlice";
 
 const nodeTypes = {
   actorNode: ActorNode,
@@ -40,8 +43,25 @@ const getId = () => `dndnode_${id++}`;
 
 export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
   const edgeUpdateSuccessful = useRef(true);
+  const dispatch = useDispatch();
+  const diagramInfo = useSelector((state) => state.diagramSlice?.diagramInfo);
+  const currentQuestion = useSelector((state) => state.interviewManagement?.currentQuestion);
+  const questions = useSelector((state) => state.interviewManagement?.questions);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [menu, setMenu] = useState(null);
+
+
+  useEffect(() => {
+    if(diagramInfo){
+
+      const updatedQuestions = questions.map((question) =>
+        question.question._id === currentQuestion.question._id
+          ? { ...question, user_answer:  diagramInfo}
+          : question
+      );
+      dispatch(setQuestions(updatedQuestions));
+    }
+  }, [diagramInfo]);
 
   const onConnect = useCallback(
     (thisEdge) => {

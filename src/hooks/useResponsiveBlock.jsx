@@ -1,7 +1,7 @@
 import {useState, useEffect, useCallback} from 'react';
 
 export const useResponsiveBlock = () => {
-    const [responsiveBlock, setResponsiveBlock] = useState(window.innerWidth >= 1440);
+    const [responsiveBlock, setResponsiveBlock] = useState(window.innerWidth >= 0);
 
     const handleResize = useCallback(() => {
         // setResponsiveBlock(window.innerWidth >= 1440);

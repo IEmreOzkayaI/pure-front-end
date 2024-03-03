@@ -1,0 +1,206 @@
+@import "../../global.scss";
+
+.interview_tracker__container {
+	&__bar {
+		width: 100%;
+		height: 8rem;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background-color: $very-dark-gray;
+
+		border-bottom: 1px solid $real-white;
+	}
+	&__content {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: flex-start;
+		background-color: $very-dark-gray;
+		color: $real-white;
+		padding-top: 5rem;
+		padding-bottom: 5rem;
+
+		&__process__steps {
+			width: 60%;
+			font-size: 1.4rem;
+
+			&__header {
+				&__main {
+				}
+				&__sub {
+					padding-top: 1rem;
+					color: rgba($color: $white, $alpha: 0.8);
+					font-weight: 100;
+				}
+			}
+			&__items {
+				padding-top: 3rem;
+				&__item {
+					display: flex;
+					justify-content: flex-start;
+					align-items: flex-start;
+					width: 23rem;
+					font-weight: 100;
+					h3 {
+						font-weight: 100;
+					}
+
+					&:first-child &__icon {
+						position: relative;
+						&::before {
+							content: "";
+							position: absolute;
+							height: 1rem;
+							width: 0.1rem;
+							background-color: $real-white;
+							top: -2rem;
+							left: 0;
+							margin-left: 1rem;
+						}
+					}
+
+					&__icon {
+						svg {
+							font-size: 2.5rem;
+							font-weight: 100;
+						}
+						display: flex;
+						flex-direction: column;
+						&::after {
+							content: "";
+							height: 3rem;
+							width: 0.1rem;
+							background-color: $real-white;
+							margin-left: 1rem;
+							margin-bottom: 1rem;
+							margin-top: 1rem;
+						}
+					}
+
+					&__text {
+						padding-left: 1rem;
+						p {
+							padding-top: 1rem;
+							color: rgba($color: $white, $alpha: 0.5);
+						}
+					}
+				}
+			}
+		}
+		&__process__progress {
+			padding-top: 3rem;
+			width: 60%;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-start;
+			justify-content: center;
+			&__item {
+				display: flex;
+				flex-direction: column;
+				width: 100%;
+				label {
+					font-size: 1.6rem;
+					font-weight: 100;
+					padding-bottom: 1rem;
+				}
+				progress {
+					width: 100%;
+					height: 1rem;
+					border-radius: 0.5rem;
+					background-color: rgba($white, 0.3); // Fallback for unsupported browsers
+
+					&::-webkit-progress-bar {
+						background-color: rgba($white, 0.3); // Fallback for unsupported browsers
+						border-radius: 0.5rem;
+					}
+
+					&::-webkit-progress-value {
+						background-color: $real-white; // For Safari
+						border-radius: 0.5rem;
+					}
+
+					&::-moz-progress-bar {
+						background-color: $real-white; // For Firefox
+						border-radius: 0.5rem;
+					}
+
+					&::-ms-fill {
+						background-color: $real-white; // For IE
+						border-radius: 0.5rem;
+					}
+				}
+			}
+
+			&__date {
+				padding-top: 1rem;
+				font-size: 1.4rem;
+				color: rgba($color: $white, $alpha: 0.8);
+			}
+		}
+		&__process__details {
+			width: 60%;
+			margin-top: 4rem;
+			&__header {
+				font-size: 1.6rem;
+				margin-bottom: 1rem;
+				font-weight: bold;
+			}
+			&__content {
+				display: grid;
+				margin-top: 2.5rem;
+				grid-template-columns: 0.3fr 4.7fr 1fr;
+				cursor: pointer;
+				svg {
+					grid-column: 1/2;
+					font-size: 2.5rem;
+					margin: 1rem 1rem 1rem 1rem;
+					display: flex;
+					align-items: center;
+					justify-content: center;
+				}
+				&__card {
+					grid-column: 2/5;
+					padding-left: 2rem;
+					h2 {
+						font-weight: 100;
+					}
+					p {
+						font-weight: 100;
+						font-size: 1.4rem;
+						padding-top: 0.7rem;
+						color: rgba($color: $white, $alpha: 0.5);
+					}
+					&__detail {
+						max-height: 0;
+						overflow: hidden;
+						transition: max-height 0.5s ease-in-out; /* Adjust timing and easing as needed */
+						display: flex;
+						width: 100%;
+						margin-top: 2.5rem;
+						p {
+							text-align: justify;
+						}
+					}
+
+					&__detail.active {
+						max-height: 1000px; /* Set a large enough value to ensure it covers all possible content heights */
+					}
+				}
+				button,
+				a {
+					grid-column: 5/7;
+					background-color: transparent;
+					border: none;
+					color: $real-white;
+					padding: 1rem 2rem;
+					border-radius: 0.5rem;
+					text-decoration: none;
+					font-size: 1.4rem;
+					height: fit-content;
+					cursor: pointer;
+				}
+			}
+		}
+	}
+}

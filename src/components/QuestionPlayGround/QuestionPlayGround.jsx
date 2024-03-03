@@ -88,8 +88,8 @@ const QuestionPlayGround = memo(
                                     </div>
                                     <div
                                         className={`${styles.additional_resources_links} ${additional_resources && styles.additional_resources_links_active}`}>
-                                        {currentQuestion?.question.additional_resources_about_algorithm_and_topic.map((resource) => {
-                                            return <div className={styles.additional_resources_links_item}>
+                                        {currentQuestion?.question.additional_resources_about_algorithm_and_topic.map((resource,index) => {
+                                            return <div className={styles.additional_resources_links_item} key={index}>
                                                 <a href={resource.link} target="_blank">{resource.name}</a>
                                             </div>
                                         })}
@@ -109,8 +109,8 @@ const QuestionPlayGround = memo(
                                     </div>
                                     <div
                                         className={`${styles.interactive_steps_content} ${interactive_steps && styles.interactive_steps_content_active}`}>
-                                        {currentQuestion?.question.interactive_steps.map((step) => {
-                                            return <div className={styles.interactive_steps_content_item}>
+                                        {currentQuestion?.question.interactive_steps.map((step,index) => {
+                                            return <div className={styles.interactive_steps_content_item} key={index}>
                                                 {step.step_number}. {step.description}
                                             </div>
                                         })}
@@ -151,8 +151,8 @@ const QuestionPlayGround = memo(
                                     </div>
                                     <div
                                         className={`${styles.additional_resources_links} ${additional_resources && styles.additional_resources_links_active}`}>
-                                        {currentQuestion?.question.additional_resources_about_topic.map((resource) => {
-                                            return <div className={styles.additional_resources_links_item}>
+                                        {currentQuestion?.question.additional_resources_about_topic.map((resource,index) => {
+                                            return <div className={styles.additional_resources_links_item} key={index}>
                                                 <a href={resource.link} target="_blank">{resource.name}</a>
                                             </div>
                                         })}
@@ -172,8 +172,8 @@ const QuestionPlayGround = memo(
                                     </div>
                                     <div
                                         className={`${styles.interactive_steps_content} ${interactive_steps && styles.interactive_steps_content_active}`}>
-                                        {currentQuestion?.question.interactive_steps.map((step) => {
-                                            return <div className={styles.interactive_steps_content_item}>
+                                        {currentQuestion?.question.interactive_steps.map((step,index) => {
+                                            return <div className={styles.interactive_steps_content_item} key={index}>
                                                 {step.step_number}. {step.description}
                                             </div>
                                         })}
@@ -203,4 +203,3 @@ QuestionPlayGround.propTypes = {
 };
 
 export default QuestionPlayGround;
-

@@ -10,6 +10,7 @@ const InterviewHeader = () => {
     const currentQuestion = useSelector((state) => state.interviewManagement.currentQuestion);
     const remainingTime = useSelector((state) => state.interviewManagement?.remainingTime);
     const questionType = useSelector((state) => state.interviewManagement.currentQuestion?.type);
+    const questions = useSelector((state) => state.interviewManagement.questions);
     const displayTime = useCountdown(remainingTime);
     // dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
 
@@ -18,6 +19,9 @@ const InterviewHeader = () => {
         dispatch(setCurrentQuestion({...currentQuestion, mode: mode}))
     };
 
+    const finishInterview = () => {
+        console.log('finish interview', questions);
+    }
     return (
         <header className={styles.interview__container__header}>
             <div className={styles.interview__container__header__title}>
@@ -68,7 +72,7 @@ const InterviewHeader = () => {
                     {displayTime}
                 </div>
             </div>
-            <button className={styles.interview__container__header__finish__button}>
+            <button className={styles.interview__container__header__finish__button} onClick={()=> finishInterview()}>
                 Finish
             </button>
 

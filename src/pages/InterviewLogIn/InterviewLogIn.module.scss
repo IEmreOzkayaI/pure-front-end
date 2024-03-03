@@ -113,7 +113,11 @@
     }
     .getStarted {
       padding-inline: 5.1rem;
-      padding-top: 5.8rem;
+      padding-top: 15rem;
+      padding-bottom: 5rem;
+      border: 0.13rem solid rgba(255, 255, 255, 0.2);
+      margin-left: 2.2rem;
+      border-radius: 5.9rem;
       @media (width <= 768px) {
         padding-inline: 1.1rem;
       }
@@ -159,6 +163,10 @@
         }
       }
       form {
+          height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         label {
           color: rgba(255, 255, 255, 0.5);
           font-size: 1.6rem;

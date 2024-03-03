@@ -31,6 +31,14 @@ import getQuestionSaga from "./sagas/getQuestionSaga.js";
 import addInterviewSaga from "./sagas/addInterviewSaga.js";
 import addInterviewSlice from "./toolkit/addInterviewSlice.js";
 
+import userRegisterInterview from "./toolkit/userRegisterInterviewSlice";
+import userRegisterInterviewSaga from "./sagas/userRegisterInterviewSaga.js";
+
+
+import userLogInInterview from "./toolkit/userLogInInterviewSlice";
+import userLogInInterviewSaga from "./sagas/userLogInInterviewSaga.js";
+
+
 import getInterviewByCompanyIdSlice from "./toolkit/getInterviewByCompanyIdSlice.js";
 import getInterviewByCompanyIdSaga from "./sagas/getInterviewByCompanyIdSaga.js";
 
@@ -57,6 +65,8 @@ const store = configureStore({
     getQuestionSlice,
     addInterviewSlice,
     getInterviewByCompanyIdSlice,
+    userRegisterInterview,
+    userLogInInterview
     intervieweeListSlice,
     getUserByIdSlice,
   },
@@ -73,6 +83,8 @@ saga.run(questionSaga);
 saga.run(getQuestionSaga);
 saga.run(addInterviewSaga);
 saga.run(diagramSaga);
+saga.run(userRegisterInterviewSaga);
+saga.run(userLogInInterviewSaga);
 saga.run(getInterviewByCompanyIdSaga);
 saga.run(intervieweeListSaga);
 saga.run(getUserByIdSaga);

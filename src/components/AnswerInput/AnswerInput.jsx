@@ -3,7 +3,6 @@ import PropTypes from "prop-types";
 import AceEditor from "../IDE/AceEditor.jsx";
 import {useSelector} from "react-redux";
 import DiagramFlow from "../ReactFlow/ReactFlow.jsx";
-import TestQuestion from "../test/TestQuestion.jsx";
 
 const AnswerInput = (props) => {
     const { rightSideHeight, edges ,setEdges,nodes,setNodes} = props;

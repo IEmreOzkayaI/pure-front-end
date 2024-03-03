@@ -12,6 +12,11 @@ const initialState = {
 const reducers = {
     setQuestions: (state, action) => {
         state.questions = action.payload;
+        const data = JSON.parse(localStorage.getItem("storedInterview"));
+        if (data) {
+           data.questions = action.payload;
+            localStorage.setItem("storedInterview", JSON.stringify(data));}
+
     },
     setQuestionsResults: (state, action) => {
         state.questionsResults = action.payload;
