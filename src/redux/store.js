@@ -48,6 +48,9 @@ import intervieweeListSlice from "./toolkit/intervieweeListSlice.js";
 import getUserByIdSlice from "./toolkit/getUserByIdSlice.js";
 import getUserByIdSaga from "./sagas/getUserByIdSaga.js";
 
+import interviewSignatured from "./toolkit/interviewSignaturedSlice.js";
+import interviewSignaturedSaga from "./sagas/interviewSignaturedSaga.js";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
   reducer: {
@@ -66,9 +69,10 @@ const store = configureStore({
     addInterviewSlice,
     getInterviewByCompanyIdSlice,
     userRegisterInterview,
-    userLogInInterview
+    userLogInInterview,
     intervieweeListSlice,
     getUserByIdSlice,
+    interviewSignatured
   },
   middleware: [saga],
 });
@@ -88,5 +92,6 @@ saga.run(userLogInInterviewSaga);
 saga.run(getInterviewByCompanyIdSaga);
 saga.run(intervieweeListSaga);
 saga.run(getUserByIdSaga);
+saga.run(interviewSignaturedSaga);
 
 export default store;

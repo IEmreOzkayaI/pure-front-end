@@ -30,7 +30,7 @@ function* userByIdWrapper(individual_user_id) {
       .get(
         `${
           import.meta.env.VITE_BACKEND_BASE_URL
-        }api/user/individual_user/${individual_user_id}`,
+        }/api/user/individual_user/${individual_user_id}`,
         {
           withCredentials: true,
         }

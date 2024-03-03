@@ -33,7 +33,7 @@ function* intervieweeListWrapper(interview_id) {
       .get(
         `${
           import.meta.env.VITE_BACKEND_BASE_URL
-        }api/interview/get_interviewees/${interview_id}`,
+        }/api/interview/get_interviewees/${interview_id}`,
         {
           withCredentials: true,
         }

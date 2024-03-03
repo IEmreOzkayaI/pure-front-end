@@ -30,7 +30,7 @@ function* interviewWrapper(company_id) {
       .get(
         `${
           import.meta.env.VITE_BACKEND_BASE_URL
-        }api/interview/get_by_company_id/${company_id}`,
+        }/api/interview/get_by_company_id/${company_id}`,
         {
           withCredentials: true,
         }

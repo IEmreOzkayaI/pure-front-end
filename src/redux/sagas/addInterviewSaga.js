@@ -24,7 +24,7 @@ function* interview(action) {
 function* interviewWrapper(interview) {
     return yield new Promise((resolve, reject) => {
         axios
-            .post(`${import.meta.env.VITE_BACKEND_BASE_URL}api/interview/add_interview`, interview
+            .post(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/interview/add_interview`, interview
             )
             .then((res) => {
                 const data = res.data;
