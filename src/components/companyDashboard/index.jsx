@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import { useState } from "react";
-import { Select, Table, Tag, Card,  Button } from "antd";
+import { Select, Table, Tag, Card, Button } from "antd";
 const { Option } = Select;
 import { FaRegClock } from "react-icons/fa";
 import { GiConfirmed, GiCancel } from "react-icons/gi";
@@ -55,6 +55,20 @@ const columnsInterview = [
     dataIndex: "name",
   },
   {
+    title: "Status",
+    dataIndex: "tags",
+    render: (_, { status }) => (
+      <Tag bordered={false} color="#38383D">
+        {status}
+      </Tag>
+    ),
+  },
+  {
+    title: "Participant Count",
+    dataIndex: "participant_count",
+    render: (_, { interviewee_list }) => interviewee_list.length,
+  },
+  {
     title: "Question Count",
     dataIndex: "question_amount",
   },
@@ -66,36 +80,6 @@ const columnsInterview = [
     title: "End Date",
     dataIndex: "end_date",
   },
-  // {
-  //   title: "Status",
-  //   dataIndex: "tags",
-  //   render: (_, { tags }) => (
-  //     <>
-  //       {tags.map((tag) => {
-  //         let color;
-  //         if (tag === "Upcoming") {
-  //           color = "purple";
-  //         } else if (tag === "Completed") {
-  //           color = "green";
-  //         } else if (tag === "Pending") {
-  //           color = "orange";
-  //         } else if (tag === "Cancelled") {
-  //           color = "red";
-  //         }
-  //         return (
-  //           <Tag bordered={false} color={color} key={tag}>
-  //             {tag.toUpperCase()}
-  //           </Tag>
-  //         );
-  //       })}
-  //     </>
-  //   ),
-  // },
-  // {
-  //   title: "Details",
-  //   key: "action",
-  //   dataIndex: "details",
-  // },
 ];
 
 const CompanyDashboard = () => {
@@ -103,6 +87,9 @@ const CompanyDashboard = () => {
   const [selectedInterviewee, setSelectedInterviewee] = useState({});
   const [searchResult, setSearchResult] = useState([]);
   const [searchValue, setSearchValue] = useState("");
+  const [isFilter, setIsFilter] = useState(false);
+  const [filterValue, setFilterValue] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const dispatch = useDispatch();
   const { _id: id } = useSelector((state) => state.user.userInfo);
@@ -115,11 +102,9 @@ const CompanyDashboard = () => {
   const intervieweeListInfo = useSelector(
     (state) => state.intervieweeListSlice.intervieweeListInfo
   );
-  console.log("interwieweeListInfo", intervieweeListInfo);
   const userByIdInfo = useSelector(
     (state) => state.getUserByIdSlice.userByIdInfo
   );
-  console.log("first interviewee", userByIdInfo);
 
   useEffect(() => {
     dispatch(interviewFetch(id)); // get all interviews
@@ -170,7 +155,6 @@ const CompanyDashboard = () => {
   };
   return (
     <div className={styles.main}>
-
       <div className={styles.left_side}>
         <p>
           {tableView === "interviews" ? "Interview " : "Interviewees "} List
@@ -191,21 +175,45 @@ const CompanyDashboard = () => {
         <Select
           defaultValue="Select an interview status"
           style={{ maxWidth: "20rem" }}
+          onChange={(value) => {
+            if (tableView === "interviews") {
+              const filteredData = interviewInfo.filter((interview) => {
+                return interview.status.toLowerCase() === value;
+              });
+              console.log("filteredData", filteredData);
+              setIsFilter(value !== "");
+              setFilterValue(value);
+              setFilteredData(filteredData);
+            } else {
+              const filteredData = intervieweeListInfo.filter((interviewee) => {
+                return interviewee.status.toLowerCase() === value;
+              });
+              console.log("filteredData", filteredData);
+              setIsFilter(value !== "");
+              setFilterValue(value);
+              setFilteredData(filteredData);
+            }
+          }}
+          value={filterValue}
         >
           <Option value="">Select an interview status</Option>
-          <Option value="upcoming">
+          <Option
+            value={`${tableView === "interviews" ? "pending" : "passive"}`}
+          >
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <FaRegClock />
-              Upcoming
+              Pending
             </div>
           </Option>
-          <Option value="completed">
+          <Option
+            value={`${tableView === "interviews" ? "success" : "active"}`}
+          >
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <GiConfirmed />
-              Completed
+              Success
             </div>
           </Option>
-          <Option value="pending">
+          {/* <Option value="pending">
             <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
               <ImStopwatch />
               Pending
@@ -216,13 +224,17 @@ const CompanyDashboard = () => {
               <GiCancel />
               Cancelled
             </div>
-          </Option>
+          </Option> */}
         </Select>
 
         {tableView === "interviews" ? (
           <Table
             dataSource={
-              searchValue.length === 0 ? interviewInfo || [] : searchResult
+              isFilter
+                ? filteredData
+                : searchValue.length === 0
+                ? interviewInfo || []
+                : searchResult
             }
             columns={columnsInterview}
             locale={{
@@ -233,7 +245,6 @@ const CompanyDashboard = () => {
               return {
                 onClick: () => {
                   dispatch(interviewById(record.id));
-                  console.log("record", record);
                   console.log("clickedInterview", selectedInterview);
 
                   dispatch(intervieweeListFetch(record.id));
@@ -244,7 +255,9 @@ const CompanyDashboard = () => {
         ) : (
           <Table
             dataSource={
-              searchValue.length === 0
+              isFilter
+                ? filteredData
+                : searchValue.length === 0
                 ? intervieweeListInfo || []
                 : searchResult
             }
@@ -256,7 +269,7 @@ const CompanyDashboard = () => {
             onRow={(record) => {
               return {
                 onClick: () => {
-                  console.log("record", record);
+                  console.log("clickedPerson", record);
                   setSelectedInterviewee(record);
                 },
               };
