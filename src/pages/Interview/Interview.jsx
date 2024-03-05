@@ -15,14 +15,16 @@ import InterviewHeader from "../../components/interviewHeader/InterviewHeader.js
 import Redirect from "../../components/shared/Redirect/Redirect.jsx";
 import systemWarning from "../../systemWarning.js";
 import { useResponsiveBlock } from "../../hooks/useResponsiveBlock.jsx";
-import { interviewFetch } from "../../redux/toolkit/interviewSlice.js";
+import { interviewSignaturedFetch } from "../../redux/toolkit/interviewSignaturedSlice.js";
 import { useParams } from "react-router-dom";
 
 const Interview = () => {
   const dispatch = useDispatch();
   const params = useParams();
   const responsiveBlock = useResponsiveBlock();
-  const interviewInfo = useSelector((state) => state.interview?.interviewInfo);
+  const interviewInfo = useSelector(
+    (state) => state.interviewSignatured?.interviewSignaturedInfo
+  );
   const questionList = useSelector((state) => state.interviewManagement.questions);
   const [edges, setEdges] = useState([]);
   const [nodes, setNodes] = useState([]);
@@ -36,7 +38,7 @@ const Interview = () => {
       dispatch(setRemainingTime(storedInterview?.interview_time));
       dispatch(setQuestionAmount(storedInterview?.question_amount));
     } else {
-      dispatch(interviewFetch(params.interview_signature));
+      dispatch(interviewSignaturedFetch(params.interview_signature));
     }
   }, [dispatch]);
 
