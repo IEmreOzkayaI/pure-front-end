@@ -38,25 +38,54 @@ const nodeTypes = {
   lifeLine: LifeLine,
 };
 
-let id = 0;
-const getId = () => `dndnode_${id++}`;
+// let id = 0;
+const getId = () =>
+  Math.random().toString(36).substring(2) + Date.now().toString(36);
 
 export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
   const edgeUpdateSuccessful = useRef(true);
   const dispatch = useDispatch();
   const diagramInfo = useSelector((state) => state.diagramSlice?.diagramInfo);
-  const currentQuestion = useSelector((state) => state.interviewManagement?.currentQuestion);
-  const questions = useSelector((state) => state.interviewManagement?.questions);
+  const currentQuestion = useSelector(
+    (state) => state.interviewManagement?.currentQuestion
+  );
+  const questions = useSelector(
+    (state) => state.interviewManagement?.questions
+  );
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [menu, setMenu] = useState(null);
-
+  const storedInterview = JSON.parse(localStorage.getItem("storedInterview"));
+  const checkForDiagramEdges = (storedInterview) => {
+    if (storedInterview.user_answers?.length > 0) {
+      const answer = storedInterview.user_answers.find((answer) => {
+        return answer.question_id === currentQuestion.question._id;
+      });
+      return answer?.edges || [];
+    }
+    return [];
+  };
+  const checkForDiagramNodes = (storedInterview) => {
+    if (storedInterview.user_answers?.length > 0) {
+      const answer = storedInterview.user_answers.find((answer) => {
+        return answer.question_id === currentQuestion.question._id;
+      });
+      return answer?.nodes || [];
+    }
+    return [];
+  };
 
   useEffect(() => {
-    if(diagramInfo){
+    if (currentQuestion) {
+      setEdges(checkForDiagramEdges(storedInterview));
+      setNodes(checkForDiagramNodes(storedInterview));
+    }
+  }, [currentQuestion]);
 
+  useEffect(() => {
+    if (diagramInfo) {
       const updatedQuestions = questions.map((question) =>
         question.question._id === currentQuestion.question._id
-          ? { ...question, user_answer:  diagramInfo}
+          ? { ...question, user_answer: diagramInfo }
           : question
       );
       dispatch(setQuestions(updatedQuestions));
