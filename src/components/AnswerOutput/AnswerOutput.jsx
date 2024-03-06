@@ -21,6 +21,7 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
   const algorithmProgress = useSelector(
     (state) => state.algorithmSlice?.algorithmProgress
   );
+  const plantUmlCode = useSelector((state) => state.diagramSlice?.diagramInfo);
   const handleCodeExecute = () => {
     if (currentQuestion?.code) {
       console.log("questions", questions);
@@ -57,11 +58,13 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
           if (answer) {
             answer.edges = [...edges];
             answer.nodes = [...nodes];
+            answer.plantUmlCode = plantUmlCode;
           } else {
             storedInterview.user_answers.push({
               question_id: currentQuestion.question._id,
               edges: [...edges],
               nodes: [...nodes],
+              plantUmlCode: plantUmlCode,
             });
           }
         } else {
@@ -70,6 +73,7 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
               question_id: currentQuestion.question._id,
               edges: [...edges],
               nodes: [...nodes],
+              plantUmlCode: plantUmlCode,
             },
           ];
         }
