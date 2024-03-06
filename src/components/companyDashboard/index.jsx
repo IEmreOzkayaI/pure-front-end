@@ -3,8 +3,7 @@ import { useState } from "react";
 import { Select, Table, Tag, Card, Button, ConfigProvider, theme } from "antd";
 const { Option } = Select;
 import { FaRegClock } from "react-icons/fa";
-import { GiConfirmed, GiCancel } from "react-icons/gi";
-import { ImStopwatch } from "react-icons/im";
+import { GiConfirmed } from "react-icons/gi";
 import styles from "./style.module.scss";
 import { CiCalendarDate } from "react-icons/ci";
 import { MdPerson2 } from "react-icons/md";
@@ -17,6 +16,9 @@ import { toast, Toaster } from "react-hot-toast";
 import { intervieweeListFetch } from "../../redux/toolkit/intervieweeListSlice.js";
 import { userByIdFetch } from "../../redux/toolkit/getUserByIdSlice.js";
 import moment from "moment";
+import { MdOutlineEmail } from "react-icons/md";
+import { interviewSolveLinkFetch } from "../../redux/toolkit/interviewSolveLinkSlice.js";
+import { useCallback } from "react";
 
 const columnsInterviewee = [
   {
@@ -105,6 +107,67 @@ const CompanyDashboard = () => {
   const userByIdInfo = useSelector(
     (state) => state.getUserByIdSlice.userByIdInfo
   );
+
+  const {
+    interviewSolveLinkError,
+    interviewSolveLinkProgress,
+    interviewSolveLinkInfo,
+  } = useSelector((state) => state.interviewSolveLinkSlice);
+
+  const handleToastNotifications =useCallback(() => {
+    let loadingToast;
+    if(interviewSolveLinkProgress) {
+       loadingToast = toast.loading("Sending Interview Links", {
+        style: {
+          border: "1px solid #16161b",
+          padding: "16px",
+          color: "#16161b",
+        },
+        iconTheme: {
+          primary: "#16161b",
+          secondary: "#f5f3f3",
+        },
+      });
+    }
+
+    if (interviewSolveLinkError) {
+      toast.dismiss(loadingToast);
+      toast.error("Interview Links could not be sent", {
+        style: {
+          border: "1px solid #16161b",
+          padding: "16px",
+          color: "#16161b",
+        },
+        iconTheme: {
+          primary: "#16161b",
+          secondary: "#fff",
+        },
+      });
+    }
+    if (interviewSolveLinkInfo) {
+      toast.dismiss(loadingToast);
+      toast.success("Interview Links are sent", {
+        style: {
+          border: "1px solid #16161b",
+          padding: "16px",
+          color: "#16161b",
+        },
+        iconTheme: {
+          primary: "#16161b",
+          secondary: "#fff",
+        },
+      });
+    }
+  },[interviewSolveLinkError,interviewSolveLinkInfo,interviewSolveLinkProgress])
+
+  
+  useEffect(() => {
+    handleToastNotifications();
+  }, [
+    interviewSolveLinkError,
+    interviewSolveLinkInfo,
+    handleToastNotifications,
+  ]);
 
   useEffect(() => {
     dispatch(interviewFetch(id)); // get all interviews
@@ -366,7 +429,85 @@ const CompanyDashboard = () => {
               <GiConfirmed size={20} />
             </div>
             {tableView === "interviews" && (
+              <>
+                <Button
+                  className="mb-2"
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#38383D",
+                    fontWeight: "bold",
+                    border: "none",
+                    color: "#fff",
+                  }}
+                  icon={<PiShareFat />}
+                  block
+                  onClick={() => {
+                    try {
+                      navigator.clipboard.writeText(
+                        selectedInterview?.data?.share_link
+                      );
+                      toast.success("Link copied", {
+                        style: {
+                          border: "1px solid #16161b",
+                          padding: "16px",
+                          color: "#16161b",
+                        },
+                        iconTheme: {
+                          primary: "#16161b",
+                          secondary: "#f5f3f3",
+                        },
+                      });
+                    } catch (e) {
+                      console.log(e);
+                      toast.error(
+                        "Link could not be copied, please try again later.",
+                        {
+                          style: {
+                            border: "1px solid #16161b",
+                            padding: "16px",
+                            color: "#16161b",
+                          },
+                          iconTheme: {
+                            primary: "#16161b",
+                            secondary: "#fff",
+                          },
+                        }
+                      );
+                    }
+                  }}
+                >
+                  Copy Interview Link
+                </Button>
+                <Button
+                  block
+                  style={{
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    backgroundColor: "#38383D",
+                    fontWeight: "bold",
+                    border: "none",
+                    color: "#fff",
+                  }}
+                  icon={<MdOutlineEmail />}
+                  onClick={() => {
+                    dispatch(
+                      interviewSolveLinkFetch({
+                        user_id_list: selectedInterview?.data?.interviewee_list,
+                        interview_id: selectedInterview?.data?.id,
+                      })
+                    );
+                  }}
+                >
+                  Send Interview Link To All Participants
+                </Button>
+              </>
+            )}
+            {tableView === "interviewees" && (
               <Button
+                block
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -376,44 +517,20 @@ const CompanyDashboard = () => {
                   border: "none",
                   color: "#fff",
                 }}
-                icon={<PiShareFat />}
-                block
+                icon={<MdOutlineEmail />}
                 onClick={() => {
-                  try {
-                    navigator.clipboard.writeText(
-                      selectedInterview?.data?.share_link
-                    );
-                    toast.success("Link copied", {
-                      style: {
-                        border: "1px solid #16161b",
-                        padding: "16px",
-                        color: "#16161b",
-                      },
-                      iconTheme: {
-                        primary: "#16161b",
-                        secondary: "#f5f3f3",
-                      },
-                    });
-                  } catch (e) {
-                    console.log(e);
-                    toast.error(
-                      "Link could not be copied, please try again later.",
-                      {
-                        style: {
-                          border: "1px solid #16161b",
-                          padding: "16px",
-                          color: "#16161b",
-                        },
-                        iconTheme: {
-                          primary: "#16161b",
-                          secondary: "#fff",
-                        },
-                      }
-                    );
-                  }
+                  dispatch(
+                    interviewSolveLinkFetch({
+                      user_id_list: [
+                        selectedInterviewee?._id || userByIdInfo?._id,
+                      ],
+                      interview_id: selectedInterview?.data?.id,
+                    })
+                  );
                 }}
+                disabled={!intervieweeListInfo}
               >
-                Copy Interview Link
+                Send Interview Link
               </Button>
             )}
 
