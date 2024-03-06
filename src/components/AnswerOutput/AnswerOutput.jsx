@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { algorithmFetch } from "../../redux/toolkit/compiler/algorithmSlice.js";
 import { setQuestions } from "../../redux/toolkit/interviewManagementSlice.js";
 import { getEdgesAndNodes } from "../../redux/toolkit/diagramSlice.js";
+import { toast, Toaster } from "react-hot-toast";
 
 const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
   const dispatch = useDispatch();
@@ -43,11 +44,108 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
     }
   };
 
-  const resetDiagram = () => {
-    setNodes([]);
-    setEdges([]);
-  };
+  const storeEdgesAndNodes = () => {
+    try {
+      if (localStorage.getItem("storedInterview")) {
+        const storedInterview = JSON.parse(
+          localStorage.getItem("storedInterview")
+        );
+        if (storedInterview.user_answers) {
+          const answer = storedInterview.user_answers.find((answer) => {
+            return answer.question_id === currentQuestion.question._id;
+          });
+          if (answer) {
+            answer.edges = [...edges];
+            answer.nodes = [...nodes];
+          } else {
+            storedInterview.user_answers.push({
+              question_id: currentQuestion.question._id,
+              edges: [...edges],
+              nodes: [...nodes],
+            });
+          }
+        } else {
+          storedInterview.user_answers = [
+            {
+              question_id: currentQuestion.question._id,
+              edges: [...edges],
+              nodes: [...nodes],
+            },
+          ];
+        }
 
+        localStorage.setItem(
+          "storedInterview",
+          JSON.stringify(storedInterview)
+        );
+        toast.success("Diagram stored", {
+          style: {
+            border: "1px solid #16161b",
+            padding: "16px",
+            color: "#16161b",
+          },
+          iconTheme: {
+            primary: "#16161b",
+            secondary: "#f5f3f3",
+          },
+        });
+      } else {
+        toast.error("No interview stored", {
+          style: {
+            border: "1px solid #16161b",
+            padding: "16px",
+            color: "#16161b",
+          },
+          iconTheme: {
+            primary: "#16161b",
+            secondary: "#f5f3f3",
+          },
+        });
+      }
+    } catch (e) {
+      console.error(e);
+      toast.error("Error while submitting", {
+        style: {
+          border: "1px solid #16161b",
+          padding: "16px",
+          color: "#16161b",
+        },
+        iconTheme: {
+          primary: "#16161b",
+          secondary: "#f5f3f3",
+        },
+      });
+    }
+  };
+  const resetDiagram = () => {
+    const storedInterview = JSON.parse(localStorage.getItem("storedInterview"));
+    if (storedInterview.user_answers) {
+      const answer = storedInterview.user_answers.find((answer) => {
+        return answer.question_id === currentQuestion.question._id;
+      });
+      if (answer) {
+        answer.edges = [];
+        answer.nodes = [];
+        setNodes([]);
+        setEdges([]);
+      }
+      localStorage.setItem("storedInterview", JSON.stringify(storedInterview));
+    } else {
+      setNodes([]);
+      setEdges([]);
+    }
+    toast.success("Diagram Reset", {
+      style: {
+        border: "1px solid #16161b",
+        padding: "16px",
+        color: "#16161b",
+      },
+      iconTheme: {
+        primary: "#16161b",
+        secondary: "#f5f3f3",
+      },
+    });
+  };
   return (
     <div className={styles.right_side_content_down}>
       <div className={styles.right_side_content_down_title}>
@@ -98,8 +196,7 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
                       setNodes,
                     })
                   );
-                  localStorage.setItem("edges", JSON.stringify(edges));
-                  localStorage.setItem("nodes", JSON.stringify(nodes));
+                  storeEdgesAndNodes();
                 }}
                 className={styles.diagram}
               >
@@ -129,6 +226,7 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
           )}
         </div>
       </div>
+      <Toaster position="bottom-right" reverseOrder={false} />
     </div>
   );
 };
