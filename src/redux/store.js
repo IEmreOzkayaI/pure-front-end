@@ -34,10 +34,8 @@ import addInterviewSlice from "./toolkit/addInterviewSlice.js";
 import userRegisterInterview from "./toolkit/userRegisterInterviewSlice";
 import userRegisterInterviewSaga from "./sagas/userRegisterInterviewSaga.js";
 
-
 import userLogInInterview from "./toolkit/userLogInInterviewSlice";
 import userLogInInterviewSaga from "./sagas/userLogInInterviewSaga.js";
-
 
 import getInterviewByCompanyIdSlice from "./toolkit/getInterviewByCompanyIdSlice.js";
 import getInterviewByCompanyIdSaga from "./sagas/getInterviewByCompanyIdSaga.js";
@@ -50,6 +48,9 @@ import getUserByIdSaga from "./sagas/getUserByIdSaga.js";
 
 import interviewSignatured from "./toolkit/interviewSignaturedSlice.js";
 import interviewSignaturedSaga from "./sagas/interviewSignaturedSaga.js";
+
+import interviewSolveLinkSaga from "./sagas/sendInterviewSolveLinkSaga.js";
+import interviewSolveLinkSlice from "./toolkit/interviewSolveLinkSlice.js";
 
 const saga = createSagaMiddleware();
 const store = configureStore({
@@ -72,7 +73,8 @@ const store = configureStore({
     userLogInInterview,
     intervieweeListSlice,
     getUserByIdSlice,
-    interviewSignatured
+    interviewSignatured,
+    interviewSolveLinkSlice,
   },
   middleware: [saga],
 });
@@ -93,5 +95,6 @@ saga.run(getInterviewByCompanyIdSaga);
 saga.run(intervieweeListSaga);
 saga.run(getUserByIdSaga);
 saga.run(interviewSignaturedSaga);
+saga.run(interviewSolveLinkSaga);
 
 export default store;
