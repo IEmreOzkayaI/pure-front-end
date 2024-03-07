@@ -78,7 +78,7 @@ const InterviewLogIn = () => {
 
   useEffect(() => {
     if (logInError) {
-      if(logInError === "Interview is already completed"){
+      if(logInError === "Interview is already registered"){
 
         navigate(`/interview/tracker/${params.interview_signature}`);
           setTimeout(() => {}, 1500);
@@ -128,7 +128,7 @@ const InterviewLogIn = () => {
 
   useEffect(() => {
     if (interviewError) {
-      if(interviewError.message === "Interview is already completed"){
+      if(interviewError.message === "Interview is already registered"){
         setTimeout(() => {
           navigate(`/interview/tracker/${params.interview_signature}`);
         }, 1500);

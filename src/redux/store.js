@@ -52,6 +52,9 @@ import interviewSignaturedSaga from "./sagas/interviewSignaturedSaga.js";
 import interviewSolveLinkSaga from "./sagas/sendInterviewSolveLinkSaga.js";
 import interviewSolveLinkSlice from "./toolkit/interviewSolveLinkSlice.js";
 
+import interviewResultSaga from "./sagas/interviewResultSaga";
+import interviewResultSlice from "./toolkit/interviewResultSlice";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
   reducer: {
@@ -75,6 +78,7 @@ const store = configureStore({
     getUserByIdSlice,
     interviewSignatured,
     interviewSolveLinkSlice,
+    interviewResultSlice,
   },
   middleware: [saga],
 });
@@ -96,5 +100,6 @@ saga.run(intervieweeListSaga);
 saga.run(getUserByIdSaga);
 saga.run(interviewSignaturedSaga);
 saga.run(interviewSolveLinkSaga);
+saga.run(interviewResultSaga);
 
 export default store;
