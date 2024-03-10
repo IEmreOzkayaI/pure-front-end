@@ -28,6 +28,7 @@ import {updateInterviewStatusFetch} from "../../redux/toolkit/updateInterviewSta
 import {IoMdCloseCircleOutline} from "react-icons/io";
 import CustomModal from "../CustomModal";
 import {DatePicker} from "antd";
+import {LuDownload} from "react-icons/lu";
 
 const columnsInterviewee = [
 	{
@@ -115,11 +116,39 @@ const CompanyDashboard = () => {
 	const [arrow] = useState("Show");
 	const [isModalOpen, setIsModalOpen] = useState(false);
 	const [time, setTime] = useState("");
-
 	const setDateTime = (date, dateString) => {
 		setTime(dateString);
 		setIsModalOpen(false);
 	};
+
+	const fetchPdf = async () => {
+		try {
+			const response = await fetch(`${import.meta.env.VITE_BACKEND_BASE_URL}/api/user/individual_user/cv/${selectedInterviewee?.user_id}`, {
+				method: "GET",
+				headers: {
+					"Content-Type": "application/pdf",
+				},
+			});
+			if (!response.ok) throw new Error("Response not OK");
+			const blob = await response.blob();
+			const url = URL.createObjectURL(blob);
+
+			// Create a temporary anchor element and trigger a download
+			const a = document.createElement("a");
+			a.href = url;
+			// Specify the name of the file to download
+			a.download = `${selectedInterviewee.name} ${selectedInterviewee?.surname}.pdf`; // Change 'CustomFileName.pdf' to your desired file name
+			document.body.appendChild(a); // Append the anchor to the body to make it clickable
+			a.click(); // Programmatically click the anchor to trigger the download
+
+			// Clean up: revoke the object URL and remove the anchor element
+			URL.revokeObjectURL(a.href);
+			document.body.removeChild(a);
+		} catch (error) {
+			console.error("Error fetching PDF:", error);
+		}
+	};
+
 	const mergedArrow = useMemo(() => {
 		if (arrow === "Hide") {
 			return false;
@@ -522,14 +551,22 @@ const CompanyDashboard = () => {
                   <div className={styles.title}>Location</div>
                   <div className={styles.value}>San Francisco, CA</div>
                 </div> */}
-										<div className={styles.row}>
-											<div className={styles.title}>Cover Letter</div>
-											<div className={styles.value}>
-												{/* {selectedInterviewee?.cover_letter ||
-                      userByIdInfo?.cover_letter ||
-                      "Example Cover Letter"} */}
-												burasi yapilacak
-											</div>
+										<div className={styles.row} style={{display:'flex'}}>
+											<Button
+												block
+												style={{
+													display: "flex",
+													alignItems: "center",
+													justifyContent: "center",
+													backgroundColor: "#38383D",
+													fontWeight: "bold",
+													border: "none",
+													color: "#fff",
+												}}
+												icon={<LuDownload />}
+												onClick={() => fetchPdf()}>
+												Cover Letter
+											</Button>
 										</div>
 									</>
 								)}
