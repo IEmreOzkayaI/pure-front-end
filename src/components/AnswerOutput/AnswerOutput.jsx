@@ -21,7 +21,6 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
   const algorithmProgress = useSelector(
     (state) => state.algorithmSlice?.algorithmProgress
   );
-  const plantUmlCode = useSelector((state) => state.diagramSlice?.diagramInfo);
   const handleCodeExecute = () => {
     if (currentQuestion?.code) {
       console.log("questions", questions);
@@ -45,98 +44,14 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
     }
   };
 
-  const storeEdgesAndNodes = () => {
-    try {
-      if (localStorage.getItem("storedInterview")) {
-        const storedInterview = JSON.parse(
-          localStorage.getItem("storedInterview")
-        );
-        if (storedInterview.user_answers) {
-          const answer = storedInterview.user_answers.find((answer) => {
-            return answer.question_id === currentQuestion.question._id;
-          });
-          if (answer) {
-            answer.edges = [...edges];
-            answer.nodes = [...nodes];
-            answer.plantUmlCode = plantUmlCode;
-          } else {
-            storedInterview.user_answers.push({
-              question_id: currentQuestion.question._id,
-              edges: [...edges],
-              nodes: [...nodes],
-              plantUmlCode: plantUmlCode,
-            });
-          }
-        } else {
-          storedInterview.user_answers = [
-            {
-              question_id: currentQuestion.question._id,
-              edges: [...edges],
-              nodes: [...nodes],
-              plantUmlCode: plantUmlCode,
-            },
-          ];
-        }
 
-        localStorage.setItem(
-          "storedInterview",
-          JSON.stringify(storedInterview)
-        );
-        toast.success("Diagram stored", {
-          style: {
-            border: "1px solid #16161b",
-            padding: "16px",
-            color: "#16161b",
-          },
-          iconTheme: {
-            primary: "#16161b",
-            secondary: "#f5f3f3",
-          },
-        });
-      } else {
-        toast.error("No interview stored", {
-          style: {
-            border: "1px solid #16161b",
-            padding: "16px",
-            color: "#16161b",
-          },
-          iconTheme: {
-            primary: "#16161b",
-            secondary: "#f5f3f3",
-          },
-        });
-      }
-    } catch (e) {
-      console.error(e);
-      toast.error("Error while submitting", {
-        style: {
-          border: "1px solid #16161b",
-          padding: "16px",
-          color: "#16161b",
-        },
-        iconTheme: {
-          primary: "#16161b",
-          secondary: "#f5f3f3",
-        },
-      });
-    }
-  };
   const resetDiagram = () => {
     const storedInterview = JSON.parse(localStorage.getItem("storedInterview"));
-    if (storedInterview.user_answers) {
-      const answer = storedInterview.user_answers.find((answer) => {
-        return answer.question_id === currentQuestion.question._id;
-      });
-      if (answer) {
-        answer.edges = [];
-        answer.nodes = [];
-        setNodes([]);
-        setEdges([]);
-      }
-      localStorage.setItem("storedInterview", JSON.stringify(storedInterview));
-    } else {
-      setNodes([]);
+    if(storedInterview){
+      storedInterview.questions.find((question) => question.question._id === currentQuestion.question._id).edges = [];
+      storedInterview.questions.find((question) => question.question._id === currentQuestion.question._id).nodes = [];
       setEdges([]);
+      setNodes([]);
     }
     toast.success("Diagram Reset", {
       style: {
@@ -149,6 +64,7 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
         secondary: "#f5f3f3",
       },
     });
+    localStorage.setItem("storedInterview", JSON.stringify(storedInterview));
   };
   return (
     <div className={styles.right_side_content_down}>
@@ -200,7 +116,6 @@ const AnswerConsole = ({ edges, nodes, setNodes, setEdges }) => {
                       setNodes,
                     })
                   );
-                  storeEdgesAndNodes();
                 }}
                 className={styles.diagram}
               >
