@@ -72,6 +72,7 @@ const Navbar = () => {
               width={"100%"}
               isOpen={isModalOpen}
               setIsOpen={setIsModalOpen}
+              label={"Interview Creation Form"}
             >
               <div>
                 <AddInterview setIsModalOpen={setIsModalOpen} />

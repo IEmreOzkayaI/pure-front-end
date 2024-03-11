@@ -42,6 +42,7 @@
 					align-items: flex-start;
 					width: 23rem;
 					font-weight: 100;
+					color: rgba($color: #aaa, $alpha: 0.2) ;
 					h3 {
 						font-weight: 100;
 					}
@@ -82,7 +83,7 @@
 						padding-left: 1rem;
 						p {
 							padding-top: 1rem;
-							color: rgba($color: $white, $alpha: 0.5);
+							color: rgba($color: #aaa, $alpha: 0.2);
 						}
 					}
 				}
@@ -202,5 +203,13 @@
 				}
 			}
 		}
+	}
+}
+
+.active_status {
+	color: $real-white;
+
+	p {
+		color: rgba($color: $white, $alpha: 0.5) !important;
 	}
 }
