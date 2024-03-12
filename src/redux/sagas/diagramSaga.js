@@ -34,15 +34,7 @@ function* diagramWrapper(payload) {
         lifeLines = [];
       let plantUML = "@startuml\n";
 
-      if (edges.length === 0 || nodes.length === 0)
-        reject("There should be atleast one node or edge");
-
       if (currentQuestion.question.topic === "Use-Case Diagram") {
-        const isDiagramValid = nodes.every((node) => {
-          return node.type === "actorNode" || node.type === "actionStateNode";
-        });
-        if (!isDiagramValid)
-          reject("Use case should only contain actor and actionStateNodes");
 
         nodes.forEach((node) => {
           // find all actors and their edges

@@ -56,22 +56,12 @@ export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
   const [menu, setMenu] = useState(null);
   const storedInterview = JSON.parse(localStorage.getItem("storedInterview"));
   const checkForDiagramEdges = (storedInterview) => {
-    if (storedInterview.user_answers?.length > 0) {
-      const answer = storedInterview.user_answers.find((answer) => {
-        return answer.question_id === currentQuestion.question._id;
-      });
-      return answer?.edges || [];
-    }
-    return [];
+    const foundQuestion = storedInterview.questions.find((question)=>question.question._id === currentQuestion.question._id)
+    return foundQuestion?.edges || [];
   };
   const checkForDiagramNodes = (storedInterview) => {
-    if (storedInterview.user_answers?.length > 0) {
-      const answer = storedInterview.user_answers.find((answer) => {
-        return answer.question_id === currentQuestion.question._id;
-      });
-      return answer?.nodes || [];
-    }
-    return [];
+    const foundQuestion = storedInterview.questions.find((question)=>question.question._id === currentQuestion.question._id)
+    return foundQuestion?.nodes || [];
   };
 
   useEffect(() => {
@@ -85,7 +75,7 @@ export default function DiagramFlow({ edges, setEdges, nodes, setNodes }) {
     if (diagramInfo) {
       const updatedQuestions = questions.map((question) =>
         question.question._id === currentQuestion.question._id
-          ? { ...question, user_answer: diagramInfo }
+          ? { ...question, user_answer: diagramInfo ,edges:[...edges],nodes:[...nodes]}
           : question
       );
       dispatch(setQuestions(updatedQuestions));
