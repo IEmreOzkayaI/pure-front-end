@@ -3,6 +3,11 @@ import styles from './interviewHeader.module.scss';
 import {useDispatch, useSelector} from "react-redux";
 import useCountdown from "../../hooks/useCountdown.jsx";
 import {setCurrentQuestion, setInterviewStatus} from "../../redux/toolkit/interviewManagementSlice.js";
+import { ExclamationCircleFilled } from "@ant-design/icons";
+import {  Modal } from "antd";
+import axios from 'axios';
+const { confirm } = Modal;
+
 
 
 const InterviewHeader = () => {
@@ -20,8 +25,79 @@ const InterviewHeader = () => {
     };
 
     const finishInterview = () => {
-        console.log('finish interview', questions);
-    }
+      return new Promise((resolve, reject) => {
+        try {
+          const user_answers = questions.map((question) => {
+            if (question.type === "Algorithm") {
+              const language = question.mode?.split("/")[2] || "Not Selected";
+              return {
+                _id: question.question._id,
+                user_answer: question.code || "",
+                type: question.type,
+                answer: question.question.answer[language] || "",
+                name: question.question.name,
+                language: language,
+              };
+            }
+            return {
+              _id: question.question._id,
+              user_answer: question.user_answer || "",
+              type: question.type,
+              answer: question.question?.answer || "",
+              name: question.question.name,
+            };
+          });
+          console.log(user_answers);
+          const interview_signature = window.location.pathname.split("/").pop();
+
+          axios
+            .post(
+              `${
+                import.meta.env.VITE_BACKEND_BASE_URL
+              }/api/interview/finish_interview`,
+              { user_answers, interview_signature },
+              {
+                withCredentials: true,
+              }
+            )
+            .then((res) => {
+              const data = res.data;
+              resolve(data);
+            })
+            .catch((err) => {
+              reject(err.response.data);
+            });
+        } catch (error) {
+          console.log(error);
+          reject(error);
+        }
+      });
+    };
+    const showPromiseConfirm = () => {
+      confirm({
+        title: "Do you want to finish the interview?",
+        icon: <ExclamationCircleFilled />,
+        content:
+          "You will be redirected to progress tracking page after you finish the interview.",
+        onOk() {
+          return new Promise((resolve, reject) => {
+            // setTimeout(Math.random() > 0.5 ? resolve : reject, 1000);
+            finishInterview()
+              .then((data) => {
+                console.log("Success!", data);
+                resolve(); 
+              })
+              .catch((error) => {
+                console.log("Oops errors!");
+                reject(error); 
+              });
+          });
+        },
+        onCancel() {},
+        okText: "Yes, Finish",
+        cancelText: "No, Continue",
+      });
+    };
     return (
         <header className={styles.interview__container__header}>
             <div className={styles.interview__container__header__title}>
@@ -72,7 +148,7 @@ const InterviewHeader = () => {
                     {displayTime}
                 </div>
             </div>
-            <button className={styles.interview__container__header__finish__button} onClick={()=> finishInterview()}>
+            <button className={styles.interview__container__header__finish__button} onClick={()=>  showPromiseConfirm()}>
                 Finish
             </button>
 

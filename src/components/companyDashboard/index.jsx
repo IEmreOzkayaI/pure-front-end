@@ -304,7 +304,7 @@ const CompanyDashboard = () => {
 									setFilteredData(filteredData);
 								} else {
 									const filteredData = intervieweeListInfo.filter((interviewee) => {
-										return interviewee.status.toLowerCase() === value;
+										return interviewee.status.name === value;
 									});
 									console.log("filteredData", filteredData);
 									setIsFilter(value !== "");
@@ -314,30 +314,61 @@ const CompanyDashboard = () => {
 							}}
 							value={filterValue}>
 							<Option value=''>Select an interview status</Option>
-							<Option value={`${tableView === "interviews" ? "pending" : "passive"}`}>
+							{tableView === "interviews" ? (<>
+							<Option value={`pending`}>
 								<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
 									<FaRegClock />
 									Pending
 								</div>
 							</Option>
-							<Option value={`${tableView === "interviews" ? "success" : "active"}`}>
+							<Option value={`success`}>
 								<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
 									<GiConfirmed />
 									Success
 								</div>
 							</Option>
-							{/* <Option value="pending">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <ImStopwatch />
-              Pending
-            </div>
-          </Option>
-          <Option value="cancelled">
-            <div style={{ display: "flex", alignItems: "center", gap: "1rem" }}>
-              <GiCancel />
-              Cancelled
-            </div>
-          </Option> */}
+							</>):(
+								<>
+								<Option value={`INITIATED`}>
+									<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+										<FaRegClock />
+										INITIATED
+									</div>
+								</Option>
+								<Option value={`REGISTERED`}>
+									<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+										<FaRegClock />
+										REGISTERED
+									</div>
+								</Option>
+								<Option value={`EXAMINING`}>
+									<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+										<FaRegClock />
+										EXAMINING
+									</div>
+								</Option>
+								<Option value={`CALL`}>
+									<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+										<FaRegClock />
+										CALL
+									</div>
+								</Option>
+								<Option value={`MEET`}>
+									<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+										<FaRegClock />
+										MEET
+									</div>
+								</Option>
+								<Option value={`ACCEPTED`}>
+									<div style={{display: "flex", alignItems: "center", gap: "1rem"}}>
+										<FaRegClock />
+										ACCEPTED
+									</div>
+								</Option>
+
+								</>
+							)}
+							
 						</Select>
 
 						{tableView === "interviews" ? (
