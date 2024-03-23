@@ -6,6 +6,7 @@ import {setCurrentQuestion, setInterviewStatus} from "../../redux/toolkit/interv
 import { ExclamationCircleFilled } from "@ant-design/icons";
 import {  Modal } from "antd";
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 const { confirm } = Modal;
 
 
@@ -18,7 +19,7 @@ const InterviewHeader = () => {
     const questions = useSelector((state) => state.interviewManagement.questions);
     const displayTime = useCountdown(remainingTime);
     // dispatch(setInterviewStatus(displayTime === '00:00' ? 'finished' : 'inProgress'));
-
+  const navigate = useNavigate();
     const handleLanguageChange = (e) => {
         const mode = e.target.value;
         dispatch(setCurrentQuestion({...currentQuestion, mode: mode}))
@@ -85,6 +86,7 @@ const InterviewHeader = () => {
             finishInterview()
               .then((data) => {
                 console.log("Success!", data);
+                navigate(data.data.redirect_path);
                 resolve(); 
               })
               .catch((error) => {
