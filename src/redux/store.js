@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import logIn from "./toolkit/logInSlice";
 import logInSaga from "./sagas/logInSaga";
@@ -58,34 +58,37 @@ import interviewResultSlice from "./toolkit/interviewResultSlice";
 import updateInterviewStatusSaga from "./sagas/updateInterviewStatusSaga";
 import updateInterviewStatusSlice from "./toolkit/updateInterviewStatusSlice";
 
+import addQuestionSaga from "./sagas/addQuestionSaga";
+import addQuestionSlice from "./toolkit/addQuestionSlice";
 
 const saga = createSagaMiddleware();
 const store = configureStore({
-  reducer: {
-    logIn,
-    confirm,
-    register,
-    user,
-    interview,
-    interviewManagement,
-    algorithmSlice,
-    logOutSlice,
-    interviewSlice,
-    diagramSlice,
-    questionSlice,
-    getQuestionSlice,
-    addInterviewSlice,
-    getInterviewByCompanyIdSlice,
-    userRegisterInterview,
-    userLogInInterview,
-    intervieweeListSlice,
-    getUserByIdSlice,
-    interviewSignatured,
-    interviewSolveLinkSlice,
-    interviewResultSlice,
-    updateInterviewStatusSlice,
-  },
-  middleware: [saga],
+	reducer: {
+		logIn,
+		confirm,
+		register,
+		user,
+		interview,
+		interviewManagement,
+		algorithmSlice,
+		logOutSlice,
+		interviewSlice,
+		diagramSlice,
+		questionSlice,
+		getQuestionSlice,
+		addInterviewSlice,
+		getInterviewByCompanyIdSlice,
+		userRegisterInterview,
+		userLogInInterview,
+		intervieweeListSlice,
+		getUserByIdSlice,
+		interviewSignatured,
+		interviewSolveLinkSlice,
+		interviewResultSlice,
+		updateInterviewStatusSlice,
+		addQuestionSlice,
+	},
+	middleware: [saga],
 });
 saga.run(logInSaga);
 saga.run(confirmSaga);
@@ -107,5 +110,6 @@ saga.run(interviewSignaturedSaga);
 saga.run(interviewSolveLinkSaga);
 saga.run(interviewResultSaga);
 saga.run(updateInterviewStatusSaga);
+saga.run(addQuestionSaga);
 
 export default store;
