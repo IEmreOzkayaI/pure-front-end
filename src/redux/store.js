@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import {configureStore} from "@reduxjs/toolkit";
 import createSagaMiddleware from "redux-saga";
 import logIn from "./toolkit/logInSlice";
 import logInSaga from "./sagas/logInSaga";
@@ -58,6 +58,9 @@ import interviewResultSlice from "./toolkit/interviewResultSlice";
 import updateInterviewStatusSaga from "./sagas/updateInterviewStatusSaga";
 import updateInterviewStatusSlice from "./toolkit/updateInterviewStatusSlice";
 
+import addQuestionSaga from "./sagas/addQuestionSaga";
+import addQuestionSlice from "./toolkit/addQuestionSlice";
+
 import getResultByUserIdInterviewIdSaga from "./sagas/getResultByUserIdInterviewId.js";
 import getResultByUserIdInterviewIdSlice from "./toolkit/getResultByUserIdInterviewIdSlice.js";
 
@@ -86,10 +89,12 @@ const store = configureStore({
     interviewSolveLinkSlice,
     interviewResultSlice,
     updateInterviewStatusSlice,
+    addQuestionSlice,
     getResultByUserIdInterviewIdSlice,
   },
   middleware: [saga],
 });
+
 saga.run(logInSaga);
 saga.run(confirmSaga);
 saga.run(registerSaga);
@@ -110,6 +115,7 @@ saga.run(interviewSignaturedSaga);
 saga.run(interviewSolveLinkSaga);
 saga.run(interviewResultSaga);
 saga.run(updateInterviewStatusSaga);
+saga.run(addQuestionSaga);
 saga.run(getResultByUserIdInterviewIdSaga);
 
 export default store;
