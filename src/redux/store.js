@@ -61,35 +61,40 @@ import updateInterviewStatusSlice from "./toolkit/updateInterviewStatusSlice";
 import addQuestionSaga from "./sagas/addQuestionSaga";
 import addQuestionSlice from "./toolkit/addQuestionSlice";
 
+import getResultByUserIdInterviewIdSaga from "./sagas/getResultByUserIdInterviewId.js";
+import getResultByUserIdInterviewIdSlice from "./toolkit/getResultByUserIdInterviewIdSlice.js";
+
 const saga = createSagaMiddleware();
 const store = configureStore({
-	reducer: {
-		logIn,
-		confirm,
-		register,
-		user,
-		interview,
-		interviewManagement,
-		algorithmSlice,
-		logOutSlice,
-		interviewSlice,
-		diagramSlice,
-		questionSlice,
-		getQuestionSlice,
-		addInterviewSlice,
-		getInterviewByCompanyIdSlice,
-		userRegisterInterview,
-		userLogInInterview,
-		intervieweeListSlice,
-		getUserByIdSlice,
-		interviewSignatured,
-		interviewSolveLinkSlice,
-		interviewResultSlice,
-		updateInterviewStatusSlice,
-		addQuestionSlice,
-	},
-	middleware: [saga],
+  reducer: {
+    logIn,
+    confirm,
+    register,
+    user,
+    interview,
+    interviewManagement,
+    algorithmSlice,
+    logOutSlice,
+    interviewSlice,
+    diagramSlice,
+    questionSlice,
+    getQuestionSlice,
+    addInterviewSlice,
+    getInterviewByCompanyIdSlice,
+    userRegisterInterview,
+    userLogInInterview,
+    intervieweeListSlice,
+    getUserByIdSlice,
+    interviewSignatured,
+    interviewSolveLinkSlice,
+    interviewResultSlice,
+    updateInterviewStatusSlice,
+    addQuestionSlice,
+    getResultByUserIdInterviewIdSlice,
+  },
+  middleware: [saga],
 });
+
 saga.run(logInSaga);
 saga.run(confirmSaga);
 saga.run(registerSaga);
@@ -111,5 +116,6 @@ saga.run(interviewSolveLinkSaga);
 saga.run(interviewResultSaga);
 saga.run(updateInterviewStatusSaga);
 saga.run(addQuestionSaga);
+saga.run(getResultByUserIdInterviewIdSaga);
 
 export default store;
