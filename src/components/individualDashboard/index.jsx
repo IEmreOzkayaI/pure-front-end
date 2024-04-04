@@ -1,30 +1,27 @@
 import PropTypes from "prop-types";
 import styles from "./style.module.scss";
-import { useSelector } from "react-redux";
+import {useSelector} from "react-redux";
 
 const IndividualDashboard = (props) => {
-  const { clickCount } = props;
+	const {clickCount} = props;
 
-  const userInfo = useSelector((state) => state.user.userInfo);
+	const userInfo = useSelector((state) => state.user.userInfo);
 
-  return (
-    <div className={styles.individual__dashboard__container}>
-      {clickCount < 5 && (
-        <div>
-          Hello Welcome To Individual User Dashboard , We are now developing
-          this page. <br />
-          But If you want to demo interview screen you can click the "interview"
-          field above. <br />
-        </div>
-      )}
+	return (
+		<div className={styles.individual__dashboard__container}>
+			{clickCount < 5 && (
+				<div>
+					Hello Welcome To Individual User Dashboard , We are now developing this page. <br />
+				</div>
+			)}
 
-      {clickCount >= 5 && JSON.stringify(userInfo, null, 2)}
-    </div>
-  );
+			{clickCount >= 5 && JSON.stringify(userInfo, null, 2)}
+		</div>
+	);
 };
 
 IndividualDashboard.propTypes = {
-  clickCount: PropTypes.number,
+	clickCount: PropTypes.number,
 };
 
 export default IndividualDashboard;
