@@ -1,0 +1,16 @@
+@import "../../../global.scss";
+
+.lifeLine {
+  background-image: url("/lifeline.png");
+  background-position: center;
+  background-repeat: no-repeat;
+  height: 100%;
+  width: 100%;
+  min-height: 30rem;
+  min-width: 19rem;
+}
+.label {
+  font-size: 1.5rem;
+  color: #000;
+  text-align: center;
+}

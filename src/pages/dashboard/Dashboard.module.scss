@@ -1,0 +1,24 @@
+@import "../../global.scss";
+
+.dashboard_container {
+  background-color: $real-white;
+  padding: 0 2rem 0 2rem;
+  max-height: calc(100vh - 4rem);
+  height: 100vh;
+
+  .dashboard {
+    display: grid;
+    height: calc(100vh - 4rem);
+    background-color: $very-dark-gray;
+    border-radius: 0 0 1.4rem  1.4rem;
+    color: $real-white;
+    grid-template-columns: 90%;
+
+
+    padding-top: 4rem;
+    align-items: flex-start;
+    justify-content: center;
+    text-align: center;
+    font-size: 2rem;
+  }
+}

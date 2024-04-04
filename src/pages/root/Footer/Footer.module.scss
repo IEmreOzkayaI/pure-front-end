@@ -1,0 +1,103 @@
+@import "../../../global.scss";
+
+footer {
+  background-color: $very-dark-gray;
+  color: $white;
+  display: flex;
+  justify-content: space-between;
+  padding: 11.7rem 11.4rem 15.6rem 11.4rem;
+  margin: 3.2rem 2rem 2.1rem 2rem;
+  border-radius: 1.4rem;
+  @media (width <= 768px) {
+    border-radius: 0;
+    margin: 0;
+  }
+
+  @media (width <= 1100px) {
+    flex-direction: column;
+  }
+
+  .listContainer {
+    display: flex;
+    margin-top: 3.7rem;
+    @media (width <= 1100px) {
+      justify-content: space-between;
+    }
+    @media (width <=697px) {
+      flex-direction: column;
+      gap: 3rem;
+      text-align: center;
+    }
+    div {
+      font-size: 1.4rem;
+    }
+    a {
+      text-decoration: none;
+      color: $white;
+      opacity: 0.7;
+      font-size: 1.2rem;
+    }
+
+    ul:not(:last-child) {
+      margin-right: 5.2rem;
+      @media (width <=697px) {
+        margin-right: 0;
+      }
+    }
+
+    ul div {
+      margin-bottom: 1.6rem;
+    }
+
+    ul li:not(:last-child) {
+      margin-bottom: 1.2rem;
+    }
+  }
+
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+
+    div:first-child {
+      width: 33.1rem;
+      margin-bottom: 3.2rem;
+      @media (width <= 1100px) {
+        width: 100%;
+      }
+      .logos {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 3.2rem;
+        @media (width <=583px) {
+          flex-direction: column;
+          gap: 2rem;
+        }
+        img {
+          width: 11.9rem;
+        }
+        .companyName {
+          font-size: 3.6rem;
+          font-weight: 400;
+
+          @media (width <=583px) {
+            font-size: 2.6rem;
+          }
+        }
+      }
+      .companyMotto {
+        width: 100%;
+        text-align: justify;
+        font-size: 1.6rem;
+        color: $white;
+      }
+    }
+
+    .socials {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 2rem;
+    }
+  }
+}

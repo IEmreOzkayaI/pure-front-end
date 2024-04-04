@@ -1,40 +1,34 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
-import { Card } from '@mui/material'
+import AnimatedRoutes from "./components/AnimatedRoutes.jsx";
+import "./global.scss";
+import {useEffect} from "react";
+import {useDispatch, useSelector} from "react-redux";
+import {clearUserInfo, userFetch} from "./redux/toolkit/userSlice.js";
+import Cookies from 'js-cookie';
+import {decryptAndRetrieve, deleteItem} from "./utils/localStorageManagement.js";
+import {clearLogInInfo} from "./redux/toolkit/logInSlice.js";
 
-function App() {
-  const [count, setCount] = useState(0)
-  console.log(
-    <Card>
-      <h1>hello</h1>
-    </Card>
-  )
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+const App = () => {
+	const dispatch = useDispatch();
+	const logInInfo = useSelector(state => state.logIn.logInInfo);
+	const logOutInfo = useSelector(state => state.logOutSlice?.logOutInfo);
+	const cookieValue = Cookies.get('refresh_token_2')
 
-export default App
+	useEffect(() => {
+		if (logInInfo !== null || decryptAndRetrieve('user_role')) {
+			dispatch(userFetch());
+		}
+	}, [logInInfo]);
+
+	useEffect(() => {
+		if (logOutInfo !== null) {
+			deleteItem('user_role');
+			dispatch(clearLogInInfo());
+			dispatch(clearUserInfo());
+		}
+	}, [logOutInfo]);
+
+	return <AnimatedRoutes />;
+
+};
+
+export default App;

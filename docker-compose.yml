@@ -1,0 +1,14 @@
+version: '1'
+services:
+  pure:
+    build:
+      context: .
+      args:
+        VITE_BACKEND_BASE_URL: ${VITE_BACKEND_BASE_URL}
+        VITE_LOCAL_STORAGE_SECRET_KEY: ${VITE_LOCAL_STORAGE_SECRET_KEY}
+    image: pure:1.0.0
+    ports:
+      - "3000:3000"
+    environment:
+      - "VITE_BACKEND_BASE_URL=${VITE_BACKEND_BASE_URL}"
+      - "VITE_LOCAL_STORAGE_SECRET_KEY=${VITE_LOCAL_STORAGE_SECRET_KEY}"

@@ -1,0 +1,111 @@
+@import "../../global.scss";
+
+.pricing {
+  margin: 0 2rem 2.1rem 2rem;
+  background-color: $very-dark-gray;
+  border-radius: 0 0 1.4rem 1.4rem;
+  height: 107.4rem;
+  padding-top: 12.5rem;
+
+  @media (width<=768px) {
+    margin: 0;
+    border-radius: 0;
+  }
+
+  .grayBackground {
+    margin: 0 11.5rem 45.5rem 11.2rem;
+    padding: 3.7rem 9rem 0 9.1rem;
+    border-radius: 4.5rem;
+    height: 45.3rem;
+
+    color: $white;
+    background-color: $dark-gray;
+    position: relative;
+
+    @media (2525px<=width) {
+      padding-left: 29%;
+    }
+    @media (2446px<=width<= 2524px) {
+      padding-left: 27.5%;
+    }
+    @media (2256px<=width<= 2445px) {
+      padding-left: 22.5%;
+    }
+    @media (2000px<=width<= 2255px) {
+      padding-left: 17.5%;
+    }
+    @media (1800px<=width<= 2000px) {
+      padding-left: 12.5%;
+    }
+    @media (571px<=width<=992px) {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 3.1rem;
+    }
+    @media (width<=570px) {
+      margin-left: 0;
+      margin-right: 0;
+      padding-left: 1.1rem;
+    }
+
+    .sliderContainer {
+      margin-top: 6rem;
+
+      & + div {
+        @media (1180px<=width <= 1390px) {
+          display: grid;
+          grid-template-columns: repeat(3, 1fr);
+          margin-top: 4rem;
+        }
+        @media (556px<=width <= 1179px) {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          margin-top: 4rem;
+        }
+        @media (485px<=width <= 555px) {
+          display: grid;
+          grid-template-columns: repeat(3, 11.5rem);
+          margin-top: 4rem;
+        }
+        @media (width <= 484px) {
+          display: grid;
+          grid-template-columns: repeat(3, 8.5rem);
+          margin-top: 4rem;
+        }
+      }
+    }
+
+    .tabs {
+      display: flex;
+      gap: 4rem;
+      cursor: pointer;
+
+      .text {
+        text-align: center;
+        font-family: Ubuntu;
+        font-size: 1.4rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        color: rgba(255, 255, 255, 0.5);
+        text-transform: uppercase;
+      }
+      .text.active {
+        color: $white;
+        text-decoration: underline;
+      }
+
+      & + div {
+        color: $white;
+        text-align: left;
+        font-family: Ubuntu;
+        font-size: 2rem;
+        font-style: normal;
+        font-weight: 400;
+        line-height: normal;
+        text-transform: uppercase;
+        margin-top: 3rem;
+      }
+    }
+  }
+}
