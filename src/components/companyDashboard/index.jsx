@@ -47,7 +47,7 @@ const columnsInterview = [
 	{
 		title: "Participant Count",
 		dataIndex: "participant_count",
-		render: (_, {interviewee_list}) => interviewee_list.length,
+		render: (_, {interviewee_list}) => interviewee_list?.length,
 	},
 	{
 		title: "Question Count",
