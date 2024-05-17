@@ -43,6 +43,7 @@ const AddInterview = ({ setIsModalOpen }) => {
   const [interactive_steps, setInteractiveSteps] = useState(false);
   const [additional_resources, setAdditionalResources] = useState(false);
   const [uniqueTopics, setUniqueTopics] = useState([]);
+  const [values, setValues] = useState({});
 
   const addInterviewSuccess = useSelector(
     (state) => state.addInterviewSlice.addInterviewInfo,
@@ -54,7 +55,6 @@ const AddInterview = ({ setIsModalOpen }) => {
     (state) => state.addInterviewSlice.addInterviewProgress,
   );
   const onFinish = (values) => {
-    console.log("Received values of form:", values);
     let startDate = values.start_end_date[0];
     let endDate = values.start_end_date[1];
 
@@ -82,7 +82,8 @@ const AddInterview = ({ setIsModalOpen }) => {
     const algorithm_question_list = values.questions
       .filter((question) => question.type === "algorithm")
       .map((question) => question.question);
-    const interview_time_reformated = values.interview_time.format("HH:mm");
+
+    const interview_time_reformated = formatInterviewTimeToMinutesAndSeconds(values.interview_time);
     const newInterview = {
       name: values.name,
       description: values.description,
@@ -99,6 +100,20 @@ const AddInterview = ({ setIsModalOpen }) => {
 
     dispatch(addInterviewFetch(newInterview));
   };
+
+  function formatInterviewTimeToMinutesAndSeconds(interviewTime) {
+    // Tam kısmı dakika olarak, ondalık kısmı saniye olarak hesapla
+    const minutes = Math.floor(interviewTime);
+    const seconds = Math.round((interviewTime - minutes) * 60);
+  
+    // Dakika ve saniyeyi iki basamaklı string olarak formatla
+    const formattedMinutes = minutes.toString().padStart(2, '0');
+    const formattedSeconds = seconds.toString().padStart(2, '0');
+  
+    // Formatlanmış dakika ve saniyeyi birleştir
+    return `${formattedMinutes}:${formattedSeconds}`;
+  }
+
 
   useEffect(() => {
     if (addInterviewLoading && !addInterviewFailure && !addInterviewSuccess) {
@@ -155,6 +170,7 @@ const AddInterview = ({ setIsModalOpen }) => {
 
   const onValuesChange = (changedValues, allValues) => {
     console.log("Form values changed:", allValues);
+    setValues(allValues)
   };
 
   const getQuestions = (name) => {

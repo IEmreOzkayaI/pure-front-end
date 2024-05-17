@@ -5,7 +5,7 @@ import {Form, Input, Select} from "antd";
 import {useDispatch, useSelector} from "react-redux";
 import {useEffect} from "react";
 import toast from "react-hot-toast";
-import {addQuestionFetch} from "../../redux/toolkit/addQuestionSlice";
+import {addQuestionFetch, clearAddQuestionInfo} from "../../redux/toolkit/addQuestionSlice";
 import { Toaster } from "react-hot-toast";
 
 const AdminDashboard = () => {
@@ -28,6 +28,7 @@ const AdminDashboard = () => {
 			setTimeout(() => {
 				form.resetFields();
 				setIsModalOpen(false);
+				clearAddQuestionInfo();
 			}, 2000);
 		}
 	}, [addQuestionProgress, addQuestionError, addQuestionInfo]);
@@ -59,7 +60,7 @@ const AdminDashboard = () => {
 								<Input placeholder='Topic' />
 							</Form.Item>
 						</div>
-						<Button type='primary' style={{color: "#fff", fontWeight: "bold", padding: "1rem 1rem", width: "100%", borderRadius: "1rem", backgroundColor: "#16161b", marginTop: "1rem"}} htmlType='submit'>
+						<Button type='primary' style={{color: "#fff", fontWeight: "bold", padding: "1rem 1rem", width: "100%", borderRadius: "1rem", backgroundColor: "#16161b", marginTop: "1rem", cursor:"pointer"}} htmlType='submit' >
 							Submit
 						</Button>
 					</Form>
